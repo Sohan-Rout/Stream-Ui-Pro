@@ -27,7 +27,7 @@ function Wireframe({
         </div>
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <h3 className="text-lg font-black tracking-tight">{name}</h3>
+        <h3 className="text-lg font-display tracking-tight">{name}</h3>
         <span className={`border-2 border-ink px-2 font-mono text-xs font-bold text-on-bright ${tone}`}>
           ×{count}
         </span>
@@ -91,7 +91,7 @@ export function SectionsShowcase() {
           <div className="flex h-full gap-2">
             {[0, 1].map((i) => (
               <div key={i} className="flex flex-1 flex-col gap-1.5 border-2 border-ink p-2">
-                <div className="font-mono text-lg leading-none font-black">&ldquo;</div>
+                <div className="font-mono text-lg leading-none font-bold">&ldquo;</div>
                 <div className={ghost} />
                 <div className={`${ghost} w-4/5`} />
                 <div className="mt-auto flex items-center gap-1.5">
@@ -108,7 +108,7 @@ export function SectionsShowcase() {
             <div key={i} className={`border-2 border-ink px-2 py-1.5 ${open ? "bg-orange" : ""}`}>
               <div className="flex items-center justify-between">
                 <div className="h-2 w-2/3 bg-ink" />
-                <div className="font-mono text-xs leading-none font-black">{open ? "−" : "+"}</div>
+                <div className="font-mono text-xs leading-none font-bold">{open ? "−" : "+"}</div>
               </div>
               {open && <div className={`${ghost} mt-1.5 w-4/5`} />}
             </div>

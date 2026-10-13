@@ -17,7 +17,7 @@ export function Hero() {
           v0.1 · public beta
         </Badge>
 
-        <h1 className="text-5xl leading-none font-black tracking-tighter text-balance sm:text-7xl">
+        <h1 className="text-5xl leading-none font-display tracking-tighter text-balance sm:text-7xl">
           UI that doesn&apos;t{" "}
           <span className="inline-block -rotate-2 border-2 border-ink bg-yellow px-2 text-on-bright shadow-brutal">
             whisper

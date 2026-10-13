@@ -29,7 +29,7 @@ function Experiment({
       </div>
       <div className="flex flex-1 items-center justify-center p-6">{children}</div>
       <div className="border-t-2 border-ink px-5 py-4">
-        <h3 className="text-lg font-black tracking-tight">{name}</h3>
+        <h3 className="text-lg font-display tracking-tight">{name}</h3>
         <p className="text-sm text-ink-muted">{hint}</p>
       </div>
     </li>

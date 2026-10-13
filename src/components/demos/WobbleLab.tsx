@@ -20,7 +20,7 @@ export function WobbleLab() {
             aria-hidden
             style={{ transitionDelay: `${i * 45}ms` }}
             className={cn(
-              "-ml-1 grid size-12 place-items-center border-2 border-ink text-2xl font-black text-on-bright shadow-brutal-sm first:ml-0 sm:size-14 sm:text-3xl",
+              "-ml-1 grid size-12 place-items-center border-2 border-ink text-2xl font-display text-on-bright shadow-brutal-sm first:ml-0 sm:size-14 sm:text-3xl",
               "transition-[translate,rotate] duration-200 ease-out group-hover:-translate-y-4 group-hover:rotate-0 motion-reduce:transition-none",
               l.tone,
               l.tilt,

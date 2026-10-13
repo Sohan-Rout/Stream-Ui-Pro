@@ -38,8 +38,10 @@
   --color-violet: var(--violet);
   --color-on-bright: var(--on-bright);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-space-mono);
+  /* Archivo Black ships one weight; use `font-display` alone, no weight class. */
+  --font-display: var(--font-archivo-black);
 
   /* hard offset shadows: the core of the look */
   --shadow-brutal-sm: 2px 2px 0 0 var(--ink);
@@ -103,6 +105,8 @@
 @layer base {
   html {
     color-scheme: light;
+    /* Never fake bold: single-weight fonts fall back to their real weight. */
+    font-synthesis-weight: none;
   }
 
   @media (prefers-reduced-motion: no-preference) {

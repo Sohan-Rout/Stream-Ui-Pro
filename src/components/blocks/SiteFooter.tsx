@@ -53,7 +53,7 @@ export function SiteFooter() {
         <div className="border-t-2 border-ink px-4 pt-6 sm:px-8">
           <p
             aria-hidden
-            className="text-center text-6xl leading-none font-black tracking-tighter select-none sm:text-9xl"
+            className="text-center text-6xl leading-none font-display tracking-tighter select-none sm:text-9xl"
           >
             stream<span className="text-pink">/</span>ui
           </p>

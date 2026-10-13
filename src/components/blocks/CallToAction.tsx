@@ -14,7 +14,7 @@ export function CallToAction() {
           </p>
           <h2
             id="cta-title"
-            className="mt-4 text-5xl leading-none font-black tracking-tighter text-balance sm:text-7xl"
+            className="mt-4 text-5xl leading-none font-display tracking-tighter text-balance sm:text-7xl"
           >
             Stop shipping beige.
           </h2>

@@ -19,7 +19,7 @@ function Strip({ hidden }: { hidden?: boolean }) {
       {words.map((w) => (
         <li
           key={w}
-          className="flex items-center gap-6 px-3 text-2xl font-black tracking-tight whitespace-nowrap uppercase sm:text-3xl"
+          className="flex items-center gap-6 px-3 text-2xl font-display tracking-tight whitespace-nowrap uppercase sm:text-3xl"
         >
           {w}
           <Asterisk aria-hidden className="size-7 text-pink" strokeWidth={3} />

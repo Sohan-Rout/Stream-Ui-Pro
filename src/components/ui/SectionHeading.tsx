@@ -22,7 +22,7 @@ export function SectionHeading({
           <span className="border-2 border-ink bg-yellow px-1.5 py-0.5 text-on-bright">{index}</span>
           {eyebrow}
         </p>
-        <h2 className="mt-4 max-w-2xl text-4xl leading-none font-black tracking-tight text-balance sm:text-5xl">
+        <h2 className="mt-4 max-w-2xl text-4xl leading-none font-display tracking-tight text-balance sm:text-5xl">
           {title}
         </h2>
       </div>

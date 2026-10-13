@@ -87,7 +87,7 @@ export function Pillars() {
                 </span>
               </div>
               <div className="flex flex-1 flex-col gap-2">
-                <h3 className="text-2xl font-black tracking-tight">{p.title}</h3>
+                <h3 className="text-2xl font-display tracking-tight">{p.title}</h3>
                 <p className="font-mono text-xs font-semibold uppercase">{p.stat}</p>
                 <p className="leading-relaxed text-ink-muted group-hover:text-on-bright">
                   {p.blurb}

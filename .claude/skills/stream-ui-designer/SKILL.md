@@ -13,10 +13,12 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
 - **Tailwind CSS v4.** There is no `tailwind.config.*`. Tokens live in CSS:
   `src/app/globals.css` uses `@import "tailwindcss"` and an `@theme inline { … }` block.
   A token `--color-surface` becomes `bg-surface`, `text-surface`, `border-surface`, and so on.
-- **Fonts:** Geist Sans and Geist Mono come from `next/font` in `src/app/layout.tsx` and are
-  exposed as `--font-sans` and `--font-mono` (`font-sans`, `font-mono`). The `body` rule in
-  globals.css still sets `font-family: Arial…`. Remove that line the first time you touch
-  typography so Geist actually applies.
+- **Fonts** (Google, via `next/font` in `src/app/layout.tsx`):
+  - `font-display` is **Archivo Black**, for headings, the wordmark, the marquee, and big type.
+    It has a single weight, so never pair it with `font-bold`/`font-black`. Weight synthesis is
+    off globally, so no faux bold.
+  - `font-sans` is **Space Grotesk** (300–700), for body copy and UI labels. This is the default.
+  - `font-mono` is **Space Mono** (400/700), for eyebrows, file labels, code, and counters.
 - **Light only, by design.** No dark mode. Backgrounds are light paper shades or flat brights;
   ink (`--ink`) is for lines, text, and hard shadows only, never large fills. Don't add a
   `prefers-color-scheme: dark` block or dark sections.
