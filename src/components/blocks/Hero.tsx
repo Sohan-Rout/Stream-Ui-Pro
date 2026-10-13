@@ -1,54 +1,34 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Music, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
-import { Button, buttonStyles } from "@/components/ui/Button";
+import { buttonStyles } from "@/components/ui/Button";
 import { InstallCommand } from "./InstallCommand";
-
-type Token = [text: string, kind?: "kw" | "str" | "dim"];
-
-// Hand-tokenized so the hero needs no syntax highlighter.
-const code: { tokens: Token[]; highlight?: boolean }[] = [
-  { tokens: [["import", "kw"], [" { Button } "], ["from", "kw"], [' "@/components/ui/button"', "str"], [";", "dim"]] },
-  { tokens: [] },
-  { tokens: [["export function", "kw"], [" Actions() {"]] },
-  { tokens: [["  return", "kw"], [" ("]] },
-  { tokens: [['    <div className=', "dim"], ['"flex gap-3"', "str"], [">", "dim"]] },
-  { tokens: [["      <Button>"], ["Deploy"], ["</Button>"]], highlight: true },
-  { tokens: [["      <Button variant="], ['"secondary"', "str"], [">Cancel</Button>"]] },
-  { tokens: [["    </div>", "dim"]] },
-  { tokens: [["  );"]] },
-  { tokens: [["}"]] },
-];
-
-const tokenClass = {
-  kw: "font-bold",
-  str: "text-ink-muted",
-  dim: "text-ink-muted",
-} as const;
+import { HeroSwitchCard } from "./HeroSwitchCard";
 
 export function Hero() {
   return (
-    <Section id="top" railClassName="grid grid-cols-1 lg:grid-cols-2">
+    <Section id="top" railClassName="grid grid-cols-1 lg:grid-cols-5">
       {/* Pitch */}
-      <div className="flex flex-col justify-center gap-8 px-5 py-14 sm:px-10 sm:py-20 lg:border-r-2 lg:border-ink">
+      <div className="flex flex-col justify-center gap-8 px-5 py-14 sm:px-10 sm:py-20 lg:col-span-3 lg:border-r-2 lg:border-ink">
         <Badge tone="paper" className="self-start">
           <span aria-hidden className="size-2 rounded-full bg-lime ring-2 ring-ink" />
           v0.1 · public beta
         </Badge>
 
-        <h1 className="font-display text-4xl leading-none tracking-tight text-balance sm:text-5xl xl:text-6xl">
-          React components with{" "}
-          <span className="box-decoration-clone bg-lime px-2 text-on-bright">
-            hard edges.
+        <h1 className="text-5xl leading-none font-display tracking-tighter text-balance sm:text-7xl">
+          UI that doesn&apos;t{" "}
+          <span className="inline-block -rotate-2 border-2 border-ink bg-lime px-2 text-on-bright shadow-brutal">
+            whisper
           </span>
+          .
         </h1>
 
         <p className="max-w-lg text-lg leading-relaxed text-pretty text-ink-muted">
-          Components, page sections, and icons built on Tailwind v4 and
-          TypeScript. Add them one at a time with the CLI. The source lands in
-          your repo, ready to edit.
+          Components, full page sections, a crisp icon set, and a labs drawer
+          full of weird experiments. Typed, accessible, and loud by default.
+          Copy it in, make it yours.
         </p>
 
         <div className="flex flex-wrap gap-4">
@@ -59,61 +39,72 @@ export function Hero() {
             href={siteConfig.githubUrl}
             className={buttonStyles({ variant: "secondary", size: "lg" })}
           >
-            <SiGithub aria-hidden /> GitHub
+            <SiGithub aria-hidden /> Star on GitHub
           </a>
         </div>
 
         <InstallCommand command={siteConfig.installCommand} className="self-start" />
       </div>
 
-      {/* Source → result */}
-      <div className="flex flex-col justify-center gap-5 border-t-2 border-ink bg-lime-soft bg-dots px-5 py-14 sm:px-10 lg:border-t-0">
-        <figure className="border-2 border-ink bg-paper-raised shadow-brutal-lg">
-          <div className="flex items-stretch border-b-2 border-ink font-mono text-xs">
-            <span className="border-r-2 border-ink bg-paper-raised px-4 py-2.5 font-bold">
-              actions.tsx
-            </span>
-            <span className="flex-1 bg-paper-sunken" />
-          </div>
-
-          <pre className="overflow-x-auto py-4 font-mono text-sm leading-6 [scrollbar-width:none]">
-            <code>
-              {code.map((line, i) => (
-                <span
-                  key={i}
-                  className={`flex ${line.highlight ? "bg-lime" : ""}`}
-                >
-                  <span aria-hidden className="w-10 shrink-0 pr-3 text-right text-ink-muted select-none">
-                    {i + 1}
-                  </span>
-                  <span className="pr-4 whitespace-pre">
-                    {line.tokens.map(([text, kind], j) => (
-                      <span key={j} className={kind ? tokenClass[kind] : undefined}>
-                        {text}
-                      </span>
-                    ))}
-                    {line.tokens.length === 0 && " "}
-                  </span>
-                </span>
-              ))}
-            </code>
-          </pre>
-
-          <figcaption className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-ink bg-paper px-4 py-4">
-            <span className="font-mono text-xs text-ink-muted">Rendered</span>
-            <span className="flex gap-3">
-              <Button size="sm">Deploy</Button>
-              <Button size="sm" variant="secondary">
-                Cancel
-              </Button>
-            </span>
-          </figcaption>
-        </figure>
-
-        <p className="flex items-center gap-2 font-mono text-xs text-ink-muted">
-          <Check aria-hidden className="size-4 text-ink" strokeWidth={2.5} />
-          added src/components/ui/button.tsx
+      {/* Specimen board */}
+      <div className="relative flex flex-col justify-center gap-6 overflow-hidden border-t-2 border-ink bg-lime-soft bg-dots px-5 py-14 sm:px-10 lg:col-span-2 lg:border-t-0">
+        <p className="absolute top-3 left-4 font-mono text-xs text-ink-muted">
+          fig. 01 — specimens
         </p>
+
+        <div
+          aria-hidden
+          className="absolute top-8 right-6 z-10 hidden size-20 sm:grid rotate-12 place-items-center rounded-full border-2 border-ink bg-pink text-center font-mono text-xs leading-tight font-bold text-on-bright shadow-brutal"
+        >
+          100%
+          <br />
+          typed
+        </div>
+
+        <div className="-rotate-1 border-2 border-ink bg-paper-raised p-4 shadow-brutal-lg sm:mr-10">
+          <div className="flex items-start gap-3">
+            <span className="grid size-9 shrink-0 place-items-center border-2 border-ink bg-lime text-on-bright">
+              <Check aria-hidden className="size-5" strokeWidth={3} />
+            </span>
+            <div className="min-w-0">
+              <p className="font-bold">Deploy succeeded</p>
+              <p className="text-sm text-ink-muted">
+                stream-ui-docs is live on production.
+              </p>
+            </div>
+            <span className="ml-auto font-mono text-xs text-ink-muted">2s</span>
+          </div>
+        </div>
+
+        <HeroSwitchCard />
+
+        <div className="-rotate-1 border-2 border-ink bg-blue p-4 text-on-bright shadow-brutal sm:mr-6">
+          <div className="flex items-center gap-3">
+            <span className="grid size-9 shrink-0 place-items-center border-2 border-ink bg-paper-raised text-on-bright">
+              <Music aria-hidden className="size-4.5" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="font-mono text-xs text-on-bright/70">now streaming</p>
+              <p className="truncate font-bold">lofi beats to ship UI to</p>
+            </div>
+          </div>
+          <div className="mt-4 h-3 border-2 border-ink bg-paper-raised">
+            <div className="h-full w-3/5 bg-lime" />
+          </div>
+          <div className="mt-1.5 flex justify-between font-mono text-xs text-on-bright/70">
+            <span>2:14</span>
+            <span>3:41</span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <Badge tone="lime">
+            <Sparkles aria-hidden /> new
+          </Badge>
+          <Badge tone="blue">beta</Badge>
+          <Badge tone="violet">stable</Badge>
+          <Badge tone="orange">labs</Badge>
+        </div>
       </div>
     </Section>
   );

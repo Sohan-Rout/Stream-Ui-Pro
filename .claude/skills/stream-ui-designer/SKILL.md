@@ -26,9 +26,11 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
   Pink is second (the CTA band, emphasis). Blue, violet, and orange are sparing accents.
   Use the `*-soft` tints (`bg-lime-soft`, `bg-pink-soft`, …) for large light surfaces. There
   is no yellow or green; don't add them back.
-- **Avoid the "vibecoded" look.** Keep cards straight (no tilted sticker cards or "100%"
-  badges), skip buzzword marquees, and don't invent stats. Write plain, specific copy that
-  says what the thing does, not jokes ("may explode", "built at 2am").
+- **Avoid the "vibecoded" look.** Skip buzzword marquees, don't invent stats, and write plain,
+  specific copy that says what the thing does, not jokes ("may explode", "built at 2am").
+- **Exception: the hero.** The user chose the playful hero (`src/components/blocks/Hero.tsx`):
+  the tilted specimen-card collage, the "100% typed" sticker, and the "UI that doesn't whisper"
+  headline. Keep it as is. Don't spread tilted cards or stickers to other sections.
 - **The look is neo-brutalist:** 2px ink borders, hard offset shadows (`shadow-brutal-*`),
   flat bright fills with `text-on-bright`, and a railed layout (`Section`/`Rail` in
   `src/components/ui/Section.tsx`) with hatched margins.
