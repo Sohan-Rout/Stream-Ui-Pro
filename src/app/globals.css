@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ---------- Tokens ---------- */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* surfaces */
+  --paper: oklch(0.97 0.018 90);
+  --paper-raised: oklch(0.99 0.008 90);
+  --paper-sunken: oklch(0.93 0.025 90);
+
+  /* ink: text, borders, hard shadows */
+  --ink: oklch(0.17 0.01 270);
+  --ink-muted: oklch(0.42 0.01 270);
+  --ink-faint: oklch(0.17 0.01 270 / 0.14);
+
+  /* flat brights; text on them is always --on-bright */
+  --yellow: oklch(0.89 0.17 98);
+  --pink: oklch(0.78 0.15 350);
+  --blue: oklch(0.74 0.12 240);
+  --green: oklch(0.84 0.17 145);
+  --orange: oklch(0.76 0.16 52);
+  --violet: oklch(0.72 0.14 295);
+  --on-bright: oklch(0.17 0.01 270);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: oklch(0.19 0.012 270);
+    --paper-raised: oklch(0.23 0.014 270);
+    --paper-sunken: oklch(0.15 0.01 270);
+
+    --ink: oklch(0.95 0.02 90);
+    --ink-muted: oklch(0.76 0.015 90);
+    --ink-faint: oklch(0.95 0.02 90 / 0.12);
+
+    --yellow: oklch(0.86 0.16 98);
+    --pink: oklch(0.75 0.14 350);
+    --blue: oklch(0.72 0.12 240);
+    --green: oklch(0.8 0.16 145);
+    --orange: oklch(0.73 0.15 52);
+    --violet: oklch(0.7 0.13 295);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunken: var(--paper-sunken);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-yellow: var(--yellow);
+  --color-pink: var(--pink);
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --color-orange: var(--orange);
+  --color-violet: var(--violet);
+  --color-on-bright: var(--on-bright);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* hard offset shadows: the core of the look */
+  --shadow-brutal-sm: 2px 2px 0 0 var(--ink);
+  --shadow-brutal: 4px 4px 0 0 var(--ink);
+  --shadow-brutal-lg: 7px 7px 0 0 var(--ink);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-wiggle: wiggle 0.4s ease-in-out;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+}
+
+/* ---------- Patterns ---------- */
+
+/* diagonal hatching for the page margins outside the rails */
+@utility bg-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--ink-faint) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+/* dot grid for "canvas" areas */
+@utility bg-dots {
+  background-image: radial-gradient(var(--ink-faint) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+/* caution tape for Labs */
+@utility bg-tape {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--yellow) 0 14px,
+    var(--on-bright) 14px 28px
+  );
+}
+
+/* ---------- Base ---------- */
+
+@layer base {
+  html {
+    color-scheme: light dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--yellow);
+    color: var(--on-bright);
+  }
 }
