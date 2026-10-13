@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
 const shapes = ["", "rounded-full", "rotate-45", "rounded-full w-36"];
-const colors = ["bg-yellow", "bg-pink", "bg-blue", "bg-green", "bg-orange", "bg-violet"];
+const colors = ["bg-lime", "bg-pink", "bg-blue", "bg-violet", "bg-orange"];
 const tilts = ["-rotate-12", "-rotate-6", "rotate-0", "rotate-6", "rotate-12"];
 
 type Roll = { shape: number; color: number; tilt: number; n: number };

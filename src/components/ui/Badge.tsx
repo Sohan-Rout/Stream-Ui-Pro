@@ -2,27 +2,25 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
 export type BadgeTone =
-  | "yellow"
+  | "lime"
   | "pink"
   | "blue"
-  | "green"
-  | "orange"
   | "violet"
+  | "orange"
   | "paper";
 
 const tones: Record<BadgeTone, string> = {
-  yellow: "bg-yellow text-on-bright",
+  lime: "bg-lime text-on-bright",
   pink: "bg-pink text-on-bright",
   blue: "bg-blue text-on-bright",
-  green: "bg-green text-on-bright",
-  orange: "bg-orange text-on-bright",
   violet: "bg-violet text-on-bright",
+  orange: "bg-orange text-on-bright",
   paper: "bg-paper-raised text-ink",
 };
 
 export type BadgeProps = ComponentProps<"span"> & { tone?: BadgeTone };
 
-export function Badge({ tone = "yellow", className, ...props }: BadgeProps) {
+export function Badge({ tone = "lime", className, ...props }: BadgeProps) {
   return (
     <span
       className={cn(

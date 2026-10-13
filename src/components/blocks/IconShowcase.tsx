@@ -8,8 +8,8 @@ export function IconShowcase() {
       <SectionHeading
         index="03"
         eyebrow="Icons"
-        title={<span id="icons-title">One stroke to rule them.</span>}
-        description="A 24px grid, consistent 1.75 stroke, and sizes that snap to the type scale. Click any glyph to copy its JSX."
+        title={<span id="icons-title">One grid, one stroke weight.</span>}
+        description="Drawn on a 24px grid at a 1.75 stroke. Search the set and click any icon to copy its JSX."
       />
       <IconExplorer />
     </Section>

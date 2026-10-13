@@ -40,12 +40,12 @@ export function TogglesDemo() {
           aria-hidden
           className={cn(
             "grid size-6 place-items-center border-2 border-ink shadow-brutal-sm transition-colors duration-150 peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blue",
-            agree ? "bg-yellow text-on-bright" : "bg-paper-raised",
+            agree ? "bg-lime text-on-bright" : "bg-paper-raised",
           )}
         >
           {agree && <Check className="size-4" strokeWidth={3.5} />}
         </span>
-        <span className="font-semibold">Ship it loud</span>
+        <span className="font-semibold">Send me release notes</span>
       </label>
     </div>
   );

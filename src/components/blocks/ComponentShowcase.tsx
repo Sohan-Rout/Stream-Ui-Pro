@@ -9,10 +9,10 @@ import { TabsDemo } from "@/components/demos/TabsDemo";
 import { TogglesDemo } from "@/components/demos/TogglesDemo";
 
 const avatars = [
-  { initials: "AK", tone: "bg-yellow" },
+  { initials: "AK", tone: "bg-lime" },
   { initials: "RM", tone: "bg-pink" },
   { initials: "JS", tone: "bg-blue" },
-  { initials: "TW", tone: "bg-green" },
+  { initials: "TW", tone: "bg-violet" },
 ];
 
 export function ComponentShowcase() {
@@ -21,8 +21,8 @@ export function ComponentShowcase() {
       <SectionHeading
         index="01"
         eyebrow="Components"
-        title={<span id="components-title">Primitives with opinions.</span>}
-        description="Every specimen below is live. Click it, tab to it, break it. Hover lifts, press sinks, focus always shows."
+        title={<span id="components-title">Accessible primitives, every state styled.</span>}
+        description="Each specimen is the real component. Try it with a mouse or the keyboard: hover, press, focus, and disabled all have defined states."
       />
       <div className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-3">
         <DemoCell file="button.tsx" note="4 variants">
@@ -50,13 +50,13 @@ export function ComponentShowcase() {
               <input
                 id="demo-email"
                 type="email"
-                placeholder="you@loud.dev"
+                placeholder="name@company.com"
                 aria-describedby="demo-email-hint"
                 className="h-11 w-full min-w-0 bg-transparent px-3 placeholder:text-ink-muted focus:outline-none"
               />
             </div>
             <p id="demo-email-hint" className="mt-2 text-sm text-ink-muted">
-              We&apos;ll only email you about releases.
+              Used for release notes only.
             </p>
           </div>
         </DemoCell>
@@ -76,7 +76,7 @@ export function ComponentShowcase() {
         <DemoCell file="badge.tsx" note="+ avatar stack">
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-wrap justify-center gap-2">
-              <Badge tone="green">stable</Badge>
+              <Badge tone="lime">stable</Badge>
               <Badge tone="blue">beta</Badge>
               <Badge tone="orange">labs</Badge>
               <Badge tone="paper">deprecated</Badge>

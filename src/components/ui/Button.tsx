@@ -5,7 +5,7 @@ export type ButtonVariant = "primary" | "secondary" | "blue" | "pink";
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-yellow text-on-bright",
+  primary: "bg-lime text-on-bright",
   secondary: "bg-paper-raised text-ink",
   blue: "bg-blue text-on-bright",
   pink: "bg-pink text-on-bright",

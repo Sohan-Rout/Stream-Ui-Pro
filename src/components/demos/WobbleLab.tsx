@@ -1,10 +1,10 @@
 import { cn } from "@/lib/cn";
 
 const letters = [
-  { ch: "W", tone: "bg-yellow", tilt: "-rotate-6" },
+  { ch: "W", tone: "bg-violet", tilt: "-rotate-6" },
   { ch: "O", tone: "bg-pink", tilt: "rotate-3" },
   { ch: "B", tone: "bg-blue", tilt: "-rotate-2" },
-  { ch: "B", tone: "bg-green", tilt: "rotate-6" },
+  { ch: "B", tone: "bg-lime", tilt: "rotate-6" },
   { ch: "L", tone: "bg-orange", tilt: "-rotate-3" },
   { ch: "E", tone: "bg-violet", tilt: "rotate-2" },
 ];

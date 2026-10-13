@@ -46,7 +46,7 @@ export function InstallCommand({
         type="button"
         onClick={copy}
         aria-label={copied ? "Copied" : "Copy install command"}
-        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-ink transition-colors duration-150 hover:bg-yellow hover:text-on-bright"
+        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-ink transition-colors duration-150 hover:bg-lime hover:text-on-bright"
       >
         {copied ? (
           <Check aria-hidden className="size-4.5" />

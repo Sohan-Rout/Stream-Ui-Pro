@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { Hero } from "@/components/blocks/Hero";
-import { Marquee } from "@/components/blocks/Marquee";
+import { SpecStrip } from "@/components/blocks/SpecStrip";
 import { Pillars } from "@/components/blocks/Pillars";
 import { ComponentShowcase } from "@/components/blocks/ComponentShowcase";
 import { SectionsShowcase } from "@/components/blocks/SectionsShowcase";
@@ -15,7 +15,7 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
-        <Marquee />
+        <SpecStrip />
         <Pillars />
         <ComponentShowcase />
         <SectionsShowcase />

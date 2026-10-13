@@ -4,9 +4,9 @@ import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/cn";
 
 const tabs = [
-  { id: "preview", label: "Preview", body: "What your users see. Loud, legible, and fast." },
-  { id: "code", label: "Code", body: "Plain TSX in your repo. Rename it, fork it, break it." },
-  { id: "props", label: "Props", body: "variant · size · className · and every native prop." },
+  { id: "preview", label: "Preview", body: "The rendered component, styled with your theme tokens." },
+  { id: "code", label: "Code", body: "The source file the CLI copies into your repo." },
+  { id: "props", label: "Props", body: "variant, size, className, and every native button prop." },
 ] as const;
 
 export function TabsDemo() {
@@ -50,7 +50,7 @@ export function TabsDemo() {
                 "-mr-0.5 cursor-pointer border-2 border-ink px-4 py-2 text-sm font-bold transition-colors duration-150",
                 selected
                   ? "relative z-10 -mb-0.5 border-b-paper-raised bg-paper-raised"
-                  : "bg-paper-sunken text-ink-muted hover:bg-yellow hover:text-on-bright",
+                  : "bg-paper-sunken text-ink-muted hover:bg-lime hover:text-on-bright",
               )}
             >
               {t.label}

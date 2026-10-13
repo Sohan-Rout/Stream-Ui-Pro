@@ -5,7 +5,7 @@ export function Logo({ className }: { className?: string }) {
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <span
         aria-hidden
-        className="grid size-8 place-items-center border-2 border-ink bg-yellow font-mono text-sm font-bold text-on-bright shadow-brutal-sm"
+        className="grid size-8 place-items-center border-2 border-ink bg-lime font-mono text-sm font-bold text-on-bright shadow-brutal-sm"
       >
         S/
       </span>

@@ -31,7 +31,7 @@ export function Switch({
       className={cn(
         "relative inline-flex h-8 w-14 shrink-0 cursor-pointer items-center border-2 border-ink shadow-brutal-sm transition-colors duration-150 motion-reduce:transition-none",
         "disabled:pointer-events-none disabled:opacity-50",
-        isOn ? "bg-green" : "bg-paper-sunken",
+        isOn ? "bg-lime" : "bg-paper-sunken",
         className,
       )}
       {...props}

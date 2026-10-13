@@ -52,7 +52,7 @@ export function IconExplorer() {
         </label>
         <p aria-live="polite" className="font-mono text-xs text-ink-muted">
           {copied ? (
-            <span className="bg-yellow px-1.5 py-0.5 font-semibold text-on-bright">
+            <span className="bg-lime px-1.5 py-0.5 font-semibold text-on-bright">
               copied &lt;{copied} /&gt;
             </span>
           ) : (
@@ -69,7 +69,7 @@ export function IconExplorer() {
                 type="button"
                 onClick={() => copy(name)}
                 aria-label={`Copy ${name} icon`}
-                className="group relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center gap-2 bg-paper outline-2 -outline-offset-1 outline-ink transition-colors duration-150 hover:bg-yellow hover:text-on-bright focus-visible:z-10 focus-visible:bg-yellow focus-visible:text-on-bright focus-visible:outline-4 focus-visible:-outline-offset-2 focus-visible:outline-blue"
+                className="group relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center gap-2 bg-paper outline-2 -outline-offset-1 outline-ink transition-colors duration-150 hover:bg-lime hover:text-on-bright focus-visible:z-10 focus-visible:bg-lime focus-visible:text-on-bright focus-visible:outline-4 focus-visible:-outline-offset-2 focus-visible:outline-blue"
               >
                 <Icon
                   aria-hidden

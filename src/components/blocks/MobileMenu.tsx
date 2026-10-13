@@ -44,7 +44,7 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
               <a
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between px-5 py-4 text-lg font-bold hover:bg-yellow hover:text-on-bright"
+                className="flex items-center justify-between px-5 py-4 text-lg font-bold hover:bg-lime hover:text-on-bright"
               >
                 {item.label}
                 <span className="font-mono text-xs text-ink-muted">

@@ -15,12 +15,12 @@ function Wireframe({
   children: ReactNode;
 }) {
   return (
-    <li className="bg-paper p-5 sm:p-6">
+    <li className="bg-blue-soft p-5 sm:p-6">
       <div className="border-2 border-ink bg-paper-raised shadow-brutal">
         <div className="flex items-center gap-1.5 border-b-2 border-ink px-3 py-2">
           <span className="size-2.5 rounded-full border-2 border-ink bg-pink" />
-          <span className="size-2.5 rounded-full border-2 border-ink bg-yellow" />
-          <span className="size-2.5 rounded-full border-2 border-ink bg-green" />
+          <span className="size-2.5 rounded-full border-2 border-ink bg-orange" />
+          <span className="size-2.5 rounded-full border-2 border-ink bg-lime" />
         </div>
         <div aria-hidden className="flex h-40 flex-col gap-2 p-4">
           {children}
@@ -45,16 +45,16 @@ export function SectionsShowcase() {
       <SectionHeading
         index="02"
         eyebrow="Sections"
-        title={<span id="sections-title">Whole pages, pre-assembled.</span>}
+        title={<span id="sections-title">Page sections built from the same parts.</span>}
         description="Composed from the same primitives, so a hero and a pricing table never disagree about what a button looks like."
       />
       <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-3">
-        <Wireframe name="Hero" count={6} tone="bg-yellow">
+        <Wireframe name="Hero" count={6} tone="bg-lime">
           <div className={`${bar} w-3/4`} />
           <div className={`${bar} w-1/2`} />
           <div className={`${ghost} mt-1 w-2/3`} />
           <div className="mt-auto flex gap-2">
-            <div className="h-6 w-16 border-2 border-ink bg-yellow" />
+            <div className="h-6 w-16 border-2 border-ink bg-lime" />
             <div className="h-6 w-12 border-2 border-ink" />
           </div>
         </Wireframe>
@@ -75,7 +75,7 @@ export function SectionsShowcase() {
 
         <Wireframe name="Features" count={5} tone="bg-pink">
           <div className="grid h-full grid-cols-2 gap-2">
-            {["bg-pink", "bg-yellow", "bg-green", "bg-blue"].map((t) => (
+            {["bg-pink", "bg-lime", "bg-violet", "bg-blue"].map((t) => (
               <div key={t} className="flex items-start gap-1.5">
                 <div className={`size-5 shrink-0 border-2 border-ink ${t}`} />
                 <div className="flex flex-1 flex-col gap-1">
@@ -87,7 +87,7 @@ export function SectionsShowcase() {
           </div>
         </Wireframe>
 
-        <Wireframe name="Testimonials" count={3} tone="bg-green">
+        <Wireframe name="Testimonials" count={3} tone="bg-violet">
           <div className="flex h-full gap-2">
             {[0, 1].map((i) => (
               <div key={i} className="flex flex-1 flex-col gap-1.5 border-2 border-ink p-2">
@@ -95,7 +95,7 @@ export function SectionsShowcase() {
                 <div className={ghost} />
                 <div className={`${ghost} w-4/5`} />
                 <div className="mt-auto flex items-center gap-1.5">
-                  <div className="size-4 rounded-full border-2 border-ink bg-green" />
+                  <div className="size-4 rounded-full border-2 border-ink bg-violet" />
                   <div className="h-2 w-1/2 bg-ink" />
                 </div>
               </div>
@@ -115,10 +115,10 @@ export function SectionsShowcase() {
           ))}
         </Wireframe>
 
-        <Wireframe name="Footer" count={4} tone="bg-violet">
+        <Wireframe name="Footer" count={4} tone="bg-lime">
           <div className="mt-auto grid grid-cols-4 gap-3 border-t-2 border-ink pt-3">
             <div className="flex flex-col gap-1.5">
-              <div className="size-5 border-2 border-ink bg-violet" />
+              <div className="size-5 border-2 border-ink bg-lime" />
               <div className={ghost} />
             </div>
             {[0, 1, 2].map((i) => (

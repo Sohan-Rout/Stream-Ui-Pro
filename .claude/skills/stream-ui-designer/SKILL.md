@@ -22,6 +22,13 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
 - **Light only, by design.** No dark mode. Backgrounds are light paper shades or flat brights;
   ink (`--ink`) is for lines, text, and hard shadows only, never large fills. Don't add a
   `prefers-color-scheme: dark` block or dark sections.
+- **Palette:** lime (`bg-lime`) is the primary accent for main actions, highlights, and the logo.
+  Pink is second (the CTA band, emphasis). Blue, violet, and orange are sparing accents.
+  Use the `*-soft` tints (`bg-lime-soft`, `bg-pink-soft`, …) for large light surfaces. There
+  is no yellow or green; don't add them back.
+- **Avoid the "vibecoded" look.** Keep cards straight (no tilted sticker cards or "100%"
+  badges), skip buzzword marquees, and don't invent stats. Write plain, specific copy that
+  says what the thing does, not jokes ("may explode", "built at 2am").
 - **The look is neo-brutalist:** 2px ink borders, hard offset shadows (`shadow-brutal-*`),
   flat bright fills with `text-on-bright`, and a railed layout (`Section`/`Rail` in
   `src/components/ui/Section.tsx`) with hatched margins.

@@ -22,9 +22,9 @@ const mono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "stream/ui — loud components for the web",
+  title: "stream/ui — React components with hard edges",
   description:
-    "A neo-brutalist UI library: components, sections, icons, and a labs drawer full of experiments. Copy, paste, ship.",
+    "Neo-brutalist React components, page sections, and icons built on Tailwind v4 and TypeScript.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

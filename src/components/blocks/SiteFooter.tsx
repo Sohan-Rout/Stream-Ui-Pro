@@ -17,7 +17,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-4 bg-paper p-6 sm:p-10">
             <Logo />
             <p className="max-w-xs text-sm leading-relaxed text-ink-muted">
-              Loud, typed, accessible UI for React. Built with Next.js, Bun, and
+              Neo-brutalist components, sections, and icons for React and
               Tailwind v4.
             </p>
           </div>
@@ -62,7 +62,7 @@ export function SiteFooter() {
           <span>
             © <CopyrightYear /> stream/ui
           </span>
-          <span>Made loud on purpose.</span>
+          <span>Built with Next.js, Bun, and Tailwind</span>
         </div>
       </Section>
     </footer>

@@ -3,24 +3,30 @@
 /* ---------- Tokens ---------- */
 
 :root {
-  /* surfaces */
-  --paper: oklch(0.97 0.018 90);
-  --paper-raised: oklch(0.99 0.008 90);
-  --paper-sunken: oklch(0.93 0.025 90);
+  /* surfaces: near-white, faintly cool */
+  --paper: oklch(0.985 0.004 110);
+  --paper-raised: oklch(1 0 0);
+  --paper-sunken: oklch(0.955 0.006 110);
 
   /* ink: text, borders, hard shadows */
   --ink: oklch(0.17 0.01 270);
-  --ink-muted: oklch(0.42 0.01 270);
-  --ink-faint: oklch(0.17 0.01 270 / 0.14);
+  --ink-muted: oklch(0.44 0.01 270);
+  --ink-faint: oklch(0.17 0.01 270 / 0.12);
 
-  /* flat brights; text on them is always --on-bright */
-  --yellow: oklch(0.89 0.17 98);
-  --pink: oklch(0.78 0.15 350);
-  --blue: oklch(0.74 0.12 240);
-  --green: oklch(0.84 0.17 145);
-  --orange: oklch(0.76 0.16 52);
-  --violet: oklch(0.72 0.14 295);
+  /* brights: lime leads, pink seconds, the rest are accents.
+     Text on any bright is always --on-bright. */
+  --lime: oklch(0.91 0.2 127);
+  --pink: oklch(0.74 0.19 354);
+  --blue: oklch(0.8 0.1 225);
+  --violet: oklch(0.77 0.12 300);
+  --orange: oklch(0.79 0.15 55);
   --on-bright: oklch(0.17 0.01 270);
+
+  /* soft tints of the brights, for large light surfaces */
+  --lime-soft: oklch(0.965 0.07 125);
+  --pink-soft: oklch(0.955 0.035 354);
+  --blue-soft: oklch(0.96 0.03 225);
+  --violet-soft: oklch(0.955 0.035 300);
 }
 
 @theme inline {
@@ -30,13 +36,16 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);
-  --color-yellow: var(--yellow);
+  --color-lime: var(--lime);
   --color-pink: var(--pink);
   --color-blue: var(--blue);
-  --color-green: var(--green);
-  --color-orange: var(--orange);
   --color-violet: var(--violet);
+  --color-orange: var(--orange);
   --color-on-bright: var(--on-bright);
+  --color-lime-soft: var(--lime-soft);
+  --color-pink-soft: var(--pink-soft);
+  --color-blue-soft: var(--blue-soft);
+  --color-violet-soft: var(--violet-soft);
 
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-space-mono);
@@ -91,15 +100,6 @@
   background-size: 16px 16px;
 }
 
-/* caution tape for Labs */
-@utility bg-tape {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--yellow) 0 14px,
-    var(--on-bright) 14px 28px
-  );
-}
-
 /* ---------- Base ---------- */
 
 @layer base {
@@ -126,7 +126,7 @@
   }
 
   ::selection {
-    background-color: var(--yellow);
+    background-color: var(--lime);
     color: var(--on-bright);
   }
 }

@@ -20,7 +20,7 @@ export function SiteHeader() {
               <li key={item.href} className="h-full border-r-2 border-ink">
                 <a
                   href={item.href}
-                  className="flex h-full items-center px-5 text-sm font-semibold transition-colors duration-150 hover:bg-yellow hover:text-on-bright"
+                  className="flex h-full items-center px-5 text-sm font-semibold transition-colors duration-150 hover:bg-lime hover:text-on-bright"
                 >
                   {item.label}
                 </a>
