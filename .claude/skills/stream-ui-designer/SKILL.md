@@ -17,8 +17,12 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
   exposed as `--font-sans` and `--font-mono` (`font-sans`, `font-mono`). The `body` rule in
   globals.css still sets `font-family: Arial…`. Remove that line the first time you touch
   typography so Geist actually applies.
-- **Dark mode:** at the moment it switches only through `prefers-color-scheme` on raw `:root`
-  vars. Every new color token needs both a light value and a dark value.
+- **Light only, by design.** No dark mode. Backgrounds are light paper shades or flat brights;
+  ink (`--ink`) is for lines, text, and hard shadows only, never large fills. Don't add a
+  `prefers-color-scheme: dark` block or dark sections.
+- **The look is neo-brutalist:** 2px ink borders, hard offset shadows (`shadow-brutal-*`),
+  flat bright fills with `text-on-bright`, and a railed layout (`Section`/`Rail` in
+  `src/components/ui/Section.tsx`) with hatched margins.
 - **Icons:** `lucide-react` (primary) and `react-icons` (only for brand logos Lucide lacks).
 
 ## Tokens first
@@ -26,8 +30,9 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
 Before you write a component, make sure the tokens it needs exist in `globals.css`. Never put
 raw hex values or arbitrary values (`p-[13px]`, `bg-[#3b82f6]`) in components.
 
-Define the semantic layer once, as CSS vars on `:root` with dark overrides, then map them
-in `@theme inline`:
+Define the semantic layer once, as CSS vars on `:root`, then map them in `@theme inline`.
+The real tokens are already in `globals.css` (`paper*`, `ink*`, the brights, `on-bright`);
+extend those rather than following this sketch literally:
 
 ```css
 :root {
@@ -94,7 +99,7 @@ Build all of them together; don't save them for later.
 
 ## Before calling UI done
 
-1. Check it in both light and dark mode.
+1. Check it with the OS in dark mode too; the page must stay light.
 2. Check it at 375px wide with no horizontal scroll.
 3. Tab through it: the focus ring is visible on every control and the order makes sense.
 4. Make sure it has no raw colors or arbitrary values.
