@@ -9,9 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "lucide-react": "^1.56.0",
     "next": "16.4.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-icons": "^5.7.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
