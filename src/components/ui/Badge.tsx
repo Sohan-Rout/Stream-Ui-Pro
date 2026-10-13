@@ -8,8 +8,7 @@ export type BadgeTone =
   | "green"
   | "orange"
   | "violet"
-  | "paper"
-  | "ink";
+  | "paper";
 
 const tones: Record<BadgeTone, string> = {
   yellow: "bg-yellow text-on-bright",
@@ -19,7 +18,6 @@ const tones: Record<BadgeTone, string> = {
   orange: "bg-orange text-on-bright",
   violet: "bg-violet text-on-bright",
   paper: "bg-paper-raised text-ink",
-  ink: "bg-ink text-paper",
 };
 
 export type BadgeProps = ComponentProps<"span"> & { tone?: BadgeTone };

@@ -32,12 +32,12 @@ export function InstallCommand({
   return (
     <div
       className={cn(
-        "flex max-w-full items-stretch border-2 border-ink bg-ink font-mono text-sm text-paper shadow-brutal",
+        "flex max-w-full items-stretch border-2 border-ink bg-paper-raised font-mono text-sm text-ink shadow-brutal",
         className,
       )}
     >
       <code className="flex min-w-0 items-center gap-3 overflow-x-auto px-4 py-3 whitespace-nowrap [scrollbar-width:none]">
-        <span aria-hidden className="text-yellow">
+        <span aria-hidden className="text-ink-muted">
           $
         </span>
         {command}
@@ -46,7 +46,7 @@ export function InstallCommand({
         type="button"
         onClick={copy}
         aria-label={copied ? "Copied" : "Copy install command"}
-        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-paper/30 transition-colors duration-150 hover:bg-yellow hover:text-on-bright"
+        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-ink transition-colors duration-150 hover:bg-yellow hover:text-on-bright"
       >
         {copied ? (
           <Check aria-hidden className="size-4.5" />

@@ -1,13 +1,13 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "ink" | "pink";
+export type ButtonVariant = "primary" | "secondary" | "blue" | "pink";
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-yellow text-on-bright",
   secondary: "bg-paper-raised text-ink",
-  ink: "bg-ink text-paper",
+  blue: "bg-blue text-on-bright",
   pink: "bg-pink text-on-bright",
 };
 
@@ -20,7 +20,7 @@ const sizes: Record<ButtonSize, string> = {
 
 /**
  * Class string for the brutal button look. Use it on links that should look
- * like buttons: `<a className={buttonStyles({ variant: "ink" })}>`.
+ * like buttons: `<a className={buttonStyles({ variant: "blue" })}>`.
  * Hover lifts the button toward the light; press pushes it into its shadow.
  */
 export function buttonStyles({

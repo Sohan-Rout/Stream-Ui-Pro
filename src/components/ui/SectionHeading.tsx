@@ -19,7 +19,7 @@ export function SectionHeading({
     <header className="flex flex-col gap-6 border-b-2 border-ink px-5 py-10 sm:px-10 sm:py-14 md:flex-row md:items-end md:justify-between">
       <div>
         <p className="flex items-center gap-3 font-mono text-xs font-semibold tracking-widest text-ink-muted uppercase">
-          <span className="bg-ink px-1.5 py-0.5 text-paper">{index}</span>
+          <span className="border-2 border-ink bg-yellow px-1.5 py-0.5 text-on-bright">{index}</span>
           {eyebrow}
         </p>
         <h2 className="mt-4 max-w-2xl text-4xl leading-none font-black tracking-tight text-balance sm:text-5xl">

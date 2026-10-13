@@ -78,20 +78,20 @@ export function Hero() {
 
         <HeroSwitchCard />
 
-        <div className="-rotate-1 border-2 border-ink bg-ink p-4 text-paper shadow-brutal sm:mr-6">
+        <div className="-rotate-1 border-2 border-ink bg-blue p-4 text-on-bright shadow-brutal sm:mr-6">
           <div className="flex items-center gap-3">
-            <span className="grid size-9 shrink-0 place-items-center border-2 border-paper bg-violet text-on-bright">
+            <span className="grid size-9 shrink-0 place-items-center border-2 border-ink bg-paper-raised text-on-bright">
               <Music aria-hidden className="size-4.5" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-mono text-xs text-yellow">now streaming</p>
+              <p className="font-mono text-xs text-on-bright/70">now streaming</p>
               <p className="truncate font-bold">lofi beats to ship UI to</p>
             </div>
           </div>
-          <div className="mt-4 h-3 border-2 border-paper">
+          <div className="mt-4 h-3 border-2 border-ink bg-paper-raised">
             <div className="h-full w-3/5 bg-yellow" />
           </div>
-          <div className="mt-1.5 flex justify-between font-mono text-xs text-paper/70">
+          <div className="mt-1.5 flex justify-between font-mono text-xs text-on-bright/70">
             <span>2:14</span>
             <span>3:41</span>
           </div>

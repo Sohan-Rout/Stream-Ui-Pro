@@ -23,25 +23,6 @@
   --on-bright: oklch(0.17 0.01 270);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: oklch(0.19 0.012 270);
-    --paper-raised: oklch(0.23 0.014 270);
-    --paper-sunken: oklch(0.15 0.01 270);
-
-    --ink: oklch(0.95 0.02 90);
-    --ink-muted: oklch(0.76 0.015 90);
-    --ink-faint: oklch(0.95 0.02 90 / 0.12);
-
-    --yellow: oklch(0.86 0.16 98);
-    --pink: oklch(0.75 0.14 350);
-    --blue: oklch(0.72 0.12 240);
-    --green: oklch(0.8 0.16 145);
-    --orange: oklch(0.73 0.15 52);
-    --violet: oklch(0.7 0.13 295);
-  }
-}
-
 @theme inline {
   --color-paper: var(--paper);
   --color-paper-raised: var(--paper-raised);
@@ -121,7 +102,7 @@
 
 @layer base {
   html {
-    color-scheme: light dark;
+    color-scheme: light;
   }
 
   @media (prefers-reduced-motion: no-preference) {

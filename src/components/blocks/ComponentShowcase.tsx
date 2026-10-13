@@ -34,7 +34,7 @@ export function ComponentShowcase() {
             <Button variant="pink">
               <Trash aria-hidden /> Delete
             </Button>
-            <Button variant="ink" size="icon" aria-label="Notifications">
+            <Button variant="blue" size="icon" aria-label="Notifications">
               <Bell aria-hidden />
             </Button>
           </div>
@@ -79,7 +79,7 @@ export function ComponentShowcase() {
               <Badge tone="green">stable</Badge>
               <Badge tone="blue">beta</Badge>
               <Badge tone="orange">labs</Badge>
-              <Badge tone="ink">deprecated</Badge>
+              <Badge tone="paper">deprecated</Badge>
             </div>
             <div className="flex items-center">
               {avatars.map((a) => (
