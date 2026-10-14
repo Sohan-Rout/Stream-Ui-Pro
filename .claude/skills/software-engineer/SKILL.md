@@ -55,12 +55,24 @@ Known current facts:
 ## Structure
 
 ```
-src/app/          routes only: page, layout, loading, error, route handlers
-src/components/   ui/ primitives, blocks/ composed sections
-src/hooks/        client hooks (useX.ts)
-src/lib/          pure utilities, no React
-src/server/       server-only logic, data access, actions
+src/app/                 routes only; (docs)/ holds /components, /sections, /icons, /labs
+src/components/ui/       primitives (Button, Input, Tabs, ...), one per file
+src/components/sections/ full page sections, sized with container queries (@container)
+src/components/blocks/   home page and site chrome (header, footer, showcases)
+src/components/demos/    home page demos and Labs experiments
+src/components/docs/     docs UI: CodeBlock, Example, PropsTable, DocsNav, ...
+src/examples/<slug>/     one file per docs example; the file is both preview and shown source
+src/registry/            components.ts, sections.ts, labs.ts, nav.ts: the single source of truth
+src/lib/                 pure utilities (cn, highlight, source, site config)
 ```
+
+**Adding a component:** write `src/components/ui/Name.tsx`, add example files under
+`src/examples/<slug>/`, then add one entry to `src/registry/components.ts` (examples,
+props, accessibility notes). The page, sidebar, index card, and prev/next links come from
+the registry automatically. Sections and labs work the same way with their registries.
+
+Docs show real source via `readSource()` (`src/lib/source.ts`), so never paste code
+strings that duplicate a file.
 
 - Write the simple, direct version first. Extract an abstraction only once a second real
   use case shows up.

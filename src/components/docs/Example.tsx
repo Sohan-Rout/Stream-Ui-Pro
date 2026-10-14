@@ -24,7 +24,7 @@ export function Example({ title, description, file, Component, stageClassName }:
       <div className="border-2 border-ink shadow-brutal">
         <div
           className={cn(
-            "flex min-h-48 items-center justify-center overflow-x-auto border-b-2 border-ink bg-dots p-8 sm:p-10",
+            "flex min-h-48 items-center justify-center overflow-x-auto border-b-2 border-ink bg-dots px-5 py-8 sm:p-10",
             stageClassName ?? "bg-paper",
           )}
         >
