@@ -3,8 +3,7 @@ import { SiGithub } from "react-icons/si";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
-import { Badge } from "@/components/ui/Badge";
-import { buttonStyles } from "@/components/ui/Button";
+import { Badge, buttonStyles } from "@streamui/react";
 import { InstallCommand } from "./InstallCommand";
 import { HeroSwitchCard } from "./HeroSwitchCard";
 

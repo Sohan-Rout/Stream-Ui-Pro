@@ -2,7 +2,7 @@
 
 import { useRef, useState, type PointerEvent } from "react";
 import { Magnet } from "lucide-react";
-import { buttonStyles } from "@/components/ui/Button";
+import { buttonStyles } from "@streamui/react";
 
 const PULL = 0.35;
 const MAX = 40;

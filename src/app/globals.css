@@ -1,61 +1,14 @@
 @import "tailwindcss";
 
-/* ---------- Tokens ---------- */
-
-:root {
-  /* surfaces: near-white, faintly cool */
-  --paper: oklch(0.985 0.004 110);
-  --paper-raised: oklch(1 0 0);
-  --paper-sunken: oklch(0.955 0.006 110);
-
-  /* ink: text, borders, hard shadows */
-  --ink: oklch(0.17 0.01 270);
-  --ink-muted: oklch(0.44 0.01 270);
-  --ink-faint: oklch(0.17 0.01 270 / 0.12);
-
-  /* brights: lime leads, pink seconds, the rest are accents.
-     Text on any bright is always --on-bright. */
-  --lime: oklch(0.91 0.2 127);
-  --pink: oklch(0.74 0.19 354);
-  --blue: oklch(0.8 0.1 225);
-  --violet: oklch(0.77 0.12 300);
-  --orange: oklch(0.79 0.15 55);
-  --on-bright: oklch(0.17 0.01 270);
-
-  /* soft tints of the brights, for large light surfaces */
-  --lime-soft: oklch(0.965 0.07 125);
-  --pink-soft: oklch(0.955 0.035 354);
-  --blue-soft: oklch(0.96 0.03 225);
-  --violet-soft: oklch(0.955 0.035 300);
-}
+/* Design tokens, colors, shadows, and animated-icon styles come from the
+   package, exactly as a consumer would load them. */
+@import "@streamui/react/theme.css";
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-paper-raised: var(--paper-raised);
-  --color-paper-sunken: var(--paper-sunken);
-  --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-ink-faint: var(--ink-faint);
-  --color-lime: var(--lime);
-  --color-pink: var(--pink);
-  --color-blue: var(--blue);
-  --color-violet: var(--violet);
-  --color-orange: var(--orange);
-  --color-on-bright: var(--on-bright);
-  --color-lime-soft: var(--lime-soft);
-  --color-pink-soft: var(--pink-soft);
-  --color-blue-soft: var(--blue-soft);
-  --color-violet-soft: var(--violet-soft);
-
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-space-mono);
   /* Archivo Black ships one weight; use `font-display` alone, no weight class. */
   --font-display: var(--font-archivo-black);
-
-  /* hard offset shadows: the core of the look */
-  --shadow-brutal-sm: 2px 2px 0 0 var(--ink);
-  --shadow-brutal: 4px 4px 0 0 var(--ink);
-  --shadow-brutal-lg: 7px 7px 0 0 var(--ink);
 
   --animate-marquee: marquee 32s linear infinite;
   --animate-wiggle: wiggle 0.4s ease-in-out;

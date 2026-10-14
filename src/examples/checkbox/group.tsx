@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Checkbox } from "@streamui/react";
 
 export default function CheckboxGroup() {
   return (

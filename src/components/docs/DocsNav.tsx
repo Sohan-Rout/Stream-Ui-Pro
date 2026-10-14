@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@streamui/react";
 
 export type NavGroup = {
   title: string;

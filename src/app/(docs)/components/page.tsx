@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@streamui/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { components } from "@/registry/components";
 
@@ -16,7 +16,7 @@ export default function ComponentsIndex() {
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Components" }]}
         title="Components"
-        description="Accessible primitives with every state styled. Each one is a single file you own: copy it in, then change anything."
+        description="Accessible primitives with every state styled. Install them from @streamui/react, or copy a single file into your repo and change anything."
         meta={<Badge tone="paper">{components.length} components</Badge>}
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Switch } from "@/components/ui/Switch";
+import { Switch } from "@streamui/react";
 
 export default function SwitchControlled() {
   const [enabled, setEnabled] = useState(false);

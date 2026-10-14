@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@streamui/react";
 
 /** A spec-sheet cell: file label up top, the live specimen centered below. */
 export function DemoCell({

@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup } from "@/components/ui/Avatar";
+import { Avatar, AvatarGroup } from "@streamui/react";
 
 const team = [
   { initials: "AL", name: "Ada Lovelace", tone: "lime" },

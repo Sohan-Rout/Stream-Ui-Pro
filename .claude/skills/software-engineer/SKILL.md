@@ -56,7 +56,9 @@ Known current facts:
 
 ```
 src/app/                 routes only; (docs)/ holds /components, /sections, /icons, /labs
-src/components/ui/       primitives (Button, Input, Tabs, ...), one per file
+packages/react/          the published npm package @streamui/react (primitives, AnimatedIcon,
+                         theme.css); the site consumes it through the Bun workspace
+src/components/ui/       site-only layout pieces (Section, Rail, SectionHeading)
 src/components/sections/ full page sections, sized with container queries (@container)
 src/components/blocks/   home page and site chrome (header, footer, showcases)
 src/components/demos/    home page demos and Labs experiments
@@ -66,13 +68,20 @@ src/registry/            components.ts, sections.ts, labs.ts, nav.ts: the single
 src/lib/                 pure utilities (cn, highlight, source, site config)
 ```
 
-**Adding a component:** write `src/components/ui/Name.tsx`, add example files under
+**Adding a component:** write `packages/react/src/Name.tsx`, export it from
+`packages/react/src/index.ts`, run `bun run ui:build`, add example files under
 `src/examples/<slug>/`, then add one entry to `src/registry/components.ts` (examples,
 props, accessibility notes). The page, sidebar, index card, and prev/next links come from
 the registry automatically. Sections and labs work the same way with their registries.
 
 Docs show real source via `readSource()` (`src/lib/source.ts`), so never paste code
 strings that duplicate a file.
+
+**Package rules.** Import primitives in the site from `@streamui/react`, never by path.
+Inside the package, use relative imports and keep `"use client"` only on files that
+need it; the build keeps each file's boundary (see `packages/react/build.ts`). Run
+`bun run ui:dev` next to `bun dev` so package edits rebuild. Publishing steps are in
+`packages/react/README.md`.
 
 - Write the simple, direct version first. Extract an abstraction only once a second real
   use case shows up.

@@ -19,6 +19,9 @@ import ProgressTones from "@/examples/progress/tones";
 import ProgressInteractive from "@/examples/progress/interactive";
 import AvatarSizes from "@/examples/avatar/sizes";
 import AvatarGroupExample from "@/examples/avatar/group";
+import AnimatedIconAnimations from "@/examples/animated-icon/animations";
+import AnimatedIconTriggers from "@/examples/animated-icon/triggers";
+import AnimatedIconInButton from "@/examples/animated-icon/in-button";
 
 export type ExampleEntry = {
   title: string;
@@ -49,8 +52,8 @@ export const components: ComponentDoc[] = [
     description:
       "The primary way to trigger an action. Lifts on hover and sinks into its shadow on press. Also available as a class helper for links.",
     status: "stable",
-    file: "src/components/ui/Button.tsx",
-    usage: `import { Button } from "@/components/ui/Button";
+    file: "packages/react/src/Button.tsx",
+    usage: `import { Button } from "@streamui/react";
 
 <Button variant="primary" size="md">Save changes</Button>`,
     examples: [
@@ -95,8 +98,8 @@ export const components: ComponentDoc[] = [
     name: "Badge",
     description: "A compact label for status, category, or counts.",
     status: "stable",
-    file: "src/components/ui/Badge.tsx",
-    usage: `import { Badge } from "@/components/ui/Badge";
+    file: "packages/react/src/Badge.tsx",
+    usage: `import { Badge } from "@streamui/react";
 
 <Badge tone="lime">stable</Badge>`,
     examples: [
@@ -122,8 +125,8 @@ export const components: ComponentDoc[] = [
     name: "Switch",
     description: "An on/off toggle for settings that apply immediately. Works controlled or uncontrolled.",
     status: "stable",
-    file: "src/components/ui/Switch.tsx",
-    usage: `import { Switch } from "@/components/ui/Switch";
+    file: "packages/react/src/Switch.tsx",
+    usage: `import { Switch } from "@streamui/react";
 
 <span id="alerts">Email alerts</span>
 <Switch aria-labelledby="alerts" defaultChecked />`,
@@ -153,8 +156,8 @@ export const components: ComponentDoc[] = [
     name: "Input",
     description: "A single-line text field with an optional leading icon and an invalid state.",
     status: "stable",
-    file: "src/components/ui/Input.tsx",
-    usage: `import { Input } from "@/components/ui/Input";
+    file: "packages/react/src/Input.tsx",
+    usage: `import { Input } from "@streamui/react";
 
 <label htmlFor="email">Email</label>
 <Input id="email" type="email" />`,
@@ -185,8 +188,8 @@ export const components: ComponentDoc[] = [
     name: "Checkbox",
     description: "A native checkbox with a hard-edged face. Fully compatible with forms.",
     status: "stable",
-    file: "src/components/ui/Checkbox.tsx",
-    usage: `import { Checkbox } from "@/components/ui/Checkbox";
+    file: "packages/react/src/Checkbox.tsx",
+    usage: `import { Checkbox } from "@streamui/react";
 
 <Checkbox name="terms" label="I agree to the terms" />`,
     examples: [
@@ -214,8 +217,8 @@ export const components: ComponentDoc[] = [
     name: "Tabs",
     description: "Switch between related panels of content without leaving the page.",
     status: "beta",
-    file: "src/components/ui/Tabs.tsx",
-    usage: `import { Tabs } from "@/components/ui/Tabs";
+    file: "packages/react/src/Tabs.tsx",
+    usage: `import { Tabs } from "@streamui/react";
 
 <Tabs
   label="Project"
@@ -246,8 +249,8 @@ export const components: ComponentDoc[] = [
     name: "Progress",
     description: "Shows how far along a task or quota is.",
     status: "stable",
-    file: "src/components/ui/Progress.tsx",
-    usage: `import { Progress } from "@/components/ui/Progress";
+    file: "packages/react/src/Progress.tsx",
+    usage: `import { Progress } from "@streamui/react";
 
 <Progress value={60} aria-label="Upload" />`,
     examples: [
@@ -275,8 +278,8 @@ export const components: ComponentDoc[] = [
     name: "Avatar",
     description: "Initials in a toned circle, plus a group that overlaps them.",
     status: "beta",
-    file: "src/components/ui/Avatar.tsx",
-    usage: `import { Avatar, AvatarGroup } from "@/components/ui/Avatar";
+    file: "packages/react/src/Avatar.tsx",
+    usage: `import { Avatar, AvatarGroup } from "@streamui/react";
 
 <Avatar initials="AL" name="Ada Lovelace" />`,
     examples: [
@@ -301,6 +304,65 @@ export const components: ComponentDoc[] = [
     accessibility: [
       'With a name, the avatar is role="img" and reads the full name instead of the initials.',
       'AvatarGroup is a role="group", so an aria-label describes the whole stack.',
+    ],
+  },
+  {
+    slug: "animated-icon",
+    name: "Animated Icon",
+    description:
+      "Wrap any SVG icon to animate it on hover, on a loop, or once on mount. Seven presets, pure CSS, and off under reduced motion.",
+    status: "beta",
+    file: "packages/react/src/AnimatedIcon.tsx",
+    usage: `import { Rocket } from "lucide-react";
+import { AnimatedIcon } from "@streamui/react";
+
+<AnimatedIcon animation="bounce" trigger="hover">
+  <Rocket aria-hidden />
+</AnimatedIcon>`,
+    examples: [
+      {
+        title: "Animations",
+        description: "Hover a tile. draw traces the strokes; the rest move the whole glyph.",
+        file: ex("animated-icon", "animations"),
+        Component: AnimatedIconAnimations,
+      },
+      {
+        title: "Triggers",
+        description: "loop for busy states, once for confirmations, hover for everything else.",
+        file: ex("animated-icon", "triggers"),
+        Component: AnimatedIconTriggers,
+      },
+      {
+        title: "Inside a button",
+        description: "With the hover trigger, hovering or focusing the parent button plays the animation.",
+        file: ex("animated-icon", "in-button"),
+        Component: AnimatedIconInButton,
+      },
+    ],
+    props: [
+      {
+        rows: [
+          {
+            name: "animation",
+            type: '"draw" | "spin" | "bounce" | "wiggle" | "pulse" | "shake" | "pop"',
+            description: "Which preset to play. Required.",
+          },
+          {
+            name: "trigger",
+            type: '"hover" | "loop" | "once"',
+            default: '"hover"',
+            description: "hover plays while the icon or its direct parent is hovered or focused.",
+          },
+          { name: "duration", type: "number", default: "700", description: "Length of one cycle in milliseconds." },
+          { name: "children", type: "ReactNode", description: "The SVG icon to animate (lucide-react, react-icons, or your own)." },
+          { name: "...props", type: 'ComponentProps<"span">', description: "Native span attributes for the wrapper." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Every animation stops under prefers-reduced-motion; the icon stays fully drawn and still.",
+      "Animation is decoration: keep the icon aria-hidden and put the meaning in text or an aria-label.",
+      "Avoid loop for anything that isn't an active process, like loading or syncing.",
     ],
   },
 ];

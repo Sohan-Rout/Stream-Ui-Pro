@@ -1,5 +1,5 @@
 import { ArrowRight, Download, Trash } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@streamui/react";
 
 export default function ButtonWithIcons() {
   return (

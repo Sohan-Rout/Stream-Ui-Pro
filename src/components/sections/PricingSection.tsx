@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { cn, Badge, Button } from "@streamui/react";
 
 type Billing = "monthly" | "yearly";
 

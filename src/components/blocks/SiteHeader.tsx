@@ -3,7 +3,7 @@ import { SiGithub } from "react-icons/si";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { Rail } from "@/components/ui/Section";
-import { buttonStyles } from "@/components/ui/Button";
+import { buttonStyles } from "@streamui/react";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";

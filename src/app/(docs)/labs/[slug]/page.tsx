@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { readSource } from "@/lib/source";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PrevNext } from "@/components/docs/PrevNext";

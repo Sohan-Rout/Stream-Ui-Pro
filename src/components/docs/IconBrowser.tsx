@@ -3,20 +3,20 @@
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
 import { Ghost, Search } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamui/react";
 
 const PAGE = 120;
 const SIZES = [16, 20, 24, 32] as const;
 const STROKES = [1.5, 1.75, 2, 2.5] as const;
+const ANIMATIONS = ["none", ...iconAnimations] as const;
+const TRIGGERS = ["hover", "loop"] as const satisfies readonly IconTrigger[];
 
 /** "arrow-up-right" → "ArrowUpRight", the name you import from lucide-react. */
 function toComponentName(name: string) {
   return name.replace(/(^|-)([a-z0-9])/g, (_, __, c: string) => c.toUpperCase());
 }
 
-function Segmented<T extends number>({
+function Segmented<T extends string | number>({
   label,
   options,
   value,
@@ -28,9 +28,9 @@ function Segmented<T extends number>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <span className="font-mono text-xs text-ink-muted uppercase">{label}</span>
-      <div role="group" aria-label={label} className="flex border-2 border-ink">
+      <div role="group" aria-label={label} className="flex flex-wrap border-2 border-ink">
         {options.map((o) => (
           <button
             key={o}
@@ -55,6 +55,8 @@ export function IconBrowser() {
   const deferredQuery = useDeferredValue(query);
   const [size, setSize] = useState<(typeof SIZES)[number]>(24);
   const [stroke, setStroke] = useState<(typeof STROKES)[number]>(1.75);
+  const [animation, setAnimation] = useState<IconAnimation | "none">("none");
+  const [trigger, setTrigger] = useState<(typeof TRIGGERS)[number]>("hover");
   const [limit, setLimit] = useState(PAGE);
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -70,7 +72,12 @@ export function IconBrowser() {
   }, [copied]);
 
   async function copy(name: IconName) {
-    const jsx = `<${toComponentName(name)} />`;
+    const icon = `<${toComponentName(name)} />`;
+    const triggerProp = trigger === "hover" ? "" : ` trigger="${trigger}"`;
+    const jsx =
+      animation === "none"
+        ? icon
+        : `<AnimatedIcon animation="${animation}"${triggerProp}>${icon}</AnimatedIcon>`;
     try {
       await navigator.clipboard.writeText(jsx);
       setCopied(jsx);
@@ -111,6 +118,12 @@ export function IconBrowser() {
             )}
           </p>
         </div>
+        <div className="flex flex-wrap items-center gap-5 border-t-2 border-dashed border-ink-faint pt-4">
+          <Segmented label="Animate" options={ANIMATIONS} value={animation} onChange={setAnimation} />
+          {animation !== "none" && (
+            <Segmented label="Play on" options={TRIGGERS} value={trigger} onChange={setTrigger} />
+          )}
+        </div>
       </div>
 
       {visible.length > 0 ? (
@@ -124,13 +137,25 @@ export function IconBrowser() {
                 aria-label={`Copy ${toComponentName(name)}`}
                 className="group flex aspect-square w-full cursor-pointer flex-col items-center justify-center gap-2 bg-paper p-2 transition-colors duration-150 hover:bg-lime hover:text-on-bright focus-visible:relative focus-visible:z-10"
               >
-                <DynamicIcon
-                  name={name}
-                  size={size}
-                  strokeWidth={stroke}
-                  aria-hidden
-                  fallback={() => <span aria-hidden className="block size-5 bg-ink-faint" />}
-                />
+                {animation === "none" ? (
+                  <DynamicIcon
+                    name={name}
+                    size={size}
+                    strokeWidth={stroke}
+                    aria-hidden
+                    fallback={() => <span aria-hidden className="block size-5 bg-ink-faint" />}
+                  />
+                ) : (
+                  <AnimatedIcon key={`${animation}-${trigger}`} animation={animation} trigger={trigger}>
+                    <DynamicIcon
+                      name={name}
+                      size={size}
+                      strokeWidth={stroke}
+                      aria-hidden
+                      fallback={() => <span aria-hidden className="block size-5 bg-ink-faint" />}
+                    />
+                  </AnimatedIcon>
+                )}
                 <span className="w-full truncate text-center font-mono text-[0.6875rem] text-ink-muted group-hover:text-on-bright">
                   {name}
                 </span>

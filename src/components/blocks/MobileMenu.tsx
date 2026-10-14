@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/cn";
-import { buttonStyles } from "@/components/ui/Button";
+import { cn, buttonStyles } from "@streamui/react";
 
 type NavItem = { label: string; href: string };
 

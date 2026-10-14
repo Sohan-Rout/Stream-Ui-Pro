@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@streamui/react";
 
 export default function ButtonVariants() {
   return (

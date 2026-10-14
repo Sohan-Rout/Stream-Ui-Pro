@@ -1,4 +1,4 @@
-import { Avatar } from "@/components/ui/Avatar";
+import { Avatar } from "@streamui/react";
 
 export default function AvatarSizes() {
   return (

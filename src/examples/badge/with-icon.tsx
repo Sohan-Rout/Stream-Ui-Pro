@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@streamui/react";
 
 export default function BadgeWithIcon() {
   return (

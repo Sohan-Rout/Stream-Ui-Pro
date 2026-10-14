@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { cn, Badge } from "@streamui/react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 import { ShapeRollerLab } from "@/components/demos/ShapeRollerLab";
 import { MagneticLab } from "@/components/demos/MagneticLab";
 import { WobbleLab } from "@/components/demos/WobbleLab";

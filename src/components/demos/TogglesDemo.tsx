@@ -1,8 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Switch } from "@/components/ui/Switch";
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Switch, Checkbox } from "@streamui/react";
 
 export function TogglesDemo() {
   const id = useId();

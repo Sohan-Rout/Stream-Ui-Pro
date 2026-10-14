@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/site";
 import { readSource } from "@/lib/source";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { Example } from "@/components/docs/Example";
 import { CodeBlock } from "@/components/docs/CodeBlock";
@@ -53,10 +53,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       </DocSection>
 
       <DocSection title="Installation" id="installation">
-        <InstallCommand
-          command={siteConfig.installCommand.replace(/add \S+$/, `add ${doc.slug}`)}
-          className="self-start"
-        />
+        <InstallCommand command={siteConfig.installCommand} className="self-start" />
         <CodeBlock code={doc.usage} filename="usage.tsx" />
       </DocSection>
 

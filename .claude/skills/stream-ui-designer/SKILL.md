@@ -10,8 +10,10 @@ spacing, type, and color theory. This skill covers how those ideas apply in **th
 
 ## Stack facts
 
-- **Tailwind CSS v4.** There is no `tailwind.config.*`. Tokens live in CSS:
-  `src/app/globals.css` uses `@import "tailwindcss"` and an `@theme inline { … }` block.
+- **Tailwind CSS v4.** There is no `tailwind.config.*`. Design tokens (colors, tints,
+  brutal shadows) and animated-icon CSS live in the package at
+  `packages/react/src/theme.css`; `src/app/globals.css` imports it and adds the site-only
+  bits (fonts, patterns, code styles).
   A token `--color-surface` becomes `bg-surface`, `text-surface`, `border-surface`, and so on.
 - **Fonts** (Google, via `next/font` in `src/app/layout.tsx`):
   - `font-display` is **Archivo Black**, for headings, the wordmark, the marquee, and big type.

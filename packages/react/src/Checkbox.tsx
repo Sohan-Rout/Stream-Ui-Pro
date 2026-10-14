@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Check } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "./cn";
 
 export type CheckboxProps = Omit<ComponentProps<"input">, "type"> & {
   label?: ReactNode;

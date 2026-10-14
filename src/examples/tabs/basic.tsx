@@ -1,4 +1,4 @@
-import { Tabs } from "@/components/ui/Tabs";
+import { Tabs } from "@streamui/react";
 
 const items = [
   {

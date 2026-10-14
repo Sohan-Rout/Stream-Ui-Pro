@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "stream/ui",
   githubUrl: "https://github.com",
-  installCommand: "bunx stream-ui@latest add button",
+  installCommand: "bun add @streamui/react",
   nav: [
     { label: "Components", href: "/components" },
     { label: "Sections", href: "/sections" },

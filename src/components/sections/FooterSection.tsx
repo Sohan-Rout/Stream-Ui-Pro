@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Button, Input } from "@streamui/react";
 
 const columns = [
   { title: "Product", links: ["Features", "Pricing", "Changelog", "Status"] },

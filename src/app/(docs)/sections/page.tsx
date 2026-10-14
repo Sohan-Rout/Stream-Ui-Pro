@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@streamui/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { SectionThumb, ThumbFrame } from "@/components/blocks/SectionThumbs";
 import { sections } from "@/registry/sections";

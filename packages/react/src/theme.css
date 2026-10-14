@@ -1,0 +1,166 @@
+/*
+ * @streamui/react theme
+ *
+ * Import after Tailwind, and point Tailwind at the package so it generates
+ * the classes the components use:
+ *
+ *   @import "tailwindcss";
+ *   @import "@streamui/react/theme.css";
+ *   @source "../node_modules/@streamui/react/dist";
+ */
+
+/* ---------- Tokens ---------- */
+
+:root {
+  /* surfaces: near-white, faintly cool */
+  --paper: oklch(0.985 0.004 110);
+  --paper-raised: oklch(1 0 0);
+  --paper-sunken: oklch(0.955 0.006 110);
+
+  /* ink: text, borders, hard shadows */
+  --ink: oklch(0.17 0.01 270);
+  --ink-muted: oklch(0.44 0.01 270);
+  --ink-faint: oklch(0.17 0.01 270 / 0.12);
+
+  /* brights: lime leads, pink seconds, the rest are accents.
+     Text on any bright is always --on-bright. */
+  --lime: oklch(0.91 0.2 127);
+  --pink: oklch(0.74 0.19 354);
+  --blue: oklch(0.8 0.1 225);
+  --violet: oklch(0.77 0.12 300);
+  --orange: oklch(0.79 0.15 55);
+  --on-bright: oklch(0.17 0.01 270);
+
+  /* soft tints of the brights, for large light surfaces */
+  --lime-soft: oklch(0.965 0.07 125);
+  --pink-soft: oklch(0.955 0.035 354);
+  --blue-soft: oklch(0.96 0.03 225);
+  --violet-soft: oklch(0.955 0.035 300);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunken: var(--paper-sunken);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-lime: var(--lime);
+  --color-pink: var(--pink);
+  --color-blue: var(--blue);
+  --color-violet: var(--violet);
+  --color-orange: var(--orange);
+  --color-on-bright: var(--on-bright);
+  --color-lime-soft: var(--lime-soft);
+  --color-pink-soft: var(--pink-soft);
+  --color-blue-soft: var(--blue-soft);
+  --color-violet-soft: var(--violet-soft);
+
+  /* hard offset shadows: the core of the look */
+  --shadow-brutal-sm: 2px 2px 0 0 var(--ink);
+  --shadow-brutal: 4px 4px 0 0 var(--ink);
+  --shadow-brutal-lg: 7px 7px 0 0 var(--ink);
+}
+
+/* ---------- Animated icons ---------- */
+
+[data-sui-icon] {
+  --sui-icon-duration: 700ms;
+  --sui-icon-ease: ease-in-out;
+  --sui-icon-iterations: 1;
+  --sui-icon-direction: normal;
+}
+
+[data-sui-icon] > svg {
+  transform-origin: center;
+}
+
+[data-sui-trigger="loop"] {
+  --sui-icon-iterations: infinite;
+}
+
+[data-sui-icon="spin"] { --sui-icon-name: sui-icon-spin; --sui-icon-ease: linear; }
+[data-sui-icon="bounce"] { --sui-icon-name: sui-icon-bounce; }
+[data-sui-icon="wiggle"] { --sui-icon-name: sui-icon-wiggle; }
+[data-sui-icon="pulse"] { --sui-icon-name: sui-icon-pulse; }
+[data-sui-icon="shake"] { --sui-icon-name: sui-icon-shake; }
+[data-sui-icon="pop"] { --sui-icon-name: sui-icon-pop; --sui-icon-ease: cubic-bezier(0.34, 1.56, 0.64, 1); }
+[data-sui-icon="draw"] { --sui-icon-ease: ease-out; }
+[data-sui-icon="draw"][data-sui-trigger="loop"] { --sui-icon-direction: alternate; }
+
+/* Transform animations move the whole <svg>. */
+[data-sui-icon]:not([data-sui-icon="draw"]):is([data-sui-trigger="loop"], [data-sui-trigger="once"]) > svg,
+[data-sui-icon]:not([data-sui-icon="draw"])[data-sui-trigger="hover"]:is(:hover, :focus-visible) > svg,
+:is(:hover, :focus-visible) > [data-sui-icon]:not([data-sui-icon="draw"])[data-sui-trigger="hover"] > svg {
+  animation: var(--sui-icon-name) var(--sui-icon-duration) var(--sui-icon-ease) var(--sui-icon-iterations)
+    var(--sui-icon-direction);
+}
+
+/* "draw" traces each stroke. Shapes get pathLength="1" from the component. */
+[data-sui-icon="draw"][data-sui-ready] > svg :is(path, line, polyline, polygon, circle, ellipse, rect) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+[data-sui-icon="draw"][data-sui-ready]:is([data-sui-trigger="loop"], [data-sui-trigger="once"])
+  > svg
+  :is(path, line, polyline, polygon, circle, ellipse, rect),
+[data-sui-icon="draw"][data-sui-ready][data-sui-trigger="hover"]:is(:hover, :focus-visible)
+  > svg
+  :is(path, line, polyline, polygon, circle, ellipse, rect),
+:is(:hover, :focus-visible)
+  > [data-sui-icon="draw"][data-sui-ready][data-sui-trigger="hover"]
+  > svg
+  :is(path, line, polyline, polygon, circle, ellipse, rect) {
+  animation: sui-icon-draw var(--sui-icon-duration) var(--sui-icon-ease) var(--sui-icon-iterations)
+    var(--sui-icon-direction) both;
+}
+
+@keyframes sui-icon-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes sui-icon-spin {
+  to { rotate: 360deg; }
+}
+
+@keyframes sui-icon-bounce {
+  0%, 100% { translate: 0 0; }
+  35% { translate: 0 -22%; }
+  65% { translate: 0 -6%; }
+}
+
+@keyframes sui-icon-wiggle {
+  0%, 100% { rotate: 0deg; }
+  20% { rotate: -14deg; }
+  40% { rotate: 12deg; }
+  60% { rotate: -8deg; }
+  80% { rotate: 4deg; }
+}
+
+@keyframes sui-icon-pulse {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.18; }
+}
+
+@keyframes sui-icon-shake {
+  0%, 100% { translate: 0 0; }
+  20% { translate: -12% 0; }
+  40% { translate: 10% 0; }
+  60% { translate: -6% 0; }
+  80% { translate: 3% 0; }
+}
+
+@keyframes sui-icon-pop {
+  0% { scale: 1; }
+  35% { scale: 0.8; }
+  100% { scale: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sui-icon] > svg,
+  [data-sui-icon] > svg * {
+    animation: none !important;
+  }
+}

@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@streamui/react";
 
 export default function ButtonSizes() {
   return (

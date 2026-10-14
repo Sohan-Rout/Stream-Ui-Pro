@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Progress } from "@/components/ui/Progress";
+import { Button, Progress } from "@streamui/react";
 
 export default function ProgressInteractive() {
   const [step, setStep] = useState(2);

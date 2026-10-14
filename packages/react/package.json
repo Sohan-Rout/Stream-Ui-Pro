@@ -1,0 +1,60 @@
+{
+  "name": "@streamui/react",
+  "version": "0.1.0",
+  "description": "Neo-brutalist React components for Tailwind CSS v4: hard edges, hard shadows, every state styled.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./theme.css": {
+      "style": "./dist/theme.css",
+      "default": "./dist/theme.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production bun run build.ts",
+    "dev": "NODE_ENV=production bun run build.ts --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run build"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.56.0",
+    "tailwind-merge": "^3.7.0"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19",
+    "tailwindcss": ">=4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "typescript": "^5"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "components",
+    "ui",
+    "neo-brutalism",
+    "animated-icons"
+  ]
+}

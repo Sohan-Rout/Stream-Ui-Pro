@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@streamui/react";
 
 const letters = [
   { ch: "W", tone: "bg-violet", tilt: "-rotate-6" },

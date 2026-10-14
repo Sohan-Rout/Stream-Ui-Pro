@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Check, ChevronDown, Copy } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@streamui/react";
 
 const COLLAPSE_AT = 18;
 

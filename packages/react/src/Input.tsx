@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "./cn";
 
 export type InputProps = ComponentProps<"input"> & {
   /** Leading icon, e.g. `<Mail />`. Decorative; hidden from assistive tech. */

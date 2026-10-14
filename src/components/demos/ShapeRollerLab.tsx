@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { Dices } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/cn";
+import { Button, cn } from "@streamui/react";
 
 const shapes = ["", "rounded-full", "rotate-45", "rounded-full w-36"];
 const colors = ["bg-lime", "bg-pink", "bg-blue", "bg-violet", "bg-orange"];
