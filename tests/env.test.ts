@@ -5,7 +5,7 @@ describe("parseEnv", () => {
   test("works with nothing set: default site URL, no funding links", () => {
     expect(parseEnv({})).toEqual({
       siteUrl: "https://streamui.org",
-      funding: { openCollective: "", kofi: "" },
+      funding: { githubSponsors: "", openCollective: "", kofi: "" },
     });
   });
 
@@ -25,7 +25,7 @@ describe("parseEnv", () => {
       FUNDING_KOFI_URL: "https://ko-fi.com/me",
       FUNDING_OPEN_COLLECTIVE_URL: "   ",
     });
-    expect(env.funding).toEqual({ openCollective: "", kofi: "https://ko-fi.com/me" });
+    expect(env.funding).toEqual({ githubSponsors: "", openCollective: "", kofi: "https://ko-fi.com/me" });
   });
 
   test("fails loudly on a malformed or insecure funding link", () => {

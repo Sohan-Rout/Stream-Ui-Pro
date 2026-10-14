@@ -10,7 +10,8 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sponsor, path: "/sponsor" });
 
-const toneBg = { lime: "bg-lime", pink: "bg-pink" } as const;
+const toneBg = { lime: "bg-lime", pink: "bg-pink", blue: "bg-blue" } as const;
+const toneButton = { lime: "primary", pink: "pink", blue: "blue" } as const;
 
 const otherWays = [
   {
@@ -74,7 +75,7 @@ export default function SponsorPage() {
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={buttonStyles({ variant: p.id === "kofi" ? "pink" : "primary", className: "self-start" })}
+                  className={buttonStyles({ variant: toneButton[p.tone], className: "self-start" })}
                 >
                   {p.cta} <ArrowUpRight aria-hidden />
                   <span className="sr-only">(opens in a new tab)</span>
@@ -86,7 +87,7 @@ export default function SponsorPage() {
           <div className="flex flex-col items-start gap-4 bg-paper-sunken px-5 py-12 sm:px-10">
             <p className="font-display text-2xl tracking-tight">Sponsorship links are on the way.</p>
             <p className="max-w-xl leading-relaxed text-ink-muted">
-              Open Collective and Ko-fi pages are being set up. Until
+              GitHub Sponsors, Open Collective, and Ko-fi pages are being set up. Until
               then, a star on GitHub is the best way to help.
             </p>
             <a href={siteConfig.githubUrl} className={buttonStyles({ variant: "secondary" })}>

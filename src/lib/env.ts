@@ -40,6 +40,7 @@ export function parseEnv(source: Source) {
     /** Canonical origin, without a trailing slash. */
     siteUrl: rawSiteUrl ? parseUrl("NEXT_PUBLIC_SITE_URL", rawSiteUrl).origin : DEFAULT_SITE_URL,
     funding: {
+      githubSponsors: optionalLink(source, "FUNDING_GITHUB_SPONSORS_URL"),
       openCollective: optionalLink(source, "FUNDING_OPEN_COLLECTIVE_URL"),
       kofi: optionalLink(source, "FUNDING_KOFI_URL"),
     },

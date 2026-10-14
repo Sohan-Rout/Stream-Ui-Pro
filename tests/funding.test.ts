@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { configuredPlatforms, fundingPlatforms } from "@/lib/funding";
 import { siteConfig } from "@/lib/site";
 
-const none = { openCollective: "", kofi: "" };
+const none = { githubSponsors: "", openCollective: "", kofi: "" };
 
 describe("configuredPlatforms", () => {
   test("hides every platform when nothing is configured", () => {
@@ -19,12 +19,13 @@ describe("configuredPlatforms", () => {
     expect(configuredPlatforms({ ...none, kofi: "   " })).toEqual([]);
   });
 
-  test("keeps a stable order: Open Collective, then Ko-fi", () => {
+  test("keeps a stable order: GitHub Sponsors, Open Collective, Ko-fi", () => {
     const all = configuredPlatforms({
       kofi: "https://ko-fi.com/me",
+      githubSponsors: "https://github.com/sponsors/me",
       openCollective: "https://opencollective.com/me",
     });
-    expect(all.map((p) => p.id)).toEqual(["openCollective", "kofi"]);
+    expect(all.map((p) => p.id)).toEqual(["githubSponsors", "openCollective", "kofi"]);
   });
 });
 
@@ -36,6 +37,6 @@ describe("configured funding links", () => {
   });
 
   test("siteConfig covers every platform the sponsor page knows", () => {
-    expect(Object.keys(siteConfig.funding).sort()).toEqual(["kofi", "openCollective"]);
+    expect(Object.keys(siteConfig.funding).sort()).toEqual(["githubSponsors", "kofi", "openCollective"]);
   });
 });

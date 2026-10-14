@@ -6,11 +6,19 @@ export type FundingPlatform = {
   url: string;
   blurb: string;
   cta: string;
-  tone: "lime" | "pink";
+  tone: "lime" | "pink" | "blue";
 };
 
 /** Every supported platform; `url` is filled from config. */
 const all: FundingPlatform[] = [
+  {
+    id: "githubSponsors",
+    name: "GitHub Sponsors",
+    url: "",
+    blurb: "Monthly or one-time, straight from your GitHub account. GitHub takes no fee, so all of it goes to the project.",
+    cta: "Sponsor on GitHub",
+    tone: "pink",
+  },
   {
     id: "openCollective",
     name: "Open Collective",
@@ -25,7 +33,7 @@ const all: FundingPlatform[] = [
     url: "",
     blurb: "A quick one-off tip by card or PayPal, from anywhere in the world.",
     cta: "Tip on Ko-fi",
-    tone: "pink",
+    tone: "blue",
   },
 ];
 
