@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { IconBrowser } from "@/components/docs/IconBrowser";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Icons",
-  description:
-    "Search 2,000+ icons, adjust size and stroke, add draw, spin, or bounce animations, and copy the React JSX.",
-  path: "/icons",
-});
+export const metadata: Metadata = pageMetadata({ ...indexSeo.icons, path: "/icons" });
 
 const usage = `import { Rocket } from "lucide-react";
 import { AnimatedIcon } from "@streamui/react";
@@ -29,8 +25,8 @@ export default function IconsPage() {
     <div className="flex flex-col gap-14">
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Icons" }]}
-        title="Icons"
-        description="Drawn on a 24px grid with one stroke weight, so icons sit evenly next to text. Pick a size, stroke, and animation, then click any icon to copy its JSX."
+        title="Animated icons"
+        description="2,000+ icons for React, drawn on a 24px grid with one stroke weight. Animate them with draw, spin, bounce, and more, then click any icon to copy its JSX."
         meta={
           <>
             <Badge tone="paper">24px grid</Badge>

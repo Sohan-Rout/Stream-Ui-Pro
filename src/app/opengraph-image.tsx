@@ -1,6 +1,6 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
 
-export const alt = "stream/ui: UI that doesn't whisper. Neo-brutalist React components for Tailwind CSS v4.";
+export const alt = "stream/ui, a neobrutalism UI library for React and Tailwind CSS: UI that doesn't whisper.";
 export const size = ogSize;
 export const contentType = ogContentType;
 

@@ -1,7 +1,7 @@
 {
   "name": "@streamui/react",
   "version": "0.1.0",
-  "description": "Neo-brutalist React components for Tailwind CSS v4: hard edges, hard shadows, every state styled.",
+  "description": "Neobrutalism UI components for React and Tailwind CSS v4: hard edges, offset shadows, every state styled, plus animated icons.",
   "license": "MIT",
   "author": "Sohan Rout",
   "repository": {
@@ -86,6 +86,12 @@
     "animated-icons",
     "nextjs",
     "typescript",
-    "accessible"
+    "accessible",
+    "neubrutalism",
+    "brutalist-ui",
+    "neobrutalism-ui",
+    "tailwind-components",
+    "react-animated-icons",
+    "animated-svg-icons"
   ]
 }

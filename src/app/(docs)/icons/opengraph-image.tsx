@@ -1,6 +1,6 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
 
-export const alt = "Icons · stream/ui";
+export const alt = "2,000+ animated icons for React · stream/ui";
 export const size = ogSize;
 export const contentType = ogContentType;
 

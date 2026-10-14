@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { homeSeo } from "@/lib/seo-copy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/blocks/Hero";
 import { SpecStrip } from "@/components/blocks/SpecStrip";
@@ -11,7 +12,7 @@ import { IconShowcase } from "@/components/blocks/IconShowcase";
 import { LabsShowcase } from "@/components/blocks/LabsShowcase";
 import { CallToAction } from "@/components/blocks/CallToAction";
 
-export const metadata: Metadata = pageMetadata({ description: siteConfig.description, path: "/" });
+export const metadata: Metadata = pageMetadata({ description: homeSeo.description, path: "/", keywords: homeSeo.keywords });
 
 const structuredData = {
   "@context": "https://schema.org",

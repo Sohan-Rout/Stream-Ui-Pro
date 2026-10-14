@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
+import { componentSeo } from "@/lib/seo-copy";
 import { siteConfig } from "@/lib/site";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: PageProps<"/components/[slug]
   const { slug } = await params;
   const doc = getComponent(slug);
   if (!doc) return {};
-  return pageMetadata({ title: `${doc.name} component`, description: doc.description, path: `/components/${doc.slug}` });
+  return pageMetadata({ ...componentSeo(doc), path: `/components/${doc.slug}` });
 }
 
 export default async function ComponentPage({ params }: PageProps<"/components/[slug]">) {

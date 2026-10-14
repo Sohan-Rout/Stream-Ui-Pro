@@ -5,7 +5,7 @@ export function generateStaticParams() {
   return labs.map((d) => ({ slug: d.slug }));
 }
 
-export const alt = "stream/ui documentation page";
+export const alt = "React UI experiment from stream/ui Labs";
 export const size = ogSize;
 export const contentType = ogContentType;
 

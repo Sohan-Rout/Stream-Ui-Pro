@@ -1,6 +1,6 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
 
-export const alt = "Labs · stream/ui";
+export const alt = "Creative React UI experiments · stream/ui";
 export const size = ogSize;
 export const contentType = ogContentType;
 

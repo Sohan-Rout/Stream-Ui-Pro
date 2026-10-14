@@ -1,12 +1,12 @@
 import { env } from "./env";
+import { homeSeo } from "./seo-copy";
 
 export const siteConfig = {
   name: "stream/ui",
   /** Canonical origin. Set NEXT_PUBLIC_SITE_URL to override (see .env.example). */
   url: env.siteUrl,
-  title: "stream/ui — React components with hard edges",
-  description:
-    "Neo-brutalist React components, page sections, and animated icons for Tailwind CSS v4. Accessible, typed, and published on npm as @streamui/react.",
+  title: homeSeo.title,
+  description: homeSeo.description,
   author: "Sohan Rout",
   githubUrl: "https://github.com/Sohan-Rout/Vibe-coded-lib",
   packageName: "@streamui/react",

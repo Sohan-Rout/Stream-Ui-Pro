@@ -15,16 +15,19 @@ export function pageMetadata({
   title,
   description,
   path,
+  keywords,
 }: {
   /** Page title; omit on the home page to use the site title. */
   title?: string;
   description: string;
   path: string;
+  keywords?: string[];
 }): Metadata {
   const socialTitle = title ? `${title} · ${siteConfig.name}` : siteConfig.title;
   return {
     ...(title && { title }),
     description,
+    ...(keywords && { keywords }),
     alternates: { canonical: path },
     openGraph: {
       type: "website",

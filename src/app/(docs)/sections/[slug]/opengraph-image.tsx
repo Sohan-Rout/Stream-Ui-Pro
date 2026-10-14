@@ -5,7 +5,7 @@ export function generateStaticParams() {
   return sections.map((d) => ({ slug: d.slug }));
 }
 
-export const alt = "stream/ui documentation page";
+export const alt = "Neobrutalism landing page section from stream/ui";
 export const size = ogSize;
 export const contentType = ogContentType;
 

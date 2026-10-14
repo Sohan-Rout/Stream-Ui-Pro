@@ -3,6 +3,7 @@ import { Archivo_Black, Space_Grotesk, Space_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { SiteFooter } from "@/components/blocks/SiteFooter";
 import { siteConfig } from "@/lib/site";
+import { homeSeo } from "@/lib/seo-copy";
 import "./globals.css";
 
 // Neo-brutalist type: a heavy grotesk for display, a quirky grotesk for
@@ -29,19 +30,7 @@ export const metadata: Metadata = {
   title: { default: siteConfig.title, template: "%s · stream/ui" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  keywords: [
-    "React components",
-    "Tailwind CSS v4",
-    "neo-brutalism",
-    "neobrutalism UI",
-    "brutalist design",
-    "UI library",
-    "component library",
-    "animated icons",
-    "Next.js",
-    "TypeScript",
-    "accessible components",
-  ],
+  keywords: homeSeo.keywords,
   authors: [{ name: siteConfig.author, url: siteConfig.githubUrl }],
   creator: siteConfig.author,
   category: "technology",

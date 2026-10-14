@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
+import { sectionSeo } from "@/lib/seo-copy";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/sections/[slug]">
   const { slug } = await params;
   const doc = getSection(slug);
   if (!doc) return {};
-  return pageMetadata({ title: `${doc.name} section`, description: doc.description, path: `/sections/${doc.slug}` });
+  return pageMetadata({ ...sectionSeo(doc), path: `/sections/${doc.slug}` });
 }
 
 export default async function SectionPage({ params }: PageProps<"/sections/[slug]">) {

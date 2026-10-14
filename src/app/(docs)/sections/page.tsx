@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamui/react";
@@ -7,20 +8,15 @@ import { DocHeader } from "@/components/docs/DocHeader";
 import { SectionThumb, ThumbFrame } from "@/components/blocks/SectionThumbs";
 import { sections } from "@/registry/sections";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Sections",
-  description:
-    "Ready-made page sections built with stream/ui: hero, features, pricing, testimonials, FAQ, and footer. Responsive with container queries.",
-  path: "/sections",
-});
+export const metadata: Metadata = pageMetadata({ ...indexSeo.sections, path: "/sections" });
 
 export default function SectionsIndex() {
   return (
     <div className="flex flex-col gap-10">
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Sections" }]}
-        title="Sections"
-        description="Full page sections composed from the same components. They size themselves to their container, so they fit a full page or a narrow column."
+        title="Landing page sections"
+        description="Neobrutalism landing page sections for React, composed from the same components. They size themselves to their container, so they fit a full page or a narrow column."
         meta={<Badge tone="paper">{sections.length} sections</Badge>}
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">

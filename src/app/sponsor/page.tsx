@@ -4,15 +4,11 @@ import { SiGithub } from "react-icons/si";
 import { buttonStyles, cn } from "@streamui/react";
 import { siteConfig } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { indexSeo } from "@/lib/seo-copy";
 import { fundingPlatforms } from "@/lib/funding";
 import { Section } from "@/components/ui/Section";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Sponsor",
-  description:
-    "stream/ui is free and MIT licensed. Sponsor it through Razorpay, Open Collective, or Ko-fi to fund new components, fixes, and docs.",
-  path: "/sponsor",
-});
+export const metadata: Metadata = pageMetadata({ ...indexSeo.sponsor, path: "/sponsor" });
 
 const toneBg = { lime: "bg-lime", pink: "bg-pink", blue: "bg-blue" } as const;
 

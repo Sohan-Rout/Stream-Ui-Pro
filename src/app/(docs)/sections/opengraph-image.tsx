@@ -1,6 +1,6 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
 
-export const alt = "Page sections · stream/ui";
+export const alt = "Neobrutalism landing page sections · stream/ui";
 export const size = ogSize;
 export const contentType = ogContentType;
 

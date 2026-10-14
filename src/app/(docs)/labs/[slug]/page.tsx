@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
+import { labSeo } from "@/lib/seo-copy";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/labs/[slug]">): P
   const { slug } = await params;
   const doc = getLab(slug);
   if (!doc) return {};
-  return pageMetadata({ title: doc.name, description: doc.description, path: `/labs/${doc.slug}` });
+  return pageMetadata({ ...labSeo(doc), path: `/labs/${doc.slug}` });
 }
 
 export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {

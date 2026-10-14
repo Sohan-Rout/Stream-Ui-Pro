@@ -1,25 +1,21 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamui/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { labs } from "@/registry/labs";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Labs",
-  description:
-    "Experimental React interactions from stream/ui: a 3D dice roller, magnetic button, shape roller, and more.",
-  path: "/labs",
-});
+export const metadata: Metadata = pageMetadata({ ...indexSeo.labs, path: "/labs" });
 
 export default function LabsIndex() {
   return (
     <div className="flex flex-col gap-10">
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Labs" }]}
-        title="Labs"
-        description="Interaction prototypes that haven't graduated into the main library. Their APIs can change between releases."
+        title="UI experiments"
+        description="Creative UI experiments in React and CSS that haven't graduated into the main library yet. Their APIs can change between releases."
         meta={<Badge tone="orange">experimental</Badge>}
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
