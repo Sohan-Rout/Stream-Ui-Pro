@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { buttonStyles } from "@/components/ui/Button";
@@ -25,9 +26,9 @@ export function CallToAction() {
         </div>
         <div className="flex max-w-full flex-col items-start gap-5">
           <InstallCommand command={siteConfig.installCommand} />
-          <a href="#components" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+          <Link href="/components" className={buttonStyles({ variant: "secondary", size: "lg" })}>
             Browse components <ArrowRight aria-hidden />
-          </a>
+          </Link>
         </div>
       </div>
     </Section>

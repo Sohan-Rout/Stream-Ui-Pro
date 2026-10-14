@@ -3,9 +3,9 @@ export const siteConfig = {
   githubUrl: "https://github.com",
   installCommand: "bunx stream-ui@latest add button",
   nav: [
-    { label: "Components", href: "#components" },
-    { label: "Sections", href: "#sections" },
-    { label: "Icons", href: "#icons" },
-    { label: "Labs", href: "#labs" },
+    { label: "Components", href: "/components" },
+    { label: "Sections", href: "/sections" },
+    { label: "Icons", href: "/icons" },
+    { label: "Labs", href: "/labs" },
   ],
 } as const;

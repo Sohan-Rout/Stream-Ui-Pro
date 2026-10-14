@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight, Blocks, FlaskConical, PanelsTopLeft, Shapes } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -18,7 +19,7 @@ type Pillar = {
 const pillars: Pillar[] = [
   {
     title: "Components",
-    href: "#components",
+    href: "/components",
     blurb: "Buttons, inputs, tabs, and dialogs with keyboard support and focus states included.",
     examples: "Button · Input · Tabs · Switch",
     icon: Blocks,
@@ -27,7 +28,7 @@ const pillars: Pillar[] = [
   },
   {
     title: "Sections",
-    href: "#sections",
+    href: "/sections",
     blurb: "Heroes, pricing tables, FAQs, and footers composed from the same components.",
     examples: "Hero · Pricing · FAQ · Footer",
     icon: PanelsTopLeft,
@@ -36,7 +37,7 @@ const pillars: Pillar[] = [
   },
   {
     title: "Icons",
-    href: "#icons",
+    href: "/icons",
     blurb: "A 24px set at one stroke weight, so icons sit evenly next to text at every size.",
     examples: "Search · copy as JSX",
     icon: Shapes,
@@ -45,7 +46,7 @@ const pillars: Pillar[] = [
   },
   {
     title: "Labs",
-    href: "#labs",
+    href: "/labs",
     blurb: "Interaction experiments that haven't been promoted to the main library yet.",
     examples: "APIs may change",
     icon: FlaskConical,
@@ -66,7 +67,7 @@ export function Pillars() {
       <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((p) => (
           <li key={p.title} className="bg-paper">
-            <a
+            <Link
               href={p.href}
               className={cn(
                 "group flex h-full flex-col gap-6 p-6 transition-colors duration-150 sm:p-8",
@@ -92,7 +93,7 @@ export function Pillars() {
                   className="size-4.5 shrink-0 transition-[translate] duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
                 />
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

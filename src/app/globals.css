@@ -130,3 +130,29 @@
     color: var(--on-bright);
   }
 }
+
+/* ---------- Highlighted code (shiki output) ---------- */
+
+.code-frame pre {
+  overflow-x: auto;
+  padding-block: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background-color: transparent !important;
+}
+
+.code-frame code {
+  counter-reset: line;
+}
+
+.code-frame .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 3rem;
+  padding-right: 1rem;
+  text-align: right;
+  color: var(--ink-muted);
+  user-select: none;
+}

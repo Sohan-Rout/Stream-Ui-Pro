@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Progress } from "@/components/ui/Progress";
 
 const STEP = 10;
 
@@ -17,19 +18,7 @@ export function ProgressDemo() {
         </span>
         <span className="font-mono text-sm tabular-nums">{value}%</span>
       </div>
-      <div
-        role="progressbar"
-        aria-labelledby="upload-label"
-        aria-valuenow={value}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        className="h-6 border-2 border-ink bg-paper-sunken shadow-brutal-sm"
-      >
-        <div
-          className="h-full border-r-2 border-ink bg-pink transition-[width] duration-200 ease-out motion-reduce:transition-none"
-          style={{ width: `${value}%` }}
-        />
-      </div>
+      <Progress value={value} aria-labelledby="upload-label" />
       <div className="mt-5 flex gap-3">
         <Button
           size="icon"

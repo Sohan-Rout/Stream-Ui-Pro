@@ -1,4 +1,5 @@
 import { SiGithub } from "react-icons/si";
+import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Logo } from "./Logo";
@@ -28,12 +29,12 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-2">
               {siteConfig.nav.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className="font-semibold underline-offset-4 hover:underline hover:decoration-2"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

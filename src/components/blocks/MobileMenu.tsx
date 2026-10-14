@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { buttonStyles } from "@/components/ui/Button";
@@ -9,6 +11,7 @@ type NavItem = { label: string; href: string };
 
 export function MobileMenu({ items }: { items: readonly NavItem[] }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -41,16 +44,17 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
         <ul className="divide-y-2 divide-ink">
           {items.map((item, i) => (
             <li key={item.href}>
-              <a
+              <Link
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between px-5 py-4 text-lg font-bold hover:bg-lime hover:text-on-bright"
+                aria-current={pathname.startsWith(item.href) ? "page" : undefined}
+                className="flex items-center justify-between px-5 py-4 text-lg font-bold hover:bg-lime hover:text-on-bright aria-[current=page]:bg-lime aria-[current=page]:text-on-bright"
               >
                 {item.label}
                 <span className="font-mono text-xs text-ink-muted">
                   0{i + 1}
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

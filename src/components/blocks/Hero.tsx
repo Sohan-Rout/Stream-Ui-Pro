@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Music, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
@@ -32,9 +33,9 @@ export function Hero() {
         </p>
 
         <div className="flex flex-wrap gap-4">
-          <a href="#components" className={buttonStyles({ size: "lg" })}>
+          <Link href="/components" className={buttonStyles({ size: "lg" })}>
             Browse components <ArrowRight aria-hidden />
-          </a>
+          </Link>
           <a
             href={siteConfig.githubUrl}
             className={buttonStyles({ variant: "secondary", size: "lg" })}

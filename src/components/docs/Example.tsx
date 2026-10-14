@@ -1,0 +1,37 @@
+import type { ComponentType } from "react";
+import { cn } from "@/lib/cn";
+import { readSource } from "@/lib/source";
+import { CodeBlock } from "./CodeBlock";
+
+export type ExampleProps = {
+  title: string;
+  description?: string;
+  /** Repo-relative path of the example file; its source is shown below. */
+  file: string;
+  Component: ComponentType;
+  /** Background for the preview stage. */
+  stageClassName?: string;
+};
+
+/** A live preview with its exact source attached underneath. */
+export function Example({ title, description, file, Component, stageClassName }: ExampleProps) {
+  return (
+    <section className="flex flex-col gap-4">
+      <div>
+        <h3 className="font-display text-xl tracking-tight">{title}</h3>
+        {description && <p className="mt-1 text-ink-muted">{description}</p>}
+      </div>
+      <div className="border-2 border-ink shadow-brutal">
+        <div
+          className={cn(
+            "flex min-h-48 items-center justify-center overflow-x-auto border-b-2 border-ink bg-dots p-8 sm:p-10",
+            stageClassName ?? "bg-paper",
+          )}
+        >
+          <Component />
+        </div>
+        <CodeBlock code={readSource(file)} filename={file.split("/").slice(-2).join("/")} framed={false} collapsible />
+      </div>
+    </section>
+  );
+}
