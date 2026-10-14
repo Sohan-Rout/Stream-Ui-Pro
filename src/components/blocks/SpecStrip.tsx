@@ -1,23 +1,24 @@
+import { Check } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 
-const specs = [
-  { label: "Framework", value: "React 19 · Next.js" },
-  { label: "Styling", value: "Tailwind CSS v4" },
-  { label: "Types", value: "TypeScript, strict" },
-  { label: "Distribution", value: "Source in your repo" },
-];
+const items = ["Tailwind ready", "React ready", "Next.js ready"];
 
 export function SpecStrip() {
   return (
-    <Section aria-label="Stack">
-      <dl className="grid grid-cols-2 gap-0.5 bg-ink md:grid-cols-4">
-        {specs.map((s) => (
-          <div key={s.label} className="flex flex-col gap-1 bg-paper px-5 py-5 sm:px-8">
-            <dt className="font-mono text-xs text-ink-muted uppercase">{s.label}</dt>
-            <dd className="font-bold">{s.value}</dd>
-          </div>
+    <Section aria-label="Compatibility">
+      <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-3">
+        {items.map((item) => (
+          <li key={item} className="flex items-center gap-3 bg-paper px-5 py-5 sm:px-8">
+            <span
+              aria-hidden
+              className="grid size-6 shrink-0 place-items-center border-2 border-ink bg-lime text-on-bright"
+            >
+              <Check className="size-3.5" strokeWidth={3.5} />
+            </span>
+            <span className="font-bold">{item}</span>
+          </li>
         ))}
-      </dl>
+      </ul>
     </Section>
   );
 }

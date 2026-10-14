@@ -62,7 +62,6 @@ export function SiteFooter() {
           <span>
             © <CopyrightYear /> stream/ui
           </span>
-          <span>Built with Next.js, Bun, and Tailwind</span>
         </div>
       </Section>
     </footer>
