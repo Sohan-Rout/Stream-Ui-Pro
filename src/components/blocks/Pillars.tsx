@@ -62,7 +62,7 @@ export function Pillars() {
         index="00"
         eyebrow="What's included"
         title={<span id="pillars-title">Four parts, one design language.</span>}
-        description="Plain React and Tailwind in your own repo. No runtime package and no theme provider."
+        description="Install one package or copy the source into your repo. Plain React and Tailwind, with no theme provider."
       />
       <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((p) => (

@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "description": "Neo-brutalist React components for Tailwind CSS v4: hard edges, hard shadows, every state styled.",
   "license": "MIT",
+  "author": "Sohan Rout",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sohan-Rout/Vibe-coded-lib.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/Sohan-Rout/Vibe-coded-lib/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/Sohan-Rout/Vibe-coded-lib/issues"
+  },
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -23,7 +33,8 @@
   "files": [
     "dist",
     "src",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "NODE_ENV=production bun run build.ts",
