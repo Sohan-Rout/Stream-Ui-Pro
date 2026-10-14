@@ -8,7 +8,7 @@ export const siteConfig = {
   title: homeSeo.title,
   description: homeSeo.description,
   author: "Sohan Rout",
-  githubUrl: "https://github.com/Sohan-Rout/Vibe-coded-lib",
+  githubUrl: "https://github.com/Sohan-Rout/Stream-Ui-Pro",
   packageName: "@streamui/react",
   installCommand: "bun add @streamui/react",
   nav: [

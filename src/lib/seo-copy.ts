@@ -120,6 +120,18 @@ const labCopy: Record<string, SeoCopy> = {
       "A wobble text hover animation in pure CSS: staggered transitions make each letter wave. No JavaScript, screen-reader friendly, full source code.",
     keywords: ["wobble text", "text hover animation", "CSS letter animation", "staggered animation"],
   },
+  "tic-tac-toe": {
+    title: "Tic-Tac-Toe Game in React with Unbeatable AI",
+    description:
+      "A tic-tac-toe game in React with an unbeatable minimax AI, an easy mode, and two-player play. Keyboard accessible, with full source code.",
+    keywords: ["tic-tac-toe React", "tic tac toe game", "minimax algorithm", "unbeatable tic-tac-toe AI", "React game"],
+  },
+  memory: {
+    title: "Memory Card Game in React and CSS",
+    description:
+      "A memory match card game in React with 3D CSS card flips, an unbiased shuffle, move counting, and screen-reader announcements. Full source code.",
+    keywords: ["memory card game", "memory match React", "card flip animation", "CSS 3D flip", "React game"],
+  },
   "shape-roller": {
     title: "Random Shape Generator in React",
     description:

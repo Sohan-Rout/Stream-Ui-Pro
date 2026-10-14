@@ -126,7 +126,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section" }
-  | { kind: "lab" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" }
   | { kind: "icons" }
   | { kind: "sponsor" };
 
@@ -236,6 +236,78 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
       );
 
     case "lab": {
+      if (art.game === "tictactoe") {
+        const marks = ["X", "O", "", "", "X", "O", "", "", "X"];
+        return (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: 228,
+              backgroundColor: brand.ink,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(12),
+              transform: "rotate(-5deg)",
+              gap: 5,
+            }}
+          >
+            {marks.map((m, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 69.3,
+                  height: 69.3,
+                  backgroundColor: i % 4 === 0 ? brand.lime : brand.raised,
+                }}
+              >
+                {m === "X" && (
+                  <div style={{ display: "flex", position: "relative", width: 40, height: 40 }}>
+                    <div style={{ position: "absolute", left: 16, top: -4, width: 8, height: 48, backgroundColor: brand.ink, transform: "rotate(45deg)" }} />
+                    <div style={{ position: "absolute", left: 16, top: -4, width: 8, height: 48, backgroundColor: brand.ink, transform: "rotate(-45deg)" }} />
+                  </div>
+                )}
+                {m === "O" && (
+                  <div style={{ display: "flex", width: 38, height: 38, borderRadius: 99, border: `8px solid ${brand.ink}` }} />
+                )}
+              </div>
+            ))}
+          </div>
+        );
+      }
+      if (art.game === "memory") {
+        const cards = [brand.pink, brand.sunken, brand.lime, brand.sunken];
+        return (
+          <div style={{ display: "flex", flexWrap: "wrap", width: 252, gap: 16, transform: "rotate(4deg)" }}>
+            {cards.map((bg, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 118,
+                  height: 118,
+                  backgroundColor: bg,
+                  border: `5px solid ${brand.ink}`,
+                  boxShadow: hard(7),
+                  fontFamily: "Space Mono",
+                  fontWeight: 700,
+                  fontSize: 30,
+                }}
+              >
+                {bg === brand.sunken ? (
+                  "S/"
+                ) : (
+                  <div style={{ display: "flex", width: 44, height: 44, borderRadius: 99, backgroundColor: brand.raised, border: `6px solid ${brand.ink}` }} />
+                )}
+              </div>
+            ))}
+          </div>
+        );
+      }
       // Five pips, like the dice lab.
       const pips = [0, 2, 4, 6, 8];
       return (
