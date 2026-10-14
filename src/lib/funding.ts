@@ -6,19 +6,11 @@ export type FundingPlatform = {
   url: string;
   blurb: string;
   cta: string;
-  tone: "lime" | "pink" | "blue";
+  tone: "lime" | "pink";
 };
 
 /** Every supported platform; `url` is filled from config. */
 const all: FundingPlatform[] = [
-  {
-    id: "razorpay",
-    name: "Razorpay",
-    url: "",
-    blurb: "Best from India. Pay with UPI, cards, net banking, or wallets.",
-    cta: "Pay with Razorpay",
-    tone: "blue",
-  },
   {
     id: "openCollective",
     name: "Open Collective",

@@ -10,7 +10,7 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sponsor, path: "/sponsor" });
 
-const toneBg = { lime: "bg-lime", pink: "bg-pink", blue: "bg-blue" } as const;
+const toneBg = { lime: "bg-lime", pink: "bg-pink" } as const;
 
 const otherWays = [
   {
@@ -86,7 +86,7 @@ export default function SponsorPage() {
           <div className="flex flex-col items-start gap-4 bg-paper-sunken px-5 py-12 sm:px-10">
             <p className="font-display text-2xl tracking-tight">Sponsorship links are on the way.</p>
             <p className="max-w-xl leading-relaxed text-ink-muted">
-              Payments through Razorpay, Open Collective, and Ko-fi are being set up. Until
+              Open Collective and Ko-fi pages are being set up. Until
               then, a star on GitHub is the best way to help.
             </p>
             <a href={siteConfig.githubUrl} className={buttonStyles({ variant: "secondary" })}>

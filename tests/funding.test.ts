@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { configuredPlatforms, fundingPlatforms } from "@/lib/funding";
 import { siteConfig } from "@/lib/site";
 
-const none = { razorpay: "", openCollective: "", kofi: "" };
+const none = { openCollective: "", kofi: "" };
 
 describe("configuredPlatforms", () => {
   test("hides every platform when nothing is configured", () => {
@@ -16,16 +16,15 @@ describe("configuredPlatforms", () => {
   });
 
   test("treats whitespace as empty", () => {
-    expect(configuredPlatforms({ ...none, razorpay: "   " })).toEqual([]);
+    expect(configuredPlatforms({ ...none, kofi: "   " })).toEqual([]);
   });
 
-  test("keeps a stable order: Razorpay, Open Collective, Ko-fi", () => {
+  test("keeps a stable order: Open Collective, then Ko-fi", () => {
     const all = configuredPlatforms({
       kofi: "https://ko-fi.com/me",
-      razorpay: "https://razorpay.me/@me",
       openCollective: "https://opencollective.com/me",
     });
-    expect(all.map((p) => p.id)).toEqual(["razorpay", "openCollective", "kofi"]);
+    expect(all.map((p) => p.id)).toEqual(["openCollective", "kofi"]);
   });
 });
 
@@ -37,6 +36,6 @@ describe("configured funding links", () => {
   });
 
   test("siteConfig covers every platform the sponsor page knows", () => {
-    expect(Object.keys(siteConfig.funding).sort()).toEqual(["kofi", "openCollective", "razorpay"]);
+    expect(Object.keys(siteConfig.funding).sort()).toEqual(["kofi", "openCollective"]);
   });
 });
