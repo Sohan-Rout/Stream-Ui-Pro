@@ -40,7 +40,6 @@ const SHOW: Record<Face, [number, number]> = {
 
 /** Two full tumbles on both axes per roll, so even a repeat value visibly rolls. */
 const SPIN = 720;
-const HISTORY = 8;
 
 function rollFace(): Face {
   // crypto gives an evenly spread roll; the modulo bias over 2^32 is negligible.
@@ -52,13 +51,11 @@ export function DiceLab() {
   const [face, setFace] = useState<Face>(1);
   const [rolls, setRolls] = useState(0);
   const [rolling, setRolling] = useState(false);
-  const [history, setHistory] = useState<Face[]>([]);
 
   function roll() {
     const next = rollFace();
     setFace(next);
     setRolls((n) => n + 1);
-    setHistory((h) => [next, ...h].slice(0, HISTORY));
     // With reduced motion there is no transition, so transitionend never fires.
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     setRolling(!still);
@@ -69,7 +66,6 @@ export function DiceLab() {
   }
 
   const [x, y] = SHOW[face];
-  const total = history.reduce((sum, f) => sum + f, 0);
 
   return (
     <div className="flex w-full flex-col items-center gap-6">
@@ -111,27 +107,6 @@ export function DiceLab() {
           {rolls === 0 ? "ready" : rolling ? "rolling…" : <>rolled <strong className="text-base">{face}</strong></>}
         </p>
       </div>
-
-      {history.length > 0 && (
-        <div className="flex w-full flex-col items-center gap-2">
-          <ol aria-label="Recent rolls, newest first" className="flex flex-wrap justify-center gap-1.5">
-            {history.map((f, i) => (
-              <li
-                key={`${rolls - i}`}
-                className={cn(
-                  "grid size-7 place-items-center border-2 border-ink font-mono text-xs font-bold",
-                  i === 0 && !rolling ? "bg-lime text-on-bright" : "bg-paper-raised",
-                )}
-              >
-                {f}
-              </li>
-            ))}
-          </ol>
-          <p className="font-mono text-xs text-ink-muted tabular-nums">
-            {rolls} {rolls === 1 ? "roll" : "rolls"} · last {history.length} total {total}
-          </p>
-        </div>
-      )}
     </div>
   );
 }

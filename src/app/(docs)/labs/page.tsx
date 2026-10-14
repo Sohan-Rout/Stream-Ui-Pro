@@ -19,7 +19,7 @@ export default function LabsIndex() {
         description="Interaction prototypes that haven't graduated into the main library. Their APIs can change between releases."
         meta={<Badge tone="orange">experimental</Badge>}
       />
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {labs.map((l) => (
           <li key={l.slug} className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal">
             <div className="flex flex-1 items-center justify-center border-b-2 border-ink bg-violet-soft p-6">
