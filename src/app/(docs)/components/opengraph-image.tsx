@@ -10,5 +10,6 @@ export default function Image() {
     title: "Components",
     description: "Accessible primitives with every state styled: buttons, inputs, tabs, switches, and more.",
     accent: "lime",
+    art: { kind: "component", name: "Button" },
   });
 }

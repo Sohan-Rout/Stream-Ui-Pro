@@ -10,5 +10,6 @@ export default function Image() {
     title: "Page sections",
     description: "Hero, features, pricing, testimonials, FAQ, and footer, built from the same parts.",
     accent: "pink",
+    art: { kind: "section" },
   });
 }

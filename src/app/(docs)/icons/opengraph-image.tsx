@@ -10,5 +10,6 @@ export default function Image() {
     title: "Icons",
     description: "Search 2,000+ icons, set size and stroke, add animations, and copy the JSX.",
     accent: "blue",
+    art: { kind: "icons" },
   });
 }

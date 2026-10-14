@@ -9,6 +9,7 @@ export default function Image() {
     eyebrow: "React · Tailwind v4",
     title: "UI that doesn't whisper.",
     highlight: "whisper",
+    art: { kind: "home" },
     description: "Neo-brutalist components, page sections, and animated icons. Accessible and typed.",
   });
 }

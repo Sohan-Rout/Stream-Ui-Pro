@@ -10,5 +10,6 @@ export default function Image() {
     title: "Keep stream/ui free and growing.",
     description: "Fund new components, fixes, and docs through Razorpay, Open Collective, or Ko-fi.",
     accent: "pink",
+    art: { kind: "sponsor" },
   });
 }

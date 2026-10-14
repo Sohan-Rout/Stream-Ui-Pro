@@ -1,8 +1,14 @@
 import { renderIcon } from "@/lib/og";
 
-export const size = { width: 512, height: 512 };
-export const contentType = "image/png";
+/** The navbar's "S/" tile: 32px for browser tabs, 192 and 512 for installs. */
+export function generateImageMetadata() {
+  return [32, 192, 512].map((px) => ({
+    id: String(px),
+    size: { width: px, height: px },
+    contentType: "image/png",
+  }));
+}
 
-export default function Icon() {
-  return renderIcon(size.width);
+export default async function Icon({ id }: { id: Promise<string> }) {
+  return renderIcon(Number(await id));
 }

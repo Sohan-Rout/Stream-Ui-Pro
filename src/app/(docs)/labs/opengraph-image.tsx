@@ -10,5 +10,6 @@ export default function Image() {
     title: "Labs",
     description: "Interaction experiments: a 3D dice roller, a magnetic button, and more.",
     accent: "violet",
+    art: { kind: "lab" },
   });
 }
