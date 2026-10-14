@@ -96,7 +96,6 @@ export function DiceLab() {
             ))}
           </div>
         </div>
-        <div className="absolute bottom-3 h-2.5 w-20 rounded-full bg-ink-faint" />
       </div>
 
       <div className="flex items-center gap-4">
