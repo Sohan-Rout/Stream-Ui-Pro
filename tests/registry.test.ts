@@ -1,0 +1,114 @@
+/**
+ * The docs are generated from the registries, so a bad entry means a broken
+ * page, a dead sidebar link, or a "Source" panel that crashes the build.
+ */
+import { describe, expect, test } from "bun:test";
+import { existsSync, readFileSync } from "node:fs";
+import * as pkg from "@streamui/react";
+import { readSource } from "@/lib/source";
+import { components } from "@/registry/components";
+import { sections } from "@/registry/sections";
+import { labs } from "@/registry/labs";
+import { docsNav, neighbors } from "@/registry/nav";
+
+const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const registries = { components, sections, labs };
+
+describe.each(Object.entries(registries))("%s registry", (_, entries) => {
+  test("has entries", () => {
+    expect(entries.length).toBeGreaterThan(0);
+  });
+
+  test("slugs are unique and URL-safe", () => {
+    const slugs = entries.map((e) => e.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    for (const slug of slugs) expect(slug).toMatch(SLUG);
+  });
+
+  test("names and descriptions are filled in", () => {
+    for (const e of entries) {
+      expect(e.name.trim()).not.toBe("");
+      expect(e.description.trim().length).toBeGreaterThan(20);
+    }
+  });
+
+  test("every source file exists and can be shown on its page", () => {
+    for (const e of entries) {
+      expect(existsSync(e.file)).toBe(true);
+      expect(readSource(e.file).length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("components registry", () => {
+  test("each component has examples, props, and accessibility notes", () => {
+    for (const c of components) {
+      expect(c.examples.length).toBeGreaterThan(0);
+      expect(c.props.flatMap((t) => t.rows).length).toBeGreaterThan(0);
+      expect(c.accessibility.length).toBeGreaterThan(0);
+    }
+  });
+
+  test("every example file exists and is the component it previews", () => {
+    for (const c of components) {
+      for (const ex of c.examples) {
+        expect(ex.file).toStartWith(`src/examples/${c.slug}/`);
+        expect(readSource(ex.file)).toContain("export default function");
+        expect(typeof ex.Component).toBe("function");
+      }
+    }
+  });
+
+  test("example titles are unique per page", () => {
+    for (const c of components) {
+      const titles = c.examples.map((e) => e.title);
+      expect(new Set(titles).size).toBe(titles.length);
+    }
+  });
+
+  test("documented components live in the package and are exported", () => {
+    const index = readFileSync("packages/react/src/index.ts", "utf8");
+    for (const c of components) {
+      expect(c.file).toStartWith("packages/react/src/");
+      const moduleName = c.file.split("/").pop()!.replace(/\.tsx?$/, "");
+      expect(index).toContain(`from "./${moduleName}"`);
+    }
+  });
+
+  test("the package exports what the usage snippets import", () => {
+    for (const c of components) {
+      const imported = c.usage.match(/import \{([^}]+)\} from "@streamui\/react"/)?.[1];
+      for (const name of imported?.split(",").map((n) => n.trim()) ?? []) {
+        expect({ component: c.slug, name, exported: name in pkg }).toEqual({ component: c.slug, name, exported: true });
+      }
+    }
+  });
+});
+
+describe("sections registry", () => {
+  test('"Built with" lists real components or lucide-react', () => {
+    const names = new Set(components.map((c) => c.name));
+    for (const s of sections) {
+      for (const u of s.uses) expect(names.has(u) || u === "lucide-react").toBe(true);
+    }
+  });
+});
+
+describe("docs navigation", () => {
+  test("links to every registry page exactly once", () => {
+    const hrefs = docsNav.flatMap((g) => [g.href, ...g.items.map((i) => i.href)]);
+    expect(new Set(hrefs).size).toBe(hrefs.length);
+    for (const c of components) expect(hrefs).toContain(`/components/${c.slug}`);
+    for (const s of sections) expect(hrefs).toContain(`/sections/${s.slug}`);
+    for (const l of labs) expect(hrefs).toContain(`/labs/${l.slug}`);
+  });
+
+  test("prev/next links stop at the ends", () => {
+    const first = neighbors(components, 0, "/components");
+    const last = neighbors(components, components.length - 1, "/components");
+    expect(first.prev).toBeUndefined();
+    expect(first.next?.href).toBe(`/components/${components[1].slug}`);
+    expect(last.next).toBeUndefined();
+    expect(last.prev?.href).toBe(`/components/${components.at(-2)!.slug}`);
+  });
+});

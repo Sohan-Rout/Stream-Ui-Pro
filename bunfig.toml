@@ -1,0 +1,3 @@
+[test]
+# Site and package tests share one DOM setup.
+preload = ["./packages/react/test/setup.ts"]

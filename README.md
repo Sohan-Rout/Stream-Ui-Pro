@@ -53,6 +53,9 @@ bun run ui:dev
 | `bun run build` | Builds the package, then the production site |
 | `bun start` | Serves the production build |
 | `bun run lint` | Runs ESLint |
+| `bun run typecheck` | Type-checks the site and the package |
+| `bun run test` | Builds the package, then runs every test |
+| `bun run check` | Lint, typecheck, test, and build: everything CI runs |
 | `bun run ui:build` | Builds `@streamui/react` into `packages/react/dist` |
 | `bun run ui:dev` | Rebuilds the package on every change |
 
@@ -97,6 +100,28 @@ JavaScript to the page.
 
 The page at `/components/<slug>` and its navigation links appear automatically.
 Sections and labs work the same way with their own registry files.
+
+## Testing
+
+Tests use `bun test` with [Testing Library](https://testing-library.com) on a
+[happy-dom](https://github.com/capricorn86/happy-dom) DOM.
+
+```bash
+bun run test
+```
+
+| Suite | What it protects |
+| --- | --- |
+| `packages/react/test/*.test.tsx` | Component behavior as users and screen readers see it: roles, states, keyboard navigation, form submission |
+| `packages/react/test/build.test.ts` | The published output: `"use client"` on line 1 of client modules only, `.js` import extensions, production JSX, complete exports, peer ranges |
+| `tests/registry.test.ts` | Every docs page: unique slugs, real source files, examples, package exports, navigation |
+| `tests/render.test.tsx` | Every example, section, and lab mounts without crashing, with no duplicate ids |
+| `tests/seo.test.ts` | Canonical URLs, share-card metadata, sitemap, robots, manifest |
+| `tests/dice.test.tsx` | The die always lands on the rolled face, opposite faces sum to 7, rolls cover 1 to 6 |
+| `tests/funding.test.ts`, `tests/helpers.test.ts` | Sponsor links, shape roller, icon names copied from the icon browser |
+
+[CI](.github/workflows/ci.yml) runs lint, typecheck, tests, and a full build on
+every push and pull request. Publishing the package also runs its tests first.
 
 ## Design system
 

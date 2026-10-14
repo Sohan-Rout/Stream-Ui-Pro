@@ -10,7 +10,7 @@ const tilts = ["-rotate-12", "-rotate-6", "rotate-0", "rotate-6", "rotate-12"];
 
 type Roll = { shape: number; color: number; tilt: number; n: number };
 
-function pickOther(length: number, current: number) {
+export function pickOther(length: number, current: number) {
   const next = Math.floor(Math.random() * (length - 1));
   return next >= current ? next + 1 : next;
 }

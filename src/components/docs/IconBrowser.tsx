@@ -12,7 +12,7 @@ const ANIMATIONS = ["none", ...iconAnimations] as const;
 const TRIGGERS = ["hover", "loop"] as const satisfies readonly IconTrigger[];
 
 /** "arrow-up-right" → "ArrowUpRight", the name you import from lucide-react. */
-function toComponentName(name: string) {
+export function toComponentName(name: string) {
   return name.replace(/(^|-)([a-z0-9])/g, (_, __, c: string) => c.toUpperCase());
 }
 

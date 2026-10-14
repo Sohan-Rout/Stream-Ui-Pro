@@ -44,7 +44,8 @@
     "build": "NODE_ENV=production bun run build.ts",
     "dev": "NODE_ENV=production bun run build.ts --watch",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "bun run build"
+    "prepublishOnly": "bun run build && bun test",
+    "test": "bun test"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -57,8 +58,15 @@
     "tailwindcss": ">=4"
   },
   "devDependencies": {
+    "@happy-dom/global-registrator": "^21.0.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/bun": "latest",
     "@types/react": "^19",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "typescript": "^5"
   },
   "publishConfig": {

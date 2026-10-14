@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "ui:build": "bun run --cwd packages/react build",
-    "ui:dev": "bun run --cwd packages/react dev"
+    "ui:dev": "bun run --cwd packages/react dev",
+    "test": "bun run ui:build && bun test",
+    "typecheck": "tsc --noEmit && bun run --cwd packages/react typecheck",
+    "check": "bun run lint && bun run typecheck && bun run test && bun run build"
   },
   "dependencies": {
     "@streamui/react": "workspace:*",
@@ -20,7 +23,11 @@
     "shiki": "^4.5.0"
   },
   "devDependencies": {
+    "@happy-dom/global-registrator": "^21.0.1",
     "@tailwindcss/turbopack": "^4",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

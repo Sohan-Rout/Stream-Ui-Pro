@@ -9,11 +9,12 @@ export type FundingPlatform = {
   tone: "lime" | "pink" | "blue";
 };
 
+/** Every supported platform; `url` is filled from config. */
 const all: FundingPlatform[] = [
   {
     id: "razorpay",
     name: "Razorpay",
-    url: siteConfig.funding.razorpay,
+    url: "",
     blurb: "Best from India. Pay with UPI, cards, net banking, or wallets.",
     cta: "Pay with Razorpay",
     tone: "blue",
@@ -21,7 +22,7 @@ const all: FundingPlatform[] = [
   {
     id: "openCollective",
     name: "Open Collective",
-    url: siteConfig.funding.openCollective,
+    url: "",
     blurb: "Monthly or one-time, with a public ledger of every expense. Companies can get invoices.",
     cta: "Back on Open Collective",
     tone: "lime",
@@ -29,12 +30,17 @@ const all: FundingPlatform[] = [
   {
     id: "kofi",
     name: "Ko-fi",
-    url: siteConfig.funding.kofi,
+    url: "",
     blurb: "A quick one-off tip by card or PayPal, from anywhere in the world.",
     cta: "Tip on Ko-fi",
     tone: "pink",
   },
 ];
 
+/** Platforms that have a link set, in display order. */
+export function configuredPlatforms(funding: Record<FundingPlatform["id"], string>) {
+  return all.map((p) => ({ ...p, url: funding[p.id].trim() })).filter((p) => p.url !== "");
+}
+
 /** Platforms with a link set in siteConfig.funding. */
-export const fundingPlatforms = all.filter((p) => p.url !== "");
+export const fundingPlatforms = configuredPlatforms(siteConfig.funding);

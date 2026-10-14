@@ -4,12 +4,12 @@ import { useState, type TransitionEvent } from "react";
 import { Dice5 } from "lucide-react";
 import { Button, cn } from "@streamui/react";
 
-type Face = 1 | 2 | 3 | 4 | 5 | 6;
+export type Face = 1 | 2 | 3 | 4 | 5 | 6;
 
-const FACES: Face[] = [1, 2, 3, 4, 5, 6];
+export const FACES: Face[] = [1, 2, 3, 4, 5, 6];
 
 /** Filled cells in a 3×3 pip grid, read left to right, top to bottom. */
-const PIPS: Record<Face, number[]> = {
+export const PIPS: Record<Face, number[]> = {
   1: [4],
   2: [0, 8],
   3: [0, 4, 8],
@@ -19,7 +19,7 @@ const PIPS: Record<Face, number[]> = {
 };
 
 /** Where each face sits on the cube. Opposite faces add up to 7, like a real die. */
-const PLACEMENT: Record<Face, string> = {
+export const PLACEMENT: Record<Face, string> = {
   1: "rotateY(0deg)",
   6: "rotateY(180deg)",
   3: "rotateY(90deg)",
@@ -29,7 +29,7 @@ const PLACEMENT: Record<Face, string> = {
 };
 
 /** Cube rotation [x, y] that turns each face toward the viewer. */
-const SHOW: Record<Face, [number, number]> = {
+export const SHOW: Record<Face, [number, number]> = {
   1: [0, 0],
   2: [90, 0],
   3: [0, -90],
@@ -39,9 +39,9 @@ const SHOW: Record<Face, [number, number]> = {
 };
 
 /** Two full tumbles on both axes per roll, so even a repeat value visibly rolls. */
-const SPIN = 720;
+export const SPIN = 720;
 
-function rollFace(): Face {
+export function rollFace(): Face {
   // crypto gives an evenly spread roll; the modulo bias over 2^32 is negligible.
   return ((crypto.getRandomValues(new Uint32Array(1))[0] % 6) + 1) as Face;
 }

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
@@ -9,7 +13,13 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["bun"]
+    "types": [
+      "bun"
+    ]
   },
-  "include": ["src", "build.ts"]
+  "include": [
+    "src",
+    "test",
+    "build.ts"
+  ]
 }

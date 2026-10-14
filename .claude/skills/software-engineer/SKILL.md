@@ -108,15 +108,20 @@ need it; the build keeps each file's boundary (see `packages/react/build.ts`). R
 
 ## Testing
 
-When the first piece of logic worth testing appears, set up `bun test` for pure `src/lib`
-code and React Testing Library + happy-dom for components. Test behavior a user could
-observe, not implementation details. Each bug fix gets a test that would have caught it.
+`bun test` with Testing Library on happy-dom (preloaded via `bunfig.toml`).
+Package tests live in `packages/react/test/`, site tests in `tests/`.
+Test behavior a user could observe (roles, states, keyboard), not implementation
+details. Each bug fix gets a test that would have caught it. When you add a
+component, section, or lab, the registry and render tests cover it automatically;
+add behavior tests for anything interactive.
 
 ## Verification loop (before saying "done")
 
-1. Run `bunx tsc --noEmit` and fix every error.
+Shortcut: `bun run check` runs lint, typecheck, tests, and the build in one go.
+
+1. Run `bun run typecheck` and fix every error.
 2. Run `bun run lint` and fix every warning you introduced.
-3. Run `bun test` if tests exist.
+3. Run `bun run test` (builds the package first; build-output tests read dist/).
 4. Run `bun run build` for anything touching routing, config, or server/client boundaries.
 5. Run the app (`bun dev`) and exercise the change in the browser, including error and
    empty states.
