@@ -1,7 +1,9 @@
+import { env } from "./env";
+
 export const siteConfig = {
   name: "stream/ui",
-  /** Canonical origin. Override with NEXT_PUBLIC_SITE_URL for preview deploys. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://streamui.org",
+  /** Canonical origin. Set NEXT_PUBLIC_SITE_URL to override (see .env.example). */
+  url: env.siteUrl,
   title: "stream/ui — React components with hard edges",
   description:
     "Neo-brutalist React components, page sections, and animated icons for Tailwind CSS v4. Accessible, typed, and published on npm as @streamui/react.",
@@ -16,15 +18,8 @@ export const siteConfig = {
     { label: "Labs", href: "/labs" },
   ],
   /**
-   * Crowdfunding links. Leave a value empty to hide that platform; the
-   * sponsor page and footer only show the ones that are filled in.
+   * Crowdfunding links, from FUNDING_* environment variables. Unset ones are
+   * hidden; the sponsor page and footer only show configured platforms.
    */
-  funding: {
-    /** Razorpay Payment Page or payment link, e.g. https://razorpay.me/@yourname */
-    razorpay: "",
-    /** Open Collective page, e.g. https://opencollective.com/streamui */
-    openCollective: "",
-    /** Ko-fi page, e.g. https://ko-fi.com/yourname */
-    kofi: "",
-  },
+  funding: env.funding,
 } as const;

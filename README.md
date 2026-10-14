@@ -45,6 +45,29 @@ a second terminal so your edits rebuild automatically:
 bun run ui:dev
 ```
 
+### Configuration
+
+Deployment settings come from environment variables, so nothing personal or
+deployment-specific is committed to this public repo. All of them are optional;
+the site builds and runs with none set.
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin for links, the sitemap, and share images. Defaults to `https://streamui.org`. |
+| `FUNDING_RAZORPAY_URL` | Razorpay payment page shown on `/sponsor` |
+| `FUNDING_OPEN_COLLECTIVE_URL` | Open Collective page shown on `/sponsor` |
+| `FUNDING_KOFI_URL` | Ko-fi page shown on `/sponsor` |
+
+Values are validated at build time: a malformed or non-https link fails the
+build with a message naming the variable. In production, set them in your
+host's dashboard (on Vercel: Project Settings → Environment Variables) and
+redeploy. `.env*` files are gitignored, and a test fails if one is ever
+committed or if a credential appears in any tracked file.
+
 ### Scripts
 
 | Script | What it does |
@@ -118,6 +141,8 @@ bun run test
 | `tests/render.test.tsx` | Every example, section, and lab mounts without crashing, with no duplicate ids |
 | `tests/seo.test.ts` | Canonical URLs, share-card metadata, sitemap, robots, manifest |
 | `tests/dice.test.tsx` | The die always lands on the rolled face, opposite faces sum to 7, rolls cover 1 to 6 |
+| `tests/env.test.ts` | Environment validation: defaults, https-only links, clear errors |
+| `tests/secrets.test.ts` | No `.env` files or credentials (tokens, keys) committed to the public repo |
 | `tests/funding.test.ts`, `tests/helpers.test.ts` | Sponsor links, shape roller, icon names copied from the icon browser |
 
 [CI](.github/workflows/ci.yml) runs lint, typecheck, tests, and a full build on
@@ -159,8 +184,8 @@ stream/ui is free and open source. If it saves you time, you can support its
 development at **[streamui.org/sponsor](https://streamui.org/sponsor)** (Razorpay,
 Open Collective, or Ko-fi), or star the repo.
 
-Sponsor links are configured in `siteConfig.funding` in
-[src/lib/site.ts](src/lib/site.ts); empty entries are hidden.
+Sponsor links come from the `FUNDING_*` environment variables (see
+[Configuration](#configuration)); unset ones are hidden.
 
 ## License
 

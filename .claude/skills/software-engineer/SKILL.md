@@ -31,6 +31,15 @@ Known current facts:
 - Before you add a dependency, check whether the platform or an existing dependency already
   does the job. Prefer small, typed, maintained packages.
 
+## Configuration and secrets (public repo)
+
+This repo is public. Never commit credentials, personal links, or real `.env` files.
+Deployment values come from environment variables read and validated in
+`src/lib/env.ts` (add new ones there and to `.env.example`, empty). Only variables
+the browser needs get the `NEXT_PUBLIC_` prefix. Secrets for publishing or CI
+(e.g. `NPM_CONFIG_TOKEN`) belong in the host's or GitHub's secret store.
+`tests/secrets.test.ts` fails if a token or `.env` file is committed.
+
 ## Server vs client
 
 - Components are Server Components by default. Add `"use client"` only to the smallest leaf
