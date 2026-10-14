@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { IconBrowser } from "@/components/docs/IconBrowser";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Icons",
-  description: "Search the icon set and copy any icon as JSX.",
-};
+  description:
+    "Search 2,000+ icons, adjust size and stroke, add draw, spin, or bounce animations, and copy the React JSX.",
+  path: "/icons",
+});
 
 const usage = `import { Rocket } from "lucide-react";
 import { AnimatedIcon } from "@streamui/react";

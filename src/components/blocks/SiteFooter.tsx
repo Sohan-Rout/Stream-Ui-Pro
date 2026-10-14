@@ -1,4 +1,5 @@
 import { SiGithub } from "react-icons/si";
+import { Heart } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
@@ -43,12 +44,24 @@ export function SiteFooter() {
             <p className="font-mono text-xs font-semibold tracking-widest text-ink-muted uppercase">
               Elsewhere
             </p>
-            <a
-              href={siteConfig.githubUrl}
-              className="mt-4 inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline hover:decoration-2"
-            >
-              <SiGithub aria-hidden className="size-4" /> GitHub
-            </a>
+            <ul className="mt-4 flex flex-col gap-2">
+              <li>
+                <a
+                  href={siteConfig.githubUrl}
+                  className="inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline hover:decoration-2"
+                >
+                  <SiGithub aria-hidden className="size-4" /> GitHub
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/sponsor"
+                  className="inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline hover:decoration-2"
+                >
+                  <Heart aria-hidden className="size-4 text-pink" /> Sponsor
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="border-t-2 border-ink px-4 pt-6 sm:px-8">

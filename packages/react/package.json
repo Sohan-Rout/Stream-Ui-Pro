@@ -9,9 +9,13 @@
     "url": "git+https://github.com/Sohan-Rout/Vibe-coded-lib.git",
     "directory": "packages/react"
   },
-  "homepage": "https://github.com/Sohan-Rout/Vibe-coded-lib/tree/main/packages/react#readme",
+  "homepage": "https://streamui.org",
   "bugs": {
     "url": "https://github.com/Sohan-Rout/Vibe-coded-lib/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://streamui.org/sponsor"
   },
   "type": "module",
   "sideEffects": [
@@ -62,10 +66,18 @@
   },
   "keywords": [
     "react",
+    "react-components",
     "tailwindcss",
-    "components",
+    "tailwind-v4",
     "ui",
+    "ui-library",
+    "component-library",
     "neo-brutalism",
-    "animated-icons"
+    "neobrutalism",
+    "brutalism",
+    "animated-icons",
+    "nextjs",
+    "typescript",
+    "accessible"
   ]
 }

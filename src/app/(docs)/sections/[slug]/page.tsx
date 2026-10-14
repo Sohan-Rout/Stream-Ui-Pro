@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/seo";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
@@ -17,7 +18,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/sections/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const doc = getSection(slug);
-  return doc ? { title: `${doc.name} section`, description: doc.description } : {};
+  if (!doc) return {};
+  return pageMetadata({ title: `${doc.name} section`, description: doc.description, path: `/sections/${doc.slug}` });
 }
 
 export default async function SectionPage({ params }: PageProps<"/sections/[slug]">) {

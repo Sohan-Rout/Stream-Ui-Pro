@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo_Black, Space_Grotesk, Space_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { SiteFooter } from "@/components/blocks/SiteFooter";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 // Neo-brutalist type: a heavy grotesk for display, a quirky grotesk for
@@ -24,13 +25,39 @@ const mono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "stream/ui — React components with hard edges",
-    template: "%s · stream/ui",
+  metadataBase: new URL(siteConfig.url),
+  title: { default: siteConfig.title, template: "%s · stream/ui" },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: [
+    "React components",
+    "Tailwind CSS v4",
+    "neo-brutalism",
+    "neobrutalism UI",
+    "brutalist design",
+    "UI library",
+    "component library",
+    "animated icons",
+    "Next.js",
+    "TypeScript",
+    "accessible components",
+  ],
+  authors: [{ name: siteConfig.author, url: siteConfig.githubUrl }],
+  creator: siteConfig.author,
+  category: "technology",
+  openGraph: {
+    type: "website",
+    siteName: siteConfig.name,
+    locale: "en_US",
+    url: "/",
+    title: siteConfig.title,
+    description: siteConfig.description,
   },
-  description:
-    "Neo-brutalist React components, page sections, and icons built on Tailwind v4 and TypeScript.",
+  twitter: { card: "summary_large_image", title: siteConfig.title, description: siteConfig.description },
+  robots: { index: true, follow: true, googleBot: { "max-image-preview": "large", "max-snippet": -1 } },
 };
+
+export const viewport: Viewport = { themeColor: "#fafaf7", colorScheme: "light" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

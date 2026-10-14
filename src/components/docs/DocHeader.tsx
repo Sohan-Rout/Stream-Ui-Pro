@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { absoluteUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export type Crumb = { label: string; href?: string };
 
@@ -15,8 +17,20 @@ export function DocHeader({
   description: ReactNode;
   meta?: ReactNode;
 }) {
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.label,
+      ...(c.href && { item: absoluteUrl(c.href) }),
+    })),
+  };
+
   return (
     <header className="flex flex-col gap-5 border-b-2 border-ink pb-10">
+      <JsonLd data={breadcrumbs} />
       <nav aria-label="Breadcrumb">
         <ol className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-ink-muted">
           {crumbs.map((c, i) => (

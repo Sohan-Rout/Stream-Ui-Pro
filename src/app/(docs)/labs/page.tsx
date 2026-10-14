@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamui/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { labs } from "@/registry/labs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Labs",
-  description: "Interaction experiments that haven't graduated into the main library.",
-};
+  description:
+    "Experimental React interactions from stream/ui: a 3D dice roller, magnetic button, shape roller, and more.",
+  path: "/labs",
+});
 
 export default function LabsIndex() {
   return (

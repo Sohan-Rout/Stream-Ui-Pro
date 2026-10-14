@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/seo";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
@@ -15,7 +16,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/labs/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const doc = getLab(slug);
-  return doc ? { title: doc.name, description: doc.description } : {};
+  if (!doc) return {};
+  return pageMetadata({ title: doc.name, description: doc.description, path: `/labs/${doc.slug}` });
 }
 
 export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {

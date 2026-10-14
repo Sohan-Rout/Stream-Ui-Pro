@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamui/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { components } from "@/registry/components";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Components",
-  description: "Accessible React primitives with every state styled.",
-};
+  description:
+    "Accessible neo-brutalist React components for Tailwind CSS v4: buttons, inputs, tabs, switches, animated icons, and more.",
+  path: "/components",
+});
 
 export default function ComponentsIndex() {
   return (

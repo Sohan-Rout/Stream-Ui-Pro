@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamui/react";
@@ -6,10 +7,12 @@ import { DocHeader } from "@/components/docs/DocHeader";
 import { SectionThumb, ThumbFrame } from "@/components/blocks/SectionThumbs";
 import { sections } from "@/registry/sections";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sections",
-  description: "Full page sections composed from stream/ui components.",
-};
+  description:
+    "Ready-made page sections built with stream/ui: hero, features, pricing, testimonials, FAQ, and footer. Responsive with container queries.",
+  path: "/sections",
+});
 
 export default function SectionsIndex() {
   return (

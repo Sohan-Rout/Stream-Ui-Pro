@@ -13,7 +13,8 @@ This repo holds two things:
 bun add @streamui/react
 ```
 
-Setup and usage for the package are in [packages/react/README.md](packages/react/README.md).
+Docs and live examples: **[streamui.org](https://streamui.org)**. Setup and usage for the package are in
+[packages/react/README.md](packages/react/README.md).
 
 ## What's in the library
 
@@ -72,7 +73,7 @@ src/
     ui/                  site-only layout pieces (Section, Rail, SectionHeading)
   examples/<slug>/       one file per docs example
   registry/              the list of components, sections, and labs the docs are built from
-  lib/                   helpers: syntax highlighting, source reading, site config
+  lib/                   helpers: site config, SEO, share images, highlighting, funding
 ```
 
 ### How the docs work
@@ -126,6 +127,15 @@ The theme is light only.
 
 See [Publishing to npm](packages/react/README.md#publishing-to-npm) in the
 package README.
+
+## Support
+
+stream/ui is free and open source. If it saves you time, you can support its
+development at **[streamui.org/sponsor](https://streamui.org/sponsor)** (Razorpay,
+Open Collective, or Ko-fi), or star the repo.
+
+Sponsor links are configured in `siteConfig.funding` in
+[src/lib/site.ts](src/lib/site.ts); empty entries are hidden.
 
 ## License
 

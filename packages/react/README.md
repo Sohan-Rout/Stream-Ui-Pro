@@ -9,7 +9,7 @@ and every state styled. Includes animated icons that work with any SVG icon set.
 bun add @streamui/react
 ```
 
-Needs React 19 and Tailwind CSS v4.
+Needs React 19 and Tailwind CSS v4. Docs and live examples: **[streamui.org](https://streamui.org)**.
 
 ## Set up Tailwind
 
@@ -63,6 +63,11 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `cn()` | `clsx` + `tailwind-merge`, aware of the brutal shadow tokens. |
 
 All animations stop when the user prefers reduced motion.
+
+## Support
+
+stream/ui is free and MIT licensed. If it helps you, consider
+[sponsoring it](https://streamui.org/sponsor).
 
 ---
 

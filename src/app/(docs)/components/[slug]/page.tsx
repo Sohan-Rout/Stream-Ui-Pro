@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { readSource } from "@/lib/source";
 import { Badge } from "@streamui/react";
@@ -19,7 +20,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/components/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const doc = getComponent(slug);
-  return doc ? { title: doc.name, description: doc.description } : {};
+  if (!doc) return {};
+  return pageMetadata({ title: `${doc.name} component`, description: doc.description, path: `/components/${doc.slug}` });
 }
 
 export default async function ComponentPage({ params }: PageProps<"/components/[slug]">) {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SiGithub } from "react-icons/si";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { Rail } from "@/components/ui/Section";
 import { buttonStyles } from "@streamui/react";
@@ -21,6 +21,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/sponsor"
+            aria-label="Sponsor stream/ui"
+            className={buttonStyles({ variant: "pink", size: "icon", className: "size-10" })}
+          >
+            <Heart aria-hidden />
+          </Link>
           <a
             href={siteConfig.githubUrl}
             aria-label="stream/ui on GitHub"

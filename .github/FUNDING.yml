@@ -1,0 +1,7 @@
+# Adds a "Sponsor" button to the GitHub repo.
+# The sponsor page lists every platform that's set up in src/lib/site.ts.
+custom: ["https://streamui.org/sponsor"]
+
+# Once the accounts exist, you can also list them here directly:
+# open_collective: your-collective-slug
+# ko_fi: your-kofi-username
