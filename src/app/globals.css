@@ -83,6 +83,11 @@
     }
   }
 
+  /* Lenis animates scrolling itself; native smoothing on top would fight it. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   body {
     background-color: var(--paper);
     color: var(--ink);

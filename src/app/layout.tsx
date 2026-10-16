@@ -6,8 +6,10 @@ import { SiteFooter } from "@/components/blocks/SiteFooter";
 import { CookieBanner } from "@/components/blocks/CookieBanner";
 import { Analytics } from "@/components/blocks/Analytics";
 import { GoogleTag } from "@/components/blocks/GoogleTag";
+import { SmoothScroll } from "@/components/blocks/SmoothScroll";
 import { siteConfig } from "@/lib/site";
 import { homeSeo } from "@/lib/seo-copy";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 // Neo-brutalist type: a heavy grotesk for display, a quirky grotesk for
@@ -71,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* usePathname can suspend on dynamic routes under Cache Components. */}
         <Suspense fallback={null}>
           <CookieBanner analytics={Boolean(gaId)} />
+          <SmoothScroll />
         </Suspense>
         {gaId && <Analytics />}
       </body>
