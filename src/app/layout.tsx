@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Archivo_Black, Space_Grotesk, Space_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { SiteFooter } from "@/components/blocks/SiteFooter";
+import { CookieBanner } from "@/components/blocks/CookieBanner";
 import { siteConfig } from "@/lib/site";
 import { homeSeo } from "@/lib/seo-copy";
 import "./globals.css";
@@ -58,6 +60,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
+        {/* usePathname can suspend on dynamic routes under Cache Components. */}
+        <Suspense fallback={null}>
+          <CookieBanner />
+        </Suspense>
       </body>
     </html>
   );

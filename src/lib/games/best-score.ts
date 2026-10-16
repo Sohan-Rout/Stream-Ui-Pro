@@ -1,12 +1,16 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import { readConsent } from "@/lib/consent";
 
 /**
  * A per-game best score kept in this browser's localStorage. Storage can be
  * blocked (private windows, settings), so every access is guarded and the
  * score simply isn't remembered then. Reads go through useSyncExternalStore,
  * so the server and first client render agree (0) with no hydration mismatch.
+ *
+ * Scores are saved only after the visitor accepts optional storage in the
+ * cookie banner (see lib/consent.ts).
  */
 const EVENT = "streamui:best-score";
 
@@ -35,7 +39,7 @@ export function useBestScore(game: string) {
   const submit = useCallback(
     (score: number) => {
       try {
-        if (score <= read(key)) return;
+        if (readConsent() !== "all" || score <= read(key)) return;
         localStorage.setItem(key, String(score));
         window.dispatchEvent(new Event(EVENT));
       } catch {

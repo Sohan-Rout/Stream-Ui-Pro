@@ -1,0 +1,97 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { siteConfig } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
+import { indexSeo } from "@/lib/seo-copy";
+import { CONSENT_KEY } from "@/lib/consent";
+import { LegalPage } from "@/components/legal/LegalPage";
+import { ConsentControls } from "@/components/legal/ConsentControls";
+
+export const metadata: Metadata = pageMetadata({ ...indexSeo.cookies, path: "/legal/cookies" });
+
+const items = [
+  {
+    name: CONSENT_KEY,
+    kind: "Essential",
+    purpose: "Remembers your answer to the cookie banner, so it doesn't ask on every page.",
+    kept: "Until you change it or clear site data",
+  },
+  {
+    name: "streamui:<game>-best",
+    kind: "Optional",
+    purpose: "Your best score in each Labs game (Snake and Flappy). Saved only if you accept.",
+    kept: "Until you pick Essential only or clear site data",
+  },
+];
+
+export default function CookiesPage() {
+  return (
+    <LegalPage
+      eyebrow="Cookies"
+      title="Cookie policy"
+      intro={
+        <p>
+          stream/ui sets no cookies at all: no analytics, no ads, no tracking pixels. The only things
+          this site keeps are two small items in your browser&apos;s local storage, listed below.
+        </p>
+      }
+    >
+      <h2>Your choice</h2>
+      <p>
+        Change it here at any time, or use <strong>Cookie settings</strong> in the footer to see the
+        banner again. Choosing Essential only also deletes any best scores already saved.
+      </p>
+      <ConsentControls />
+
+      <h2>What&apos;s stored</h2>
+      <div className="overflow-x-auto border-2 border-ink">
+        <table className="w-full min-w-xl border-collapse text-left text-sm">
+          <thead className="bg-paper-sunken font-mono text-xs tracking-widest uppercase">
+            <tr>
+              <th scope="col" className="border-b-2 border-ink p-3">Name</th>
+              <th scope="col" className="border-b-2 border-ink p-3">Type</th>
+              <th scope="col" className="border-b-2 border-ink p-3">Purpose</th>
+              <th scope="col" className="border-b-2 border-ink p-3">Kept</th>
+            </tr>
+          </thead>
+          <tbody className="bg-paper-raised">
+            {items.map((item) => (
+              <tr key={item.name} className="border-t-2 border-ink align-top first:border-t-0">
+                <td className="p-3 font-mono text-xs break-all">{item.name}</td>
+                <td className="p-3">
+                  <span
+                    className={
+                      item.kind === "Essential"
+                        ? "border-2 border-ink bg-blue px-1.5 py-0.5 text-xs font-semibold text-on-bright"
+                        : "border-2 border-ink bg-pink px-1.5 py-0.5 text-xs font-semibold text-on-bright"
+                    }
+                  >
+                    {item.kind}
+                  </span>
+                </td>
+                <td className="p-3 text-ink-muted">{item.purpose}</td>
+                <td className="p-3 text-ink-muted">{item.kept}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Local storage stays in your browser. It isn&apos;t sent with requests the way cookies are,
+        and we never read it on a server.
+      </p>
+
+      <h2>Third parties</h2>
+      <p>
+        No third-party scripts run on this site, so none of them can set cookies here. Pages you
+        reach through links, like GitHub or a UPI app, follow their own cookie policies. More detail
+        is in the <Link href="/legal/privacy">privacy policy</Link>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions? Open an issue on <a href={`${siteConfig.githubUrl}/issues`}>GitHub</a>.
+      </p>
+    </LegalPage>
+  );
+}

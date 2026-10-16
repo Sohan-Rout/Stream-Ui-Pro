@@ -4,6 +4,15 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Logo } from "./Logo";
+import { CookieSettingsButton } from "./CookieBanner";
+
+const legal = [
+  { label: "Privacy", href: "/legal/privacy" },
+  { label: "Terms", href: "/legal/terms" },
+  { label: "Cookies", href: "/legal/cookies" },
+];
+
+const smallLink = "cursor-pointer underline-offset-4 hover:text-ink hover:underline";
 
 /** Cached so the static shell can prerender (Cache Components forbids raw `new Date()`). */
 async function CopyrightYear() {
@@ -76,6 +85,20 @@ export function SiteFooter() {
           <span>
             © <CopyrightYear /> stream/ui
           </span>
+          <nav aria-label="Legal">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              {legal.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={smallLink}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <CookieSettingsButton className={smallLink} />
+              </li>
+            </ul>
+          </nav>
         </div>
       </Section>
     </footer>

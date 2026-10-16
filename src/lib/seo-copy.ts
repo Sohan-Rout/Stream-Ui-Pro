@@ -68,6 +68,24 @@ export const indexSeo = {
       "stream/ui is a free, MIT-licensed neobrutalism UI library. Sponsor it on GitHub Sponsors or by UPI through Razorpay to fund new components and docs.",
     keywords: ["sponsor open source", "stream/ui", "neobrutalism UI library"],
   },
+  privacy: {
+    title: "Privacy Policy",
+    description:
+      "How stream/ui handles your data: no accounts, no analytics, no ad trackers. What our host logs, which third parties you may reach, and your choices.",
+    keywords: ["stream/ui privacy policy", "privacy"],
+  },
+  terms: {
+    title: "Terms of Use",
+    description:
+      "Terms for using the stream/ui website and the MIT-licensed @streamuilib/react package: licensing, sponsorships, warranties, and liability.",
+    keywords: ["stream/ui terms of use", "MIT license"],
+  },
+  cookies: {
+    title: "Cookie Policy",
+    description:
+      "stream/ui sets no cookies and runs no trackers. See the two things this site may keep in your browser's storage, and change your choice at any time.",
+    keywords: ["stream/ui cookie policy", "cookies", "local storage"],
+  },
 } satisfies Record<string, SeoCopy>;
 
 /** Components whose name doesn't read well after "Neobrutalism". */
