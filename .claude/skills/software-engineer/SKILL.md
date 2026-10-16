@@ -86,6 +86,12 @@ the registry automatically. Sections and labs work the same way with their regis
 Docs show real source via `readSource()` (`src/lib/source.ts`), so never paste code
 strings that duplicate a file.
 
+**Merging classes in site code.** Use `cn` from `@/lib/cn`, not the package's, whenever
+a class list may include the site-only patterns (`bg-dots`, `bg-hatch`, `bg-pixel-grid`).
+The package's `cn` doesn't know them and treats them as background colors, silently
+dropping the color or the pattern. Add any new pattern utility to that file's
+`bg-image` group.
+
 **Package rules.** Import primitives in the site from `@streamuilib/react`, never by path.
 Inside the package, use relative imports and keep `"use client"` only on files that
 need it; the build keeps each file's boundary (see `packages/react/build.ts`). Run

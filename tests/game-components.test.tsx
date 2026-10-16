@@ -1,8 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
 import { MemoryLab } from "@/components/demos/MemoryLab";
+import { SnakeLab } from "@/components/demos/SnakeLab";
 
 const cell = (row: number, col: number) =>
   screen.getByRole("button", { name: new RegExp(`^Row ${row}, column ${col}:`) });
@@ -111,5 +112,55 @@ describe("MemoryLab", () => {
     await userEvent.click(card(5));
     await userEvent.click(card(6));
     expect(calls).toBe(1);
+  });
+});
+
+describe("SnakeLab", () => {
+  const board = () => screen.getByRole("group", { name: /Snake board/ });
+  const segments = () => board().querySelectorAll(":scope > span").length;
+
+  test("starts paused on a ready screen with three styles", () => {
+    render(<SnakeLab tick={20} />);
+    // One on the board overlay, one in the middle of the direction pad.
+    expect(screen.getAllByRole("button", { name: "Start" })).toHaveLength(2);
+    const styles = within(screen.getByRole("group", { name: "Style" })).getAllByRole("button");
+    expect(styles.map((b) => b.textContent)).toEqual(["Classic", "Funky", "Pixelated"]);
+    expect(styles.map((b) => b.getAttribute("aria-pressed"))).toEqual(["true", "false", "false"]);
+  });
+
+  test("switching styles reskins the board without resetting it", async () => {
+    render(<SnakeLab tick={20} />);
+    await userEvent.click(screen.getByRole("button", { name: "Pixelated" }));
+    expect(board().dataset.style).toBe("pixel");
+    expect(screen.getByRole("button", { name: "Pixelated" }).getAttribute("aria-pressed")).toBe("true");
+    expect(screen.getByText("0000")).toBeDefined();
+    await userEvent.click(screen.getByRole("button", { name: "Funky" }));
+    expect(board().dataset.style).toBe("funky");
+  });
+
+  test("an arrow key on the focused board starts the game", async () => {
+    render(<SnakeLab tick={20} />);
+    board().focus();
+    await userEvent.keyboard("{ArrowUp}");
+    await waitFor(() => expect(screen.queryByRole("button", { name: "Start" })).toBeNull());
+    expect(screen.getByRole("button", { name: "Pause" })).toBeDefined();
+  });
+
+  test("Space pauses and resumes", async () => {
+    render(<SnakeLab tick={20} />);
+    await userEvent.click(screen.getAllByRole("button", { name: "Start" })[0]);
+    board().focus();
+    await userEvent.keyboard(" ");
+    expect(screen.getByRole("button", { name: "Resume" })).toBeDefined();
+    await userEvent.keyboard(" ");
+    expect(screen.queryByRole("button", { name: "Resume" })).toBeNull();
+  });
+
+  test("left alone, the snake runs into the wall and the game ends", async () => {
+    render(<SnakeLab tick={5} />);
+    await userEvent.click(screen.getAllByRole("button", { name: "Start" })[0]);
+    await waitFor(() => expect(screen.getByRole("button", { name: "Play again" })).toBeDefined(), { timeout: 2000 });
+    expect(document.querySelector('[aria-live="polite"]')?.textContent).toMatch(/^Game over\. Score \d+\.$/);
+    expect(segments()).toBeGreaterThanOrEqual(4);
   });
 });

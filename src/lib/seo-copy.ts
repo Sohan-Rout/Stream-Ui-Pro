@@ -132,6 +132,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A memory match card game in React with 3D CSS card flips, an unbiased shuffle, move counting, and screen-reader announcements. Full source code.",
     keywords: ["memory card game", "memory match React", "card flip animation", "CSS 3D flip", "React game"],
   },
+  snake: {
+    title: "Snake Game in React: Classic, Funky, Pixel",
+    description:
+      "A snake game in React with three styles: classic, funky, and pixelated. Keyboard, swipe, and on-screen controls, with the full source code.",
+    keywords: ["snake game React", "React snake game", "pixel art game", "browser snake game", "React game"],
+  },
   "shape-roller": {
     title: "Random Shape Generator in React",
     description:

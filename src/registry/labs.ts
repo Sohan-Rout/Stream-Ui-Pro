@@ -5,6 +5,7 @@ import { WobbleLab } from "@/components/demos/WobbleLab";
 import { DiceLab } from "@/components/demos/DiceLab";
 import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
 import { MemoryLab } from "@/components/demos/MemoryLab";
+import { SnakeLab } from "@/components/demos/SnakeLab";
 
 export type LabDoc = {
   slug: string;
@@ -80,6 +81,19 @@ export const labs: LabDoc[] = [
       "The deck shuffles on your first flip with an unbiased Fisher–Yates shuffle, so the server and browser render the same face-down grid.",
       "Cards flip with CSS 3D transforms and backface-visibility; under reduced motion they switch instantly.",
       "Every flip, match, and miss is announced, and each card's label says what's on it once it's face up.",
+    ],
+  },
+  {
+    slug: "snake",
+    name: "Snake",
+    description: "The classic snake game in three looks: classic, funky, and pixelated.",
+    file: "src/components/demos/SnakeLab.tsx",
+    Component: SnakeLab,
+    notes: [
+      "Steer with the arrow keys or WASD on the focused board, swipe on touch screens, or use the on-screen pad. Space pauses.",
+      "The rules live in src/lib/games/snake.ts as pure functions: walls and your own body end the game, and up to two turns are buffered between ticks.",
+      "Classic, Funky, and Pixelated are only skins over the same game state, so you can switch looks mid-game.",
+      "It speeds up a little with every food, and your best score is remembered in this browser.",
     ],
   },
 ];

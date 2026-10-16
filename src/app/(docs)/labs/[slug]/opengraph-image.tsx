@@ -17,6 +17,9 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     title: doc?.name ?? "stream/ui",
     description: doc?.description ?? "Neo-brutalist React components for Tailwind CSS v4.",
     accent: "violet",
-    art: { kind: "lab", game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : "dice" },
+    art: {
+      kind: "lab",
+      game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : slug === "snake" ? "snake" : "dice",
+    },
   });
 }

@@ -126,7 +126,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section" }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" }
   | { kind: "icons" }
   | { kind: "sponsor" };
 
@@ -274,6 +274,55 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
                 )}
               </div>
             ))}
+          </div>
+        );
+      }
+      if (art.game === "snake") {
+        // A snake winding toward its food on a pixel grid.
+        const cells = 8;
+        const unit = 30;
+        const body = [
+          [1, 5], [2, 5], [3, 5], [4, 5], [4, 4], [4, 3], [5, 3], [6, 3],
+        ];
+        const tones = [brand.violet, brand.blue];
+        return (
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              width: cells * unit,
+              height: cells * unit,
+              backgroundColor: brand.sunken,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(12),
+              transform: "rotate(-4deg)",
+            }}
+          >
+            {body.map(([x, y], i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  left: x * unit,
+                  top: y * unit,
+                  width: unit,
+                  height: unit,
+                  backgroundColor: i === body.length - 1 ? brand.pink : tones[i % 2],
+                  border: `3px solid ${brand.ink}`,
+                }}
+              />
+            ))}
+            <div
+              style={{
+                position: "absolute",
+                left: 6 * unit + 6,
+                top: 1 * unit + 6,
+                width: unit - 12,
+                height: unit - 12,
+                backgroundColor: brand.orange,
+                border: `3px solid ${brand.ink}`,
+              }}
+            />
           </div>
         );
       }

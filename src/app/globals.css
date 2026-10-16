@@ -47,6 +47,21 @@
   );
 }
 
+/* pixel grid for the 8-bit snake board; set --cells on the element */
+@utility bg-pixel-grid {
+  background-image:
+    linear-gradient(var(--ink-faint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ink-faint) 1px, transparent 1px);
+  background-size: calc(100% / var(--cells, 16)) calc(100% / var(--cells, 16));
+}
+
+/* raised 8-bit block: light top-left edge, dark bottom-right edge */
+@utility pixel-bevel {
+  box-shadow:
+    inset 3px 3px 0 0 oklch(1 0 0 / 0.45),
+    inset -3px -3px 0 0 oklch(0 0 0 / 0.28);
+}
+
 /* dot grid for "canvas" areas */
 @utility bg-dots {
   background-image: radial-gradient(var(--ink-faint) 1.2px, transparent 1.2px);
