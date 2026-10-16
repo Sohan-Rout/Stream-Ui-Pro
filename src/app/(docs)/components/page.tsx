@@ -15,7 +15,7 @@ export default function ComponentsIndex() {
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Components" }]}
         title="Neobrutalism components"
-        description="Accessible neobrutalism components for React and Tailwind CSS v4, with every state styled. Install them from @streamuilib/react, or copy a single file into your repo and change anything."
+        description="Accessible neobrutalism components for React and Tailwind CSS v4. Every state is styled, and every component is typed."
         meta={<Badge tone="paper">{components.length} components</Badge>}
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
