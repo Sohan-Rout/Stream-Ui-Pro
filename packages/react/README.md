@@ -117,16 +117,23 @@ Every release:
 ```bash
 cd packages/react
 
-# 1. Bump the version (patch: 0.1.0 → 0.1.1, minor: → 0.2.0, major: → 1.0.0).
-#    This also creates a git tag, so commit your changes first.
+# 1. Add a "## 0.2.1" section to CHANGELOG.md describing the release, and
+#    commit it (a test fails if the current version has no section).
+
+# 2. Bump the version (patch: 0.2.0 → 0.2.1, minor: → 0.3.0, major: → 1.0.0).
+#    This commits the bump and creates the git tag v0.2.1.
 bun pm version patch
 
-# 2. See exactly what would be uploaded, without uploading anything
+# 3. See exactly what would be uploaded, without uploading anything
 bun publish --dry-run
 
-# 3. Publish (builds first via prepublishOnly). Add --otp=123456 if npm asks
+# 4. Publish (builds first via prepublishOnly). Add --otp=123456 if npm asks
 #    for your two-factor code.
 bun publish
+
+# 5. Push the commit and the tag. The Release workflow turns the tag into a
+#    GitHub release, using the CHANGELOG.md section as its notes.
+git push --follow-tags
 ```
 
 `publishConfig.access` is already `public`, which scoped packages need on

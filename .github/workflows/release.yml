@@ -1,0 +1,86 @@
+name: Release
+
+# Pushing a tag like v0.3.0 creates the matching GitHub release, with its
+# notes taken from that version's section of packages/react/CHANGELOG.md
+# on main.
+#
+# For a tag pushed before this workflow existed (v0.1.0, v0.2.0), a tag push
+# runs nothing: GitHub uses the workflow file inside the tagged commit. Run
+# it by hand instead: Actions → Release → Run workflow, and enter the tag.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to release, like v0.1.0"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: GitHub release
+    runs-on: ubuntu-latest
+    steps:
+      # The default branch, with every tag: the changelog comes from main,
+      # and the version check reads package.json at the tag.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Check the tag matches the package version
+        id: version
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "::error::Tag $TAG doesn't exist. Push it first: git push origin $TAG"
+            exit 1
+          fi
+          pkg="$(git show "$TAG:packages/react/package.json" | node -p "JSON.parse(require('fs').readFileSync(0)).version")"
+          if [ "${TAG#v}" != "$pkg" ]; then
+            echo "::error::Tag $TAG doesn't match packages/react/package.json at that commit ($pkg)."
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$pkg" >> "$GITHUB_OUTPUT"
+
+      - name: Extract release notes from the changelog
+        run: |
+          awk -v v="${{ steps.version.outputs.version }}" '
+            $0 == "## " v { on = 1; next }
+            on && /^## / { exit }
+            on { print }
+          ' packages/react/CHANGELOG.md > notes.md
+          if ! grep -q '[^[:space:]]' notes.md; then
+            echo "::error::No '## ${{ steps.version.outputs.version }}' section in packages/react/CHANGELOG.md."
+            exit 1
+          fi
+          {
+            echo
+            echo '```bash'
+            echo "bun add @streamuilib/react@${{ steps.version.outputs.version }}"
+            echo '```'
+            echo
+            echo "On npm: https://www.npmjs.com/package/@streamuilib/react/v/${{ steps.version.outputs.version }}"
+          } >> notes.md
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; leaving it as is."
+            exit 0
+          fi
+          # Only the newest version is marked "Latest", whatever order these run in.
+          latest="$(git tag -l 'v*' --sort=-v:refname | head -1)"
+          gh release create "$TAG" \
+            --verify-tag \
+            --title "@streamuilib/react ${{ steps.version.outputs.version }}" \
+            --notes-file notes.md \
+            --latest="$([ "$TAG" = "$latest" ] && echo true || echo false)"
