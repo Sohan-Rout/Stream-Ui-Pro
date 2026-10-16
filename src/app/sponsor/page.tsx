@@ -71,27 +71,22 @@ export default function SponsorPage() {
                 <h3 className="font-display text-2xl tracking-tight">{p.name}</h3>
                 <p className="leading-relaxed text-ink-muted">{p.blurb}</p>
                 {p.qr && (
-                  <figure className="flex flex-col items-start gap-3">
-                    <div className="border-2 border-ink bg-paper-raised p-3 shadow-brutal">
-                      {/* The QR comes from a payment provider's URL set at deploy time, so it
-                          can't go through next/image's fixed list of allowed hosts. */}
-                      {/* Any size or shape fits the fixed frame without cropping or stretching:
-                          cutting into a QR code would make it unscannable. */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={p.qr}
-                        alt={`${p.name} QR code. Scan it with a UPI app to pay.`}
-                        width={224}
-                        height={224}
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                        className="block size-56 object-contain"
-                      />
-                    </div>
-                    <figcaption className="font-mono text-xs text-ink-muted">
-                      Scan with Google Pay, PhonePe, Paytm, or any UPI app
-                    </figcaption>
-                  </figure>
+                  <div className="self-start border-2 border-ink bg-paper-raised p-3 shadow-brutal">
+                    {/* The QR comes from a payment provider's URL set at deploy time, so it
+                        can't go through next/image's fixed list of allowed hosts. */}
+                    {/* Any size or shape fits the fixed frame without cropping or stretching:
+                        cutting into a QR code would make it unscannable. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.qr}
+                      alt={`${p.name} QR code. Scan it with a UPI app to pay.`}
+                      width={224}
+                      height={224}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="block size-56 object-contain"
+                    />
+                  </div>
                 )}
                 <div className="flex-1" />
                 {p.url && (
