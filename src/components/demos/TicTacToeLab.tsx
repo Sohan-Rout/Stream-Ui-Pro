@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Circle, RotateCcw, X } from "lucide-react";
-import { AnimatedIcon, Button, cn } from "@streamui/react";
+import { AnimatedIcon, Button, cn } from "@streamuilib/react";
 import { cryptoInt } from "@/lib/games/memory";
 import {
   cpuMove,

@@ -1,4 +1,4 @@
-# @streamui/react
+# @streamuilib/react
 
 Neo-brutalist React components for Tailwind CSS v4: hard edges, hard shadows,
 and every state styled. Includes animated icons that work with any SVG icon set.
@@ -6,7 +6,7 @@ and every state styled. Includes animated icons that work with any SVG icon set.
 ## Install
 
 ```bash
-bun add @streamui/react
+bun add @streamuilib/react
 ```
 
 Needs React 19 and Tailwind CSS v4. Docs and live examples: **[streamui.org](https://streamui.org)**.
@@ -18,8 +18,8 @@ the package so it generates the classes the components use:
 
 ```css
 @import "tailwindcss";
-@import "@streamui/react/theme.css";
-@source "../node_modules/@streamui/react/dist";
+@import "@streamuilib/react/theme.css";
+@source "../node_modules/@streamuilib/react/dist";
 ```
 
 The `@source` path is relative to the stylesheet, so adjust the `../` to match
@@ -28,7 +28,7 @@ where your CSS file lives.
 ## Use
 
 ```tsx
-import { Button, Badge, AnimatedIcon } from "@streamui/react";
+import { Button, Badge, AnimatedIcon } from "@streamuilib/react";
 import { Rocket } from "lucide-react";
 
 export function Launch() {
@@ -90,7 +90,7 @@ bun run ui:dev     # rebuild on every change (run next to `bun dev`)
 ```
 
 The docs site depends on this package through the workspace
-(`"@streamui/react": "workspace:*"`), so it always uses the local build.
+(`"@streamuilib/react": "workspace:*"`), so it always uses the local build.
 
 ## Publishing to npm
 
@@ -98,9 +98,9 @@ One-time setup:
 
 1. Create an account at [npmjs.com](https://www.npmjs.com/signup) and turn on
    two-factor authentication.
-2. Create the **`streamui`** organization (free for public packages) at
+2. Create the **`streamuilib`** organization (free for public packages) at
    [npmjs.com/org/create](https://www.npmjs.com/org/create). The scope
-   `@streamui/` only works for accounts that belong to that org.
+   `@streamuilib/` only works for accounts that belong to that org.
 3. Log in from the terminal. Bun reads the same credentials as npm:
 
    ```bash
@@ -126,7 +126,7 @@ bun publish
 
 `publishConfig.access` is already `public`, which scoped packages need on
 their first publish. After publishing, the package is live at
-`https://www.npmjs.com/package/@streamui/react`.
+`https://www.npmjs.com/package/@streamuilib/react`.
 
 Notes:
 

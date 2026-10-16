@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@streamui/react";
+import { Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@streamuilib/react";
 
 export default function CardBasic() {
   return (

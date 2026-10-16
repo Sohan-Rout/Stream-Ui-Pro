@@ -1,4 +1,4 @@
-import { Badge } from "@streamui/react";
+import { Badge } from "@streamuilib/react";
 
 export default function BadgeTones() {
   return (

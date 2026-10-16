@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from "@streamui/react";
+import { Radio, RadioGroup } from "@streamuilib/react";
 
 export default function RadioGroupHorizontal() {
   return (

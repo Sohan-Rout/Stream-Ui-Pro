@@ -2,7 +2,7 @@
 
 import { useState, type TransitionEvent } from "react";
 import { Dice5 } from "lucide-react";
-import { Button, cn } from "@streamui/react";
+import { Button, cn } from "@streamuilib/react";
 
 export type Face = 1 | 2 | 3 | 4 | 5 | 6;
 

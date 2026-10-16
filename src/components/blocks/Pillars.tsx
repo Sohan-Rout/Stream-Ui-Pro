@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowUpRight, Blocks, FlaskConical, PanelsTopLeft, Shapes } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 

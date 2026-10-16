@@ -1,4 +1,4 @@
-import { Progress } from "@streamui/react";
+import { Progress } from "@streamuilib/react";
 
 const bars = [
   { label: "Storage", value: 72, tone: "pink" },

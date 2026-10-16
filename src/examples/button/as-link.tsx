@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { buttonStyles } from "@streamui/react";
+import { buttonStyles } from "@streamuilib/react";
 
 export default function ButtonAsLink() {
   return (

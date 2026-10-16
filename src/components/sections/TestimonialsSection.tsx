@@ -1,4 +1,4 @@
-import { Avatar } from "@streamui/react";
+import { Avatar } from "@streamuilib/react";
 
 const quotes = [
   {

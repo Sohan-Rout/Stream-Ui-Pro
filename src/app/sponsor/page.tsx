@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Bug, Share2, Star } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import { buttonStyles, cn } from "@streamui/react";
+import { buttonStyles, cn } from "@streamuilib/react";
 import { siteConfig } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";

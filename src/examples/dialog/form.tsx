@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { UserPlus } from "lucide-react";
-import { Button, Dialog, Input } from "@streamui/react";
+import { Button, Dialog, Input } from "@streamuilib/react";
 
 export default function DialogForm() {
   const [open, setOpen] = useState(false);

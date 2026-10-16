@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
-import { Badge } from "@streamui/react";
+import { Badge } from "@streamuilib/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { IconBrowser } from "@/components/docs/IconBrowser";
@@ -10,7 +10,7 @@ import { IconBrowser } from "@/components/docs/IconBrowser";
 export const metadata: Metadata = pageMetadata({ ...indexSeo.icons, path: "/icons" });
 
 const usage = `import { Rocket } from "lucide-react";
-import { AnimatedIcon } from "@streamui/react";
+import { AnimatedIcon } from "@streamuilib/react";
 
 // Static
 <Rocket className="size-5" strokeWidth={1.75} aria-hidden />

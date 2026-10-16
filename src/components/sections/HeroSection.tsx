@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Badge, Button } from "@streamui/react";
+import { Badge, Button } from "@streamuilib/react";
 
 const bars = [
   { label: "Mon", height: "h-2/5", tone: "bg-blue" },

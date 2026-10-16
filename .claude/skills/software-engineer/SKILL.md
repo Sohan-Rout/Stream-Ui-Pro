@@ -65,7 +65,7 @@ the browser needs get the `NEXT_PUBLIC_` prefix. Secrets for publishing or CI
 
 ```
 src/app/                 routes only; (docs)/ holds /components, /sections, /icons, /labs
-packages/react/          the published npm package @streamui/react (primitives, AnimatedIcon,
+packages/react/          the published npm package @streamuilib/react (primitives, AnimatedIcon,
                          theme.css); the site consumes it through the Bun workspace
 src/components/ui/       site-only layout pieces (Section, Rail, SectionHeading)
 src/components/sections/ full page sections, sized with container queries (@container)
@@ -86,7 +86,7 @@ the registry automatically. Sections and labs work the same way with their regis
 Docs show real source via `readSource()` (`src/lib/source.ts`), so never paste code
 strings that duplicate a file.
 
-**Package rules.** Import primitives in the site from `@streamui/react`, never by path.
+**Package rules.** Import primitives in the site from `@streamuilib/react`, never by path.
 Inside the package, use relative imports and keep `"use client"` only on files that
 need it; the build keeps each file's boundary (see `packages/react/build.ts`). Run
 `bun run ui:dev` next to `bun dev` so package edits rebuild. Publishing steps are in

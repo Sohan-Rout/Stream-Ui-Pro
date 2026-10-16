@@ -1,4 +1,4 @@
-import { Skeleton } from "@streamui/react";
+import { Skeleton } from "@streamuilib/react";
 
 export default function SkeletonBasic() {
   return (

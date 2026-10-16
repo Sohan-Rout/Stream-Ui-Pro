@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Bomb, Flame, Ghost, Heart, Music, RotateCcw, Rocket, Star, Zap } from "lucide-react";
-import { Button, cn } from "@streamui/react";
+import { Button, cn } from "@streamuilib/react";
 import { createDeck, shuffle, type Card } from "@/lib/games/memory";
 
 const FACES: { name: string; icon: LucideIcon; tone: string }[] = [

@@ -1,5 +1,5 @@
 import { Download, Heart, RefreshCw, Send } from "lucide-react";
-import { AnimatedIcon, Button } from "@streamui/react";
+import { AnimatedIcon, Button } from "@streamuilib/react";
 
 export default function AnimatedIconInButton() {
   return (

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { cn, Badge } from "@streamui/react";
+import { cn, Badge } from "@streamuilib/react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ShapeRollerLab } from "@/components/demos/ShapeRollerLab";

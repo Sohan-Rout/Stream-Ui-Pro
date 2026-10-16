@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 import { readSource } from "@/lib/source";
 import { CodeBlock } from "./CodeBlock";
 

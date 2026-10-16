@@ -1,7 +1,7 @@
 import { Bell, Mail, Plus, Trash } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge, Button, Input, Avatar, AvatarGroup } from "@streamui/react";
+import { Badge, Button, Input, Avatar, AvatarGroup } from "@streamuilib/react";
 import { DemoCell } from "@/components/demos/DemoCell";
 import { ProgressDemo } from "@/components/demos/ProgressDemo";
 import { TabsDemo } from "@/components/demos/TabsDemo";

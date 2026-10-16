@@ -1,4 +1,4 @@
-import { Switch } from "@streamui/react";
+import { Switch } from "@streamuilib/react";
 
 export default function SwitchBasic() {
   return (

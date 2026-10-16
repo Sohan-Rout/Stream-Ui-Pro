@@ -1,12 +1,12 @@
 /*
- * @streamui/react theme
+ * @streamuilib/react theme
  *
  * Import after Tailwind, and point Tailwind at the package so it generates
  * the classes the components use:
  *
  *   @import "tailwindcss";
- *   @import "@streamui/react/theme.css";
- *   @source "../node_modules/@streamui/react/dist";
+ *   @import "@streamuilib/react/theme.css";
+ *   @source "../node_modules/@streamuilib/react/dist";
  */
 
 /* ---------- Tokens ---------- */

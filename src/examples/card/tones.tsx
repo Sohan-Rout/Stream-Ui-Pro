@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle, type CardTone } from "@streamui/react";
+import { Card, CardContent, CardTitle, type CardTone } from "@streamuilib/react";
 
 const tones: CardTone[] = ["paper", "lime", "pink", "blue", "violet", "orange"];
 

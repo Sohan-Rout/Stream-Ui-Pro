@@ -1,4 +1,4 @@
-import { Textarea } from "@streamui/react";
+import { Textarea } from "@streamuilib/react";
 
 export default function TextareaStates() {
   return (

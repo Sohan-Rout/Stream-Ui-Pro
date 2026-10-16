@@ -70,7 +70,7 @@ const entries: ComponentDoc[] = [
       "The primary way to trigger an action. Lifts on hover and sinks into its shadow on press. Also available as a class helper for links.",
     status: "stable",
     file: "packages/react/src/Button.tsx",
-    usage: `import { Button } from "@streamui/react";
+    usage: `import { Button } from "@streamuilib/react";
 
 <Button variant="primary" size="md">Save changes</Button>`,
     examples: [
@@ -116,7 +116,7 @@ const entries: ComponentDoc[] = [
     description: "A compact label for status, category, or counts.",
     status: "stable",
     file: "packages/react/src/Badge.tsx",
-    usage: `import { Badge } from "@streamui/react";
+    usage: `import { Badge } from "@streamuilib/react";
 
 <Badge tone="lime">stable</Badge>`,
     examples: [
@@ -143,7 +143,7 @@ const entries: ComponentDoc[] = [
     description: "An on/off toggle for settings that apply immediately. Works controlled or uncontrolled.",
     status: "stable",
     file: "packages/react/src/Switch.tsx",
-    usage: `import { Switch } from "@streamui/react";
+    usage: `import { Switch } from "@streamuilib/react";
 
 <span id="alerts">Email alerts</span>
 <Switch aria-labelledby="alerts" defaultChecked />`,
@@ -174,7 +174,7 @@ const entries: ComponentDoc[] = [
     description: "A single-line text field with an optional leading icon and an invalid state.",
     status: "stable",
     file: "packages/react/src/Input.tsx",
-    usage: `import { Input } from "@streamui/react";
+    usage: `import { Input } from "@streamuilib/react";
 
 <label htmlFor="email">Email</label>
 <Input id="email" type="email" />`,
@@ -206,7 +206,7 @@ const entries: ComponentDoc[] = [
     description: "A native checkbox with a hard-edged face. Fully compatible with forms.",
     status: "stable",
     file: "packages/react/src/Checkbox.tsx",
-    usage: `import { Checkbox } from "@streamui/react";
+    usage: `import { Checkbox } from "@streamuilib/react";
 
 <Checkbox name="terms" label="I agree to the terms" />`,
     examples: [
@@ -235,7 +235,7 @@ const entries: ComponentDoc[] = [
     description: "Switch between related panels of content without leaving the page.",
     status: "beta",
     file: "packages/react/src/Tabs.tsx",
-    usage: `import { Tabs } from "@streamui/react";
+    usage: `import { Tabs } from "@streamuilib/react";
 
 <Tabs
   label="Project"
@@ -267,7 +267,7 @@ const entries: ComponentDoc[] = [
     description: "Shows how far along a task or quota is.",
     status: "stable",
     file: "packages/react/src/Progress.tsx",
-    usage: `import { Progress } from "@streamui/react";
+    usage: `import { Progress } from "@streamuilib/react";
 
 <Progress value={60} aria-label="Upload" />`,
     examples: [
@@ -296,7 +296,7 @@ const entries: ComponentDoc[] = [
     description: "Initials in a toned circle, plus a group that overlaps them.",
     status: "beta",
     file: "packages/react/src/Avatar.tsx",
-    usage: `import { Avatar, AvatarGroup } from "@streamui/react";
+    usage: `import { Avatar, AvatarGroup } from "@streamuilib/react";
 
 <Avatar initials="AL" name="Ada Lovelace" />`,
     examples: [
@@ -331,7 +331,7 @@ const entries: ComponentDoc[] = [
     status: "beta",
     file: "packages/react/src/AnimatedIcon.tsx",
     usage: `import { Rocket } from "lucide-react";
-import { AnimatedIcon } from "@streamui/react";
+import { AnimatedIcon } from "@streamuilib/react";
 
 <AnimatedIcon animation="bounce" trigger="hover">
   <Rocket aria-hidden />
@@ -388,7 +388,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A bordered surface with a hard shadow, composed from header, title, description, content, and footer parts.",
     status: "stable",
     file: "packages/react/src/Card.tsx",
-    usage: `import { Card, CardContent, CardHeader, CardTitle } from "@streamui/react";
+    usage: `import { Card, CardContent, CardHeader, CardTitle } from "@streamuilib/react";
 
 <Card>
   <CardHeader>
@@ -428,7 +428,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A message box for info, success, warnings, and errors, with an icon, title, and optional actions.",
     status: "stable",
     file: "packages/react/src/Alert.tsx",
-    usage: `import { Alert } from "@streamui/react";
+    usage: `import { Alert } from "@streamuilib/react";
 
 <Alert tone="success" title="Changes saved" />`,
     examples: [
@@ -459,7 +459,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A multi-line text field in the same frame as Input, with an invalid state and vertical resizing.",
     status: "stable",
     file: "packages/react/src/Textarea.tsx",
-    usage: `import { Textarea } from "@streamui/react";
+    usage: `import { Textarea } from "@streamuilib/react";
 
 <label htmlFor="msg">Message</label>
 <Textarea id="msg" rows={4} />`,
@@ -489,7 +489,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A native select in the brutal frame, so phones get their own picker and keyboards work as expected.",
     status: "stable",
     file: "packages/react/src/Select.tsx",
-    usage: `import { Select } from "@streamui/react";
+    usage: `import { Select } from "@streamuilib/react";
 
 <label htmlFor="region">Region</label>
 <Select id="region">
@@ -521,7 +521,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "Native radio buttons with a brutal face, grouped in a fieldset whose legend names the choice.",
     status: "stable",
     file: "packages/react/src/Radio.tsx",
-    usage: `import { Radio, RadioGroup } from "@streamui/react";
+    usage: `import { Radio, RadioGroup } from "@streamuilib/react";
 
 <RadioGroup legend="Billing">
   <Radio name="billing" value="monthly" label="Monthly" />
@@ -563,7 +563,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "Expandable sections built on native details and summary, with an exclusive mode that keeps one open at a time.",
     status: "stable",
     file: "packages/react/src/Accordion.tsx",
-    usage: `import { Accordion } from "@streamui/react";
+    usage: `import { Accordion } from "@streamuilib/react";
 
 <Accordion
   exclusive
@@ -603,7 +603,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A modal built on the native dialog element: focus is trapped, Esc closes it, and focus returns to the trigger.",
     status: "beta",
     file: "packages/react/src/Dialog.tsx",
-    usage: `import { Button, Dialog } from "@streamui/react";
+    usage: `import { Button, Dialog } from "@streamuilib/react";
 
 <Dialog title="Delete this project?" trigger={<Button>Delete</Button>}>
   This can't be undone.
@@ -640,7 +640,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "A short hint on hover and keyboard focus that Esc dismisses, linked to its trigger for screen readers.",
     status: "beta",
     file: "packages/react/src/Tooltip.tsx",
-    usage: `import { Button, Tooltip } from "@streamui/react";
+    usage: `import { Button, Tooltip } from "@streamuilib/react";
 
 <Tooltip content="Notifications">
   <Button size="icon" aria-label="Notifications">…</Button>
@@ -669,7 +669,7 @@ import { AnimatedIcon } from "@streamui/react";
     description: "Placeholder shapes for content that's loading, sized with classes and pulsing only when motion is allowed.",
     status: "stable",
     file: "packages/react/src/Skeleton.tsx",
-    usage: `import { Skeleton } from "@streamui/react";
+    usage: `import { Skeleton } from "@streamuilib/react";
 
 <div role="status" aria-busy="true" aria-label="Loading">
   <Skeleton className="h-4 w-40" />

@@ -1,5 +1,5 @@
 import { Bell, Settings, Share2 } from "lucide-react";
-import { Button, Tooltip } from "@streamui/react";
+import { Button, Tooltip } from "@streamuilib/react";
 
 export default function TooltipBasic() {
   return (

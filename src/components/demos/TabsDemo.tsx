@@ -1,4 +1,4 @@
-import { Tabs } from "@streamui/react";
+import { Tabs } from "@streamuilib/react";
 
 const items = [
   { id: "preview", label: "Preview", content: "The rendered component, styled with your theme tokens." },

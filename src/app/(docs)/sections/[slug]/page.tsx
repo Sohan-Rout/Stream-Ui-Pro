@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { sectionSeo } from "@/lib/seo-copy";
 import { readSource } from "@/lib/source";
-import { Badge } from "@streamui/react";
+import { Badge } from "@streamuilib/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PrevNext } from "@/components/docs/PrevNext";

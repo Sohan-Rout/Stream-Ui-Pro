@@ -1,5 +1,5 @@
 import { Mail } from "lucide-react";
-import { Input } from "@streamui/react";
+import { Input } from "@streamuilib/react";
 
 export default function InputStates() {
   return (

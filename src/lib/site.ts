@@ -9,8 +9,8 @@ export const siteConfig = {
   description: homeSeo.description,
   author: "Sohan Rout",
   githubUrl: "https://github.com/Sohan-Rout/Stream-Ui-Pro",
-  packageName: "@streamui/react",
-  installCommand: "bun add @streamui/react",
+  packageName: "@streamuilib/react",
+  installCommand: "bun add @streamuilib/react",
   nav: [
     { label: "Components", href: "/components" },
     { label: "Sections", href: "/sections" },

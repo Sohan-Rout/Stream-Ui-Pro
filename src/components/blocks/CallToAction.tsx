@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
-import { buttonStyles } from "@streamui/react";
+import { buttonStyles } from "@streamuilib/react";
 import { InstallCommand } from "./InstallCommand";
 
 export function CallToAction() {

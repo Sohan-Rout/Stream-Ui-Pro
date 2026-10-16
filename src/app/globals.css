@@ -2,7 +2,7 @@
 
 /* Design tokens, colors, shadows, and animated-icon styles come from the
    package, exactly as a consumer would load them. */
-@import "@streamui/react/theme.css";
+@import "@streamuilib/react/theme.css";
 
 @theme inline {
   --font-sans: var(--font-space-grotesk);

@@ -1,4 +1,4 @@
-import { Alert, Button } from "@streamui/react";
+import { Alert, Button } from "@streamuilib/react";
 
 export default function AlertWithAction() {
   return (

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Trash } from "lucide-react";
-import { Button, Dialog } from "@streamui/react";
+import { Button, Dialog } from "@streamuilib/react";
 
 export default function DialogBasic() {
   const [open, setOpen] = useState(false);

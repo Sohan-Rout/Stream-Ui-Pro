@@ -1,4 +1,4 @@
-import { Alert } from "@streamui/react";
+import { Alert } from "@streamuilib/react";
 
 export default function AlertTones() {
   return (

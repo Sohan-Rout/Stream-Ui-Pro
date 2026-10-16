@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader, Skeleton } from "@streamui/react";
+import { Card, CardContent, CardFooter, CardHeader, Skeleton } from "@streamuilib/react";
 
 export default function SkeletonCard() {
   return (

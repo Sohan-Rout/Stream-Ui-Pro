@@ -1,4 +1,4 @@
-import { Select } from "@streamui/react";
+import { Select } from "@streamuilib/react";
 
 export default function SelectStates() {
   return (

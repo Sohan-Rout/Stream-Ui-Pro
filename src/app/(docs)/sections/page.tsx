@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@streamui/react";
+import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { SectionThumb, ThumbFrame } from "@/components/blocks/SectionThumbs";
 import { sections } from "@/registry/sections";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Switch, cn } from "@streamui/react";
+import { Switch, cn } from "@streamuilib/react";
 
 export function HeroSwitchCard() {
   const [loud, setLoud] = useState(true);

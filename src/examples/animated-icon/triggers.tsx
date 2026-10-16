@@ -1,5 +1,5 @@
 import { CircleCheck, LoaderCircle, MousePointerClick } from "lucide-react";
-import { AnimatedIcon } from "@streamui/react";
+import { AnimatedIcon } from "@streamuilib/react";
 
 export default function AnimatedIconTriggers() {
   return (

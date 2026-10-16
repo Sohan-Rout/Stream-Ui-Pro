@@ -3,7 +3,7 @@
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
 import { Ghost, Search } from "lucide-react";
-import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamui/react";
+import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamuilib/react";
 
 const PAGE = 120;
 const SIZES = [16, 20, 24, 32] as const;

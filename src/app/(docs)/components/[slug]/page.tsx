@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { componentSeo } from "@/lib/seo-copy";
 import { siteConfig } from "@/lib/site";
 import { readSource } from "@/lib/source";
-import { Badge } from "@streamui/react";
+import { Badge } from "@streamuilib/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { Example } from "@/components/docs/Example";
 import { CodeBlock } from "@/components/docs/CodeBlock";

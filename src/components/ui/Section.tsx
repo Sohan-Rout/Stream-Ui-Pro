@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 
 /** Hollow square marking where a rail meets a horizontal rule. */
 function Joint({ side }: { side: "left" | "right" }) {

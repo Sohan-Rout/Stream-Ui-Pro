@@ -1,5 +1,5 @@
 /**
- * Builds @streamui/react into dist/:
+ * Builds @streamuilib/react into dist/:
  *   - one ESM file per source file, so each keeps its own "use client"
  *     boundary (bundling everything into one client file would stop server
  *     components from calling helpers like cn() and buttonStyles())

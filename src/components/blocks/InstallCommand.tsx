@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Check, Copy } from "lucide-react";
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 
 export function InstallCommand({
   command,

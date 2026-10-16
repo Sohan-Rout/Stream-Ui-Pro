@@ -1,4 +1,4 @@
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 
 export function Logo({ className }: { className?: string }) {
   return (

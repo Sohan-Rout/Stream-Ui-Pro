@@ -1,4 +1,4 @@
-import { cn } from "@streamui/react";
+import { cn } from "@streamuilib/react";
 
 const letters = [
   { ch: "W", tone: "bg-violet", tilt: "-rotate-6" },

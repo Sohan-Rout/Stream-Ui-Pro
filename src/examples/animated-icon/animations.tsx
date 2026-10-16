@@ -1,5 +1,5 @@
 import { Bell, Heart, PenLine, Rocket, Settings, Smartphone, Sparkles } from "lucide-react";
-import { AnimatedIcon, type IconAnimation } from "@streamui/react";
+import { AnimatedIcon, type IconAnimation } from "@streamuilib/react";
 
 const demos: { animation: IconAnimation; icon: typeof Rocket }[] = [
   { animation: "draw", icon: PenLine },

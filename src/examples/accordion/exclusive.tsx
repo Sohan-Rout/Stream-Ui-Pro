@@ -1,4 +1,4 @@
-import { Accordion } from "@streamui/react";
+import { Accordion } from "@streamuilib/react";
 
 const steps = [
   { id: "account", title: "1. Create an account", content: "Sign up with GitHub or email." },

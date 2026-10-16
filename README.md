@@ -5,12 +5,12 @@ shadows, flat lime and pink brights, and every interactive state styled.
 
 This repo holds two things:
 
-- **[`@streamui/react`](packages/react)**, the component library published to npm
+- **[`@streamuilib/react`](packages/react)**, the component library published to npm
 - **The docs site**, a Next.js app that showcases and documents every component,
   page section, icon, and experiment, and uses the package itself
 
 ```bash
-bun add @streamui/react
+bun add @streamuilib/react
 ```
 
 Docs and live examples: **[streamui.org](https://streamui.org)**. Setup and usage for the package are in
@@ -79,13 +79,13 @@ committed or if a credential appears in any tracked file.
 | `bun run typecheck` | Type-checks the site and the package |
 | `bun run test` | Builds the package, then runs every test |
 | `bun run check` | Lint, typecheck, test, and build: everything CI runs |
-| `bun run ui:build` | Builds `@streamui/react` into `packages/react/dist` |
+| `bun run ui:build` | Builds `@streamuilib/react` into `packages/react/dist` |
 | `bun run ui:dev` | Rebuilds the package on every change |
 
 ## Project structure
 
 ```
-packages/react/          @streamui/react: components, AnimatedIcon, theme.css
+packages/react/          @streamuilib/react: components, AnimatedIcon, theme.css
   build.ts               Bun build: per-file ESM, types, theme
 src/
   app/
@@ -189,4 +189,4 @@ Sponsor links come from the `FUNDING_*` environment variables (see
 
 ## License
 
-The `@streamui/react` package is [MIT licensed](packages/react/LICENSE) © Sohan Rout.
+The `@streamuilib/react` package is [MIT licensed](packages/react/LICENSE) © Sohan Rout.

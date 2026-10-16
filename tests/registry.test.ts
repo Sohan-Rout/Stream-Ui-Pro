@@ -4,7 +4,7 @@
  */
 import { describe, expect, test } from "bun:test";
 import { existsSync, readFileSync } from "node:fs";
-import * as pkg from "@streamui/react";
+import * as pkg from "@streamuilib/react";
 import { readSource } from "@/lib/source";
 import { componentOrder, components } from "@/registry/components";
 import { sections } from "@/registry/sections";
@@ -81,7 +81,7 @@ describe("components registry", () => {
 
   test("the package exports what the usage snippets import", () => {
     for (const c of components) {
-      const imported = c.usage.match(/import \{([^}]+)\} from "@streamui\/react"/)?.[1];
+      const imported = c.usage.match(/import \{([^}]+)\} from "@streamuilib\/react"/)?.[1];
       for (const name of imported?.split(",").map((n) => n.trim()) ?? []) {
         expect({ component: c.slug, name, exported: name in pkg }).toEqual({ component: c.slug, name, exported: true });
       }
