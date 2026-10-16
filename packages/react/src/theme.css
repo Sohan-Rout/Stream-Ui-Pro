@@ -36,6 +36,7 @@
   --pink-soft: oklch(0.955 0.035 354);
   --blue-soft: oklch(0.96 0.03 225);
   --violet-soft: oklch(0.955 0.035 300);
+  --orange-soft: oklch(0.955 0.045 60);
 }
 
 @theme inline {
@@ -55,6 +56,7 @@
   --color-pink-soft: var(--pink-soft);
   --color-blue-soft: var(--blue-soft);
   --color-violet-soft: var(--violet-soft);
+  --color-orange-soft: var(--orange-soft);
 
   /* hard offset shadows: the core of the look */
   --shadow-brutal-sm: 2px 2px 0 0 var(--ink);

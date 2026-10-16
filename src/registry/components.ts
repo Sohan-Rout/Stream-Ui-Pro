@@ -22,6 +22,23 @@ import AvatarGroupExample from "@/examples/avatar/group";
 import AnimatedIconAnimations from "@/examples/animated-icon/animations";
 import AnimatedIconTriggers from "@/examples/animated-icon/triggers";
 import AnimatedIconInButton from "@/examples/animated-icon/in-button";
+import CardBasic from "@/examples/card/basic";
+import CardTones from "@/examples/card/tones";
+import AlertTones from "@/examples/alert/tones";
+import AlertWithAction from "@/examples/alert/with-action";
+import TextareaBasic from "@/examples/textarea/basic";
+import TextareaStates from "@/examples/textarea/states";
+import SelectBasic from "@/examples/select/basic";
+import SelectStates from "@/examples/select/states";
+import RadioGroupBasic from "@/examples/radio-group/basic";
+import RadioGroupHorizontal from "@/examples/radio-group/horizontal";
+import AccordionBasic from "@/examples/accordion/basic";
+import AccordionExclusive from "@/examples/accordion/exclusive";
+import DialogBasic from "@/examples/dialog/basic";
+import DialogForm from "@/examples/dialog/form";
+import TooltipBasic from "@/examples/tooltip/basic";
+import SkeletonBasic from "@/examples/skeleton/basic";
+import SkeletonCard from "@/examples/skeleton/card";
 
 export type ExampleEntry = {
   title: string;
@@ -45,7 +62,7 @@ export type ComponentDoc = {
 
 const ex = (slug: string, name: string) => `src/examples/${slug}/${name}.tsx`;
 
-export const components: ComponentDoc[] = [
+const entries: ComponentDoc[] = [
   {
     slug: "button",
     name: "Button",
@@ -365,7 +382,342 @@ import { AnimatedIcon } from "@streamui/react";
       "Avoid loop for anything that isn't an active process, like loading or syncing.",
     ],
   },
+  {
+    slug: "card",
+    name: "Card",
+    description: "A bordered surface with a hard shadow, composed from header, title, description, content, and footer parts.",
+    status: "stable",
+    file: "packages/react/src/Card.tsx",
+    usage: `import { Card, CardContent, CardHeader, CardTitle } from "@streamui/react";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Pro plan</CardTitle>
+  </CardHeader>
+  <CardContent>…</CardContent>
+</Card>`,
+    examples: [
+      { title: "Composed card", file: ex("card", "basic"), Component: CardBasic },
+      { title: "Tones", description: "Soft tints keep large surfaces light.", file: ex("card", "tones"), Component: CardTones },
+    ],
+    props: [
+      {
+        caption: "Card",
+        rows: [
+          { name: "tone", type: '"paper" | "lime" | "pink" | "blue" | "violet" | "orange"', default: '"paper"', description: "Surface tint." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native div attributes." },
+        ],
+      },
+      {
+        caption: "CardTitle",
+        rows: [{ name: "as", type: '"h2" | "h3" | "h4"', default: '"h3"', description: "Heading level, to fit your page outline." }],
+      },
+      {
+        caption: "CardHeader, CardDescription, CardContent, CardFooter",
+        rows: [{ name: "...props", type: "native element props", description: "Plain layout parts; className is merged last." }],
+      },
+    ],
+    accessibility: [
+      "CardTitle is a real heading, so cards show up in a screen reader's heading list. Pick the level that fits your page.",
+      "A card is a plain container. If the whole card should be clickable, put one link inside and stretch its hit area rather than wrapping everything in a link.",
+    ],
+  },
+  {
+    slug: "alert",
+    name: "Alert",
+    description: "A message box for info, success, warnings, and errors, with an icon, title, and optional actions.",
+    status: "stable",
+    file: "packages/react/src/Alert.tsx",
+    usage: `import { Alert } from "@streamui/react";
+
+<Alert tone="success" title="Changes saved" />`,
+    examples: [
+      { title: "Tones", file: ex("alert", "tones"), Component: AlertTones },
+      { title: "With actions", file: ex("alert", "with-action"), Component: AlertWithAction },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "tone", type: '"info" | "success" | "warning" | "danger"', default: '"info"', description: "Color, icon, and default role." },
+          { name: "title", type: "ReactNode", description: "Bold first line." },
+          { name: "icon", type: "ReactNode | null", description: "Replaces the tone's icon; null hides it." },
+          { name: "action", type: "ReactNode", description: "Buttons or links under the message." },
+          { name: "role", type: "string", description: 'Overrides the default "alert" or "status".' },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native div attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Warnings and errors default to role="alert", which screen readers announce immediately; info and success use the politer role="status".',
+      'Live roles announce content that appears after load. For a message that\'s on the page from the start, pass role="note" (or another role) so it isn\'t announced as new.',
+      "The icon is decorative; the title and text carry the meaning, so color is never the only signal.",
+    ],
+  },
+  {
+    slug: "textarea",
+    name: "Textarea",
+    description: "A multi-line text field in the same frame as Input, with an invalid state and vertical resizing.",
+    status: "stable",
+    file: "packages/react/src/Textarea.tsx",
+    usage: `import { Textarea } from "@streamui/react";
+
+<label htmlFor="msg">Message</label>
+<Textarea id="msg" rows={4} />`,
+    examples: [
+      { title: "Basic", file: ex("textarea", "basic"), Component: TextareaBasic },
+      { title: "Invalid and disabled", file: ex("textarea", "states"), Component: TextareaStates },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "invalid", type: "boolean", default: "false", description: "Sets aria-invalid and tints the field pink." },
+          { name: "rows", type: "number", default: "4", description: "Visible lines before scrolling." },
+          { name: "frameClassName", type: "string", description: "Classes for the outer frame." },
+          { name: "className", type: "string", description: "Classes for the <textarea> itself." },
+          { name: "...props", type: 'ComponentProps<"textarea">', description: "Every native textarea attribute." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Pair it with a <label>, and link hints or errors with aria-describedby.",
+      "Shares Input's frame, so focus, invalid, and disabled states look the same across a form.",
+    ],
+  },
+  {
+    slug: "select",
+    name: "Select",
+    description: "A native select in the brutal frame, so phones get their own picker and keyboards work as expected.",
+    status: "stable",
+    file: "packages/react/src/Select.tsx",
+    usage: `import { Select } from "@streamui/react";
+
+<label htmlFor="region">Region</label>
+<Select id="region">
+  <option value="bom">Asia (Mumbai)</option>
+</Select>`,
+    examples: [
+      { title: "Basic", file: ex("select", "basic"), Component: SelectBasic },
+      { title: "Invalid and disabled", file: ex("select", "states"), Component: SelectStates },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "invalid", type: "boolean", default: "false", description: "Sets aria-invalid and tints the field pink." },
+          { name: "frameClassName", type: "string", description: "Classes for the outer frame." },
+          { name: "className", type: "string", description: "Classes for the <select> itself." },
+          { name: "children", type: "<option> elements", description: "Options and optgroups, exactly as in native HTML." },
+          { name: "...props", type: 'ComponentProps<"select">', description: "Every native select attribute." },
+        ],
+      },
+    ],
+    accessibility: [
+      "It's the platform's own <select>: typeahead, arrow keys, and the native picker on touch devices all work.",
+      "Use a disabled empty first option as a placeholder, and mark the field invalid if the form is submitted without a choice.",
+    ],
+  },
+  {
+    slug: "radio-group",
+    name: "Radio Group",
+    description: "Native radio buttons with a brutal face, grouped in a fieldset whose legend names the choice.",
+    status: "stable",
+    file: "packages/react/src/Radio.tsx",
+    usage: `import { Radio, RadioGroup } from "@streamui/react";
+
+<RadioGroup legend="Billing">
+  <Radio name="billing" value="monthly" label="Monthly" />
+  <Radio name="billing" value="yearly" label="Yearly" />
+</RadioGroup>`,
+    examples: [
+      { title: "With descriptions", file: ex("radio-group", "basic"), Component: RadioGroupBasic },
+      { title: "Horizontal", file: ex("radio-group", "horizontal"), Component: RadioGroupHorizontal },
+    ],
+    props: [
+      {
+        caption: "RadioGroup",
+        rows: [
+          { name: "legend", type: "ReactNode", description: "The group's visible name. Required." },
+          { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "Layout of the options." },
+          { name: "...props", type: 'ComponentProps<"fieldset">', description: "Native fieldset attributes, e.g. disabled." },
+        ],
+      },
+      {
+        caption: "Radio",
+        rows: [
+          { name: "name", type: "string", description: "Shared by every radio in the group." },
+          { name: "value", type: "string", description: "Submitted with the form when chosen." },
+          { name: "label", type: "ReactNode", description: "Visible label; the whole row is clickable." },
+          { name: "description", type: "ReactNode", description: "Secondary line under the label." },
+          { name: "...props", type: 'Omit<ComponentProps<"input">, "type">', description: "Native input attributes, e.g. defaultChecked." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Real radio inputs: arrow keys move between options and Tab moves in and out of the group, as browsers expect.",
+      "The fieldset's legend is announced with each option, so users know what they're choosing.",
+      "The visible circle mirrors the input's focus ring, and the dot only shows when it's checked.",
+    ],
+  },
+  {
+    slug: "accordion",
+    name: "Accordion",
+    description: "Expandable sections built on native details and summary, with an exclusive mode that keeps one open at a time.",
+    status: "stable",
+    file: "packages/react/src/Accordion.tsx",
+    usage: `import { Accordion } from "@streamui/react";
+
+<Accordion
+  exclusive
+  items={[
+    { id: "install", title: "How do I install it?", content: "…" },
+    { id: "license", title: "Is it free?", content: "…" },
+  ]}
+/>`,
+    examples: [
+      { title: "Basic", file: ex("accordion", "basic"), Component: AccordionBasic },
+      {
+        title: "One open at a time",
+        description: "exclusive uses the native details name attribute, so opening one closes the others.",
+        file: ex("accordion", "exclusive"),
+        Component: AccordionExclusive,
+      },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "items", type: "{ id: string; title: ReactNode; content: ReactNode }[]", description: "Sections in order. id must be unique." },
+          { name: "exclusive", type: "boolean", default: "false", description: "Only one section open at a time." },
+          { name: "defaultOpen", type: "string[]", default: "[]", description: "Ids open on first render." },
+          { name: "className", type: "string", description: "Classes for the wrapper." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Native <details>/<summary>: Enter and Space toggle, and screen readers announce expanded or collapsed.",
+      "Works without JavaScript, and the browser's find-in-page can open a section to show a match.",
+      "Closed content stays in the page, so it isn't lost to search engines.",
+    ],
+  },
+  {
+    slug: "dialog",
+    name: "Dialog",
+    description: "A modal built on the native dialog element: focus is trapped, Esc closes it, and focus returns to the trigger.",
+    status: "beta",
+    file: "packages/react/src/Dialog.tsx",
+    usage: `import { Button, Dialog } from "@streamui/react";
+
+<Dialog title="Delete this project?" trigger={<Button>Delete</Button>}>
+  This can't be undone.
+</Dialog>`,
+    examples: [
+      { title: "Confirm", description: "Controlled with open and onOpenChange so the footer buttons can close it.", file: ex("dialog", "basic"), Component: DialogBasic },
+      { title: "With a form", file: ex("dialog", "form"), Component: DialogForm },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "title", type: "ReactNode", description: "Heading; also the dialog's accessible name. Required." },
+          { name: "description", type: "ReactNode", description: "Supporting line; becomes the accessible description." },
+          { name: "children", type: "ReactNode", description: "Body content." },
+          { name: "footer", type: "ReactNode", description: "Actions along the bottom." },
+          { name: "trigger", type: "ReactElement", description: "Element that opens the dialog; gets aria-haspopup and aria-expanded." },
+          { name: "open", type: "boolean", description: "Controlled open state." },
+          { name: "defaultOpen", type: "boolean", default: "false", description: "Initial state when uncontrolled." },
+          { name: "onOpenChange", type: "(open: boolean) => void", description: "Called on every open and close, including Esc." },
+          { name: "dismissible", type: "boolean", default: "true", description: "Close when the backdrop is clicked." },
+          { name: "className", type: "string", description: "Classes for the panel." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Uses <dialog>.showModal(): focus moves into the dialog, Tab stays inside, and the rest of the page is inert.",
+      "Esc closes it and focus returns to the element that opened it.",
+      "Named by its title (aria-labelledby) and described by its description (aria-describedby). The close button has a label.",
+    ],
+  },
+  {
+    slug: "tooltip",
+    name: "Tooltip",
+    description: "A short hint on hover and keyboard focus that Esc dismisses, linked to its trigger for screen readers.",
+    status: "beta",
+    file: "packages/react/src/Tooltip.tsx",
+    usage: `import { Button, Tooltip } from "@streamui/react";
+
+<Tooltip content="Notifications">
+  <Button size="icon" aria-label="Notifications">…</Button>
+</Tooltip>`,
+    examples: [{ title: "On icon buttons", description: "Hover or Tab to the buttons. Esc hides the hint.", file: ex("tooltip", "basic"), Component: TooltipBasic }],
+    props: [
+      {
+        rows: [
+          { name: "content", type: "ReactNode", description: "The hint. Keep it short. Required." },
+          { name: "children", type: "ReactElement", description: "One focusable trigger; it gets aria-describedby." },
+          { name: "side", type: '"top" | "bottom"', default: '"top"', description: "Which side of the trigger to show on." },
+          { name: "delay", type: "number", default: "150", description: "Hover delay in ms. Focus shows immediately." },
+          { name: "className", type: "string", description: "Classes for the tooltip bubble." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Shows on keyboard focus as well as hover, and Esc dismisses it without moving focus (WCAG 1.4.13).",
+      'The bubble has role="tooltip" and is linked with aria-describedby, so it\'s read after the trigger\'s name.',
+      "Tooltips are hints, not labels: icon-only buttons still need their own aria-label.",
+    ],
+  },
+  {
+    slug: "skeleton",
+    name: "Skeleton",
+    description: "Placeholder shapes for content that's loading, sized with classes and pulsing only when motion is allowed.",
+    status: "stable",
+    file: "packages/react/src/Skeleton.tsx",
+    usage: `import { Skeleton } from "@streamui/react";
+
+<div role="status" aria-busy="true" aria-label="Loading">
+  <Skeleton className="h-4 w-40" />
+</div>`,
+    examples: [
+      { title: "Profile row", file: ex("skeleton", "basic"), Component: SkeletonBasic },
+      { title: "Loading card", file: ex("skeleton", "card"), Component: SkeletonCard },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "className", type: "string", description: "Size and shape, e.g. h-4 w-40 or size-12 rounded-full." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native div attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Each skeleton is aria-hidden; label the loading region instead (role=\"status\", aria-busy, aria-label) so screen readers hear one message.",
+      "The pulse only runs when the user allows motion.",
+    ],
+  },
 ];
+
+/** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
+export const componentOrder = [
+  "button",
+  "badge",
+  "card",
+  "alert",
+  "input",
+  "textarea",
+  "select",
+  "checkbox",
+  "radio-group",
+  "switch",
+  "tabs",
+  "accordion",
+  "dialog",
+  "tooltip",
+  "progress",
+  "skeleton",
+  "avatar",
+  "animated-icon",
+];
+
+export const components: ComponentDoc[] = [...entries].sort(
+  (a, b) => componentOrder.indexOf(a.slug) - componentOrder.indexOf(b.slug),
+);
 
 export function getComponent(slug: string) {
   return components.find((c) => c.slug === slug);

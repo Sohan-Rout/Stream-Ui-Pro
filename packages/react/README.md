@@ -53,11 +53,20 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | --- | --- |
 | `Button`, `buttonStyles()` | Four variants, four sizes. `buttonStyles()` styles links as buttons. |
 | `Badge` | Status and category labels in six tones. |
-| `Switch` | Accessible on/off toggle, controlled or uncontrolled. |
+| `Card` + `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter` | Bordered surface with a hard shadow, in six soft tones. |
+| `Alert` | Info, success, warning, and danger messages with icon, title, and actions. |
 | `Input` | Text field with optional icon and invalid state. |
+| `Textarea` | Multi-line field in the same frame as Input. |
+| `Select` | Native select, styled: platform pickers and full keyboard support. |
 | `Checkbox` | Native checkbox with a styled face. |
+| `Radio`, `RadioGroup` | Native radios with a styled face, grouped in a labelled fieldset. |
+| `Switch` | Accessible on/off toggle, controlled or uncontrolled. |
 | `Tabs` | WAI-ARIA tabs with arrow-key navigation. |
+| `Accordion` | Native details/summary sections, optionally one open at a time. |
+| `Dialog` | Modal on native `<dialog>`: focus trap, Esc to close, focus return. |
+| `Tooltip` | Hint on hover and focus, Esc to dismiss, linked with aria-describedby. |
 | `Progress` | Determinate progress bar. |
+| `Skeleton` | Loading placeholders that pulse only when motion is allowed. |
 | `Avatar`, `AvatarGroup` | Initials avatars and overlapping stacks. |
 | `AnimatedIcon` | Animates any SVG icon: `draw`, `spin`, `bounce`, `wiggle`, `pulse`, `shake`, `pop`. Triggers: `hover`, `loop`, `once`. |
 | `cn()` | `clsx` + `tailwind-merge`, aware of the brutal shadow tokens. |

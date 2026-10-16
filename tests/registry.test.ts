@@ -6,7 +6,7 @@ import { describe, expect, test } from "bun:test";
 import { existsSync, readFileSync } from "node:fs";
 import * as pkg from "@streamui/react";
 import { readSource } from "@/lib/source";
-import { components } from "@/registry/components";
+import { componentOrder, components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { docsNav, neighbors } from "@/registry/nav";
@@ -41,6 +41,10 @@ describe.each(Object.entries(registries))("%s registry", (_, entries) => {
 });
 
 describe("components registry", () => {
+  test("every component has a place in the sidebar order", () => {
+    expect([...componentOrder].sort()).toEqual(components.map((c) => c.slug).sort());
+  });
+
   test("each component has examples, props, and accessibility notes", () => {
     for (const c of components) {
       expect(c.examples.length).toBeGreaterThan(0);
