@@ -28,9 +28,26 @@ describe("parseEnv", () => {
     expect(env.funding).toEqual({ githubSponsors: "", openCollective: "", kofi: "https://ko-fi.com/me" });
   });
 
+  test("adds https:// to a link pasted without it", () => {
+    expect(parseEnv({ FUNDING_GITHUB_SPONSORS_URL: "github.com/sponsors/streamuilib" }).funding.githubSponsors).toBe(
+      "https://github.com/sponsors/streamuilib",
+    );
+    expect(parseEnv({ NEXT_PUBLIC_SITE_URL: "streamui.org" }).siteUrl).toBe("https://streamui.org");
+  });
+
+  test("rejects a bare username, naming the variable and showing an example", () => {
+    expect(() => parseEnv({ FUNDING_GITHUB_SPONSORS_URL: "streamuilib" })).toThrow(
+      /FUNDING_GITHUB_SPONSORS_URL must be a full URL with a domain.*https:\/\/github\.com\/sponsors\/your-org/,
+    );
+  });
+
+  test("error messages say where to fix it", () => {
+    expect(() => parseEnv({ FUNDING_KOFI_URL: "nope" })).toThrow(/Project Settings → Environment Variables/);
+  });
+
   test("fails loudly on a malformed or insecure funding link", () => {
-    expect(() => parseEnv({ FUNDING_OPEN_COLLECTIVE_URL: "opencollective.com/x" })).toThrow(
-      /FUNDING_OPEN_COLLECTIVE_URL must be a full URL/,
+    expect(() => parseEnv({ FUNDING_OPEN_COLLECTIVE_URL: "https://" })).toThrow(
+      /FUNDING_OPEN_COLLECTIVE_URL is not a valid URL/,
     );
     expect(() => parseEnv({ FUNDING_KOFI_URL: "http://ko-fi.com/me" })).toThrow(/must use https/);
     expect(() => parseEnv({ FUNDING_KOFI_URL: "javascript:alert(1)" })).toThrow(/must use https/);
