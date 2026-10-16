@@ -9,7 +9,22 @@ import { ConsentControls } from "@/components/legal/ConsentControls";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.cookies, path: "/legal/cookies" });
 
-const items = [
+const gaItems = [
+  {
+    name: "_ga",
+    kind: "Analytics",
+    purpose: "Google Analytics: tells one visit from another, so we can count visitors. Set only if you accept.",
+    kept: "Up to 2 years, or until you pick Essential only",
+  },
+  {
+    name: "_ga_<id>",
+    kind: "Analytics",
+    purpose: "Google Analytics: keeps track of the current session. Set only if you accept.",
+    kept: "Up to 2 years, or until you pick Essential only",
+  },
+];
+
+const storageItems = [
   {
     name: CONSENT_KEY,
     kind: "Essential",
@@ -24,32 +39,46 @@ const items = [
   },
 ];
 
+const badge = {
+  Essential: "bg-blue",
+  Optional: "bg-pink",
+  Analytics: "bg-orange",
+} as const;
+
 export default function CookiesPage() {
+  const analytics = Boolean(siteConfig.analytics.gaId);
+  const items = [
+    ...(analytics ? gaItems.map((i) => ({ ...i, type: "Cookie" })) : []),
+    ...storageItems.map((i) => ({ ...i, type: "Local storage" })),
+  ];
   return (
     <LegalPage
       eyebrow="Cookies"
       title="Cookie policy"
       intro={
         <p>
-          stream/ui sets no cookies at all: no analytics, no ads, no tracking pixels. The only things
-          this site keeps are two small items in your browser&apos;s local storage, listed below.
+          {analytics
+            ? "stream/ui shows no ads and sets no cookies until you agree. If you accept, Google Analytics sets two cookies to count visits. Everything else is local storage on your device. The full list is below."
+            : "stream/ui sets no cookies at all: no analytics, no ads, no tracking pixels. The only things this site keeps are two small items in your browser's local storage, listed below."}
         </p>
       }
     >
       <h2>Your choice</h2>
       <p>
         Change it here at any time, or use <strong>Cookie settings</strong> in the footer to see the
-        banner again. Choosing Essential only also deletes any best scores already saved.
+        banner again. Choosing Essential only also deletes any best scores already saved
+        {analytics ? " and switches Google Analytics off, removing its cookies." : "."}
       </p>
       <ConsentControls />
 
       <h2>What&apos;s stored</h2>
       <div className="overflow-x-auto border-2 border-ink">
-        <table className="w-full min-w-xl border-collapse text-left text-sm">
+        <table className="w-full min-w-2xl border-collapse text-left text-sm">
           <thead className="bg-paper-sunken font-mono text-xs tracking-widest uppercase">
             <tr>
               <th scope="col" className="border-b-2 border-ink p-3">Name</th>
               <th scope="col" className="border-b-2 border-ink p-3">Type</th>
+              <th scope="col" className="border-b-2 border-ink p-3">Stored as</th>
               <th scope="col" className="border-b-2 border-ink p-3">Purpose</th>
               <th scope="col" className="border-b-2 border-ink p-3">Kept</th>
             </tr>
@@ -60,15 +89,12 @@ export default function CookiesPage() {
                 <td className="p-3 font-mono text-xs break-all">{item.name}</td>
                 <td className="p-3">
                   <span
-                    className={
-                      item.kind === "Essential"
-                        ? "border-2 border-ink bg-blue px-1.5 py-0.5 text-xs font-semibold text-on-bright"
-                        : "border-2 border-ink bg-pink px-1.5 py-0.5 text-xs font-semibold text-on-bright"
-                    }
+                    className={`border-2 border-ink px-1.5 py-0.5 text-xs font-semibold text-on-bright ${badge[item.kind as keyof typeof badge]}`}
                   >
                     {item.kind}
                   </span>
                 </td>
+                <td className="p-3 text-ink-muted">{item.type}</td>
                 <td className="p-3 text-ink-muted">{item.purpose}</td>
                 <td className="p-3 text-ink-muted">{item.kept}</td>
               </tr>
@@ -83,8 +109,10 @@ export default function CookiesPage() {
 
       <h2>Third parties</h2>
       <p>
-        No third-party scripts run on this site, so none of them can set cookies here. Pages you
-        reach through links, like GitHub or a UPI app, follow their own cookie policies. More detail
+        {analytics
+          ? "The only third-party script is the Google tag for Analytics, and it loads only after you accept. "
+          : "No third-party scripts run on this site, so none of them can set cookies here. "}
+        Pages you reach through links, like GitHub or a UPI app, follow their own cookie policies. More detail
         is in the <Link href="/legal/privacy">privacy policy</Link>.
       </p>
 

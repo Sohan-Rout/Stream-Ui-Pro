@@ -3,11 +3,11 @@
 import { useSyncExternalStore } from "react";
 
 /**
- * The visitor's storage choice. The site sets no cookies and runs no
- * analytics; the only optional storage is Labs best scores, so:
+ * The visitor's storage choice. Nothing optional runs before an answer:
  *
- *   "all"        remember best scores on this device
- *   "essential"  remember only this choice
+ *   "all"        load Google Analytics (when configured) and remember
+ *                Labs best scores on this device
+ *   "essential"  remember only this choice; GA stays off
  *   null         not asked yet: show the banner, save nothing optional
  *
  * Kept in localStorage. When storage is blocked the choice lives in memory

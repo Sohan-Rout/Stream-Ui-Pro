@@ -2,10 +2,11 @@ import { describe, expect, test } from "bun:test";
 import { parseEnv } from "@/lib/env";
 
 describe("parseEnv", () => {
-  test("works with nothing set: default site URL, no funding links", () => {
+  test("works with nothing set: default site URL, no funding links, no analytics", () => {
     expect(parseEnv({})).toEqual({
       siteUrl: "https://streamui.org",
       funding: { githubSponsors: "", razorpay: "", razorpayQr: "" },
+      gaId: "",
     });
   });
 
@@ -49,5 +50,20 @@ describe("parseEnv", () => {
     expect(() => parseEnv({ FUNDING_RAZORPAY_QR_URL: "https://" })).toThrow(/FUNDING_RAZORPAY_QR_URL is not a valid URL/);
     expect(() => parseEnv({ FUNDING_RAZORPAY_QR_URL: "http://rzp.io/i/abc" })).toThrow(/must use https/);
     expect(() => parseEnv({ FUNDING_RAZORPAY_URL: "javascript:alert(1)" })).toThrow(/must use https/);
+  });
+});
+
+describe("NEXT_PUBLIC_GA_ID", () => {
+  test("is optional: unset turns analytics off", () => {
+    expect(parseEnv({}).gaId).toBe("");
+  });
+
+  test("accepts a GA4 measurement ID, in any case", () => {
+    expect(parseEnv({ NEXT_PUBLIC_GA_ID: " g-585j372fj9 " }).gaId).toBe("G-585J372FJ9");
+  });
+
+  test("rejects other tag IDs with a clear message", () => {
+    expect(() => parseEnv({ NEXT_PUBLIC_GA_ID: "UA-12345-1" })).toThrow(/GA4 measurement ID like G-/);
+    expect(() => parseEnv({ NEXT_PUBLIC_GA_ID: "GTM-ABC123" })).toThrow(/NEXT_PUBLIC_GA_ID/);
   });
 });

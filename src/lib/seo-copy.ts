@@ -71,7 +71,7 @@ export const indexSeo = {
   privacy: {
     title: "Privacy Policy",
     description:
-      "How stream/ui handles your data: no accounts, no analytics, no ad trackers. What our host logs, which third parties you may reach, and your choices.",
+      "How stream/ui handles your data: no accounts or ads, and Google Analytics only with your consent. What our host logs, the third parties, and your choices.",
     keywords: ["stream/ui privacy policy", "privacy"],
   },
   terms: {
@@ -83,7 +83,7 @@ export const indexSeo = {
   cookies: {
     title: "Cookie Policy",
     description:
-      "stream/ui sets no cookies and runs no trackers. See the two things this site may keep in your browser's storage, and change your choice at any time.",
+      "Every cookie and storage item stream/ui may use, from Google Analytics (only after you accept) to Labs best scores, and how to change your choice.",
     keywords: ["stream/ui cookie policy", "cookies", "local storage"],
   },
 } satisfies Record<string, SeoCopy>;

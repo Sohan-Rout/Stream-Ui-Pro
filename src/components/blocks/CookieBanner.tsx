@@ -15,7 +15,7 @@ import { setConsent, useConsent } from "@/lib/consent";
  * hero waits for an answer. Elsewhere it opens non-modally and the docs stay
  * usable. Escape counts as "Essential only", the privacy-preserving answer.
  */
-export function CookieBanner() {
+export function CookieBanner({ analytics = false }: { analytics?: boolean }) {
   const consent = useConsent();
   const modal = usePathname() === "/";
 
@@ -59,8 +59,9 @@ export function CookieBanner() {
             Cookies? Just crumbs.
           </h2>
           <p id="cookie-body" className="mt-1.5 text-sm leading-relaxed text-ink-muted">
-            No tracking, no ads, no analytics. With your OK we save your Labs best scores on this
-            device.{" "}
+            {analytics
+              ? "No ads, and nothing runs before you choose. Accept lets us count visits with Google Analytics and save your Labs best scores on this device."
+              : "No tracking, no ads, no analytics. With your OK we save your Labs best scores on this device."}{" "}
             <Link
               href="/legal/cookies"
               className="font-semibold text-ink underline decoration-2 underline-offset-4"

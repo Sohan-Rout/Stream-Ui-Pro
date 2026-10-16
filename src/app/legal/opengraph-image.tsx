@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     eyebrow: "Legal",
     title: "Privacy, terms, and cookies.",
-    description: "No tracking, no ads, no analytics. Plain-language policies for stream/ui.",
+    description: "No ads, analytics only with consent. Plain-language policies for stream/ui.",
     accent: "blue",
     art: { kind: "home" },
   });

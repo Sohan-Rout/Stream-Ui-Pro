@@ -59,6 +59,20 @@ function optionalLink(source: Source, name: string) {
   return raw ? parseUrl(name, raw).href : "";
 }
 
+const GA_ID = /^G-[A-Z0-9]{4,}$/;
+
+/** Optional GA4 measurement ID ("G-XXXXXXX"); empty means analytics is off. */
+function optionalGaId(source: Source) {
+  const raw = source.NEXT_PUBLIC_GA_ID?.trim().toUpperCase() ?? "";
+  if (raw && !GA_ID.test(raw)) {
+    throw new Error(
+      `NEXT_PUBLIC_GA_ID must be a GA4 measurement ID like G-ABC123XYZ, got "${raw}". ` +
+        `Find it in Google Analytics under Admin → Data streams, or remove the variable to turn analytics off.`,
+    );
+  }
+  return raw;
+}
+
 export function parseEnv(source: Source) {
   const rawSiteUrl = source.NEXT_PUBLIC_SITE_URL?.trim();
   return {
@@ -71,6 +85,8 @@ export function parseEnv(source: Source) {
       /** Razorpay UPI QR code image, for scanning with a phone. */
       razorpayQr: optionalLink(source, "FUNDING_RAZORPAY_QR_URL"),
     },
+    /** Google Analytics 4, loaded only after a visitor accepts the cookie banner. */
+    gaId: optionalGaId(source),
   };
 }
 

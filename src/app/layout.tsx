@@ -4,6 +4,7 @@ import { Archivo_Black, Space_Grotesk, Space_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { SiteFooter } from "@/components/blocks/SiteFooter";
 import { CookieBanner } from "@/components/blocks/CookieBanner";
+import { Analytics } from "@/components/blocks/Analytics";
 import { siteConfig } from "@/lib/site";
 import { homeSeo } from "@/lib/seo-copy";
 import "./globals.css";
@@ -62,8 +63,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         {/* usePathname can suspend on dynamic routes under Cache Components. */}
         <Suspense fallback={null}>
-          <CookieBanner />
+          <CookieBanner analytics={Boolean(siteConfig.analytics.gaId)} />
         </Suspense>
+        {siteConfig.analytics.gaId && <Analytics gaId={siteConfig.analytics.gaId} />}
       </body>
     </html>
   );

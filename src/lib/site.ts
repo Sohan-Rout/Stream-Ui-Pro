@@ -22,4 +22,6 @@ export const siteConfig = {
    * hidden; the sponsor page and footer only show configured platforms.
    */
   funding: env.funding,
+  /** Google Analytics, from NEXT_PUBLIC_GA_ID; unset turns it off. */
+  analytics: { gaId: env.gaId },
 } as const;

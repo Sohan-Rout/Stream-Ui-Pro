@@ -8,10 +8,15 @@ import userEvent from "@testing-library/user-event";
 
 let pathname = "/";
 mock.module("next/navigation", () => ({ usePathname: () => pathname }));
+// Stand-in for the Google tag, so tests can see whether it would load.
+mock.module("@next/third-parties/google", () => ({
+  GoogleAnalytics: ({ gaId }: { gaId: string }) => <script data-testid="ga" data-id={gaId} />,
+}));
 
 const { CONSENT_KEY, readConsent, setConsent } = await import("@/lib/consent");
 const { CookieBanner, CookieSettingsButton } = await import("@/components/blocks/CookieBanner");
 const { useBestScore } = await import("@/lib/games/best-score");
+const { Analytics } = await import("@/components/blocks/Analytics");
 
 // happy-dom's <dialog> lacks showModal in some versions; record which opened.
 const opened: string[] = [];
@@ -96,5 +101,53 @@ describe("best scores follow consent", () => {
     setConsent("essential");
     expect(localStorage.getItem("streamui:flappy-best")).toBeNull();
     expect(localStorage.getItem(CONSENT_KEY)).toBe("essential");
+  });
+});
+
+describe("Google Analytics follows consent", () => {
+  const ID = "G-TEST123";
+  const disabled = () => (window as unknown as Record<string, unknown>)[`ga-disable-${ID}`];
+
+  test("doesn't load before the visitor answers", () => {
+    render(<Analytics gaId={ID} />);
+    expect(screen.queryByTestId("ga")).toBeNull();
+    expect(disabled()).toBe(true);
+  });
+
+  test("doesn't load with essential only", () => {
+    setConsent("essential");
+    render(<Analytics gaId={ID} />);
+    expect(screen.queryByTestId("ga")).toBeNull();
+  });
+
+  test("loads after Accept", () => {
+    setConsent("all");
+    render(<Analytics gaId={ID} />);
+    expect(screen.getByTestId("ga").dataset.id).toBe(ID);
+    expect(disabled()).toBe(false);
+  });
+
+  test("withdrawing consent turns GA off and deletes its cookies", () => {
+    // Cookies need a real origin; the test page starts at about:blank.
+    (window as unknown as { happyDOM: { setURL(url: string): void } }).happyDOM.setURL("https://streamui.org/");
+    setConsent("all");
+    render(<Analytics gaId={ID} />);
+    document.cookie = "_ga=GA1.1.123; path=/";
+    document.cookie = "_ga_TEST123=GS1.1.456; path=/";
+    document.cookie = "other=keep; path=/";
+    expect(document.cookie).toContain("_ga_TEST123");
+    act(() => setConsent("essential"));
+    expect(screen.queryByTestId("ga")).toBeNull();
+    expect(disabled()).toBe(true);
+    expect(document.cookie).not.toContain("_ga");
+    expect(document.cookie).toContain("other=keep");
+  });
+
+  test("the banner mentions Google Analytics only when it's configured", () => {
+    const { unmount } = render(<CookieBanner analytics />);
+    expect(screen.getByText(/Google Analytics/)).toBeTruthy();
+    unmount();
+    render(<CookieBanner />);
+    expect(screen.queryByText(/Google Analytics/)).toBeNull();
   });
 });
