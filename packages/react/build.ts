@@ -8,15 +8,17 @@
  *   - .d.ts types from tsc
  *   - theme.css copied as-is
  *
- * Everything is written to a staging folder and swapped into dist/ at the
- * end, so a dev server reading dist/ mid-build never sees missing files,
- * and a failed build leaves the previous dist/ in place.
+ * Everything is written to a staging folder, then synced into dist/ in
+ * place: changed files are overwritten, stale ones removed, and dist/ itself
+ * is never deleted. A dev server watching dist/ (Turbopack caches a failed
+ * resolve) never sees theme.css go missing, and a failed build leaves the
+ * previous dist/ untouched.
  *
  * Usage: bun run build.ts [--watch]
  */
 import { $, Glob, type BunPlugin } from "bun";
 import { watch } from "node:fs";
-import { cp, rename, rm } from "node:fs/promises";
+import { cp, mkdir, rm } from "node:fs/promises";
 
 const SRC = "src";
 const DIST = "dist";
@@ -43,6 +45,21 @@ const keepRelativeImports: BunPlugin = {
 };
 
 const USE_CLIENT = /^\s*["']use client["'];?/;
+
+/** Make `dest` match `src`, writing only files whose contents changed. */
+async function syncInto(dest: string, src: string) {
+  await mkdir(dest, { recursive: true });
+  const built = new Set(new Glob("**/*").scanSync(src));
+  for (const file of built) {
+    const next = Bun.file(`${src}/${file}`);
+    const current = Bun.file(`${dest}/${file}`);
+    if ((await current.exists()) && (await current.text()) === (await next.text())) continue;
+    await Bun.write(current, next);
+  }
+  for (const file of new Glob("**/*").scanSync(dest)) {
+    if (!built.has(file)) await rm(`${dest}/${file}`, { force: true });
+  }
+}
 
 async function build() {
   const started = performance.now();
@@ -91,10 +108,8 @@ async function build() {
   }
   await cp(`${SRC}/theme.css`, `${OUT}/theme.css`);
 
-  // Swap in the finished build: the gap between these two calls is the only
-  // moment dist/ is absent, instead of the whole build.
-  await rm(DIST, { recursive: true, force: true });
-  await rename(OUT, DIST);
+  await syncInto(DIST, OUT);
+  await rm(OUT, { recursive: true, force: true });
 
   console.log(`built ${entrypoints.length + 1} modules in ${Math.round(performance.now() - started)}ms`);
 }
