@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type TransitionEvent } from "react";
+import { useEffect, useRef, useState, type TransitionEvent } from "react";
 import { Dice5 } from "lucide-react";
 import { Button, cn } from "@streamuilib/react";
 
@@ -40,6 +40,8 @@ export const SHOW: Record<Face, [number, number]> = {
 
 /** Two full tumbles on both axes per roll, so even a repeat value visibly rolls. */
 export const SPIN = 720;
+/** Length of the roll animation; matches duration-1000 on the die. */
+const ROLL_MS = 1000;
 
 export function rollFace(): Face {
   // crypto gives an evenly spread roll; the modulo bias over 2^32 is negligible.
@@ -51,18 +53,27 @@ export function DiceLab() {
   const [face, setFace] = useState<Face>(1);
   const [rolls, setRolls] = useState(0);
   const [rolling, setRolling] = useState(false);
+  const fallback = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(fallback.current), []);
 
   function roll() {
     const next = rollFace();
     setFace(next);
     setRolls((n) => n + 1);
-    // With reduced motion there is no transition, so transitionend never fires.
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setRolling(!still);
+    // The roll plays even with reduced motion on: it's the experiment, and it
+    // only runs when the visitor asks for it (WCAG 2.3.3 "essential" motion).
+    setRolling(true);
+    // If something stops the transition (an extension, a disabled-animations
+    // setting), transitionend never fires; settle anyway once it would have.
+    clearTimeout(fallback.current);
+    fallback.current = setTimeout(() => setRolling(false), ROLL_MS + 200);
   }
 
   function onSettled(e: TransitionEvent<HTMLDivElement>) {
-    if (e.target === e.currentTarget && e.propertyName === "transform") setRolling(false);
+    if (e.target === e.currentTarget && e.propertyName === "transform") {
+      clearTimeout(fallback.current);
+      setRolling(false);
+    }
   }
 
   const [x, y] = SHOW[face];
@@ -74,7 +85,7 @@ export function DiceLab() {
         <div className="transform-3d" style={{ transform: "rotateX(-22deg) rotateY(-28deg)" }}>
           <div
             onTransitionEnd={onSettled}
-            className="relative size-24 transition-transform duration-1000 ease-[cubic-bezier(0.2,0.8,0.25,1)] transform-3d motion-reduce:transition-none"
+            className="relative size-24 transition-transform duration-1000 ease-[cubic-bezier(0.2,0.8,0.25,1)] transform-3d"
             style={{ transform: `rotateX(${rolls * SPIN + x}deg) rotateY(${rolls * SPIN + y}deg)` }}
           >
             {FACES.map((f) => (

@@ -13,8 +13,9 @@ export function MagneticLab() {
 
   function onMove(e: PointerEvent) {
     const area = areaRef.current;
+    // Follows the cursor even with reduced motion on: the visitor drives every
+    // pixel of it, and following is the whole experiment.
     if (!area || e.pointerType !== "mouse") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const r = area.getBoundingClientRect();
     const clamp = (v: number) => Math.max(-MAX, Math.min(MAX, v));
     setOffset({

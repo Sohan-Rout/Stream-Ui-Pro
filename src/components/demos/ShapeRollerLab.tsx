@@ -23,7 +23,7 @@ export function ShapeRollerLab() {
   return (
     <div className="flex w-full flex-col items-center gap-6">
       <div className="grid h-40 w-full place-items-center bg-dots">
-        <div key={roll.n} className={cn("motion-safe:animate-wiggle", tilts[roll.tilt])}>
+        <div key={roll.n} className={cn("animate-wiggle", tilts[roll.tilt])}>
           <div
             className={cn(
               "size-24 border-2 border-ink shadow-brutal-lg",

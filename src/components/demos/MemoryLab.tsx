@@ -95,7 +95,7 @@ export function MemoryLab({
                 onClick={() => flip(i)}
                 aria-label={`Card ${i + 1}: ${faceUp ? face.name : "face down"}${isMatched ? ", matched" : ""}`}
                 aria-disabled={faceUp || locked}
-                className="relative block size-14 cursor-pointer transition-transform duration-300 ease-out transform-3d motion-reduce:transition-none aria-disabled:cursor-default"
+                className="relative block size-14 cursor-pointer transition-transform duration-300 ease-out transform-3d aria-disabled:cursor-default"
                 style={{ transform: faceUp ? "rotateY(180deg)" : "rotateY(0deg)" }}
               >
                 {/* Back */}

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { DiceLab, FACES, PIPS, PLACEMENT, SHOW, SPIN, rollFace, type Face } from "@/components/demos/DiceLab";
 
 /* 3D rotation matrices in CSS's coordinate system (y points down). */
@@ -84,5 +85,22 @@ describe("DiceLab", () => {
     render(<DiceLab />);
     expect(document.querySelector(".perspective-\\[600px\\]")?.getAttribute("aria-hidden")).toBe("true");
     expect(screen.getByText("ready").getAttribute("aria-live")).toBe("polite");
+  });
+});
+
+describe("DiceLab with reduced motion on", () => {
+  test("still rolls, and settles even if the animation never reports its end", async () => {
+    const original = window.matchMedia;
+    window.matchMedia = ((q: string) => ({ matches: q.includes("reduce"), media: q, addEventListener() {}, removeEventListener() {} })) as unknown as typeof window.matchMedia;
+    try {
+      render(<DiceLab />);
+      await userEvent.click(screen.getByRole("button", { name: /roll/i }));
+      // The roll plays: Labs motion is the experiment and visitor-triggered.
+      expect(screen.getByText("rolling…")).toBeTruthy();
+      // No transitionend fires in the test DOM, so the fallback must settle it.
+      await waitFor(() => expect(screen.getByText(/rolled/)).toBeTruthy(), { timeout: 2000 });
+    } finally {
+      window.matchMedia = original;
+    }
   });
 });
