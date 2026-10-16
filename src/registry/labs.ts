@@ -6,6 +6,7 @@ import { DiceLab } from "@/components/demos/DiceLab";
 import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
 import { MemoryLab } from "@/components/demos/MemoryLab";
 import { SnakeLab } from "@/components/demos/SnakeLab";
+import { FlappyLab } from "@/components/demos/FlappyLab";
 
 export type LabDoc = {
   slug: string;
@@ -94,6 +95,19 @@ export const labs: LabDoc[] = [
       "The rules live in src/lib/games/snake.ts as pure functions: walls and your own body end the game, and up to two turns are buffered between ticks.",
       "Classic, Funky, and Pixelated are only skins over the same game state, so you can switch looks mid-game.",
       "It speeds up a little with every food, and your best score is remembered in this browser.",
+    ],
+  },
+  {
+    slug: "flappy",
+    name: "Flappy",
+    description: "A neo-brutalist flappy bird: flap through the gaps between hard-shadowed pipes.",
+    file: "src/components/demos/FlappyLab.tsx",
+    Component: FlappyLab,
+    notes: [
+      "The world draws on a <canvas> at 60fps outside React; React state only changes when the score or status does.",
+      "Physics live in src/lib/games/flappy.ts as pure functions in world units and seconds, so they're tested without a browser.",
+      "Long frames are capped, so switching tabs mid-flight can't teleport the bird through a pipe.",
+      "Space, Up, W, or a tap flaps; P pauses. A short grace period after a crash stops a mashed key from restarting instantly.",
     ],
   },
 ];

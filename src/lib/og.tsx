@@ -1,24 +1,8 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "./site";
+import { brand } from "./brand";
 
-/** Theme tokens as hex: the image renderer doesn't understand oklch(). */
-export const brand = {
-  paper: "#fafaf7",
-  raised: "#ffffff",
-  sunken: "#eff0ec",
-  ink: "#0e0f14",
-  muted: "#505258",
-  faint: "rgba(14,15,20,0.10)",
-  lime: "#bdf952",
-  pink: "#ff70b3",
-  blue: "#70ccee",
-  violet: "#c0a2f5",
-  orange: "#ff9e53",
-  limeSoft: "#e9fcc9",
-  pinkSoft: "#ffe6f0",
-  blueSoft: "#e3f4fb",
-  violetSoft: "#efe8fd",
-} as const;
+export { brand };
 
 export type OgAccent = "lime" | "pink" | "blue" | "violet" | "orange";
 
@@ -126,7 +110,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section" }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" }
   | { kind: "icons" }
   | { kind: "sponsor" };
 
@@ -274,6 +258,62 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
                 )}
               </div>
             ))}
+          </div>
+        );
+      }
+      if (art.game === "flappy") {
+        return (
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              width: 250,
+              height: 250,
+              backgroundColor: brand.blueSoft,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(12),
+              transform: "rotate(3deg)",
+              overflow: "hidden",
+            }}
+          >
+            {/* Two pipes with a gap, and the bird flying through it. */}
+            {[
+              { left: 150, top: -10, height: 80 },
+              { left: 150, top: 170, height: 90 },
+            ].map((p, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  left: p.left,
+                  top: p.top,
+                  width: 56,
+                  height: p.height,
+                  backgroundColor: brand.pink,
+                  border: `4px solid ${brand.ink}`,
+                  boxShadow: hard(5),
+                }}
+              />
+            ))}
+            <div style={{ position: "absolute", left: 0, top: 206, width: 250, height: 44, backgroundColor: brand.lime, borderTop: `4px solid ${brand.ink}` }} />
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                left: 70,
+                top: 104,
+                width: 46,
+                height: 46,
+                backgroundColor: brand.orange,
+                border: `4px solid ${brand.ink}`,
+                boxShadow: hard(4),
+                borderRadius: 6,
+                transform: "rotate(-14deg)",
+              }}
+            >
+              <div style={{ position: "absolute", left: 24, top: 8, width: 14, height: 14, borderRadius: 99, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+              <div style={{ position: "absolute", left: 2, top: 20, width: 20, height: 12, backgroundColor: brand.violet, border: `3px solid ${brand.ink}` }} />
+            </div>
           </div>
         );
       }

@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
 import { MemoryLab } from "@/components/demos/MemoryLab";
 import { SnakeLab } from "@/components/demos/SnakeLab";
+import { FlappyLab } from "@/components/demos/FlappyLab";
 
 const cell = (row: number, col: number) =>
   screen.getByRole("button", { name: new RegExp(`^Row ${row}, column ${col}:`) });
@@ -162,5 +163,41 @@ describe("SnakeLab", () => {
     await waitFor(() => expect(screen.getByRole("button", { name: "Play again" })).toBeDefined(), { timeout: 2000 });
     expect(document.querySelector('[aria-live="polite"]')?.textContent).toMatch(/^Game over\. Score \d+\.$/);
     expect(segments()).toBeGreaterThanOrEqual(4);
+  });
+});
+
+describe("FlappyLab", () => {
+  const game = () => screen.getByRole("group", { name: /Flappy game/ });
+  const announce = () => document.querySelector('[aria-live="polite"]')?.textContent;
+
+  test("starts on a ready card", () => {
+    render(<FlappyLab />);
+    expect(screen.getByText("Flappy")).toBeDefined();
+    expect(screen.getByRole("button", { name: "Start" })).toBeDefined();
+  });
+
+  test("Space on the focused game starts it", async () => {
+    render(<FlappyLab />);
+    game().focus();
+    await userEvent.keyboard(" ");
+    expect(screen.queryByRole("button", { name: "Start" })).toBeNull();
+    expect(announce()).toMatch(/Flying/);
+  });
+
+  test("P pauses and resumes", async () => {
+    render(<FlappyLab />);
+    await userEvent.click(screen.getByRole("button", { name: "Start" }));
+    game().focus();
+    await userEvent.keyboard("p");
+    expect(screen.getByRole("button", { name: "Resume" })).toBeDefined();
+    await userEvent.keyboard("p");
+    expect(screen.queryByRole("button", { name: "Resume" })).toBeNull();
+  });
+
+  test("without flapping, the bird falls and the game ends with a score card", async () => {
+    render(<FlappyLab />);
+    await userEvent.click(screen.getByRole("button", { name: "Start" }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "Play again" })).toBeDefined(), { timeout: 4000 });
+    expect(announce()).toMatch(/^Game over\. Score 0\. Best \d+\.$/);
   });
 });

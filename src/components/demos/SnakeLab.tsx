@@ -5,7 +5,6 @@ import {
   useId,
   useRef,
   useState,
-  useSyncExternalStore,
   type CSSProperties,
   type KeyboardEvent,
   type PointerEvent,
@@ -14,6 +13,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Pause, Play, RotateC
 import { Button } from "@streamuilib/react";
 import { cn } from "@/lib/cn";
 import { cryptoInt } from "@/lib/games/memory";
+import { useBestScore } from "@/lib/games/best-score";
 import { createGame, step, tickMs, turn, type Direction, type Point, type SnakeGame } from "@/lib/games/snake";
 
 export type SnakeStyle = "classic" | "funky" | "pixel";
@@ -38,34 +38,6 @@ const KEYS: Record<string, Direction> = {
 };
 
 const FUNKY_TONES = ["bg-lime", "bg-pink", "bg-blue", "bg-violet", "bg-orange"];
-
-/* Best score lives in this browser only; storage can be blocked, so every access is guarded. */
-const BEST_KEY = "streamui:snake-best";
-const BEST_EVENT = "streamui:snake-best";
-function readBest() {
-  try {
-    return Number(localStorage.getItem(BEST_KEY)) || 0;
-  } catch {
-    return 0;
-  }
-}
-function saveBest(score: number) {
-  try {
-    if (score <= readBest()) return;
-    localStorage.setItem(BEST_KEY, String(score));
-    window.dispatchEvent(new Event(BEST_EVENT));
-  } catch {
-    // Storage unavailable: the best score just isn't remembered.
-  }
-}
-function subscribeBest(onChange: () => void) {
-  window.addEventListener(BEST_EVENT, onChange);
-  window.addEventListener("storage", onChange);
-  return () => {
-    window.removeEventListener(BEST_EVENT, onChange);
-    window.removeEventListener("storage", onChange);
-  };
-}
 
 /** Where a cell sits on the board, as percentages so the board can scale. */
 const place = (p: Point): CSSProperties => ({
@@ -147,7 +119,7 @@ export function SnakeLab({ tick }: { tick?: number }) {
   // Deterministic first render; food is only placed randomly after it's eaten.
   const [game, setGame] = useState<SnakeGame>(() => createGame(SIZE));
   const [look, setLook] = useState<SnakeStyle>("classic");
-  const best = useSyncExternalStore(subscribeBest, readBest, () => 0);
+  const [best, saveBest] = useBestScore("snake");
   const board = useRef<HTMLDivElement>(null);
   const swipe = useRef<{ x: number; y: number } | null>(null);
   const statusId = useId();
@@ -161,7 +133,7 @@ export function SnakeLab({ tick }: { tick?: number }) {
 
   useEffect(() => {
     if (game.status === "over" || game.status === "won") saveBest(game.score);
-  }, [game.status, game.score]);
+  }, [game.status, game.score, saveBest]);
 
   const playing = game.status === "playing";
 

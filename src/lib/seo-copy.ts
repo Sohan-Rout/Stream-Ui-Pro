@@ -132,6 +132,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A memory match card game in React with 3D CSS card flips, an unbiased shuffle, move counting, and screen-reader announcements. Full source code.",
     keywords: ["memory card game", "memory match React", "card flip animation", "CSS 3D flip", "React game"],
   },
+  flappy: {
+    title: "Flappy Bird Game in React and Canvas",
+    description:
+      "A neo-brutalist Flappy Bird clone in React with a 60fps canvas, tested physics, and keyboard and touch controls. With the full source code.",
+    keywords: ["flappy bird React", "flappy bird clone", "canvas game React", "React game", "HTML5 game"],
+  },
   snake: {
     title: "Snake Game in React: Classic, Funky, Pixel",
     description:

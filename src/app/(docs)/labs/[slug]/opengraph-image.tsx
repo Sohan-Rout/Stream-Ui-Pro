@@ -19,7 +19,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     accent: "violet",
     art: {
       kind: "lab",
-      game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : slug === "snake" ? "snake" : "dice",
+      game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : slug === "snake" ? "snake" : slug === "flappy" ? "flappy" : "dice",
     },
   });
 }
