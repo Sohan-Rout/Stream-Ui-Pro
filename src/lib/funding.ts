@@ -1,46 +1,43 @@
 import { siteConfig } from "./site";
 
+export type FundingConfig = typeof siteConfig.funding;
+
 export type FundingPlatform = {
-  id: keyof typeof siteConfig.funding;
+  id: "githubSponsors" | "razorpay";
   name: string;
+  /** Link to pay or sponsor; empty if only a QR code is configured. */
   url: string;
+  /** Image URL of a payment QR code, if any. */
+  qr: string;
   blurb: string;
   cta: string;
-  tone: "lime" | "pink" | "blue";
+  tone: "pink" | "blue";
 };
 
-/** Every supported platform; `url` is filled from config. */
-const all: FundingPlatform[] = [
-  {
-    id: "githubSponsors",
-    name: "GitHub Sponsors",
-    url: "",
-    blurb: "Monthly or one-time, straight from your GitHub account. GitHub takes no fee, so all of it goes to the project.",
-    cta: "Sponsor on GitHub",
-    tone: "pink",
-  },
-  {
-    id: "openCollective",
-    name: "Open Collective",
-    url: "",
-    blurb: "Monthly or one-time, with a public ledger of every expense. Companies can get invoices.",
-    cta: "Back on Open Collective",
-    tone: "lime",
-  },
-  {
-    id: "kofi",
-    name: "Ko-fi",
-    url: "",
-    blurb: "A quick one-off tip by card or PayPal, from anywhere in the world.",
-    cta: "Tip on Ko-fi",
-    tone: "blue",
-  },
-];
-
-/** Platforms that have a link set, in display order. */
-export function configuredPlatforms(funding: Record<FundingPlatform["id"], string>) {
-  return all.map((p) => ({ ...p, url: funding[p.id].trim() })).filter((p) => p.url !== "");
+/** Platforms with a link or QR code configured, in display order. */
+export function configuredPlatforms(funding: FundingConfig): FundingPlatform[] {
+  const platforms: FundingPlatform[] = [
+    {
+      id: "githubSponsors",
+      name: "GitHub Sponsors",
+      url: funding.githubSponsors.trim(),
+      qr: "",
+      blurb: "Monthly or one-time, straight from your GitHub account. GitHub takes no fee, so all of it goes to the project.",
+      cta: "Sponsor on GitHub",
+      tone: "pink",
+    },
+    {
+      id: "razorpay",
+      name: "UPI via Razorpay",
+      url: funding.razorpay.trim(),
+      qr: funding.razorpayQr.trim(),
+      blurb: "For supporters in India. Scan the code with any UPI app, like Google Pay, PhonePe, or Paytm.",
+      cta: "Pay with Razorpay",
+      tone: "blue",
+    },
+  ];
+  return platforms.filter((p) => p.url !== "" || p.qr !== "");
 }
 
-/** Platforms with a link set in siteConfig.funding. */
+/** Platforms configured through the FUNDING_* environment variables. */
 export const fundingPlatforms = configuredPlatforms(siteConfig.funding);

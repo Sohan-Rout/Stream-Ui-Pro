@@ -58,9 +58,9 @@ cp .env.example .env.local
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin for links, the sitemap, and share images. Defaults to `https://streamui.org`. |
-| `FUNDING_GITHUB_SPONSORS_URL` | GitHub Sponsors profile shown on `/sponsor`, e.g. `https://github.com/sponsors/streamui` |
-| `FUNDING_OPEN_COLLECTIVE_URL` | Open Collective page shown on `/sponsor` |
-| `FUNDING_KOFI_URL` | Ko-fi page shown on `/sponsor` |
+| `FUNDING_GITHUB_SPONSORS_URL` | GitHub Sponsors profile shown on `/sponsor`, e.g. `https://github.com/sponsors/Sohan-Rout` |
+| `FUNDING_RAZORPAY_QR_URL` | Image URL of a Razorpay UPI QR code, shown on `/sponsor` for scanning |
+| `FUNDING_RAZORPAY_URL` | Razorpay payment link, shown as a button for people paying on their phone |
 
 Values are validated at build time: a malformed or non-https link fails the
 build with a message naming the variable. In production, set them in your
@@ -182,7 +182,7 @@ package README.
 
 stream/ui is free and open source. If it saves you time, you can support its
 development at **[streamui.org/sponsor](https://streamui.org/sponsor)** (GitHub
-Sponsors, Open Collective, or Ko-fi), or star the repo.
+Sponsors or UPI), or star the repo.
 
 Sponsor links come from the `FUNDING_*` environment variables (see
 [Configuration](#configuration)); unset ones are hidden.

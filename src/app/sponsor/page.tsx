@@ -10,8 +10,8 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sponsor, path: "/sponsor" });
 
-const toneBg = { lime: "bg-lime", pink: "bg-pink", blue: "bg-blue" } as const;
-const toneButton = { lime: "primary", pink: "pink", blue: "blue" } as const;
+const toneBg = { pink: "bg-pink", blue: "bg-blue" } as const;
+const toneButton = { pink: "pink", blue: "blue" } as const;
 
 const otherWays = [
   {
@@ -63,23 +63,46 @@ export default function SponsorPage() {
             className={cn(
               "grid grid-cols-1 gap-0.5 bg-ink",
               fundingPlatforms.length > 1 && "md:grid-cols-2",
-              fundingPlatforms.length > 2 && "lg:grid-cols-3",
             )}
           >
             {fundingPlatforms.map((p) => (
               <li key={p.id} className="flex flex-col gap-5 bg-paper p-8 sm:p-10">
                 <span aria-hidden className={cn("h-3 w-12 border-2 border-ink", toneBg[p.tone])} />
                 <h3 className="font-display text-2xl tracking-tight">{p.name}</h3>
-                <p className="flex-1 leading-relaxed text-ink-muted">{p.blurb}</p>
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonStyles({ variant: toneButton[p.tone], className: "self-start" })}
-                >
-                  {p.cta} <ArrowUpRight aria-hidden />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                <p className="leading-relaxed text-ink-muted">{p.blurb}</p>
+                {p.qr && (
+                  <figure className="flex flex-col items-start gap-3">
+                    <div className="border-2 border-ink bg-paper-raised p-3 shadow-brutal">
+                      {/* The QR comes from a payment provider's URL set at deploy time, so it
+                          can't go through next/image's fixed list of allowed hosts. */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={p.qr}
+                        alt={`${p.name} QR code. Scan it with a UPI app to pay.`}
+                        width={192}
+                        height={192}
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                        className="block size-48"
+                      />
+                    </div>
+                    <figcaption className="font-mono text-xs text-ink-muted">
+                      Scan with Google Pay, PhonePe, Paytm, or any UPI app
+                    </figcaption>
+                  </figure>
+                )}
+                <div className="flex-1" />
+                {p.url && (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonStyles({ variant: toneButton[p.tone], className: "self-start" })}
+                  >
+                    {p.cta} <ArrowUpRight aria-hidden />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -87,7 +110,7 @@ export default function SponsorPage() {
           <div className="flex flex-col items-start gap-4 bg-paper-sunken px-5 py-12 sm:px-10">
             <p className="font-display text-2xl tracking-tight">Sponsorship links are on the way.</p>
             <p className="max-w-xl leading-relaxed text-ink-muted">
-              GitHub Sponsors, Open Collective, and Ko-fi pages are being set up. Until
+              GitHub Sponsors and UPI payments are being set up. Until
               then, a star on GitHub is the best way to help.
             </p>
             <a href={siteConfig.githubUrl} className={buttonStyles({ variant: "secondary" })}>

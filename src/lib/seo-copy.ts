@@ -65,7 +65,7 @@ export const indexSeo = {
   sponsor: {
     title: "Sponsor",
     description:
-      "stream/ui is a free, MIT-licensed neobrutalism UI library. Sponsor it on GitHub Sponsors, Open Collective, or Ko-fi to fund new components and docs.",
+      "stream/ui is a free, MIT-licensed neobrutalism UI library. Sponsor it on GitHub Sponsors or by UPI through Razorpay to fund new components and docs.",
     keywords: ["sponsor open source", "stream/ui", "neobrutalism UI library"],
   },
 } satisfies Record<string, SeoCopy>;

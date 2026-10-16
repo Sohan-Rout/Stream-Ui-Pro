@@ -18,8 +18,8 @@ const LOCALHOST = /^(localhost|127\.0\.0\.1|\[::1\])$/;
 const EXAMPLES: Record<string, string> = {
   NEXT_PUBLIC_SITE_URL: "https://streamui.org",
   FUNDING_GITHUB_SPONSORS_URL: "https://github.com/sponsors/your-org",
-  FUNDING_OPEN_COLLECTIVE_URL: "https://opencollective.com/your-collective",
-  FUNDING_KOFI_URL: "https://ko-fi.com/your-name",
+  FUNDING_RAZORPAY_URL: "https://razorpay.me/@your-name",
+  FUNDING_RAZORPAY_QR_URL: "https://rzp.io/i/your-qr-code",
 };
 
 const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
@@ -34,7 +34,7 @@ function invalid(name: string, raw: string, reason: string) {
 }
 
 function parseUrl(name: string, raw: string) {
-  // A link pasted without its scheme ("ko-fi.com/me") is clearly meant as https.
+  // A link pasted without its scheme ("razorpay.me/@me") is clearly meant as https.
   const candidate = HAS_SCHEME.test(raw) ? raw : `https://${raw}`;
   let url: URL;
   try {
@@ -66,8 +66,10 @@ export function parseEnv(source: Source) {
     siteUrl: rawSiteUrl ? parseUrl("NEXT_PUBLIC_SITE_URL", rawSiteUrl).origin : DEFAULT_SITE_URL,
     funding: {
       githubSponsors: optionalLink(source, "FUNDING_GITHUB_SPONSORS_URL"),
-      openCollective: optionalLink(source, "FUNDING_OPEN_COLLECTIVE_URL"),
-      kofi: optionalLink(source, "FUNDING_KOFI_URL"),
+      /** Razorpay payment link, for paying on the same device. */
+      razorpay: optionalLink(source, "FUNDING_RAZORPAY_URL"),
+      /** Razorpay UPI QR code image, for scanning with a phone. */
+      razorpayQr: optionalLink(source, "FUNDING_RAZORPAY_QR_URL"),
     },
   };
 }

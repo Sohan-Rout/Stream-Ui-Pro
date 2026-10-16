@@ -5,7 +5,7 @@ describe("parseEnv", () => {
   test("works with nothing set: default site URL, no funding links", () => {
     expect(parseEnv({})).toEqual({
       siteUrl: "https://streamui.org",
-      funding: { githubSponsors: "", openCollective: "", kofi: "" },
+      funding: { githubSponsors: "", razorpay: "", razorpayQr: "" },
     });
   });
 
@@ -22,10 +22,10 @@ describe("parseEnv", () => {
 
   test("reads funding links and treats blank values as unset", () => {
     const env = parseEnv({
-      FUNDING_KOFI_URL: "https://ko-fi.com/me",
-      FUNDING_OPEN_COLLECTIVE_URL: "   ",
+      FUNDING_RAZORPAY_QR_URL: "https://rzp.io/i/abc123",
+      FUNDING_RAZORPAY_URL: "   ",
     });
-    expect(env.funding).toEqual({ githubSponsors: "", openCollective: "", kofi: "https://ko-fi.com/me" });
+    expect(env.funding).toEqual({ githubSponsors: "", razorpay: "", razorpayQr: "https://rzp.io/i/abc123" });
   });
 
   test("adds https:// to a link pasted without it", () => {
@@ -42,14 +42,12 @@ describe("parseEnv", () => {
   });
 
   test("error messages say where to fix it", () => {
-    expect(() => parseEnv({ FUNDING_KOFI_URL: "nope" })).toThrow(/Project Settings → Environment Variables/);
+    expect(() => parseEnv({ FUNDING_RAZORPAY_URL: "nope" })).toThrow(/Project Settings → Environment Variables/);
   });
 
   test("fails loudly on a malformed or insecure funding link", () => {
-    expect(() => parseEnv({ FUNDING_OPEN_COLLECTIVE_URL: "https://" })).toThrow(
-      /FUNDING_OPEN_COLLECTIVE_URL is not a valid URL/,
-    );
-    expect(() => parseEnv({ FUNDING_KOFI_URL: "http://ko-fi.com/me" })).toThrow(/must use https/);
-    expect(() => parseEnv({ FUNDING_KOFI_URL: "javascript:alert(1)" })).toThrow(/must use https/);
+    expect(() => parseEnv({ FUNDING_RAZORPAY_QR_URL: "https://" })).toThrow(/FUNDING_RAZORPAY_QR_URL is not a valid URL/);
+    expect(() => parseEnv({ FUNDING_RAZORPAY_QR_URL: "http://rzp.io/i/abc" })).toThrow(/must use https/);
+    expect(() => parseEnv({ FUNDING_RAZORPAY_URL: "javascript:alert(1)" })).toThrow(/must use https/);
   });
 });
