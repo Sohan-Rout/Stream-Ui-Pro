@@ -75,15 +75,17 @@ export default function SponsorPage() {
                     <div className="border-2 border-ink bg-paper-raised p-3 shadow-brutal">
                       {/* The QR comes from a payment provider's URL set at deploy time, so it
                           can't go through next/image's fixed list of allowed hosts. */}
+                      {/* Any size or shape fits the fixed frame without cropping or stretching:
+                          cutting into a QR code would make it unscannable. */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={p.qr}
                         alt={`${p.name} QR code. Scan it with a UPI app to pay.`}
-                        width={192}
-                        height={192}
+                        width={224}
+                        height={224}
                         loading="lazy"
                         referrerPolicy="no-referrer"
-                        className="block size-48"
+                        className="block size-56 object-contain"
                       />
                     </div>
                     <figcaption className="font-mono text-xs text-ink-muted">
