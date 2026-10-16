@@ -58,7 +58,7 @@ export default function CookiesPage() {
       intro={
         <p>
           {analytics
-            ? "stream/ui shows no ads and sets no cookies until you agree. If you accept, Google Analytics sets two cookies to count visits. Everything else is local storage on your device. The full list is below."
+            ? "stream/ui shows no ads and sets no cookies until you agree. If you accept, Google Analytics sets two cookies to tell visits apart; before that it counts visits without cookies. Everything else is local storage on your device."
             : "stream/ui sets no cookies at all: no analytics, no ads, no tracking pixels. The only things this site keeps are two small items in your browser's local storage, listed below."}
         </p>
       }
@@ -67,7 +67,7 @@ export default function CookiesPage() {
       <p>
         Change it here at any time, or use <strong>Cookie settings</strong> in the footer to see the
         banner again. Choosing Essential only also deletes any best scores already saved
-        {analytics ? " and switches Google Analytics off, removing its cookies." : "."}
+        {analytics ? " and deletes the Google Analytics cookies." : "."}
       </p>
       <ConsentControls />
 
@@ -110,7 +110,7 @@ export default function CookiesPage() {
       <h2>Third parties</h2>
       <p>
         {analytics
-          ? "The only third-party script is the Google tag for Analytics, and it loads only after you accept. "
+          ? "The only third-party script is the Google tag for Analytics. It runs on every page in Consent Mode and sets its cookies only after you accept. "
           : "No third-party scripts run on this site, so none of them can set cookies here. "}
         Pages you reach through links, like GitHub or a UPI app, follow their own cookie policies. More detail
         is in the <Link href="/legal/privacy">privacy policy</Link>.

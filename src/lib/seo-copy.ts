@@ -71,7 +71,7 @@ export const indexSeo = {
   privacy: {
     title: "Privacy Policy",
     description:
-      "How stream/ui handles your data: no accounts or ads, and Google Analytics only with your consent. What our host logs, the third parties, and your choices.",
+      "How stream/ui handles your data: no accounts or ads, and Google Analytics cookies only with consent. What our host logs, the third parties, your choices.",
     keywords: ["stream/ui privacy policy", "privacy"],
   },
   terms: {

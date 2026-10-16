@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { useConsent } from "@/lib/consent";
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 /** Deletes Google Analytics' first-party cookies (_ga, _ga_<id>). */
 function clearGaCookies() {
@@ -18,20 +23,23 @@ function clearGaCookies() {
 }
 
 /**
- * Google Analytics 4, only after the visitor accepts the cookie banner.
+ * Passes the cookie banner's answer to Google's Consent Mode. The tag itself
+ * is in the page head (GoogleTag.tsx) and starts with consent denied.
  *
- * Before an answer, or with "Essential only", the Google tag never loads and
- * sets no cookies. Withdrawing consent later turns the already-loaded tag off
- * (GA's documented `ga-disable-<id>` flag) and deletes its cookies.
+ *   Accept          analytics_storage granted: GA may set its cookies
+ *   Essential only  denied again, and existing GA cookies are deleted
+ *
+ * Ad storage, ad user data, and ad personalization stay denied always.
  */
-export function Analytics({ gaId }: { gaId: string }) {
+export function Analytics() {
   const consent = useConsent();
-  const allowed = consent === "all";
 
   useEffect(() => {
-    window[`ga-disable-${gaId}`] = !allowed;
+    // undefined: still hydrating, so the head script's default stands.
+    if (consent === undefined) return;
+    window.gtag?.("consent", "update", { analytics_storage: consent === "all" ? "granted" : "denied" });
     if (consent === "essential") clearGaCookies();
-  }, [gaId, allowed, consent]);
+  }, [consent]);
 
-  return allowed ? <GoogleAnalytics gaId={gaId} /> : null;
+  return null;
 }

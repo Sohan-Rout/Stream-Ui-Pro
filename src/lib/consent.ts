@@ -1,13 +1,14 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { CONSENT_KEY } from "./consent-key";
 
 /**
- * The visitor's storage choice. Nothing optional runs before an answer:
+ * The visitor's storage choice. Nothing optional is stored before an answer:
  *
- *   "all"        load Google Analytics (when configured) and remember
- *                Labs best scores on this device
- *   "essential"  remember only this choice; GA stays off
+ *   "all"        let Google Analytics (when configured) set its cookies,
+ *                and remember Labs best scores on this device
+ *   "essential"  remember only this choice; GA stays cookieless
  *   null         not asked yet: show the banner, save nothing optional
  *
  * Kept in localStorage. When storage is blocked the choice lives in memory
@@ -15,7 +16,7 @@ import { useSyncExternalStore } from "react";
  */
 export type Consent = "all" | "essential";
 
-export const CONSENT_KEY = "streamui:consent";
+export { CONSENT_KEY };
 const EVENT = "streamui:consent";
 /** Keys removed when a visitor picks "essential". */
 const OPTIONAL_PREFIX = "streamui:";

@@ -8,15 +8,12 @@ import userEvent from "@testing-library/user-event";
 
 let pathname = "/";
 mock.module("next/navigation", () => ({ usePathname: () => pathname }));
-// Stand-in for the Google tag, so tests can see whether it would load.
-mock.module("@next/third-parties/google", () => ({
-  GoogleAnalytics: ({ gaId }: { gaId: string }) => <script data-testid="ga" data-id={gaId} />,
-}));
 
 const { CONSENT_KEY, readConsent, setConsent } = await import("@/lib/consent");
 const { CookieBanner, CookieSettingsButton } = await import("@/components/blocks/CookieBanner");
 const { useBestScore } = await import("@/lib/games/best-score");
 const { Analytics } = await import("@/components/blocks/Analytics");
+const { googleTagSnippet } = await import("@/components/blocks/GoogleTag");
 
 // happy-dom's <dialog> lacks showModal in some versions; record which opened.
 const opened: string[] = [];
@@ -104,41 +101,78 @@ describe("best scores follow consent", () => {
   });
 });
 
-describe("Google Analytics follows consent", () => {
+describe("Google tag (Consent Mode v2)", () => {
   const ID = "G-TEST123";
-  const disabled = () => (window as unknown as Record<string, unknown>)[`ga-disable-${ID}`];
+  type Win = { dataLayer?: IArguments[]; gtag?: unknown };
 
-  test("doesn't load before the visitor answers", () => {
-    render(<Analytics gaId={ID} />);
-    expect(screen.queryByTestId("ga")).toBeNull();
-    expect(disabled()).toBe(true);
+  /** Runs the head snippet the way the browser would, returning the dataLayer. */
+  function runSnippet() {
+    const w = window as unknown as Win;
+    delete w.dataLayer;
+    // The snippet declares a global gtag(); run it in the window's scope.
+    new Function(`${googleTagSnippet(ID)}; window.gtag = gtag;`)();
+    return (w.dataLayer ?? []).map((args) => Array.from(args));
+  }
+
+  test("denies every consent type before GA is configured", () => {
+    const calls = runSnippet();
+    const consent = calls.findIndex((c) => c[0] === "consent" && c[1] === "default");
+    const config = calls.findIndex((c) => c[0] === "config");
+    expect(consent).toBeGreaterThanOrEqual(0);
+    expect(consent).toBeLessThan(config);
+    expect(calls[consent][2]).toEqual({
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+    });
+    expect(calls[config]).toEqual(["config", ID]);
   });
 
-  test("doesn't load with essential only", () => {
-    setConsent("essential");
-    render(<Analytics gaId={ID} />);
-    expect(screen.queryByTestId("ga")).toBeNull();
-  });
-
-  test("loads after Accept", () => {
+  test("a returning visitor who accepted starts granted, but ads stay denied", () => {
     setConsent("all");
-    render(<Analytics gaId={ID} />);
-    expect(screen.getByTestId("ga").dataset.id).toBe(ID);
-    expect(disabled()).toBe(false);
+    const defaults = runSnippet().find((c) => c[1] === "default")?.[2] as Record<string, string>;
+    expect(defaults.analytics_storage).toBe("granted");
+    expect(defaults.ad_storage).toBe("denied");
   });
 
-  test("withdrawing consent turns GA off and deletes its cookies", () => {
+  test("Essential only stays denied", () => {
+    setConsent("essential");
+    const defaults = runSnippet().find((c) => c[1] === "default")?.[2] as Record<string, string>;
+    expect(defaults.analytics_storage).toBe("denied");
+  });
+});
+
+describe("the banner's answer reaches Consent Mode", () => {
+  const updates: unknown[][] = [];
+  beforeEach(() => {
+    updates.length = 0;
+    (window as unknown as { gtag: (...a: unknown[]) => void }).gtag = (...a) => updates.push(a);
+  });
+  const lastUpdate = () => updates.filter((u) => u[0] === "consent" && u[1] === "update").at(-1)?.[2];
+
+  test("unanswered: denied", () => {
+    render(<Analytics />);
+    expect(lastUpdate()).toEqual({ analytics_storage: "denied" });
+  });
+
+  test("Accept grants analytics storage", () => {
+    render(<Analytics />);
+    act(() => setConsent("all"));
+    expect(lastUpdate()).toEqual({ analytics_storage: "granted" });
+  });
+
+  test("withdrawing consent denies it again and deletes the GA cookies", () => {
     // Cookies need a real origin; the test page starts at about:blank.
     (window as unknown as { happyDOM: { setURL(url: string): void } }).happyDOM.setURL("https://streamui.org/");
     setConsent("all");
-    render(<Analytics gaId={ID} />);
+    render(<Analytics />);
     document.cookie = "_ga=GA1.1.123; path=/";
     document.cookie = "_ga_TEST123=GS1.1.456; path=/";
     document.cookie = "other=keep; path=/";
     expect(document.cookie).toContain("_ga_TEST123");
     act(() => setConsent("essential"));
-    expect(screen.queryByTestId("ga")).toBeNull();
-    expect(disabled()).toBe(true);
+    expect(lastUpdate()).toEqual({ analytics_storage: "denied" });
     expect(document.cookie).not.toContain("_ga");
     expect(document.cookie).toContain("other=keep");
   });

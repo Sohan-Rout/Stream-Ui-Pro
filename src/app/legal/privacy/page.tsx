@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <p>
           The short version: stream/ui has no accounts and no ads.{" "}
           {analytics
-            ? "If you accept the cookie banner, Google Analytics counts your visit; otherwise nothing is measured. We never sell your data."
+            ? "Google Analytics counts visits without cookies, and uses cookies only if you accept the banner. We never sell your data."
             : "There are no analytics or ad trackers, we don't collect personal data, and we don't sell or share anything."}
         </p>
       }
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
       <h2>What we collect</h2>
       <p>
         There are no sign-ups or forms.{" "}
-        {analytics ? "Analytics runs only with your consent (see below)." : "There are no analytics scripts."}
+        {analytics ? "Google Analytics measures visits as described below." : "There are no analytics scripts."}
       </p>
       <p>
         Like every website, our host receives standard request details when you load a page: your
@@ -45,18 +45,24 @@ export default function PrivacyPage() {
         <>
           <h2>Google Analytics</h2>
           <p>
-            If you click <strong>Accept</strong> on the cookie banner, we load{" "}
-            <a href="https://policies.google.com/privacy">Google Analytics 4</a> to understand how
-            the site is used: which pages are visited, roughly where visitors come from (country and
-            referring site), and the type of device and browser. GA4 doesn&apos;t log or store IP
-            addresses. Google processes this data as our service provider and sets the cookies
-            listed in the <Link href="/legal/cookies">cookie policy</Link>.
+            We use <a href="https://policies.google.com/privacy">Google Analytics 4</a> to understand
+            how the site is used: which pages are visited, roughly where visitors come from (country
+            and referring site), and the type of device and browser. GA4 doesn&apos;t log or store
+            IP addresses. Google processes this data as our service provider.
           </p>
           <p>
-            If you choose <strong>Essential only</strong>, or don&apos;t answer, the Google tag never
-            loads. You can withdraw consent at any time under <strong>Cookie settings</strong>; we
-            then switch Analytics off and delete its cookies. You can also use Google&apos;s{" "}
-            <a href="https://tools.google.com/dlpage/gaoptout">opt-out add-on</a>.
+            Google Analytics runs in Google&apos;s <strong>Consent Mode</strong>. Until you click{" "}
+            <strong>Accept</strong>, and whenever you choose <strong>Essential only</strong>, it sets
+            no cookies and stores no identifier on your device; it only sends anonymous, cookieless
+            pings that can&apos;t tell one visit from the next. Accepting lets it set the cookies
+            listed in the <Link href="/legal/cookies">cookie policy</Link>. Advertising features are
+            always off.
+          </p>
+          <p>
+            You can withdraw consent at any time under <strong>Cookie settings</strong>; we then
+            delete the Analytics cookies. To stop the pings too, use Google&apos;s{" "}
+            <a href="https://tools.google.com/dlpage/gaoptout">opt-out add-on</a> or a content
+            blocker.
           </p>
         </>
       )}
@@ -78,8 +84,8 @@ export default function PrivacyPage() {
         </li>
         {analytics && (
           <li>
-            <strong>Google Analytics</strong> loads from Google&apos;s servers, and only after you
-            accept.
+            <strong>Google Analytics</strong> loads from Google&apos;s servers on every page, and
+            uses cookies only after you accept.
           </li>
         )}
         <li>

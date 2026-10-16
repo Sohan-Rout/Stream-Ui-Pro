@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/blocks/SiteHeader";
 import { SiteFooter } from "@/components/blocks/SiteFooter";
 import { CookieBanner } from "@/components/blocks/CookieBanner";
 import { Analytics } from "@/components/blocks/Analytics";
+import { GoogleTag } from "@/components/blocks/GoogleTag";
 import { siteConfig } from "@/lib/site";
 import { homeSeo } from "@/lib/seo-copy";
 import "./globals.css";
@@ -52,20 +53,26 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#fafaf7", colorScheme: "light" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const { gaId } = siteConfig.analytics;
   return (
     <html
       lang="en"
       className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
+      {gaId && (
+        <head>
+          <GoogleTag gaId={gaId} />
+        </head>
+      )}
       <body className="flex min-h-full flex-col bg-hatch font-sans">
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
         {/* usePathname can suspend on dynamic routes under Cache Components. */}
         <Suspense fallback={null}>
-          <CookieBanner analytics={Boolean(siteConfig.analytics.gaId)} />
+          <CookieBanner analytics={Boolean(gaId)} />
         </Suspense>
-        {siteConfig.analytics.gaId && <Analytics gaId={siteConfig.analytics.gaId} />}
+        {gaId && <Analytics />}
       </body>
     </html>
   );

@@ -60,7 +60,7 @@ export function CookieBanner({ analytics = false }: { analytics?: boolean }) {
           </h2>
           <p id="cookie-body" className="mt-1.5 text-sm leading-relaxed text-ink-muted">
             {analytics
-              ? "No ads, and nothing runs before you choose. Accept lets us count visits with Google Analytics and save your Labs best scores on this device."
+              ? "No ads. Google Analytics counts visits anonymously, with no cookies, until you choose. Accept lets it use cookies and saves your Labs best scores on this device."
               : "No tracking, no ads, no analytics. With your OK we save your Labs best scores on this device."}{" "}
             <Link
               href="/legal/cookies"
