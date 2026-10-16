@@ -9,7 +9,7 @@
  *   - theme.css copied as-is
  *
  * Everything is written to a staging folder, then synced into dist/ in
- * place: changed files are overwritten, stale ones removed, and dist/ itself
+ * place: changed files are atomically replaced, stale ones removed, and dist/ itself
  * is never deleted. A dev server watching dist/ (Turbopack caches a failed
  * resolve) never sees theme.css go missing, and a failed build leaves the
  * previous dist/ untouched.
@@ -18,7 +18,7 @@
  */
 import { $, Glob, type BunPlugin } from "bun";
 import { watch } from "node:fs";
-import { cp, mkdir, rm } from "node:fs/promises";
+import { cp, mkdir, rename, rm } from "node:fs/promises";
 
 const SRC = "src";
 const DIST = "dist";
@@ -54,7 +54,12 @@ async function syncInto(dest: string, src: string) {
     const next = Bun.file(`${src}/${file}`);
     const current = Bun.file(`${dest}/${file}`);
     if ((await current.exists()) && (await current.text()) === (await next.text())) continue;
-    await Bun.write(current, next);
+    // Write beside the target, then rename over it: a rename is atomic, so a
+    // dev server never reads a half-written file (say, an index.js cut off
+    // before its last exports).
+    const temp = `${dest}/${file}.tmp-${process.pid}`;
+    await Bun.write(temp, next);
+    await rename(temp, `${dest}/${file}`);
   }
   for (const file of new Glob("**/*").scanSync(dest)) {
     if (!built.has(file)) await rm(`${dest}/${file}`, { force: true });
