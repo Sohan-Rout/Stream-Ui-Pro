@@ -166,3 +166,89 @@
     animation: none !important;
   }
 }
+
+/* In the components layer, so utilities (h-3, w-40…) still win. */
+@layer components {
+  /* ---------- Slider (native range) ---------- */
+
+  .sui-range {
+    --sui-fill: 0%;
+    --sui-range-color: var(--lime);
+    appearance: none;
+    height: 1.5rem;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .sui-range::-webkit-slider-runnable-track {
+    height: 0.75rem;
+    border: 2px solid var(--ink);
+    background: linear-gradient(to right, var(--sui-range-color) var(--sui-fill), var(--paper-sunken) var(--sui-fill));
+  }
+  .sui-range::-moz-range-track {
+    height: 0.75rem;
+    box-sizing: border-box;
+    border: 2px solid var(--ink);
+    background: linear-gradient(to right, var(--sui-range-color) var(--sui-fill), var(--paper-sunken) var(--sui-fill));
+  }
+
+  .sui-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    /* Center on the track: (track inner height − thumb height) / 2. */
+    margin-top: calc((0.75rem - 4px - 1.125rem) / 2);
+    border: 2px solid var(--ink);
+    background: var(--paper-raised);
+    box-shadow: 2px 2px 0 0 var(--ink);
+  }
+  .sui-range::-moz-range-thumb {
+    width: 1.125rem;
+    height: 1.125rem;
+    box-sizing: border-box;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background: var(--paper-raised);
+    box-shadow: 2px 2px 0 0 var(--ink);
+  }
+
+  .sui-range:active::-webkit-slider-thumb {
+    background: var(--sui-range-color);
+  }
+  .sui-range:active::-moz-range-thumb {
+    background: var(--sui-range-color);
+  }
+
+  .sui-range:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 4px;
+  }
+
+  .sui-range:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* ---------- Equalizer ---------- */
+
+  .sui-eq-bar {
+    transform-origin: bottom;
+    transform: scaleY(0.3);
+  }
+
+  [data-playing] > .sui-eq-bar {
+    animation: sui-eq calc(0.5s + var(--sui-eq-i) * 0.13s) ease-in-out calc(var(--sui-eq-i) * -0.21s) infinite alternate;
+  }
+
+  @keyframes sui-eq {
+    from { transform: scaleY(0.25); }
+    to { transform: scaleY(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-playing] > .sui-eq-bar {
+      animation: none;
+      transform: scaleY(0.7);
+    }
+  }
+}

@@ -25,3 +25,9 @@ export { Accordion, type AccordionItem, type AccordionProps } from "./Accordion"
 export { Dialog, type DialogProps } from "./Dialog";
 export { Tooltip, type TooltipProps } from "./Tooltip";
 export { Skeleton } from "./Skeleton";
+export { Slider, type SliderProps } from "./Slider";
+export { Equalizer, type EqualizerProps } from "./Equalizer";
+export { formatTime, type Track } from "./music";
+export { TrackList, type TrackListProps } from "./TrackList";
+export { useAudioPlayer, type AudioPlayerControls, type UseAudioPlayerOptions } from "./useAudioPlayer";
+export { AudioPlayer, MiniPlayer, TrackCover, type AudioPlayerProps, type MiniPlayerProps } from "./AudioPlayer";

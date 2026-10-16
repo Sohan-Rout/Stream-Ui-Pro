@@ -61,6 +61,7 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `Checkbox` | Native checkbox with a styled face. |
 | `Radio`, `RadioGroup` | Native radios with a styled face, grouped in a labelled fieldset. |
 | `Switch` | Accessible on/off toggle, controlled or uncontrolled. |
+| `Slider` | Native range input with a styled track and thumb. |
 | `Tabs` | WAI-ARIA tabs with arrow-key navigation. |
 | `Accordion` | Native details/summary sections, optionally one open at a time. |
 | `Dialog` | Modal on native `<dialog>`: focus trap, Esc to close, focus return. |
@@ -68,6 +69,10 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `Progress` | Determinate progress bar. |
 | `Skeleton` | Loading placeholders that pulse only when motion is allowed. |
 | `Avatar`, `AvatarGroup` | Initials avatars and overlapping stacks. |
+| `AudioPlayer`, `MiniPlayer` | Music players on native `<audio>`: seek, volume, mute, playlist, auto-advance. |
+| `useAudioPlayer` | The playback hook behind them, for building your own player. |
+| `TrackList` | Playlist with a now-playing meter and `aria-current`. |
+| `Equalizer` | Decorative now-playing bars that stop under reduced motion. |
 | `AnimatedIcon` | Animates any SVG icon: `draw`, `spin`, `bounce`, `wiggle`, `pulse`, `shake`, `pop`. Triggers: `hover`, `loop`, `once`. |
 | `cn()` | `clsx` + `tailwind-merge`, aware of the brutal shadow tokens. |
 

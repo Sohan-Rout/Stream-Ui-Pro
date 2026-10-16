@@ -41,6 +41,17 @@ describe("dist output", () => {
     }
   });
 
+  test("components that write their own event handlers are client modules", () => {
+    // In a Server Component, a handler like onClick={() => ...} on a native
+    // element fails at render time ("Event handlers cannot be passed...").
+    const handler = /\bon[A-Z]\w*=\{(?!props\.)/;
+    for (const file of sourceFiles().filter((f) => f.endsWith(".tsx"))) {
+      const source = read(SRC, file);
+      if (!handler.test(source)) continue;
+      expect({ file, client: USE_CLIENT.test(source) }).toEqual({ file, client: true });
+    }
+  });
+
   test("server-safe helpers stay out of client modules", () => {
     // If these became client references, Server Components couldn't call them.
     for (const file of ["cn.js", "Button.js", "tones.js", "index.js"]) {

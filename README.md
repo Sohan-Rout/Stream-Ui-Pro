@@ -20,7 +20,7 @@ Docs and live examples: **[streamui.org](https://streamui.org)**. Setup and usag
 
 | Part | What you get |
 | --- | --- |
-| **Components** | Button, Badge, Card, Alert, Input, Textarea, Select, Checkbox, Radio Group, Switch, Tabs, Accordion, Dialog, Tooltip, Progress, Skeleton, Avatar, and Animated Icon. Keyboard support and focus states included. |
+| **Components** | Button, Badge, Card, Alert, Input, Textarea, Select, Checkbox, Radio Group, Switch, Tabs, Accordion, Dialog, Tooltip, Slider, Progress, Skeleton, Avatar, Audio Player, Track List, Equalizer, and Animated Icon. Keyboard support and focus states included. |
 | **Sections** | Hero, Features, Pricing, Testimonials, FAQ, and Footer, built from the components. They size themselves with container queries, so they fit a full page or a narrow column. |
 | **Icons** | The full Lucide set, searchable, with size, stroke, and animation controls. Click an icon to copy its JSX. |
 | **Animated icons** | Wrap any SVG icon in `<AnimatedIcon>` to draw, spin, bounce, wiggle, pulse, shake, or pop it on hover, on a loop, or once. Pure CSS, off under reduced motion. |

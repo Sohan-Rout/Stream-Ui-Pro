@@ -18,9 +18,11 @@ import {
   CardTitle,
   Progress,
   Textarea,
+  TrackList,
   type IconAnimation,
 } from "@streamuilib/react";
 import RadioGroupHorizontal from "@/examples/radio-group/horizontal";
+import AudioPlayerMini from "@/examples/audio-player/mini";
 
 function CardPreview() {
   return (
@@ -101,6 +103,20 @@ function AnimatedIconPreview() {
   );
 }
 
+function TrackListPreview() {
+  return (
+    <TrackList
+      className="w-72 border-2 border-ink shadow-brutal-sm"
+      index={0}
+      playing
+      tracks={[
+        { title: "Hard Edges", artist: "stream/ui demo", src: "", duration: 23, tone: "lime" },
+        { title: "Offset Shadow", artist: "stream/ui demo", src: "", duration: 20, tone: "pink" },
+      ]}
+    />
+  );
+}
+
 export const indexPreviews: Record<string, ComponentType> = {
   card: CardPreview,
   alert: AlertPreview,
@@ -109,4 +125,6 @@ export const indexPreviews: Record<string, ComponentType> = {
   accordion: AccordionPreview,
   progress: ProgressPreview,
   "animated-icon": AnimatedIconPreview,
+  "audio-player": AudioPlayerMini,
+  "track-list": TrackListPreview,
 };

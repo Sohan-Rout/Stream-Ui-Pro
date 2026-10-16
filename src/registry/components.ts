@@ -39,6 +39,13 @@ import DialogForm from "@/examples/dialog/form";
 import TooltipBasic from "@/examples/tooltip/basic";
 import SkeletonBasic from "@/examples/skeleton/basic";
 import SkeletonCard from "@/examples/skeleton/card";
+import SliderBasic from "@/examples/slider/basic";
+import SliderTones from "@/examples/slider/tones";
+import AudioPlayerFull from "@/examples/audio-player/full";
+import AudioPlayerMini from "@/examples/audio-player/mini";
+import AudioPlayerHeadless from "@/examples/audio-player/headless";
+import TrackListBasic from "@/examples/track-list/basic";
+import EqualizerBasic from "@/examples/equalizer/basic";
 
 export type ExampleEntry = {
   title: string;
@@ -691,6 +698,147 @@ import { AnimatedIcon } from "@streamuilib/react";
       "The pulse only runs when the user allows motion.",
     ],
   },
+  {
+    slug: "slider",
+    name: "Slider",
+    description: "A native range input with a hard-edged track and thumb, for volume, seeking, and any value on a scale.",
+    status: "stable",
+    file: "packages/react/src/Slider.tsx",
+    usage: `import { Slider } from "@streamuilib/react";
+
+<Slider aria-label="Volume" value={volume} onValueChange={setVolume} />`,
+    examples: [
+      { title: "With a label and readout", file: ex("slider", "basic"), Component: SliderBasic },
+      { title: "Tones", file: ex("slider", "tones"), Component: SliderTones },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "value", type: "number", description: "Current value. Required; the slider is always controlled." },
+          { name: "onValueChange", type: "(value: number) => void", description: "Called with the new value as a number." },
+          { name: "min / max", type: "number", default: "0 / 100", description: "Range of the slider." },
+          { name: "step", type: 'number | "any"', default: "1", description: "Increment; any allows continuous values." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange"', default: '"lime"', description: "Color of the filled part." },
+          { name: "aria-valuetext", type: "string", description: 'What screen readers announce, e.g. "1:23 of 3:05".' },
+          { name: "...props", type: 'ComponentProps<"input">', description: "Native input attributes, e.g. disabled or id." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A real <input type=\"range\">: arrow keys, Page Up/Down, Home/End, and touch all work.",
+      "Give it a name with a <label> or aria-label, and use aria-valuetext when the raw number isn't meaningful.",
+      "The focus ring sits around the whole track, and the thumb fills with the tone while dragging.",
+    ],
+  },
+  {
+    slug: "audio-player",
+    name: "Audio Player",
+    description: "Full and mini music players with seek, volume, playlists, and auto-advance, plus a hook to build your own.",
+    status: "beta",
+    file: "packages/react/src/AudioPlayer.tsx",
+    usage: `import { AudioPlayer } from "@streamuilib/react";
+
+<AudioPlayer
+  playlist
+  tracks={[
+    { title: "Hard Edges", artist: "stream/ui", src: "/audio/hard-edges.mp3" },
+    { title: "Ink & Paper", artist: "stream/ui", src: "/audio/ink-and-paper.mp3" },
+  ]}
+/>`,
+    examples: [
+      {
+        title: "Full player with playlist",
+        description: "These demo tracks are generated in your browser, so there are no audio files to download.",
+        file: ex("audio-player", "full"),
+        Component: AudioPlayerFull,
+      },
+      { title: "Mini player", file: ex("audio-player", "mini"), Component: AudioPlayerMini },
+      {
+        title: "Build your own with useAudioPlayer",
+        description: "The hook handles playback; you choose the layout.",
+        file: ex("audio-player", "headless"),
+        Component: AudioPlayerHeadless,
+      },
+    ],
+    props: [
+      {
+        caption: "AudioPlayer, MiniPlayer",
+        rows: [
+          { name: "tracks", type: "Track[]", description: "{ title, src, artist?, cover?, tone?, duration? }. Required." },
+          { name: "playlist", type: "boolean", default: "false", description: "AudioPlayer only: show the track list." },
+          { name: "defaultIndex", type: "number", default: "0", description: "Track selected first." },
+          { name: "defaultVolume", type: "number", default: "0.8", description: "Start volume, 0 to 1." },
+          { name: "loop", type: "boolean", default: "true", description: "Wrap from the last track to the first." },
+          { name: "className", type: "string", description: "Classes for the player frame." },
+        ],
+      },
+      {
+        caption: "useAudioPlayer(tracks, options)",
+        rows: [
+          { name: "returns", type: "{ track, index, playing, time, duration, volume, muted, ready, … }", description: "Live playback state." },
+          { name: "controls", type: "play, pause, toggle, seek, next, previous, select, setVolume, toggleMute", description: "Actions; previous restarts the track if you're past 3 seconds." },
+          { name: "audioProps", type: "{ ref, src, preload }", description: "Spread onto your own <audio> element." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Each player is a labelled region; every button has a name (Play/Pause, Previous track, Next track, Mute/Unmute).",
+      "The seek and volume sliders announce readable values like \"0:12 of 0:23\" and \"80%\".",
+      "Mute is a toggle button with aria-pressed, and the now-playing track is announced politely.",
+      "State follows the <audio> element's own events, so it stays correct when the browser or system pauses playback.",
+    ],
+  },
+  {
+    slug: "track-list",
+    name: "Track List",
+    description: "A playlist of tracks with numbers, artists, durations, and a live meter on the one that's playing.",
+    status: "beta",
+    file: "packages/react/src/TrackList.tsx",
+    usage: `import { TrackList } from "@streamuilib/react";
+
+<TrackList tracks={tracks} index={current} playing onSelect={setCurrent} />`,
+    examples: [{ title: "Basic", description: "Pick a track to move the meter.", file: ex("track-list", "basic"), Component: TrackListBasic }],
+    props: [
+      {
+        rows: [
+          { name: "tracks", type: "Track[]", description: "Tracks in order. Required." },
+          { name: "index", type: "number", description: "The current track." },
+          { name: "playing", type: "boolean", default: "false", description: "Animates the current track's meter." },
+          { name: "onSelect", type: "(index: number) => void", description: "Called when a track is chosen." },
+          { name: "...props", type: 'ComponentProps<"ol">', description: "Native list attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      "An ordered list of buttons, so screen readers announce the count and position.",
+      "The current track has aria-current and a hidden \"Now playing\" prefix; the meter itself is decorative.",
+    ],
+  },
+  {
+    slug: "equalizer",
+    name: "Equalizer",
+    description: "An animated now-playing meter whose bars move independently, and stop when paused or when motion is reduced.",
+    status: "stable",
+    file: "packages/react/src/Equalizer.tsx",
+    usage: `import { Equalizer } from "@streamuilib/react";
+
+<Equalizer playing={isPlaying} bars={4} tone="pink" />`,
+    examples: [{ title: "Sizes and tones", file: ex("equalizer", "basic"), Component: EqualizerBasic }],
+    props: [
+      {
+        rows: [
+          { name: "playing", type: "boolean", default: "true", description: "Animate the bars; when false they rest low." },
+          { name: "bars", type: "number", default: "4", description: "How many bars." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange"', default: '"lime"', description: "Bar color." },
+          { name: "className", type: "string", description: "Size it with height classes, e.g. h-8." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Purely decorative and aria-hidden; pair it with text that says what's playing.",
+      "Under prefers-reduced-motion the bars hold still at a fixed height.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -705,6 +853,7 @@ export const componentOrder = [
   "checkbox",
   "radio-group",
   "switch",
+  "slider",
   "tabs",
   "accordion",
   "dialog",
@@ -712,6 +861,9 @@ export const componentOrder = [
   "progress",
   "skeleton",
   "avatar",
+  "audio-player",
+  "track-list",
+  "equalizer",
   "animated-icon",
 ];
 
