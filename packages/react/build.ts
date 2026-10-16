@@ -8,14 +8,19 @@
  *   - .d.ts types from tsc
  *   - theme.css copied as-is
  *
+ * Everything is written to a staging folder and swapped into dist/ at the
+ * end, so a dev server reading dist/ mid-build never sees missing files,
+ * and a failed build leaves the previous dist/ in place.
+ *
  * Usage: bun run build.ts [--watch]
  */
 import { $, Glob, type BunPlugin } from "bun";
 import { watch } from "node:fs";
-import { cp, rm } from "node:fs/promises";
+import { cp, rename, rm } from "node:fs/promises";
 
 const SRC = "src";
-const OUT = "dist";
+const DIST = "dist";
+const OUT = ".dist-staging";
 
 // Bun picks the JSX runtime from NODE_ENV when the process starts, so the
 // package script sets it. Published code must use react/jsx-runtime.
@@ -76,7 +81,7 @@ async function build() {
     addJsExtensions(barrel.transformSync(await Bun.file(`${SRC}/index.ts`).text())),
   );
 
-  await $`bunx tsc -p tsconfig.build.json`;
+  await $`bunx tsc -p tsconfig.build.json --outDir ${OUT}`;
 
   // Same .js extension fix for the type declarations.
   for (const dts of new Glob("*.d.ts").scanSync(OUT)) {
@@ -85,6 +90,11 @@ async function build() {
     await Bun.write(path, addJsExtensions(text));
   }
   await cp(`${SRC}/theme.css`, `${OUT}/theme.css`);
+
+  // Swap in the finished build: the gap between these two calls is the only
+  // moment dist/ is absent, instead of the whole build.
+  await rm(DIST, { recursive: true, force: true });
+  await rename(OUT, DIST);
 
   console.log(`built ${entrypoints.length + 1} modules in ${Math.round(performance.now() - started)}ms`);
 }
