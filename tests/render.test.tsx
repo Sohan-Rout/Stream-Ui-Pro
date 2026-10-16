@@ -7,6 +7,7 @@ import { render } from "@testing-library/react";
 import { components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
+import { indexPreviews } from "@/registry/previews";
 
 describe("component examples render", () => {
   for (const c of components) {
@@ -16,6 +17,20 @@ describe("component examples render", () => {
         expect(container.innerHTML.length).toBeGreaterThan(0);
       });
     }
+  }
+});
+
+describe("index-card previews", () => {
+  test("only exist for real components", () => {
+    const slugs = new Set(components.map((c) => c.slug));
+    for (const slug of Object.keys(indexPreviews)) expect(slugs.has(slug)).toBe(true);
+  });
+
+  for (const [slug, Preview] of Object.entries(indexPreviews)) {
+    test(`${slug} preview renders`, () => {
+      const { container } = render(<Preview />);
+      expect(container.innerHTML.length).toBeGreaterThan(0);
+    });
   }
 });
 

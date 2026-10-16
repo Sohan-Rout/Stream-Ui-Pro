@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { components } from "@/registry/components";
+import { indexPreviews } from "@/registry/previews";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.components, path: "/components" });
 
@@ -20,12 +21,13 @@ export default function ComponentsIndex() {
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {components.map((c) => {
-          const Preview = c.examples[0].Component;
+          const Preview = indexPreviews[c.slug] ?? c.examples[0].Component;
           return (
             <li key={c.slug} className="group relative flex flex-col border-2 border-ink bg-paper-raised shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none">
-              <div className="flex min-h-44 items-center justify-center overflow-hidden border-b-2 border-ink bg-paper bg-dots p-6">
+              {/* Same height on every card, so titles line up across each row. */}
+              <div className="flex h-56 items-center justify-center overflow-hidden border-b-2 border-ink bg-paper bg-dots p-6">
                 {/* Live but inert: the whole card is the link. */}
-                <div inert className="pointer-events-none">
+                <div inert className="pointer-events-none flex w-full justify-center">
                   <Preview />
                 </div>
               </div>
