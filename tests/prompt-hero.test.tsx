@@ -1,13 +1,14 @@
 /** The prompt-box hero: sending, keyboard rules, and example chips. */
 import { afterEach, describe, expect, test } from "bun:test";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
+import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 
 afterEach(cleanup);
 
 const box = () => screen.getByRole("textbox", { name: "Describe what you want to build" });
-const send = () => screen.getByRole("button", { name: "Generate" }) as HTMLButtonElement;
+const send = () => screen.getByRole("button", { name: /Generate/ }) as HTMLButtonElement;
 
 /** Records submissions instead of navigating. */
 function trackSubmits() {
@@ -20,7 +21,11 @@ function trackSubmits() {
   return sent;
 }
 
-describe("PromptHeroSection", () => {
+// Both prompt heroes share the same behavior; only the look differs.
+describe.each([
+  ["PromptHeroSection", PromptHeroSection],
+  ["PixelPromptHeroSection", PixelPromptHeroSection],
+])("%s", (_, PromptHeroSection) => {
   test("send stays disabled until there's real text", async () => {
     render(<PromptHeroSection />);
     expect(send().disabled).toBe(true);
@@ -57,8 +62,9 @@ describe("PromptHeroSection", () => {
 
   test("an example chip fills the box and focuses it for editing", async () => {
     render(<PromptHeroSection />);
-    await userEvent.click(screen.getByRole("button", { name: "A pricing table with three plans" }));
-    expect((box() as HTMLTextAreaElement).value).toBe("A pricing table with three plans");
+    const chip = within(screen.getByRole("list", { name: "Try an example" })).getAllByRole("button")[1];
+    await userEvent.click(chip);
+    expect((box() as HTMLTextAreaElement).value).toBe(chip.textContent);
     expect(document.activeElement).toBe(box());
     expect(send().disabled).toBe(false);
   });

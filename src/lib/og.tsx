@@ -110,7 +110,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section" }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" }
   | { kind: "icons" }
   | { kind: "sponsor" };
 
@@ -314,6 +314,46 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               <div style={{ position: "absolute", left: 24, top: 8, width: 14, height: 14, borderRadius: 99, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
               <div style={{ position: "absolute", left: 2, top: 20, width: 20, height: 12, backgroundColor: brand.violet, border: `3px solid ${brand.ink}` }} />
             </div>
+          </div>
+        );
+      }
+      if (art.game === "tetris") {
+        // A well with a few locked pieces and one falling in.
+        const unit = 34;
+        const blocks: [number, number, string][] = [
+          [0, 6, brand.blue], [1, 6, brand.blue], [2, 6, brand.blue], [3, 6, brand.blue],
+          [4, 6, brand.orange], [5, 6, brand.orange], [4, 5, brand.orange], [5, 5, brand.orange],
+          [0, 5, brand.pink], [1, 5, brand.pink], [1, 4, brand.pink], [2, 4, brand.pink],
+          [6, 6, brand.lime], [6, 5, brand.lime], [5, 4, brand.lime],
+          [2, 1, brand.violet], [3, 1, brand.violet], [4, 1, brand.violet], [3, 2, brand.violet],
+        ];
+        return (
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              width: 7 * unit,
+              height: 7 * unit,
+              backgroundColor: brand.sunken,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(12),
+              transform: "rotate(3deg)",
+            }}
+          >
+            {blocks.map(([x, y, color], i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  left: x * unit,
+                  top: y * unit,
+                  width: unit,
+                  height: unit,
+                  backgroundColor: color,
+                  border: `3px solid ${brand.ink}`,
+                }}
+              />
+            ))}
           </div>
         );
       }

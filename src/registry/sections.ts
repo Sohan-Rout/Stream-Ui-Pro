@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import type { SectionSlug } from "@/components/blocks/SectionThumbs";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
+import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -32,7 +33,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in two layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in three layouts.",
     variants: [
       {
         id: "split",
@@ -54,6 +55,19 @@ export const sections: SectionDoc[] = [
           "Enter sends and Shift+Enter adds a line; the send button stays disabled until there is text.",
           "Example chips fill the box and move focus to it, so people can edit before sending.",
           "It's a plain GET form: point its action at your app and read the prompt parameter.",
+        ],
+      },
+      {
+        id: "pixel",
+        name: "Pixel prompt",
+        description: "The prompt box in an arcade screen over a pixel grid, with tetrominoes falling onto a locked stack.",
+        file: "src/components/sections/PixelPromptHeroSection.tsx",
+        Component: PixelPromptHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Pieces fall one grid cell per tick (CSS steps), so the motion reads like a game, not a slide. They're decorative and hold still for reduced motion.",
+          "Self-contained: the shapes, keyframes, and grid size live in the file, so it copies into any project.",
+          "Same prompt behavior as the Prompt box hero: Enter sends, Shift+Enter adds a line, chips fill the box.",
         ],
       },
     ],

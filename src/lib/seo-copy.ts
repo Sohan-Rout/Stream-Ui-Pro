@@ -114,7 +114,7 @@ const sectionOverrides: Record<string, SeoCopy> = {
   hero: {
     title: "Neobrutalism Hero Sections for React",
     description:
-      "Neobrutalism hero sections for React and Tailwind CSS: a split hero with a product glimpse and an AI prompt box hero with example chips. Copy and paste.",
+      "Neobrutalism hero sections for React and Tailwind CSS: a split hero, an AI prompt box hero, and a pixel art prompt hero with falling blocks.",
     keywords: [...base, "neobrutalism hero section", "hero section", "AI prompt hero", "prompt box UI", "React hero"],
   },
 };
@@ -136,6 +136,12 @@ const variantCopy: Record<string, SeoCopy> = {
     description:
       "A neobrutalism split hero for React and Tailwind CSS: headline, two calls to action, and a product chart card. Responsive and accessible. Copy the code.",
     keywords: [...base, "split hero section", "neobrutalism hero section", "hero with image", "React hero"],
+  },
+  "hero/pixel": {
+    title: "Pixel Art AI Prompt Hero for React",
+    description:
+      "A pixel art AI prompt hero for React and Tailwind CSS: an arcade-style prompt box over falling Tetris blocks, with Enter to send. Copy the code.",
+    keywords: [...base, "pixel art hero", "retro hero section", "AI prompt hero", "8-bit UI", "tetris animation"],
   },
   "hero/prompt": {
     title: "AI Prompt Box Hero Section for React",
@@ -192,6 +198,12 @@ const labCopy: Record<string, SeoCopy> = {
     description:
       "A neo-brutalist Flappy Bird clone in React with a 60fps canvas, tested physics, and keyboard and touch controls. With the full source code.",
     keywords: ["flappy bird React", "flappy bird clone", "canvas game React", "React game", "HTML5 game"],
+  },
+  tetris: {
+    title: "Tetris Game in React: Neobrutalism Blocks",
+    description:
+      "A Tetris game in React with neobrutalism blocks: ghost piece, next-piece preview, wall kicks, and classic scoring. Keyboard and touch, full source.",
+    keywords: ["tetris React", "React tetris game", "tetris clone", "browser tetris", "neobrutalism game", "React game"],
   },
   snake: {
     title: "Snake Game in React: Classic, Funky, Pixel",

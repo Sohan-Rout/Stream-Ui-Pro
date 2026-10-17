@@ -7,6 +7,7 @@ import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
 import { MemoryLab } from "@/components/demos/MemoryLab";
 import { SnakeLab } from "@/components/demos/SnakeLab";
 import { FlappyLab } from "@/components/demos/FlappyLab";
+import { TetrisLab } from "@/components/demos/TetrisLab";
 
 export type LabDoc = {
   slug: string;
@@ -108,6 +109,19 @@ export const labs: LabDoc[] = [
       "Physics live in src/lib/games/flappy.ts as pure functions in world units and seconds, so they're tested without a browser.",
       "Long frames are capped, so switching tabs mid-flight can't teleport the bird through a pipe.",
       "Space, Up, W, or a tap flaps; P pauses. A short grace period after a crash stops a mashed key from restarting instantly.",
+    ],
+  },
+  {
+    slug: "tetris",
+    name: "Tetris",
+    description: "Neo-brutalist falling blocks: hard-edged tetrominoes, a ghost preview, and the next three pieces.",
+    file: "src/components/demos/TetrisLab.tsx",
+    Component: TetrisLab,
+    notes: [
+      "Arrows move and rotate (Z rotates back), Down drops a row, Space drops to the ghost, and P pauses. On touch, tap to rotate, swipe sideways to move, and swipe down to drop.",
+      "The rules live in src/lib/games/tetris.ts as pure functions: a 7-bag randomizer, wall kicks, classic scoring, and a level every 10 lines.",
+      "Each piece gets a palette color with an ink border and a pixel bevel, so even the pale ones read on the board.",
+      "Your best score is remembered in this browser once you accept the cookie banner.",
     ],
   },
 ];
