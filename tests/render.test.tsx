@@ -36,9 +36,27 @@ describe("index-card previews", () => {
 
 describe("sections render", () => {
   for (const s of sections) {
-    test(s.name, () => {
-      const { container } = render(<s.Component />);
-      expect(container.querySelector("section, footer")).not.toBeNull();
+    for (const v of s.variants) {
+      test(`${s.name}: ${v.name}`, () => {
+        const { container } = render(<v.Component />);
+        expect(container.querySelector("section, footer")).not.toBeNull();
+      });
+    }
+  }
+});
+
+describe("hero headings", () => {
+  // A hero is the page's h1 when used for real; docs previews demote it so
+  // the docs page keeps a single h1.
+  const heroes = sections.find((s) => s.slug === "hero")!.variants;
+  for (const v of heroes) {
+    test(`${v.name}: h1 by default, any level on request`, () => {
+      const { container, unmount } = render(<v.Component />);
+      expect(container.querySelectorAll("h1")).toHaveLength(1);
+      unmount();
+      const demoted = render(<v.Component headingAs="h3" />).container;
+      expect(demoted.querySelector("h1")).toBeNull();
+      expect(demoted.querySelector("h3")).not.toBeNull();
     });
   }
 });

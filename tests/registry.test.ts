@@ -34,8 +34,10 @@ describe.each(Object.entries(registries))("%s registry", (_, entries) => {
 
   test("every source file exists and can be shown on its page", () => {
     for (const e of entries) {
-      expect(existsSync(e.file)).toBe(true);
-      expect(readSource(e.file).length).toBeGreaterThan(0);
+      for (const file of "variants" in e ? e.variants.map((v) => v.file) : [e.file]) {
+        expect(existsSync(file)).toBe(true);
+        expect(readSource(file).length).toBeGreaterThan(0);
+      }
     }
   });
 });
@@ -92,8 +94,23 @@ describe("components registry", () => {
 describe("sections registry", () => {
   test('"Built with" lists real components or lucide-react', () => {
     const names = new Set(components.map((c) => c.name));
+    for (const v of sections.flatMap((s) => s.variants)) {
+      for (const u of v.uses) expect(names.has(u) || u === "lucide-react").toBe(true);
+    }
+  });
+
+  test("variant ids are unique within a section and safe as URL fragments", () => {
     for (const s of sections) {
-      for (const u of s.uses) expect(names.has(u) || u === "lucide-react").toBe(true);
+      const ids = s.variants.map((v) => v.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const id of ids) expect(id).toMatch(SLUG);
+    }
+  });
+
+  test("every variant has a description and notes", () => {
+    for (const v of sections.flatMap((s) => s.variants)) {
+      expect(v.description.trim().length).toBeGreaterThan(20);
+      expect(v.notes.length).toBeGreaterThan(0);
     }
   });
 });

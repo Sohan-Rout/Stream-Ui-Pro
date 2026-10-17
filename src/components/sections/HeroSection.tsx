@@ -11,7 +11,7 @@ const bars = [
 ];
 
 /** Split hero: pitch on the left, a product glimpse on the right. */
-export function HeroSection() {
+export function HeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h1" | "h2" | "h3" }) {
   return (
     <section className="@container bg-paper">
       <div className="grid grid-cols-1 @3xl:grid-cols-2">
@@ -20,9 +20,9 @@ export function HeroSection() {
             <span aria-hidden className="size-2 rounded-full bg-lime ring-2 ring-ink" />
             Version 2.0 is out
           </Badge>
-          <h1 className="font-display text-4xl leading-none tracking-tight text-balance @3xl:text-5xl">
+          <Heading className="font-display text-4xl leading-none tracking-tight text-balance @3xl:text-5xl">
             Know what shipped, before anyone asks.
-          </h1>
+          </Heading>
           <p className="max-w-md text-lg leading-relaxed text-ink-muted">
             Acme turns your deploys, incidents, and metrics into one live
             timeline your whole team can read.

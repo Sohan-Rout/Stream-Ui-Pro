@@ -34,6 +34,11 @@ export default function SectionsIndex() {
               <ArrowUpRight aria-hidden className="size-4.5 shrink-0" />
             </div>
             <p className="mt-1 text-sm leading-relaxed text-ink-muted">{s.description}</p>
+            {s.variants.length > 1 && (
+              <Badge tone="paper" className="mt-4 self-start">
+                {s.variants.length} variants
+              </Badge>
+            )}
           </li>
         ))}
       </ul>

@@ -109,7 +109,18 @@ export function componentSeo(doc: { slug: string; name: string }): SeoCopy {
   };
 }
 
+/** Sections whose page covers more than the generic copy says. */
+const sectionOverrides: Record<string, SeoCopy> = {
+  hero: {
+    title: "Neobrutalism Hero Sections for React",
+    description:
+      "Neobrutalism hero sections for React and Tailwind CSS: a split hero with a product glimpse and an AI prompt box hero with example chips. Copy and paste.",
+    keywords: [...base, "neobrutalism hero section", "hero section", "AI prompt hero", "prompt box UI", "React hero"],
+  },
+};
+
 export function sectionSeo(doc: { slug: string; name: string }): SeoCopy {
+  if (sectionOverrides[doc.slug]) return sectionOverrides[doc.slug];
   const label = doc.slug === "faq" ? "FAQ" : doc.name.toLowerCase();
   return {
     title: `Neobrutalism ${doc.name} Section for React`,
