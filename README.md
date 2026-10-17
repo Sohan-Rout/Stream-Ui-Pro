@@ -26,6 +26,24 @@ Docs and live examples: **[streamui.org](https://streamui.org)**. Setup and usag
 | **Animated icons** | Wrap any SVG icon in `<AnimatedIcon>` to draw, spin, bounce, wiggle, pulse, shake, or pop it on hover, on a loop, or once. Pure CSS, off under reduced motion. |
 | **Labs** | Interaction experiments that haven't graduated into the library yet. |
 
+## Install with shadcn
+
+Every component, section, and lab is also a [shadcn registry](https://ui.shadcn.com/docs/registry)
+item, so you can copy the source straight into a project that uses shadcn/ui:
+
+```bash
+npx shadcn@latest add https://streamui.org/r/theme.json https://streamui.org/r/flappy-hero.json
+```
+
+Files land in `streamui/` folders (`components/ui/streamui/button.tsx`, `lib/streamui/cn.ts`, ...),
+beside your own shadcn/ui components, never over them. `theme` adds the tokens and utilities;
+`fonts` adds Archivo Black, Space Grotesk, and Space Mono. The full catalog is at
+`https://streamui.org/r/registry.json`.
+
+The registry is generated from the real sources on every build (`bun run registry:build`, see
+`scripts/build-registry.ts`), and `tests/shadcn-registry.test.ts` validates it against shadcn's
+schema.
+
 ## Getting started
 
 Requires [Bun](https://bun.sh) 1.3 or later.

@@ -9,6 +9,9 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    // Generated shadcn registry (scripts/build-registry.ts).
+    "registry/**",
+    "public/r/**",
     "out/**",
     "build/**",
     "next-env.d.ts",

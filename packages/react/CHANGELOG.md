@@ -6,6 +6,19 @@ include breaking changes, and they are called out here.
 
 Each `## x.y.z` section below becomes the notes of its GitHub release.
 
+## Unreleased
+
+### Added
+
+- Pattern utilities in `theme.css`: `bg-dots`, `bg-hatch`, `bg-pixel-grid`
+  (set `--cells` on the element), and `pixel-bevel`, plus the `wiggle`
+  keyframes as `animate-wiggle`.
+
+### Changed
+
+- `cn()` treats the pattern utilities as background images, so
+  `bg-dots bg-paper` keeps both classes.
+
 ## 0.2.0
 
 Music player components.

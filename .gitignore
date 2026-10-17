@@ -44,3 +44,8 @@ next-env.d.ts
 # package build output
 /packages/*/dist
 /packages/*/.dist-staging
+
+# shadcn registry, generated on every build (scripts/build-registry.ts)
+/registry/
+/registry.json
+/public/r/
