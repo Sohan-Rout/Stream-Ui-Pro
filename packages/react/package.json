@@ -1,6 +1,6 @@
 {
   "name": "@streamuilib/react",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Neobrutalism UI components for React and Tailwind CSS v4: hard edges, offset shadows, every state styled, plus animated icons.",
   "license": "MIT",
   "author": "Sohan Rout",
