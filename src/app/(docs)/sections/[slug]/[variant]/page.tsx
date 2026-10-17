@@ -1,0 +1,52 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/seo";
+import { variantSeo } from "@/lib/seo-copy";
+import { DocHeader } from "@/components/docs/DocHeader";
+import { PrevNext } from "@/components/docs/PrevNext";
+import { BuiltWith, SectionDocBody } from "@/components/docs/SectionParts";
+import { getSectionVariant, sections } from "@/registry/sections";
+import { neighbors } from "@/registry/nav";
+
+/** One page per design, for sections that have more than one. */
+export function generateStaticParams() {
+  return sections
+    .filter((s) => s.variants.length > 1)
+    .flatMap((s) => s.variants.map((v) => ({ slug: s.slug, variant: v.id })));
+}
+
+export async function generateMetadata({ params }: PageProps<"/sections/[slug]/[variant]">): Promise<Metadata> {
+  const { slug, variant } = await params;
+  const found = getSectionVariant(slug, variant);
+  if (!found) return {};
+  return pageMetadata({ ...variantSeo(found.section, found.variant), path: `/sections/${slug}/${variant}` });
+}
+
+export default async function SectionVariantPage({ params }: PageProps<"/sections/[slug]/[variant]">) {
+  const { slug, variant } = await params;
+  const found = getSectionVariant(slug, variant);
+  if (!found) notFound();
+  const { section, variant: v } = found;
+
+  // Prev/next step through this section's designs.
+  const list = section.variants.map((x) => ({ slug: x.id, name: x.name }));
+  const { prev, next } = neighbors(list, section.variants.indexOf(v), `/sections/${section.slug}`);
+
+  return (
+    <article className="flex flex-col gap-14">
+      <DocHeader
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Sections", href: "/sections" },
+          { label: section.name, href: `/sections/${section.slug}` },
+          { label: v.name },
+        ]}
+        title={`${v.name} ${section.name.toLowerCase()}`}
+        description={v.description}
+        meta={<BuiltWith uses={v.uses} />}
+      />
+      <SectionDocBody variant={v} />
+      <PrevNext prev={prev} next={next} />
+    </article>
+  );
+}

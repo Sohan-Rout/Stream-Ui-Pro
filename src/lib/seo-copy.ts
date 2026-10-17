@@ -129,6 +129,32 @@ export function sectionSeo(doc: { slug: string; name: string }): SeoCopy {
   };
 }
 
+/** Copy for a section variant's own page, like /sections/hero/prompt. */
+const variantCopy: Record<string, SeoCopy> = {
+  "hero/split": {
+    title: "Neobrutalism Split Hero Section for React",
+    description:
+      "A neobrutalism split hero for React and Tailwind CSS: headline, two calls to action, and a product chart card. Responsive and accessible. Copy the code.",
+    keywords: [...base, "split hero section", "neobrutalism hero section", "hero with image", "React hero"],
+  },
+  "hero/prompt": {
+    title: "AI Prompt Box Hero Section for React",
+    description:
+      "A neobrutalism AI prompt hero for React and Tailwind CSS: a large prompt box with Enter to send, example chips, and a plain form. Copy the code.",
+    keywords: [...base, "AI prompt hero", "prompt box UI", "AI chat input", "prompt input component", "hero section"],
+  },
+};
+
+export function variantSeo(section: { slug: string; name: string }, variant: { id: string; name: string }): SeoCopy {
+  return (
+    variantCopy[`${section.slug}/${variant.id}`] ?? {
+      title: `Neobrutalism ${variant.name} ${section.name} for React`,
+      description: `A neobrutalism ${variant.name.toLowerCase()} ${section.name.toLowerCase()} section for React and Tailwind CSS: responsive, accessible, and ready to copy into your landing page.`,
+      keywords: [...base, `${variant.name.toLowerCase()} ${section.name.toLowerCase()} section`, "landing page section"],
+    }
+  );
+}
+
 /** Each lab targets what people search for when building that effect. */
 const labCopy: Record<string, SeoCopy> = {
   dice: {

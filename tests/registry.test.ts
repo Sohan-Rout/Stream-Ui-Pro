@@ -7,7 +7,7 @@ import { existsSync, readFileSync } from "node:fs";
 import * as pkg from "@streamuilib/react";
 import { readSource } from "@/lib/source";
 import { componentOrder, components } from "@/registry/components";
-import { sections } from "@/registry/sections";
+import { getSectionVariant, sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { docsNav, neighbors } from "@/registry/nav";
 
@@ -105,6 +105,16 @@ describe("sections registry", () => {
       expect(new Set(ids).size).toBe(ids.length);
       for (const id of ids) expect(id).toMatch(SLUG);
     }
+  });
+
+  test("variant pages exist only for sections with more than one design", () => {
+    for (const s of sections) {
+      for (const v of s.variants) {
+        expect(Boolean(getSectionVariant(s.slug, v.id))).toBe(s.variants.length > 1);
+      }
+    }
+    expect(getSectionVariant("hero", "nope")).toBeUndefined();
+    expect(getSectionVariant("nope", "split")).toBeUndefined();
   });
 
   test("every variant has a description and notes", () => {

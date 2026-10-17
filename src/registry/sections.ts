@@ -143,3 +143,11 @@ export const sections: SectionDoc[] = [
 export function getSection(slug: string) {
   return sections.find((s) => s.slug === slug);
 }
+
+/** A design with its own page: only sections with more than one have them. */
+export function getSectionVariant(slug: string, id: string) {
+  const section = getSection(slug);
+  if (!section || section.variants.length < 2) return undefined;
+  const variant = section.variants.find((v) => v.id === id);
+  return variant && { section, variant };
+}

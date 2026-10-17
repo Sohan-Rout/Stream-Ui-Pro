@@ -68,6 +68,7 @@ describe("sitemap.xml", () => {
       "/legal/cookies",
       ...components.map((c) => `/components/${c.slug}`),
       ...sections.map((s) => `/sections/${s.slug}`),
+      ...sections.filter((s) => s.variants.length > 1).flatMap((s) => s.variants.map((v) => `/sections/${s.slug}/${v.id}`)),
       ...labs.map((l) => `/labs/${l.slug}`),
     ].map(absoluteUrl);
     expect(urls.sort()).toEqual(expected.sort());

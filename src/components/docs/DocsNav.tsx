@@ -28,12 +28,14 @@ function NavList({ groups }: { groups: NavGroup[] }) {
           {g.items.length > 0 && (
             <ul className="mt-3 flex flex-col border-l-2 border-ink">
               {g.items.map((item) => {
-                const active = pathname === item.href;
+                // A variant page like /sections/hero/prompt keeps "Hero" highlighted.
+                const here = pathname === item.href;
+                const active = here || pathname.startsWith(`${item.href}/`);
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      aria-current={active ? "page" : undefined}
+                      aria-current={here ? "page" : active ? "true" : undefined}
                       className={cn(
                         "-ml-0.5 block border-l-2 py-1.5 pl-4 text-sm transition-colors duration-150",
                         active

@@ -23,6 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/legal/cookies", 0.2, "monthly"),
     ...components.map((c) => entry(`/components/${c.slug}`, 0.8, "monthly")),
     ...sections.map((s) => entry(`/sections/${s.slug}`, 0.7, "monthly")),
+    ...sections
+      .filter((s) => s.variants.length > 1)
+      .flatMap((s) => s.variants.map((v) => entry(`/sections/${s.slug}/${v.id}`, 0.7, "monthly"))),
     ...labs.map((l) => entry(`/labs/${l.slug}`, 0.5, "monthly")),
   ];
 }
