@@ -158,7 +158,7 @@ const variantCopy: Record<string, SeoCopy> = {
   "hero/flappy": {
     title: "Flappy Hero Section with Scrolling Pipes",
     description:
-      "A neobrutalism hero for React and Tailwind CSS: endlessly scrolling pipes, a flapping bird, and a centered headline card. CSS only. Copy the code.",
+      "A neobrutalism hero for React and Tailwind CSS: endlessly scrolling pipes, a flapping bird, and a big outlined headline. CSS only. Copy the code.",
     keywords: [...base, "flappy hero section", "animated hero section", "game landing page", "CSS animation", "React hero"],
   },
   "hero/prompt": {

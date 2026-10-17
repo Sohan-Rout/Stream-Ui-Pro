@@ -48,7 +48,7 @@ function PipePairs() {
 
 /**
  * Flappy hero: a sky where pink pipe pairs scroll past endlessly and an
- * orange bird bobs in place, flapping, behind a centered headline card.
+ * orange bird bobs in place, flapping, behind a centered headline, outlined so it reads over the pipes.
  * All motion is decorative and holds still for reduced motion. No
  * JavaScript: a server component.
  */
@@ -95,9 +95,9 @@ export function FlappyHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
       />
 
       <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-4 pt-24 text-center @3xl:pt-28" style={{ paddingBottom: GROUND + 72 }}>
-        <div className="relative flex flex-col items-center border-4 border-ink bg-paper-raised px-6 py-8 shadow-brutal-lg @3xl:px-12 @3xl:py-10">
-          {/* The bird, bobbing just above the card: square body, beak, eye, and a flapping wing. */}
-          <div aria-hidden className="flappy-hero-bird pointer-events-none absolute -top-16 left-6 z-10 @3xl:left-10">
+        <div className="relative flex flex-col items-center">
+          {/* The bird, bobbing above the headline: square body, beak, eye, and a flapping wing. */}
+          <div aria-hidden className="flappy-hero-bird pointer-events-none absolute -top-20 left-2 z-10 @3xl:-left-6">
             <div className="relative size-12">
               <span
                 className="absolute top-4 -right-3 block size-0 border-y-8 border-l-14 border-y-transparent border-l-pink"
@@ -114,13 +114,17 @@ export function FlappyHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
           <p className="border-2 border-ink bg-orange px-3 py-1 font-mono text-xs font-bold tracking-widest text-on-bright uppercase">
             Best 128 · Tap to fly
           </p>
+          {/* No card behind the text: a thick white outline keeps it readable over the moving pipes. */}
           <Heading
-            className="mt-6 font-display text-4xl leading-none tracking-tight text-balance @3xl:text-6xl"
-            style={{ textShadow: "4px 4px 0 var(--pink)" } as CSSProperties}
+            className="mt-6 font-display text-5xl leading-none tracking-tight text-balance @3xl:text-7xl"
+            style={{ WebkitTextStroke: "10px var(--paper-raised)", paintOrder: "stroke fill", textShadow: "6px 6px 0 var(--pink)" } as CSSProperties}
           >
             Launch day, no crash landings.
           </Heading>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-ink-muted">
+          <p
+            className="mt-6 max-w-md text-lg leading-relaxed font-semibold"
+            style={{ WebkitTextStroke: "5px var(--paper-raised)", paintOrder: "stroke fill" } as CSSProperties}
+          >
             Acme keeps your landing page light and fast, so it clears every pipe between you and your
             first customer.
           </p>

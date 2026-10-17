@@ -222,9 +222,9 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
             <div style={{ display: "flex", position: "absolute", left: 0, bottom: 0, width: 34, height: bottom, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />
           </div>
         ))}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "absolute", left: 92, top: 40, width: 112, padding: 10, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }}>
-          {bar("90%", 10, brand.ink)}
-          {bar("60%", 10, brand.ink)}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 7, position: "absolute", left: 82, top: 44, width: 132 }}>
+          {bar("100%", 14, brand.ink)}
+          {bar("70%", 14, brand.ink)}
           <div style={{ display: "flex", width: 44, height: 16, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
         </div>
         <div style={{ display: "flex", position: "absolute", left: 70, top: 112, width: 26, height: 24, borderRadius: 4, backgroundColor: brand.orange, border: `3px solid ${brand.ink}` }} />

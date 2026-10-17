@@ -102,13 +102,13 @@ export const sections: SectionDoc[] = [
       {
         id: "flappy",
         name: "Flappy",
-        description: "A sky of endlessly scrolling pipes and a bobbing, flapping bird behind a centered headline card.",
+        description: "A sky of endlessly scrolling pipes and a bobbing, flapping bird over a big outlined headline.",
         file: "src/components/sections/FlappyHeroSection.tsx",
         Component: FlappyHeroSection,
         uses: ["lucide-react"],
         notes: [
           "The pipe track is drawn twice side by side and slides one copy's width, so the loop never jumps. Edit GAPS to change where the openings fall.",
-          "The bird bobs just above the card's corner, so it stays in view at every width.",
+          "There's no card behind the text: a thick white outline (text stroke painted under the fill) keeps it readable as the pipes pass behind.",
           "No JavaScript: a server component, with CSS animation that holds still for reduced motion.",
         ],
       },
