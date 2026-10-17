@@ -212,6 +212,26 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "flappy") {
+    // Pipes, the bird between them, a card, and the ground.
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.blueSoft }}>
+        {[[30, 44, 70], [220, 70, 40]].map(([x, top, bottom], i) => (
+          <div key={i} style={{ display: "flex", position: "absolute", left: x, top: 0, bottom: 28 }}>
+            <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: 34, height: top, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", position: "absolute", left: 0, bottom: 0, width: 34, height: bottom, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />
+          </div>
+        ))}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "absolute", left: 92, top: 40, width: 112, padding: 10, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }}>
+          {bar("90%", 10, brand.ink)}
+          {bar("60%", 10, brand.ink)}
+          <div style={{ display: "flex", width: 44, height: 16, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        </div>
+        <div style={{ display: "flex", position: "absolute", left: 70, top: 112, width: 26, height: 24, borderRadius: 4, backgroundColor: brand.orange, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 28, backgroundColor: brand.lime, borderTop: `3px solid ${brand.ink}` }} />
+      </div>
+    );
+  }
   if (variant === "platformer") {
     // Sky, a block row with a coin, a pipe, and brick ground.
     const t = 26;

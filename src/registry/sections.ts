@@ -5,6 +5,7 @@ import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
 import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
+import { FlappyHeroSection } from "@/components/sections/FlappyHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -35,7 +36,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in five layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in six layouts.",
     variants: [
       {
         id: "split",
@@ -96,6 +97,19 @@ export const sections: SectionDoc[] = [
           "Bonus blocks are real buttons: click or press Enter to pop a coin and add to the HUD, once per block. The count is announced to screen readers.",
           "The mascot is an original sprite drawn from a text grid in SPRITE; swap the letters to draw your own.",
           "The bounce, coin pops, and block bumps are decorative and hold still for reduced motion.",
+        ],
+      },
+      {
+        id: "flappy",
+        name: "Flappy",
+        description: "A sky of endlessly scrolling pipes and a bobbing, flapping bird behind a centered headline card.",
+        file: "src/components/sections/FlappyHeroSection.tsx",
+        Component: FlappyHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "The pipe track is drawn twice side by side and slides one copy's width, so the loop never jumps. Edit GAPS to change where the openings fall.",
+          "The bird bobs just above the card's corner, so it stays in view at every width.",
+          "No JavaScript: a server component, with CSS animation that holds still for reduced motion.",
         ],
       },
     ],
