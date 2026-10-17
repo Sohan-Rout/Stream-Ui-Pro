@@ -3,6 +3,7 @@ import type { SectionSlug } from "@/components/blocks/SectionThumbs";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
 import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
+import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -33,7 +34,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in three layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in four layouts.",
     variants: [
       {
         id: "split",
@@ -68,6 +69,19 @@ export const sections: SectionDoc[] = [
           "Pieces fall one grid cell per tick (CSS steps), so the motion reads like a game, not a slide. They're decorative and hold still for reduced motion.",
           "Self-contained: the shapes, keyframes, and grid size live in the file, so it copies into any project.",
           "Same prompt behavior as the Prompt box hero: Enter sends, Shift+Enter adds a line, chips fill the box.",
+        ],
+      },
+      {
+        id: "blocks",
+        name: "Falling blocks",
+        description: "A centered headline built from letter tiles that drop into place, over a grid of falling tetrominoes.",
+        file: "src/components/sections/BlocksHeroSection.tsx",
+        Component: BlocksHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Each letter is its own tile and drops in a few steps, one after another, like pieces landing. Screen readers get the plain headline text instead.",
+          "Edit LINES to change the headline; words wrap between each other, never mid-word. Tiles grow with the container.",
+          "No JavaScript: it's a server component, and every animation is CSS that holds still for reduced motion.",
         ],
       },
     ],

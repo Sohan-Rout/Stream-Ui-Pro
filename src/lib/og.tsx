@@ -12,36 +12,62 @@ export const ogContentType = "image/png";
 type Font = { name: string; data: ArrayBuffer; weight: 400 | 700; style: "normal" };
 
 /**
- * Fetches a TTF from Google Fonts, subset to `text`. The image renderer can't
- * read the woff2 files next/font serves, and Google returns TTF to non-browser
- * clients. Cached, and returns null offline so the build falls back to the
- * default font instead of failing.
+ * Fetches a font's TTF from Google Fonts. The image renderer can't read the
+ * woff2 files next/font serves, and Google returns TTF to non-browser
+ * clients. Whole fonts, not per-image subsets: one request per font serves
+ * every image in the build, instead of hundreds that get throttled.
+ * Retries a few times; throws on failure so a miss is never cached.
  */
-async function googleFont(family: string, weight: 400 | 700, text: string): Promise<ArrayBuffer | null> {
+async function fetchGoogleFont(family: string, weight: 400 | 700): Promise<ArrayBuffer> {
   "use cache";
+  const query = `family=${family.replace(/ /g, "+")}:wght@${weight}`;
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(`https://fonts.googleapis.com/css2?${query}`);
+      if (!res.ok) throw new Error(`Google Fonts CSS ${res.status}`);
+      const src = (await res.text()).match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1];
+      if (!src) throw new Error("No TTF in the Google Fonts CSS");
+      const font = await fetch(src);
+      if (!font.ok) throw new Error(`Font file ${font.status}`);
+      return await font.arrayBuffer();
+    } catch (error) {
+      lastError = error;
+      await new Promise((r) => setTimeout(r, 400 * attempt));
+    }
+  }
+  throw lastError;
+}
+
+async function googleFont(family: string, weight: 400 | 700): Promise<ArrayBuffer | null> {
   try {
-    const query = `family=${family.replace(/ /g, "+")}:wght@${weight}&text=${encodeURIComponent(text)}`;
-    const css = await fetch(`https://fonts.googleapis.com/css2?${query}`).then((r) => r.text());
-    const src = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1];
-    return src ? await fetch(src).then((r) => r.arrayBuffer()) : null;
-  } catch {
+    return await fetchGoogleFont(family, weight);
+  } catch (error) {
+    console.warn(`[og] Couldn't load ${family} ${weight}; using the default font.`, error);
     return null;
   }
 }
 
 /** Archivo Black for display, Space Mono regular and bold for labels (as on the site). */
-export async function brandFonts(text: string): Promise<Font[]> {
+export async function brandFonts(): Promise<Font[]> {
   const specs = [
     ["Archivo Black", 400],
     ["Space Mono", 400],
     ["Space Mono", 700],
   ] as const;
-  const loaded = await Promise.all(specs.map(([family, weight]) => googleFont(family, weight, text)));
+  const loaded = await Promise.all(specs.map(([family, weight]) => googleFont(family, weight)));
   return specs.flatMap(([name, weight], i) => {
     const data = loaded[i];
     return data ? [{ name, data, weight, style: "normal" as const }] : [];
   });
 }
+
+/**
+ * ImageResponse options for these fonts. An empty `fonts` list makes the
+ * renderer throw ("No fonts are loaded"), so with none loaded it's left out
+ * and the built-in default font draws the text instead of failing the build.
+ */
+const withFonts = (fonts: Font[]) => (fonts.length > 0 ? { fonts } : {});
 
 const host = new URL(siteConfig.url).host;
 
@@ -80,7 +106,7 @@ function LogoTile({ size }: { size: number }) {
 
 /** Square favicon / home-screen icon: the logo tile with room for its shadow. */
 export async function renderIcon(size: number, { opaque = false } = {}) {
-  const fonts = await brandFonts("S/");
+  const fonts = await brandFonts();
   // Leave a margin so the hard shadow isn't clipped; iOS needs an opaque square.
   const tile = Math.round(size * (opaque ? 0.72 : 0.875));
   return new ImageResponse(
@@ -98,7 +124,7 @@ export async function renderIcon(size: number, { opaque = false } = {}) {
         <LogoTile size={tile} />
       </div>
     ),
-    { width: size, height: size, fonts },
+    { width: size, height: size, ...withFonts(fonts) },
   );
 }
 
@@ -181,6 +207,42 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
         <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
           {[56, 70, 48].map((w, i) => (
             <div key={i} style={{ display: "flex", width: w, height: 16, border: `3px solid ${brand.ink}`, backgroundColor: brand.paper }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (variant === "blocks") {
+    // The headline as letter tiles over a block stack.
+    const tones = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange];
+    const u = 18;
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.sunken }}>
+        {Array.from({ length: 16 }, (_, x) => (
+          <div key={x} style={{ display: "flex", position: "absolute", left: x * u, top: 9 * u, width: u, height: u, backgroundColor: tones[x % 5], border: `3px solid ${brand.ink}` }} />
+        ))}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, position: "absolute", left: 0, right: 0, top: 26 }}>
+          {[["B", "L", "O", "C", "K"], ["B", "Y"]].map((row, r) => (
+            <div key={r} style={{ display: "flex", gap: 4 }}>
+              {row.map((ch, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 40,
+                    height: 40,
+                    backgroundColor: tones[(r * 5 + i) % 5],
+                    border: `4px solid ${brand.ink}`,
+                    fontFamily: "Archivo Black",
+                    fontSize: 24,
+                  }}
+                >
+                  {ch}
+                </div>
+              ))}
+            </div>
           ))}
         </div>
       </div>
@@ -745,10 +807,7 @@ export async function renderOgImage({
   art: OgArt;
 }) {
   const [before, after] = highlight ? title.split(highlight) : [title, undefined];
-  const tag = art.kind === "component" ? art.name : "";
-  const fonts = await brandFonts(
-    `${eyebrow}${title}${description}${host}${siteConfig.packageName}${tag}stream/uiS/<>→♥100% typedThank you!Browse componentsSponsorTailwindReactNext.js ready·`,
-  );
+  const fonts = await brandFonts();
   const titleSize = title.length <= 14 ? 104 : title.length <= 26 ? 84 : 66;
   const color = brand[accent];
   const footer = ["Tailwind ready", "React ready", "Next.js ready"];
@@ -928,6 +987,6 @@ export async function renderOgImage({
         </div>
       </div>
     ),
-    { ...ogSize, fonts },
+    { ...ogSize, ...withFonts(fonts) },
   );
 }
