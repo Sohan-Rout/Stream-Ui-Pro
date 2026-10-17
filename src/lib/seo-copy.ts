@@ -211,6 +211,18 @@ const labCopy: Record<string, SeoCopy> = {
       "A neo-brutalist Flappy Bird clone in React with a 60fps canvas, tested physics, and keyboard and touch controls. With the full source code.",
     keywords: ["flappy bird React", "flappy bird clone", "canvas game React", "React game", "HTML5 game"],
   },
+  maze: {
+    title: "Maze Chase Game in React: Dots and Bots",
+    description:
+      "An arcade maze chase game in React: eat the dots, dodge three bots with different chase rules, and flip them with power pellets. Full source code.",
+    keywords: ["maze game React", "arcade maze game", "arcade game React", "browser maze game", "React game"],
+  },
+  jumper: {
+    title: "Platformer Game in React: Run, Jump, Stomp",
+    description:
+      "A retro side-scrolling platformer in React and canvas: coyote time, a jump buffer, coin blocks, walkers, pits, and a flag. Full source code.",
+    keywords: ["platformer game React", "retro platformer", "side scroller React", "canvas game React", "React game"],
+  },
   tetris: {
     title: "Tetris Game in React: Neobrutalism Blocks",
     description:

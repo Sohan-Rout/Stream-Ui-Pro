@@ -136,7 +136,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -467,6 +467,41 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               <div style={{ position: "absolute", left: 24, top: 8, width: 14, height: 14, borderRadius: 99, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
               <div style={{ position: "absolute", left: 2, top: 20, width: 20, height: 12, backgroundColor: brand.violet, border: `3px solid ${brand.ink}` }} />
             </div>
+          </div>
+        );
+      }
+      if (art.game === "maze") {
+        // A corner of maze, a dot trail, the chomper, and a bot.
+        const u = 34;
+        const walls: [number, number][] = [[1, 1], [2, 1], [4, 1], [5, 1], [1, 3], [3, 3], [5, 3], [1, 5], [2, 5], [4, 5], [5, 5]];
+        return (
+          <div style={{ display: "flex", position: "relative", width: 7 * u, height: 7 * u, backgroundColor: brand.sunken, border: `5px solid ${brand.ink}`, boxShadow: hard(12), transform: "rotate(-3deg)" }}>
+            {walls.map(([x, y], i) => (
+              <div key={i} style={{ display: "flex", position: "absolute", left: x * u, top: y * u, width: u, height: u, backgroundColor: brand.violetSoft, border: `3px solid ${brand.ink}` }} />
+            ))}
+            {[1, 2, 3, 4].map((x) => (
+              <div key={x} style={{ display: "flex", position: "absolute", left: x * u + u / 2 - 4, top: 2 * u + u / 2 - 4, width: 8, height: 8, backgroundColor: brand.ink }} />
+            ))}
+            <div style={{ display: "flex", position: "absolute", left: 5 * u + 6, top: 4 * u + u / 2 - 7, width: 14, height: 14, borderRadius: 99, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", position: "absolute", left: 0, top: 2 * u, width: u, height: u, borderRadius: 99, backgroundColor: brand.lime, border: `4px solid ${brand.ink}`, borderRightColor: "transparent" }} />
+            <div style={{ display: "flex", position: "absolute", left: 5 * u, top: 2 * u, width: u - 4, height: u - 4, borderTopLeftRadius: 99, borderTopRightRadius: 99, backgroundColor: brand.blue, border: `3px solid ${brand.ink}` }} />
+          </div>
+        );
+      }
+      if (art.game === "jumper") {
+        // Sky, a block row, the mascot mid-jump, a walker, and the ground.
+        return (
+          <div style={{ display: "flex", position: "relative", width: 260, height: 230, backgroundColor: brand.blueSoft, border: `5px solid ${brand.ink}`, boxShadow: hard(12), transform: "rotate(3deg)", overflow: "hidden" }}>
+            <div style={{ display: "flex", position: "absolute", left: 30, top: 24, width: 66, height: 22, borderRadius: 11, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+            {[brand.orange, brand.lime, brand.orange].map((c, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "absolute", left: 100 + i * 31, top: 64, width: 34, height: 34, backgroundColor: c, border: `3px solid ${brand.ink}`, fontFamily: "Space Mono", fontWeight: 700, fontSize: 20 }}>
+                {c === brand.lime ? "!" : ""}
+              </div>
+            ))}
+            <div style={{ display: "flex", position: "absolute", left: 120, top: 112, width: 32, height: 36, backgroundColor: brand.lime, border: `4px solid ${brand.ink}`, boxShadow: hard(3) }} />
+            <div style={{ display: "flex", position: "absolute", left: 200, top: 150, width: 34, height: 28, borderRadius: 12, backgroundColor: brand.pink, border: `4px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", position: "absolute", left: 0, top: 178, width: 260, height: 12, backgroundColor: brand.lime, borderTop: `4px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", position: "absolute", left: 0, top: 190, width: 260, height: 40, backgroundColor: brand.orange }} />
           </div>
         );
       }

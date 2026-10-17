@@ -8,6 +8,8 @@ import { MemoryLab } from "@/components/demos/MemoryLab";
 import { SnakeLab } from "@/components/demos/SnakeLab";
 import { FlappyLab } from "@/components/demos/FlappyLab";
 import { TetrisLab } from "@/components/demos/TetrisLab";
+import { MazeLab } from "@/components/demos/MazeLab";
+import { JumperLab } from "@/components/demos/JumperLab";
 
 export type LabDoc = {
   slug: string;
@@ -111,6 +113,32 @@ export const labs: LabDoc[] = [
       "Physics live in src/lib/games/flappy.ts as pure functions in world units and seconds, so they're tested without a browser.",
       "Long frames are capped, so switching tabs mid-flight can't teleport the bird through a pipe.",
       "Space, Up, W, or a tap flaps; P pauses. A short grace period after a crash stops a mashed key from restarting instantly.",
+    ],
+  },
+  {
+    slug: "maze",
+    name: "Muncher",
+    description: "A maze chase: eat every dot, dodge three bots, and grab a power pellet to turn the tables.",
+    file: "src/components/demos/MazeLab.tsx",
+    Component: MazeLab,
+    notes: [
+      "Arrows or WASD steer on the focused board (a turn pressed early waits for the opening), swipe on touch screens, or use the pad. Space pauses.",
+      "Each bot hunts differently: one chases you, one cuts you off ahead, and a shy one backs off up close. Power pellets scare them for a while; eat them for 200, 400, then 800.",
+      "The rules live in src/lib/games/maze.ts as pure functions, one cell per tick, with a side tunnel that wraps around.",
+      "Clear the board and the next level starts faster. Three lives; your best score is remembered once you accept the cookie banner.",
+    ],
+  },
+  {
+    slug: "jumper",
+    name: "Jumper",
+    description: "A side-scrolling platformer: run, jump, bump blocks for coins, stomp walkers, and reach the flag.",
+    file: "src/components/demos/JumperLab.tsx",
+    Component: JumperLab,
+    notes: [
+      "Arrows or A/D run, Space, Up, or W jumps (let go early for a short hop), and P pauses. On touch, hold the arrows and tap jump.",
+      "Coyote time and a jump buffer make jumps forgiving: you can still jump a moment after leaving a ledge, or a moment before landing.",
+      "Physics live in src/lib/games/jumper.ts in pixels and seconds. The level is built in code, and tests check every pit can be cleared.",
+      "Halfway is a checkpoint, and a fresh life is briefly safe so you can't respawn into a walker.",
     ],
   },
   {
