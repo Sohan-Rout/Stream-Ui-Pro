@@ -1,7 +1,5 @@
 import type { ComponentType } from "react";
 import type { SectionSlug } from "@/components/blocks/SectionThumbs";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
 import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
@@ -36,30 +34,8 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in six layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in four playful layouts.",
     variants: [
-      {
-        id: "split",
-        name: "Split",
-        description: "A split hero with a pitch, two calls to action, and a product glimpse.",
-        file: "src/components/sections/HeroSection.tsx",
-        Component: HeroSection,
-        uses: ["Button", "Badge"],
-        notes: ["Stacks on narrow containers; splits into two columns from 48rem.", "Swap the chart card for a screenshot or illustration."],
-      },
-      {
-        id: "prompt",
-        name: "Prompt box",
-        description: "A centered headline over a large prompt box with example chips, for AI and generator products.",
-        file: "src/components/sections/PromptHeroSection.tsx",
-        Component: PromptHeroSection,
-        uses: ["Button", "Badge", "lucide-react"],
-        notes: [
-          "Enter sends and Shift+Enter adds a line; the send button stays disabled until there is text.",
-          "Example chips fill the box and move focus to it, so people can edit before sending.",
-          "It's a plain GET form: point its action at your app and read the prompt parameter.",
-        ],
-      },
       {
         id: "pixel",
         name: "Pixel prompt",
@@ -70,7 +46,7 @@ export const sections: SectionDoc[] = [
         notes: [
           "Pieces fall one grid cell per tick (CSS steps), so the motion reads like a game, not a slide. They're decorative and hold still for reduced motion.",
           "Self-contained: the shapes, keyframes, and grid size live in the file, so it copies into any project.",
-          "Same prompt behavior as the Prompt box hero: Enter sends, Shift+Enter adds a line, chips fill the box.",
+          "Enter sends, Shift+Enter adds a line, and the example chips fill the box. It's a plain GET form: point its action at your app and read the prompt parameter.",
         ],
       },
       {

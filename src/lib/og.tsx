@@ -176,42 +176,6 @@ const bar = (width: number | string, height: number, color: string) => (
 
 /** What's inside the section window: a sketch of the layout, per variant. */
 function SectionBody({ variant, accent }: { variant?: string; accent: string }) {
-  if (variant === "split") {
-    return (
-      <div style={{ display: "flex", height: 170 }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 18, width: 160, borderRight: `5px solid ${brand.ink}` }}>
-          {bar("90%", 14, brand.ink)}
-          {bar("65%", 14, brand.ink)}
-          {bar("80%", 10, brand.faint)}
-          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-            <div style={{ display: "flex", width: 60, height: 26, backgroundColor: accent, border: `4px solid ${brand.ink}` }} />
-            <div style={{ display: "flex", width: 46, height: 26, border: `4px solid ${brand.ink}` }} />
-          </div>
-        </div>
-        <div style={{ display: "flex", flex: 1, alignItems: "flex-end", gap: 8, padding: 18, backgroundColor: brand.limeSoft }}>
-          {[50, 80, 64, 110].map((h, i) => (
-            <div key={i} style={{ display: "flex", width: 18, height: h, backgroundColor: i === 3 ? brand.pink : brand.blue, border: `3px solid ${brand.ink}` }} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-  if (variant === "prompt") {
-    return (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: 20, backgroundColor: brand.pinkSoft }}>
-        {bar("70%", 14, brand.ink)}
-        {bar("45%", 14, brand.ink)}
-        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-end", width: "100%", height: 54, marginTop: 6, padding: 6, backgroundColor: brand.raised, border: `4px solid ${brand.ink}`, boxShadow: hard(5) }}>
-          <div style={{ display: "flex", width: 22, height: 22, backgroundColor: accent, border: `3px solid ${brand.ink}` }} />
-        </div>
-        <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
-          {[56, 70, 48].map((w, i) => (
-            <div key={i} style={{ display: "flex", width: w, height: 16, border: `3px solid ${brand.ink}`, backgroundColor: brand.paper }} />
-          ))}
-        </div>
-      </div>
-    );
-  }
   if (variant === "flappy") {
     // Pipes, the bird between them, a card, and the ground.
     return (

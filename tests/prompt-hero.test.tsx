@@ -2,7 +2,6 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
 import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 
 afterEach(cleanup);
@@ -21,11 +20,8 @@ function trackSubmits() {
   return sent;
 }
 
-// Both prompt heroes share the same behavior; only the look differs.
-describe.each([
-  ["PromptHeroSection", PromptHeroSection],
-  ["PixelPromptHeroSection", PixelPromptHeroSection],
-])("%s", (_, PromptHeroSection) => {
+describe("PixelPromptHeroSection", () => {
+  const PromptHeroSection = PixelPromptHeroSection;
   test("send stays disabled until there's real text", async () => {
     render(<PromptHeroSection />);
     expect(send().disabled).toBe(true);

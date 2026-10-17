@@ -6,7 +6,13 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { SectionThumb, ThumbFrame } from "@/components/blocks/SectionThumbs";
-import { sections } from "@/registry/sections";
+import { LiveThumb } from "@/components/docs/LiveThumb";
+import { sections, type SectionDoc } from "@/registry/sections";
+
+function FirstVariant({ section }: { section: SectionDoc }) {
+  const Live = section.variants[0].Component;
+  return <Live headingAs="h3" />;
+}
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sections, path: "/sections" });
 
@@ -22,9 +28,16 @@ export default function SectionsIndex() {
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {sections.map((s) => (
           <li key={s.slug} className="group relative flex flex-col border-2 border-ink bg-blue-soft p-5 shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none">
-            <ThumbFrame>
-              <SectionThumb slug={s.slug} />
-            </ThumbFrame>
+            {s.variants.length > 1 ? (
+              // Several designs: show the first one live, since a sketch can't stand for all of them.
+              <LiveThumb>
+                <FirstVariant section={s} />
+              </LiveThumb>
+            ) : (
+              <ThumbFrame>
+                <SectionThumb slug={s.slug} />
+              </ThumbFrame>
+            )}
             <div className="mt-5 flex items-center justify-between gap-3">
               <h2 className="font-display text-xl tracking-tight">
                 <Link href={`/sections/${s.slug}`} className="after:absolute after:inset-0">

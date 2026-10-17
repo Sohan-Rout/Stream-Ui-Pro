@@ -114,7 +114,7 @@ const sectionOverrides: Record<string, SeoCopy> = {
   hero: {
     title: "Neobrutalism Hero Sections for React",
     description:
-      "Neobrutalism hero sections for React and Tailwind CSS: split, AI prompt, pixel prompt, falling blocks, platformer, and flappy. Responsive, ready to copy.",
+      "Neobrutalism hero sections for React and Tailwind CSS: a pixel AI prompt, Tetris-style falling blocks, a retro platformer, and flappy pipes. Copy them.",
     keywords: [...base, "neobrutalism hero section", "hero section", "AI prompt hero", "prompt box UI", "React hero"],
   },
 };
@@ -131,12 +131,6 @@ export function sectionSeo(doc: { slug: string; name: string }): SeoCopy {
 
 /** Copy for a section variant's own page, like /sections/hero/prompt. */
 const variantCopy: Record<string, SeoCopy> = {
-  "hero/split": {
-    title: "Neobrutalism Split Hero Section for React",
-    description:
-      "A neobrutalism split hero for React and Tailwind CSS: headline, two calls to action, and a product chart card. Responsive and accessible. Copy the code.",
-    keywords: [...base, "split hero section", "neobrutalism hero section", "hero with image", "React hero"],
-  },
   "hero/pixel": {
     title: "Pixel Art AI Prompt Hero for React",
     description:
@@ -160,12 +154,6 @@ const variantCopy: Record<string, SeoCopy> = {
     description:
       "A neobrutalism hero for React and Tailwind CSS: endlessly scrolling pipes, a flapping bird, and a big outlined headline. CSS only. Copy the code.",
     keywords: [...base, "flappy hero section", "animated hero section", "game landing page", "CSS animation", "React hero"],
-  },
-  "hero/prompt": {
-    title: "AI Prompt Box Hero Section for React",
-    description:
-      "A neobrutalism AI prompt hero for React and Tailwind CSS: a large prompt box with Enter to send, example chips, and a plain form. Copy the code.",
-    keywords: [...base, "AI prompt hero", "prompt box UI", "AI chat input", "prompt input component", "hero section"],
   },
 };
 
