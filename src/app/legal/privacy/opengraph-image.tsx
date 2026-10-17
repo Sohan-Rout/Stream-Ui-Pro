@@ -1,15 +1,15 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
 
-export const alt = "stream/ui legal: privacy, terms, and cookies";
+export const alt = "stream/ui privacy policy";
 export const size = ogSize;
 export const contentType = ogContentType;
 
 export default function Image() {
   return renderOgImage({
     eyebrow: "Legal",
-    title: "Privacy, terms, and cookies.",
-    description: "No ads, analytics cookies only with consent. Plain-language policies for stream/ui.",
+    title: "Privacy policy",
+    description: "No accounts, no ads. Analytics cookies only with your consent.",
     accent: "blue",
-    art: { kind: "home" },
+    art: { kind: "legal", doc: "privacy" },
   });
 }

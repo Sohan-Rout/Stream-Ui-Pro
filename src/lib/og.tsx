@@ -109,10 +109,11 @@ export async function renderIcon(size: number, { opaque = false } = {}) {
 export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
-  | { kind: "section" }
+  | { kind: "section"; variant?: string }
   | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" }
   | { kind: "icons" }
-  | { kind: "sponsor" };
+  | { kind: "sponsor" }
+  | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
 
 const hard = (px: number) => `${px}px ${px}px 0 ${brand.ink}`;
 
@@ -139,6 +140,80 @@ function Sticker({ text, color, rotate }: { text: string; color: string; rotate:
       }}
     >
       {text}
+    </div>
+  );
+}
+
+const bar = (width: number | string, height: number, color: string) => (
+  <div style={{ display: "flex", width, height, backgroundColor: color }} />
+);
+
+/** What's inside the section window: a sketch of the layout, per variant. */
+function SectionBody({ variant, accent }: { variant?: string; accent: string }) {
+  if (variant === "split") {
+    return (
+      <div style={{ display: "flex", height: 170 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 18, width: 160, borderRight: `5px solid ${brand.ink}` }}>
+          {bar("90%", 14, brand.ink)}
+          {bar("65%", 14, brand.ink)}
+          {bar("80%", 10, brand.faint)}
+          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+            <div style={{ display: "flex", width: 60, height: 26, backgroundColor: accent, border: `4px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", width: 46, height: 26, border: `4px solid ${brand.ink}` }} />
+          </div>
+        </div>
+        <div style={{ display: "flex", flex: 1, alignItems: "flex-end", gap: 8, padding: 18, backgroundColor: brand.limeSoft }}>
+          {[50, 80, 64, 110].map((h, i) => (
+            <div key={i} style={{ display: "flex", width: 18, height: h, backgroundColor: i === 3 ? brand.pink : brand.blue, border: `3px solid ${brand.ink}` }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (variant === "prompt") {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: 20, backgroundColor: brand.pinkSoft }}>
+        {bar("70%", 14, brand.ink)}
+        {bar("45%", 14, brand.ink)}
+        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-end", width: "100%", height: 54, marginTop: 6, padding: 6, backgroundColor: brand.raised, border: `4px solid ${brand.ink}`, boxShadow: hard(5) }}>
+          <div style={{ display: "flex", width: 22, height: 22, backgroundColor: accent, border: `3px solid ${brand.ink}` }} />
+        </div>
+        <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+          {[56, 70, 48].map((w, i) => (
+            <div key={i} style={{ display: "flex", width: w, height: 16, border: `3px solid ${brand.ink}`, backgroundColor: brand.paper }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (variant === "pixel") {
+    const u = 18;
+    const block = (x: number, y: number, color: string, key: string) => (
+      <div key={key} style={{ display: "flex", position: "absolute", left: x * u, top: y * u, width: u, height: u, backgroundColor: color, border: `3px solid ${brand.ink}` }} />
+    );
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.sunken }}>
+        {/* A T falling on the left, an L on the right, and the locked stack below. */}
+        {[[1, 1], [2, 1], [3, 1], [2, 2]].map(([x, y]) => block(x, y, brand.violet, `t${x}${y}`))}
+        {[[13, 2], [13, 3], [13, 4], [14, 4]].map(([x, y]) => block(x, y, brand.pink, `l${x}${y}`))}
+        {Array.from({ length: 16 }, (_, x) => block(x, 9, [brand.blue, brand.lime, brand.orange, brand.pink][x % 4], `f${x}`))}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, position: "absolute", left: 70, top: 34, width: 150, padding: 12, backgroundColor: brand.paper, border: `4px solid ${brand.ink}`, boxShadow: hard(5) }}>
+          {bar("85%", 12, brand.ink)}
+          {bar("60%", 12, brand.ink)}
+          <div style={{ display: "flex", width: "100%", height: 26, border: `3px solid ${brand.ink}`, backgroundColor: brand.raised }} />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, padding: 22 }}>
+      {bar("80%", 16, brand.ink)}
+      {bar("55%", 16, brand.ink)}
+      {bar("70%", 12, brand.faint)}
+      <div style={{ display: "flex", gap: 12, marginTop: 10 }}>
+        <div style={{ display: "flex", width: 90, height: 34, backgroundColor: accent, border: `4px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", width: 70, height: 34, border: `4px solid ${brand.ink}` }} />
+      </div>
     </div>
   );
 }
@@ -207,15 +282,7 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               <div key={c} style={{ display: "flex", width: 16, height: 16, borderRadius: 99, backgroundColor: c, border: `3px solid ${brand.ink}` }} />
             ))}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12, padding: 22 }}>
-            <div style={{ display: "flex", width: "80%", height: 16, backgroundColor: brand.ink }} />
-            <div style={{ display: "flex", width: "55%", height: 16, backgroundColor: brand.ink }} />
-            <div style={{ display: "flex", width: "70%", height: 12, backgroundColor: brand.faint }} />
-            <div style={{ display: "flex", gap: 12, marginTop: 10 }}>
-              <div style={{ display: "flex", width: 90, height: 34, backgroundColor: accent, border: `4px solid ${brand.ink}` }} />
-              <div style={{ display: "flex", width: 70, height: 34, border: `4px solid ${brand.ink}` }} />
-            </div>
-          </div>
+          <SectionBody variant={art.variant} accent={accent} />
         </div>
       );
 
@@ -513,6 +580,89 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               />
             </div>
           ))}
+        </div>
+      );
+    }
+
+    case "legal": {
+      // A policy document, with a badge for which one: a lock, a cookie, or the license.
+      const lines = [150, 120, 140, 100, 130];
+      const badge =
+        art.doc === "cookies" ? (
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              width: 130,
+              height: 130,
+              borderRadius: 999,
+              backgroundColor: brand.orange,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(7),
+            }}
+          >
+            {[
+              [28, 30], [70, 22], [52, 62], [22, 78], [84, 74],
+            ].map(([x, y], i) => (
+              <div key={i} style={{ position: "absolute", left: x, top: y, width: 16, height: 16, borderRadius: 4, backgroundColor: brand.ink }} />
+            ))}
+          </div>
+        ) : art.doc === "privacy" ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                width: 70,
+                height: 56,
+                borderTopLeftRadius: 40,
+                borderTopRightRadius: 40,
+                border: `10px solid ${brand.ink}`,
+                borderBottom: "none",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 118,
+                height: 92,
+                backgroundColor: brand.blue,
+                border: `5px solid ${brand.ink}`,
+                boxShadow: hard(7),
+              }}
+            >
+              <div style={{ display: "flex", width: 18, height: 34, borderRadius: 9, backgroundColor: brand.ink }} />
+            </div>
+          </div>
+        ) : (
+          <Sticker text="MIT" color={brand.lime} rotate={10} />
+        );
+      return (
+        <div style={{ display: "flex", position: "relative", width: 300, height: 270 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+              position: "absolute",
+              left: 0,
+              top: 10,
+              width: 200,
+              height: 240,
+              padding: 22,
+              backgroundColor: brand.raised,
+              border: `5px solid ${brand.ink}`,
+              boxShadow: hard(12),
+              transform: "rotate(-4deg)",
+            }}
+          >
+            <div style={{ display: "flex", width: 120, height: 18, backgroundColor: accent }} />
+            {lines.map((w, i) => (
+              <div key={i} style={{ display: "flex", width: w, height: 10, backgroundColor: brand.faint }} />
+            ))}
+          </div>
+          <div style={{ display: "flex", position: "absolute", right: 0, bottom: 0 }}>{badge}</div>
         </div>
       );
     }

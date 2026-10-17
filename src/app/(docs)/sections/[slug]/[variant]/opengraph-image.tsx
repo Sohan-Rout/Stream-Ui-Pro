@@ -19,6 +19,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     title: found ? `${found.variant.name} ${found.section.name.toLowerCase()}` : "stream/ui",
     description: found?.variant.description ?? "Neo-brutalist React components for Tailwind CSS v4.",
     accent: "pink",
-    art: { kind: "section" },
+    art: { kind: "section", variant: found?.variant.id },
   });
 }
