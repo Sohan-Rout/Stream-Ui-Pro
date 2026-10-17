@@ -37,7 +37,7 @@ export function SiteHeader() {
           </a>
           <Link
             href="/components"
-            className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex" })}
+            className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex md:hidden lg:inline-flex" })}
           >
             Get started <ArrowRight aria-hidden />
           </Link>

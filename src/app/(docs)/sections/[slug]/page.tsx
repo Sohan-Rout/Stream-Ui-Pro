@@ -12,6 +12,14 @@ import { BuiltWith, SectionDocBody } from "@/components/docs/SectionParts";
 import { getSection, sections } from "@/registry/sections";
 import { neighbors } from "@/registry/nav";
 
+/**
+ * Everything on this page belongs to one URL's slug, so there's no shared
+ * shell to show instantly. Every page is prerendered at build time, so
+ * navigation waits only for a ready-made page. (Partial Prefetching's
+ * dev insight "URL data outside of Suspense" otherwise flags this route.)
+ */
+export const instant = false;
+
 export function generateStaticParams() {
   return sections.map((s) => ({ slug: s.slug }));
 }
