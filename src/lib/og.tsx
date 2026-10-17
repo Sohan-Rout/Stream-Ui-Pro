@@ -212,6 +212,30 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "platformer") {
+    // Sky, a block row with a coin, a pipe, and brick ground.
+    const t = 26;
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.blueSoft }}>
+        <div style={{ display: "flex", position: "absolute", left: 18, top: 16, width: 70, height: 20, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 92, top: 30 }}>
+          {[brand.orange, brand.lime, brand.orange, brand.lime, brand.orange].map((c, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", width: t, height: t, marginLeft: i ? -3 : 0, backgroundColor: c, border: `3px solid ${brand.ink}`, fontFamily: "Archivo Black", fontSize: 16 }}>
+              {c === brand.lime ? "!" : ""}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", position: "absolute", left: 117, top: 2, width: 16, height: 22, borderRadius: 99, backgroundColor: brand.orange, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", right: 24, bottom: 40 }}>
+          <div style={{ display: "flex", width: 54, height: 18, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+          <div style={{ display: "flex", width: 42, height: 40, marginTop: -3, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        </div>
+        <div style={{ display: "flex", position: "absolute", left: 60, bottom: 40, width: 24, height: 24, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 28, height: 12, backgroundColor: brand.lime, borderTop: `3px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 28, backgroundColor: brand.orange }} />
+      </div>
+    );
+  }
   if (variant === "blocks") {
     // The headline as letter tiles over a block stack.
     const tones = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange];

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cn } from "@/lib/cn";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
 import Link from "next/link";
@@ -20,7 +21,10 @@ export default function LabsIndex() {
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {labs.map((l) => (
-          <li key={l.slug} className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal">
+          <li
+            key={l.slug}
+            className={cn("flex flex-col border-2 border-ink bg-paper-raised shadow-brutal", l.wide && "md:col-span-2")}
+          >
             <div className="flex flex-1 items-center justify-center border-b-2 border-ink bg-violet-soft p-6">
               <l.Component />
             </div>

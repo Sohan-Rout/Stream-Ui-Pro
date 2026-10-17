@@ -16,6 +16,8 @@ export type LabDoc = {
   file: string;
   Component: ComponentType;
   notes: string[];
+  /** Spans both columns on the Labs page, for experiments that need the room. */
+  wide?: boolean;
 };
 
 export const labs: LabDoc[] = [
@@ -117,6 +119,7 @@ export const labs: LabDoc[] = [
     description: "Neo-brutalist falling blocks: hard-edged tetrominoes, a ghost preview, and the next three pieces.",
     file: "src/components/demos/TetrisLab.tsx",
     Component: TetrisLab,
+    wide: true,
     notes: [
       "Arrows move and rotate (Z rotates back), Down drops a row, Space drops to the ghost, and P pauses. On touch, tap to rotate, swipe sideways to move, and swipe down to drop.",
       "The rules live in src/lib/games/tetris.ts as pure functions: a 7-bag randomizer, wall kicks, classic scoring, and a level every 10 lines.",

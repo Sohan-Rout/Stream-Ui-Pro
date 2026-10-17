@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { PromptHeroSection } from "@/components/sections/PromptHeroSection";
 import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
 import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
+import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -34,7 +35,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in four layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in five layouts.",
     variants: [
       {
         id: "split",
@@ -82,6 +83,19 @@ export const sections: SectionDoc[] = [
           "Each letter is its own tile and drops in a few steps, one after another, like pieces landing. Screen readers get the plain headline text instead.",
           "Edit LINES to change the headline; words wrap between each other, never mid-word. Tiles grow with the container.",
           "No JavaScript: it's a server component, and every animation is CSS that holds still for reduced motion.",
+        ],
+      },
+      {
+        id: "platformer",
+        name: "Platformer",
+        description: "A retro platformer scene: a HUD, bonus blocks that pop coins, pipes, clouds, and a bouncing pixel mascot.",
+        file: "src/components/sections/PlatformerHeroSection.tsx",
+        Component: PlatformerHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Bonus blocks are real buttons: click or press Enter to pop a coin and add to the HUD, once per block. The count is announced to screen readers.",
+          "The mascot is an original sprite drawn from a text grid in SPRITE; swap the letters to draw your own.",
+          "The bounce, coin pops, and block bumps are decorative and hold still for reduced motion.",
         ],
       },
     ],

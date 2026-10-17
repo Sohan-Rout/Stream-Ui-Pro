@@ -114,7 +114,7 @@ const sectionOverrides: Record<string, SeoCopy> = {
   hero: {
     title: "Neobrutalism Hero Sections for React",
     description:
-      "Neobrutalism hero sections for React and Tailwind CSS: split, AI prompt box, pixel prompt, and Tetris-style falling blocks. Responsive and ready to copy.",
+      "Neobrutalism hero sections for React and Tailwind CSS: split, AI prompt box, pixel prompt, Tetris-style blocks, and a retro platformer. Ready to copy.",
     keywords: [...base, "neobrutalism hero section", "hero section", "AI prompt hero", "prompt box UI", "React hero"],
   },
 };
@@ -148,6 +148,12 @@ const variantCopy: Record<string, SeoCopy> = {
     description:
       "A neobrutalism hero for React and Tailwind CSS: a headline of letter tiles that drop into place over falling Tetris-style blocks. CSS only. Copy it.",
     keywords: [...base, "tetris hero section", "pixel hero section", "animated hero", "retro landing page", "CSS animation"],
+  },
+  "hero/platformer": {
+    title: "Retro Platformer Hero Section for React",
+    description:
+      "A neobrutalism retro platformer hero for React and Tailwind CSS: bonus blocks that pop coins, a live HUD, pipes, clouds, and a pixel mascot.",
+    keywords: [...base, "platformer hero section", "8-bit hero", "retro game landing page", "pixel art hero", "game UI"],
   },
   "hero/prompt": {
     title: "AI Prompt Box Hero Section for React",

@@ -167,8 +167,9 @@ export function TetrisLab({ gravity }: { gravity?: number }) {
           : `Score ${game.score}. Lines ${game.lines}. Level ${game.level}.`;
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
-      <div className="flex items-start gap-3 sm:gap-4">
+    <div className="@container flex w-full flex-col items-center gap-4">
+      {/* Narrow (phones): stats above a wider board. From 24rem of room: stats beside it. */}
+      <div className="flex w-full flex-col items-center gap-3 @sm:w-auto @sm:flex-row @sm:items-start @sm:gap-4">
         <div
           ref={board}
           tabIndex={0}
@@ -179,7 +180,7 @@ export function TetrisLab({ gravity }: { gravity?: number }) {
           onPointerDown={(e) => (swipe.current = { x: e.clientX, y: e.clientY })}
           onPointerUp={onPointerUp}
           onPointerCancel={() => (swipe.current = null)}
-          className="relative grid w-40 touch-none gap-px border-2 border-ink bg-ink-faint shadow-brutal select-none sm:w-48"
+          className="relative grid w-full max-w-60 touch-none gap-px border-2 border-ink bg-ink-faint shadow-brutal select-none @sm:w-48"
           // Square cells set the height; a fixed 1:2 box plus the 1px gaps overflowed by a pixel or two.
           style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)` }}
         >
@@ -204,19 +205,21 @@ export function TetrisLab({ gravity }: { gravity?: number }) {
           )}
         </div>
 
-        <div className="flex w-20 flex-col gap-2 sm:w-24">
-          <div className="flex flex-col items-center gap-2 border-2 border-ink bg-paper-raised p-2 shadow-brutal-sm">
+        <div className="order-first flex w-full max-w-60 gap-2 @sm:order-none @sm:w-24 @sm:flex-col">
+          <div className="flex w-20 shrink-0 flex-col items-center gap-2 border-2 border-ink bg-paper-raised p-2 shadow-brutal-sm @sm:w-full">
             <p className="self-start font-mono text-xs font-bold tracking-wider text-ink-muted uppercase">Next</p>
             <Preview type={game.queue[0]} />
-            <div className="flex w-full items-end justify-around gap-1 border-t-2 border-ink pt-2">
+            <div className="hidden w-full items-end justify-around gap-1 border-t-2 border-ink pt-2 @sm:flex">
               <Preview type={game.queue[1]} small />
               <Preview type={game.queue[2]} small />
             </div>
           </div>
-          <Stat label="Score" value={game.score} />
-          <Stat label="Lines" value={game.lines} />
-          <Stat label="Level" value={game.level} />
-          <Stat label="Best" value={best} />
+          <div className="grid flex-1 grid-cols-2 gap-2 @sm:grid-cols-1">
+            <Stat label="Score" value={game.score} />
+            <Stat label="Lines" value={game.lines} />
+            <Stat label="Level" value={game.level} />
+            <Stat label="Best" value={best} />
+          </div>
         </div>
       </div>
 
@@ -225,26 +228,26 @@ export function TetrisLab({ gravity }: { gravity?: number }) {
       </p>
 
       {/* Mouse and touch controls; the keyboard works on the focused board. */}
-      <div role="group" aria-label="Controls" className="flex flex-wrap justify-center gap-1.5">
-        <Button size="icon" variant="secondary" className="size-10" aria-label="Move left" onClick={() => act((g) => move(g, -1))}>
+      <div role="group" aria-label="Controls" className="grid w-full max-w-60 grid-cols-6 gap-1.5 @sm:w-auto @sm:max-w-none @sm:grid-flow-col @sm:grid-cols-none">
+        <Button size="icon" variant="secondary" className="h-10 w-full @sm:size-10" aria-label="Move left" onClick={() => act((g) => move(g, -1))}>
           <ChevronLeft aria-hidden />
         </Button>
-        <Button size="icon" variant="secondary" className="size-10" aria-label="Rotate" onClick={() => act((g) => rotate(g, 1))}>
+        <Button size="icon" variant="secondary" className="h-10 w-full @sm:size-10" aria-label="Rotate" onClick={() => act((g) => rotate(g, 1))}>
           <RotateCw aria-hidden />
         </Button>
-        <Button size="icon" variant="secondary" className="size-10" aria-label="Move right" onClick={() => act((g) => move(g, 1))}>
+        <Button size="icon" variant="secondary" className="h-10 w-full @sm:size-10" aria-label="Move right" onClick={() => act((g) => move(g, 1))}>
           <ChevronRight aria-hidden />
         </Button>
-        <Button size="icon" variant="secondary" className="size-10" aria-label="Soft drop" onClick={() => act((g) => softDrop(g, cryptoInt))}>
+        <Button size="icon" variant="secondary" className="h-10 w-full @sm:size-10" aria-label="Soft drop" onClick={() => act((g) => softDrop(g, cryptoInt))}>
           <ChevronDown aria-hidden />
         </Button>
-        <Button size="icon" variant="pink" className="size-10" aria-label="Hard drop" onClick={() => act((g) => hardDrop(g, cryptoInt))}>
+        <Button size="icon" variant="pink" className="h-10 w-full @sm:size-10" aria-label="Hard drop" onClick={() => act((g) => hardDrop(g, cryptoInt))}>
           <ArrowDownToLine aria-hidden />
         </Button>
         <Button
           size="icon"
           variant={playing ? "secondary" : "primary"}
-          className="size-10"
+          className="h-10 w-full @sm:size-10"
           aria-label={playing ? "Pause" : "Start"}
           onClick={playing ? pause : start}
         >
