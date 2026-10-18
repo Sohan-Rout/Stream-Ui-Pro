@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { SiGithub } from "react-icons/si";
 import { ArrowRight, Heart } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { Rail } from "@/components/ui/Section";
 import { buttonStyles } from "@streamuilib/react";
+import { GitHubButton } from "./GitHubButton";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
@@ -28,13 +28,7 @@ export function SiteHeader() {
           >
             <Heart aria-hidden />
           </Link>
-          <a
-            href={siteConfig.githubUrl}
-            aria-label="stream/ui on GitHub"
-            className={buttonStyles({ variant: "secondary", size: "icon", className: "size-10" })}
-          >
-            <SiGithub aria-hidden />
-          </a>
+          <GitHubButton />
           <Link
             href="/components"
             className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex md:hidden lg:inline-flex" })}
