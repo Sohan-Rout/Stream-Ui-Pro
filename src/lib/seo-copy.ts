@@ -34,6 +34,8 @@ export const homeSeo: SeoCopy = {
     "Tailwind component library",
     "animated icons",
     "open source UI components",
+    "shadcn registry",
+    "neobrutalism shadcn",
   ],
 };
 

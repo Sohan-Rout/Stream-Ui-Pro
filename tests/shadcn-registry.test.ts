@@ -10,6 +10,7 @@ import { registryItemSchema, registrySchema } from "shadcn/schema";
 import { components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
+import { shadcnName } from "@/registry/shadcn";
 
 const ROOT = path.join(import.meta.dir, "..");
 const BASE = "https://registry.test";
@@ -42,11 +43,10 @@ describe("shadcn registry", () => {
 
   test("has every component, section design, and lab, plus the theme and fonts", () => {
     const n = names();
-    for (const c of components) expect(n.has(c.slug)).toBe(true);
-    for (const s of sections) {
-      for (const v of s.variants) expect(n.has(s.variants.length > 1 ? `${v.id}-${s.slug}` : `${s.slug}-section`)).toBe(true);
-    }
-    for (const l of labs) expect(n.has(`${l.slug}-lab`)).toBe(true);
+    // The docs pages build their install commands from these same names.
+    for (const c of components) expect(n.has(shadcnName.component(c.slug))).toBe(true);
+    for (const s of sections) for (const v of s.variants) expect(n.has(shadcnName.section(s, v))).toBe(true);
+    for (const l of labs) expect(n.has(shadcnName.lab(l.slug))).toBe(true);
     for (const x of ["theme", "fonts", "utils", "game-utils"]) expect(n.has(x)).toBe(true);
   });
 

@@ -8,6 +8,8 @@ import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PrevNext } from "@/components/docs/PrevNext";
 import { getLab, labs } from "@/registry/labs";
+import { shadcnAdd, shadcnName } from "@/registry/shadcn";
+import { InstallCommand } from "@/components/blocks/InstallCommand";
 import { neighbors } from "@/registry/nav";
 
 /**
@@ -63,6 +65,13 @@ export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {
             </li>
           ))}
         </ul>
+      </DocSection>
+
+      <DocSection title="Install" id="install">
+        <p className="max-w-2xl leading-relaxed text-ink-muted">
+          Copy it, with its game rules, into a shadcn/ui project with the shadcn CLI. Or copy the source below.
+        </p>
+        <InstallCommand command={shadcnAdd(shadcnName.lab(doc.slug))} className="self-start" />
       </DocSection>
 
       <DocSection title="Source" id="source">

@@ -5,6 +5,7 @@ import { components } from "@/registry/components";
 import type { SectionVariant } from "@/registry/sections";
 import { DocSection } from "./DocHeader";
 import { CodeBlock } from "./CodeBlock";
+import { InstallCommand } from "@/components/blocks/InstallCommand";
 
 /** "Built with" badges, linking to each component's page. */
 export function BuiltWith({ uses }: { uses: string[] }) {
@@ -26,10 +27,18 @@ export function BuiltWith({ uses }: { uses: string[] }) {
 }
 
 /** Preview, notes, and source for one section design: the body of its page. */
-export function SectionDocBody({ variant }: { variant: SectionVariant }) {
+export function SectionDocBody({ variant, install }: { variant: SectionVariant; install: string }) {
   const Live = variant.Component;
   return (
     <>
+      <DocSection title="Install" id="install">
+        <p className="max-w-2xl leading-relaxed text-ink-muted">
+          Copy it into a shadcn/ui project with the shadcn CLI, which brings the theme and anything else it
+          needs. Or copy the source below.
+        </p>
+        <InstallCommand command={install} className="self-start" />
+      </DocSection>
+
       <DocSection title="Preview" id="preview">
         <div className="border-2 border-ink shadow-brutal-lg">
           <div className="flex items-center gap-1.5 border-b-2 border-ink bg-paper-sunken px-3 py-2">

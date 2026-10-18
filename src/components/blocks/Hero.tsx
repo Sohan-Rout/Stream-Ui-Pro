@@ -4,7 +4,8 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Badge, buttonStyles } from "@streamuilib/react";
-import { InstallCommand } from "./InstallCommand";
+import { InstallTabs } from "./InstallTabs";
+import { installOptions } from "@/registry/shadcn";
 import { HeroSwitchCard } from "./HeroSwitchCard";
 
 export function Hero() {
@@ -43,7 +44,7 @@ export function Hero() {
           </a>
         </div>
 
-        <InstallCommand command={siteConfig.installCommand} className="self-start" />
+        <InstallTabs options={installOptions("button")} className="self-start" />
       </div>
 
       {/* Specimen board */}

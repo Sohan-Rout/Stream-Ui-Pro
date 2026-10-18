@@ -21,6 +21,7 @@ import { components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { siteConfig } from "@/lib/site";
+import { shadcnName } from "@/registry/shadcn";
 
 const ROOT = path.join(import.meta.dir, "..");
 const STYLE = "streamui";
@@ -109,14 +110,15 @@ place(`${PKG}/useAudioPlayer.ts`, "use-audio-player", "registry:hook", "use-audi
 
 // Components: one item per package component, named by its docs slug.
 for (const c of components) {
-  item(c.slug, { type: "registry:ui", title: c.name, description: c.description, categories: ["component"] });
-  place(c.file, c.slug, "registry:ui", kebab(path.basename(c.file, path.extname(c.file))));
+  const name = shadcnName.component(c.slug);
+  item(name, { type: "registry:ui", title: c.name, description: c.description, categories: ["component"] });
+  place(c.file, name, "registry:ui", kebab(path.basename(c.file, path.extname(c.file))));
 }
 
 // Section designs: heroes by variant, the rest as "<slug>-section".
 for (const s of sections) {
   for (const v of s.variants) {
-    const name = s.variants.length > 1 ? `${v.id}-${s.slug}` : `${s.slug}-section`;
+    const name = shadcnName.section(s, v);
     item(name, {
       type: "registry:block",
       title: s.variants.length > 1 ? `${v.name} ${s.name.toLowerCase()}` : `${s.name} section`,
@@ -134,7 +136,7 @@ place("src/lib/brand.ts", "game-utils", "registry:lib", "brand");
 place("scripts/registry/best-score.ts", "game-utils", "registry:lib", "games/best-score");
 
 for (const l of labs) {
-  const name = `${l.slug}-lab`;
+  const name = shadcnName.lab(l.slug);
   item(name, { type: "registry:block", title: l.name, description: l.description, categories: ["lab"] });
   place(l.file, name, "registry:component", name);
 }

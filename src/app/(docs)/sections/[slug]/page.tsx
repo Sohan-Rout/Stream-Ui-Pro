@@ -10,6 +10,7 @@ import { PrevNext } from "@/components/docs/PrevNext";
 import { LiveThumb } from "@/components/docs/LiveThumb";
 import { BuiltWith, SectionDocBody } from "@/components/docs/SectionParts";
 import { getSection, sections } from "@/registry/sections";
+import { shadcnAdd, shadcnName } from "@/registry/shadcn";
 import { neighbors } from "@/registry/nav";
 
 /**
@@ -80,7 +81,7 @@ export default async function SectionPage({ params }: PageProps<"/sections/[slug
           })}
         </ul>
       ) : (
-        <SectionDocBody variant={first} />
+        <SectionDocBody variant={first} install={shadcnAdd(shadcnName.section(doc, first))} />
       )}
 
       <PrevNext prev={prev} next={next} />
