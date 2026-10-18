@@ -32,8 +32,22 @@ Every component, section, and lab is also a [shadcn registry](https://ui.shadcn.
 item, so you can copy the source straight into a project that uses shadcn/ui:
 
 ```bash
-npx shadcn@latest add https://streamui.org/r/theme.json https://streamui.org/r/flappy-hero.json
+# See everything in the registry
+bunx shadcn@latest search https://streamui.org/r/registry.json
+
+# Add an item (it brings the theme and anything else it needs)
+bunx shadcn@latest add https://streamui.org/r/flappy-hero.json
 ```
+
+Or register the namespace once and use short names:
+
+```bash
+bunx shadcn@latest registry add "@streamui=https://streamui.org/r/{name}.json"
+bunx shadcn@latest search @streamui
+bunx shadcn@latest add @streamui/flappy-hero
+```
+
+`npx` works the same as `bunx`.
 
 Files land in `streamui/` folders (`components/ui/streamui/button.tsx`, `lib/streamui/cn.ts`, ...),
 beside your own shadcn/ui components, never over them. `theme` adds the tokens and utilities;

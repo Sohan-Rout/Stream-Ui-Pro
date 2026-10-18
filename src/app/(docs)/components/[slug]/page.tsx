@@ -10,7 +10,7 @@ import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrevNext } from "@/components/docs/PrevNext";
 import { InstallTabs } from "@/components/blocks/InstallTabs";
-import { installOptions, shadcnName } from "@/registry/shadcn";
+import { installOptions, shadcnAdd, shadcnName } from "@/registry/shadcn";
 import { components, getComponent } from "@/registry/components";
 import { neighbors } from "@/registry/nav";
 
@@ -64,7 +64,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       </DocSection>
 
       <DocSection title="Installation" id="installation">
-        <InstallTabs options={installOptions(shadcnName.component(doc.slug))} className="self-start" />
+        <InstallTabs options={installOptions(shadcnAdd(shadcnName.component(doc.slug)))} className="self-start" />
         <CodeBlock code={doc.usage} filename="usage.tsx" />
       </DocSection>
 

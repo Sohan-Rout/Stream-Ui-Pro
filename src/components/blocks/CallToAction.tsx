@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { buttonStyles } from "@streamuilib/react";
 import { InstallTabs } from "./InstallTabs";
-import { installOptions } from "@/registry/shadcn";
+import { installOptions, shadcnBrowse } from "@/registry/shadcn";
 
 export function CallToAction() {
   return (
@@ -25,7 +25,7 @@ export function CallToAction() {
           </p>
         </div>
         <div className="flex max-w-full flex-col items-start gap-5">
-          <InstallTabs options={installOptions("button")} />
+          <InstallTabs options={installOptions(shadcnBrowse())} />
           <Link href="/components" className={buttonStyles({ variant: "secondary", size: "lg" })}>
             Browse components <ArrowRight aria-hidden />
           </Link>

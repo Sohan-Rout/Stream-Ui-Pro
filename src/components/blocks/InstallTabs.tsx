@@ -6,8 +6,8 @@ import type { InstallOption } from "@/registry/shadcn";
 import { InstallCommand } from "./InstallCommand";
 
 /**
- * Install commands side by side: the npm package, and the shadcn CLI (which
- * copies the source into the project from this site's registry).
+ * Install commands side by side: the npm package (with bun), and the shadcn
+ * CLI copying source from this site's registry.
  */
 export function InstallTabs({ options, className }: { options: InstallOption[]; className?: string }) {
   const [active, setActive] = useState(options[0].id);
