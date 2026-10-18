@@ -50,3 +50,10 @@ next-env.d.ts
 /registry.json
 /public/r/
 
+
+# /brag launch videos
+/brag-output*/
+
+# third-party agent skills, installed locally (see skills-lock.json)
+/.agents/
+/.claude/skills/brag
