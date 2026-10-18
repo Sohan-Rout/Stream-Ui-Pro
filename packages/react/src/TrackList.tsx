@@ -17,7 +17,7 @@ export type TrackListProps = Omit<ComponentProps<"ol">, "onSelect"> & {
 /** A playlist. The current track shows a live meter and is marked aria-current. */
 export function TrackList({ tracks, index, playing = false, onSelect, className, ...props }: TrackListProps) {
   return (
-    <ol aria-label="Playlist" className={cn("divide-y-2 divide-ink bg-paper-raised", className)} {...props}>
+    <ol aria-label="Playlist" className={cn("divide-y-2 divide-ink bg-paper-raised text-ink", className)} {...props}>
       {tracks.map((t, i) => {
         const current = i === index;
         return (

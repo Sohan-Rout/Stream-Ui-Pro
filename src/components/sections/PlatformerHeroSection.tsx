@@ -61,7 +61,7 @@ export function PlatformerHeroSection({ headingAs: Heading = "h1" }: { headingAs
   const score = coins * 200;
 
   return (
-    <section className="@container relative overflow-hidden bg-blue-soft">
+    <section className="@container relative overflow-hidden bg-blue-soft text-ink">
       <style href="platformer-hero" precedence="default">{`
         @keyframes platformer-hop { 0%, 60%, 100% { transform: translateY(0); } 75% { transform: translateY(-28px); } }
         @keyframes platformer-coin { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-56px); opacity: 0; } }

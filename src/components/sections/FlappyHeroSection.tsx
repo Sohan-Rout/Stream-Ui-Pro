@@ -236,7 +236,7 @@ export function FlappyHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
       tabIndex={-1}
       onPointerDown={onPointerDown}
       onKeyDown={onKeyDown}
-      className="@container relative cursor-pointer overflow-hidden bg-blue-soft outline-none select-none"
+      className="@container relative cursor-pointer overflow-hidden bg-blue-soft outline-none select-none text-ink"
     >
       <style href="flappy-hero" precedence="default">{`
         @keyframes flappy-hero-ground { to { background-position: -32px 0; } }

@@ -7,7 +7,7 @@ import { cn } from "./cn";
  */
 export function fieldFrame({ invalid, className }: { invalid?: boolean; className?: string } = {}) {
   return cn(
-    "flex border-2 border-ink bg-paper-raised shadow-brutal-sm transition-shadow duration-150",
+    "flex border-2 border-ink bg-paper-raised text-ink shadow-brutal-sm transition-shadow duration-150",
     "focus-within:shadow-brutal focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-blue",
     "has-disabled:opacity-50 has-disabled:shadow-none",
     invalid && "bg-pink-soft",

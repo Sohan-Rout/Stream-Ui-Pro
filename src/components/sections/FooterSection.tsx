@@ -9,7 +9,7 @@ const columns = [
 /** Footer with a newsletter signup and ruled link columns. */
 export function FooterSection() {
   return (
-    <footer className="@container bg-paper">
+    <footer className="@container bg-paper text-ink">
       <div className="grid grid-cols-1 gap-0.5 bg-ink @3xl:grid-cols-5">
         <div className="flex flex-col gap-5 bg-paper p-8 @3xl:col-span-2">
           <span className="font-display text-2xl tracking-tight">acme</span>

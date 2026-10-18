@@ -6,6 +6,8 @@ import type { SectionVariant } from "@/registry/sections";
 import { DocSection } from "./DocHeader";
 import { CodeBlock } from "./CodeBlock";
 import { InstallCommand } from "@/components/blocks/InstallCommand";
+import { shadcnAdd } from "@/registry/shadcn";
+import { OpenInV0 } from "./OpenInV0";
 
 /** "Built with" badges, linking to each component's page. */
 export function BuiltWith({ uses }: { uses: string[] }) {
@@ -27,16 +29,19 @@ export function BuiltWith({ uses }: { uses: string[] }) {
 }
 
 /** Preview, notes, and source for one section design: the body of its page. */
-export function SectionDocBody({ variant, install }: { variant: SectionVariant; install: string }) {
+export function SectionDocBody({ variant, item }: { variant: SectionVariant; item: string }) {
   const Live = variant.Component;
   return (
     <>
       <DocSection title="Install" id="install">
         <p className="max-w-2xl leading-relaxed text-ink-muted">
           Copy it into a shadcn/ui project with the shadcn CLI, which brings the theme and anything else it
-          needs. Or copy the source below.
+          needs, or open it in v0 to remix it. Or copy the source below.
         </p>
-        <InstallCommand command={install} className="self-start" />
+        <div className="flex flex-wrap items-center gap-3">
+          <InstallCommand command={shadcnAdd(item)} />
+          <OpenInV0 item={item} />
+        </div>
       </DocSection>
 
       <DocSection title="Preview" id="preview">

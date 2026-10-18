@@ -190,7 +190,7 @@ export function SnakeLab({ tick }: { tick?: number }) {
   const score = look === "pixel" ? String(game.score).padStart(4, "0") : String(game.score);
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
+    <div className="flex w-full flex-col items-center gap-4 text-ink">
       <div role="group" aria-label="Style" className="flex border-2 border-ink shadow-brutal-sm">
         {STYLES.map((s) => (
           <button

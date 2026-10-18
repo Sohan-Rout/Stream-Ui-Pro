@@ -75,7 +75,7 @@ export function PixelPromptHeroSection({ headingAs: Heading = "h1" }: { headingA
 
   return (
     <section
-      className="@container relative overflow-hidden bg-paper-sunken bg-pixel-grid"
+      className="@container relative overflow-hidden bg-paper-sunken bg-pixel-grid text-ink"
       style={{ backgroundSize: `${CELL}px ${CELL}px` }}
     >
       {/* Falls in whole cells (steps), like a game tick; still for reduced motion. */}

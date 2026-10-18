@@ -21,6 +21,9 @@ const SHADCN = "bunx shadcn@latest";
 /** The command that copies an item (and everything it needs) into a shadcn/ui project. */
 export const shadcnAdd = (name: string) => `${SHADCN} add ${registryItemUrl(name)}`;
 
+/** Opens a registry item in v0, which builds a live project from it. */
+export const openInV0Url = (name: string) => `https://v0.dev/chat/api/open?url=${encodeURIComponent(registryItemUrl(name))}`;
+
 /** Lists every item in the registry in the terminal. */
 export const shadcnBrowse = () => `${SHADCN} search ${siteConfig.url.replace(/\/$/, "")}/r/registry.json`;
 

@@ -164,7 +164,7 @@ export function MazeLab({ tick }: { tick?: number }) {
           : `Score ${game.score}. ${game.lives} ${game.lives === 1 ? "life" : "lives"} left. Level ${game.level}.`;
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
+    <div className="flex w-full flex-col items-center gap-4 text-ink">
       <div className="flex w-full max-w-80 items-center justify-between font-mono text-xs uppercase">
         <span>
           Score <span className="font-bold tabular-nums">{game.score}</span>

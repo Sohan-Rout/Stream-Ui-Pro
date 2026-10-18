@@ -29,7 +29,7 @@ export function MagneticLab() {
       ref={areaRef}
       onPointerMove={onMove}
       onPointerLeave={() => setOffset({ x: 0, y: 0 })}
-      className="grid h-56 w-full place-items-center border-2 border-dashed border-ink-faint"
+      className="grid h-56 w-full place-items-center border-2 border-dashed border-ink-faint text-ink"
     >
       <div
         className="transition-transform duration-150 ease-out"

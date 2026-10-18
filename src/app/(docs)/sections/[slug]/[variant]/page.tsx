@@ -6,7 +6,7 @@ import { DocHeader } from "@/components/docs/DocHeader";
 import { PrevNext } from "@/components/docs/PrevNext";
 import { BuiltWith, SectionDocBody } from "@/components/docs/SectionParts";
 import { getSectionVariant, sections } from "@/registry/sections";
-import { shadcnAdd, shadcnName } from "@/registry/shadcn";
+import { shadcnName } from "@/registry/shadcn";
 import { neighbors } from "@/registry/nav";
 
 /** One page per design, for sections that have more than one. */
@@ -54,7 +54,7 @@ export default async function SectionVariantPage({ params }: PageProps<"/section
         description={v.description}
         meta={<BuiltWith uses={v.uses} />}
       />
-      <SectionDocBody variant={v} install={shadcnAdd(shadcnName.section(section, v))} />
+      <SectionDocBody variant={v} item={shadcnName.section(section, v)} />
       <PrevNext prev={prev} next={next} />
     </article>
   );

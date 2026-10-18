@@ -28,7 +28,7 @@ export function Accordion({ items, exclusive = false, defaultOpen = [], classNam
           key={item.id}
           name={exclusive ? group : undefined}
           open={defaultOpen.includes(item.id)}
-          className="group border-2 border-ink bg-paper-raised shadow-brutal-sm open:bg-lime-soft"
+          className="group border-2 border-ink bg-paper-raised text-ink shadow-brutal-sm open:bg-lime-soft"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-bold [&::-webkit-details-marker]:hidden">
             {item.title}

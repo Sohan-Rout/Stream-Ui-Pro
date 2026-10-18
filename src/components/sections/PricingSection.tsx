@@ -36,7 +36,7 @@ export function PricingSection() {
   const [billing, setBilling] = useState<Billing>("yearly");
 
   return (
-    <section className="@container bg-paper">
+    <section className="@container bg-paper text-ink">
       <header className="flex flex-col gap-6 border-b-2 border-ink p-8 @3xl:flex-row @3xl:items-end @3xl:justify-between @3xl:p-12">
         <div>
           <p className="font-mono text-xs font-bold tracking-widest text-ink-muted uppercase">Pricing</p>

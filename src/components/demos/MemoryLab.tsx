@@ -82,7 +82,7 @@ export function MemoryLab({
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-5">
+    <div className="flex w-full flex-col items-center gap-5 text-ink">
       <ul aria-label="Cards" className="grid grid-cols-4 gap-2">
         {deck.map((card, i) => {
           const isMatched = matched.has(card.pair);

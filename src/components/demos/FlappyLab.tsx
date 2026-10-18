@@ -263,7 +263,7 @@ export function FlappyLab() {
           : "Press Space, or tap the game, to start.";
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
+    <div className="flex w-full flex-col items-center gap-4 text-ink">
       <div className="flex w-full max-w-80 items-center justify-between font-mono text-xs uppercase">
         <span className="text-ink-muted">Space · ↑ · tap to flap</span>
         <span className="text-ink-muted">

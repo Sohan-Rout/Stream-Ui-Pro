@@ -79,7 +79,7 @@ export function DiceLab() {
   const [x, y] = SHOW[face];
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6 text-ink">
       <div aria-hidden className="relative grid h-40 w-full place-items-center bg-dots perspective-[600px]">
         {/* Fixed three-quarter view, so the die reads as a cube even at rest. */}
         <div className="transform-3d" style={{ transform: "rotateX(-22deg) rotateY(-28deg)" }}>

@@ -10,6 +10,7 @@ import { CodeBlock } from "@/components/docs/CodeBlock";
 import { PropsTable } from "@/components/docs/PropsTable";
 import { PrevNext } from "@/components/docs/PrevNext";
 import { InstallTabs } from "@/components/blocks/InstallTabs";
+import { OpenInV0 } from "@/components/docs/OpenInV0";
 import { installOptions, shadcnAdd, shadcnName } from "@/registry/shadcn";
 import { components, getComponent } from "@/registry/components";
 import { neighbors } from "@/registry/nav";
@@ -64,7 +65,10 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       </DocSection>
 
       <DocSection title="Installation" id="installation">
-        <InstallTabs options={installOptions(shadcnAdd(shadcnName.component(doc.slug)))} className="self-start" />
+        <div className="flex flex-wrap items-end gap-3">
+          <InstallTabs options={installOptions(shadcnAdd(shadcnName.component(doc.slug)))} />
+          <OpenInV0 item={shadcnName.component(doc.slug)} />
+        </div>
         <CodeBlock code={doc.usage} filename="usage.tsx" />
       </DocSection>
 

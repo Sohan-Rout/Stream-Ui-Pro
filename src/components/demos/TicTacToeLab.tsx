@@ -121,7 +121,7 @@ export function TicTacToeLab({ cpuDelay = 380 }: { cpuDelay?: number }) {
           : `${turn} to move`;
 
   return (
-    <div className="flex w-full flex-col items-center gap-5">
+    <div className="flex w-full flex-col items-center gap-5 text-ink">
       <div role="group" aria-label="Opponent" className="flex flex-wrap justify-center border-2 border-ink shadow-brutal-sm">
         {MODES.map((m) => (
           <button

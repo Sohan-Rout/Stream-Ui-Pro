@@ -45,7 +45,7 @@ export function BlocksHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
 
   return (
     <section
-      className="@container relative overflow-hidden bg-paper-sunken bg-pixel-grid"
+      className="@container relative overflow-hidden bg-paper-sunken bg-pixel-grid text-ink"
       style={{ backgroundSize: `${CELL}px ${CELL}px` }}
     >
       {/* Pieces and letters move in whole steps, like a game tick; still for reduced motion. */}

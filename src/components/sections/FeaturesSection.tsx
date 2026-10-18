@@ -13,7 +13,7 @@ const features: { icon: LucideIcon; title: string; body: string; tone: string }[
 /** Feature grid separated by hard rules. */
 export function FeaturesSection() {
   return (
-    <section className="@container bg-paper">
+    <section className="@container bg-paper text-ink">
       <header className="border-b-2 border-ink p-8 @3xl:p-12">
         <p className="font-mono text-xs font-bold tracking-widest text-ink-muted uppercase">Features</p>
         <h2 className="mt-4 max-w-xl font-display text-3xl leading-tight tracking-tight text-balance @3xl:text-4xl">

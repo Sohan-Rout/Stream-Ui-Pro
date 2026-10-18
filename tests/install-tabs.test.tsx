@@ -28,3 +28,10 @@ test("the landing page's shadcn command lists the whole registry", async () => {
   expect(code()).toBe(`$${shadcnBrowse()}`);
   expect(code()).toContain(`${siteConfig.url}/r/registry.json`);
 });
+
+test("Open in v0 links to the item's registry JSON on this site", async () => {
+  const { openInV0Url, registryItemUrl } = await import("@/registry/shadcn");
+  const url = new URL(openInV0Url("flappy-hero"));
+  expect(url.origin + url.pathname).toBe("https://v0.dev/chat/api/open");
+  expect(url.searchParams.get("url")).toBe(registryItemUrl("flappy-hero"));
+});

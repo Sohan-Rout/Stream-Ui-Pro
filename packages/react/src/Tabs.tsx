@@ -37,7 +37,7 @@ export function Tabs({ items, label, defaultIndex = 0, className }: TabsProps) {
   }
 
   return (
-    <div className={className}>
+    <div className={cn("text-ink", className)}>
       <div role="tablist" aria-label={label} className="flex" onKeyDown={onKeyDown}>
         {items.map((t, i) => {
           const selected = i === active;

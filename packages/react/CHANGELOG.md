@@ -6,6 +6,14 @@ include breaking changes, and they are called out here.
 
 Each `## x.y.z` section below becomes the notes of its GitHub release.
 
+## Unreleased
+
+### Fixed
+
+- Input, Select, Textarea, Accordion, Tabs, and TrackList set their own ink
+  text color instead of inheriting it, so they stay readable inside apps
+  with a light-on-dark body color.
+
 ## 0.3.0
 
 ### Added

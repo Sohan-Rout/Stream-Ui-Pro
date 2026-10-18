@@ -167,7 +167,7 @@ export function TetrisLab({ gravity }: { gravity?: number }) {
           : `Score ${game.score}. Lines ${game.lines}. Level ${game.level}.`;
 
   return (
-    <div className="@container flex w-full flex-col items-center gap-4">
+    <div className="@container flex w-full flex-col items-center gap-4 text-ink">
       {/* Narrow (phones): stats above a wider board. From 24rem of room: stats beside it. */}
       <div className="flex w-full flex-col items-center gap-3 @sm:w-auto @sm:flex-row @sm:items-start @sm:gap-4">
         <div

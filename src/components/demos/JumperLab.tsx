@@ -323,7 +323,7 @@ export function JumperLab() {
   const showOverlay = hud.status === "ready" || hud.status === "over" || hud.status === "won" || hud.status === "paused";
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
+    <div className="flex w-full flex-col items-center gap-4 text-ink">
       <div className="flex w-full max-w-96 items-center justify-between font-mono text-xs uppercase">
         <span>
           Score <span className="font-bold tabular-nums">{String(hud.score).padStart(5, "0")}</span>

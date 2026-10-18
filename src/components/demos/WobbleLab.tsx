@@ -12,7 +12,7 @@ const letters = [
 /** Pure CSS: hover the word and a staggered wave runs through the letters. */
 export function WobbleLab() {
   return (
-    <div className="group grid h-56 w-full cursor-default place-items-center">
+    <div className="group grid h-56 w-full cursor-default place-items-center text-ink">
       <p aria-label="Wobble" className="flex">
         {letters.map((l, i) => (
           <span

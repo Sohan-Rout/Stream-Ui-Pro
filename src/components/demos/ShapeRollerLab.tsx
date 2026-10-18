@@ -21,7 +21,7 @@ export function ShapeRollerLab() {
   const [roll, setRoll] = useState<Roll>({ shape: 0, color: 0, tilt: 2, n: 0 });
 
   return (
-    <div className="flex w-full flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6 text-ink">
       <div className="grid h-40 w-full place-items-center bg-dots">
         <div key={roll.n} className={cn("animate-wiggle", tilts[roll.tilt])}>
           <div

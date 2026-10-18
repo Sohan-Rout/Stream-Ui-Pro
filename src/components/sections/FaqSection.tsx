@@ -25,7 +25,7 @@ const faqs = [
  */
 export function FaqSection() {
   return (
-    <section className="@container bg-paper">
+    <section className="@container bg-paper text-ink">
       <div className="grid grid-cols-1 @3xl:grid-cols-3">
         <header className="border-b-2 border-ink p-8 @3xl:border-r-2 @3xl:border-b-0 @3xl:p-12">
           <p className="font-mono text-xs font-bold tracking-widest text-ink-muted uppercase">FAQ</p>
