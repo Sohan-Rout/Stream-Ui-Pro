@@ -210,6 +210,27 @@ The theme is light only.
 See [Publishing to npm](packages/react/README.md#publishing-to-npm) in the
 package README.
 
+## Launch videos
+
+Short launch videos come from the third-party
+[`/brag`](https://github.com/latent-spaces/brag) agent skill. The skill is not
+committed: it bundles about 18 MB of audio, so `.agents/` and
+`.claude/skills/brag` are gitignored. `skills-lock.json` records the version
+in use.
+
+To set it up in a fresh clone:
+
+```bash
+# Install the skill into .agents/skills/brag
+bunx skills add https://github.com/latent-spaces/brag --skill brag
+
+# Link it where Claude Code looks for project skills
+ln -s ../../.agents/skills/brag .claude/skills/brag
+```
+
+With the dev server running (`bun dev`), ask your agent to `/brag`. The video,
+poster, and share copy land in `brag-output/`, which is also gitignored.
+
 ## Support
 
 stream/ui is free and open source. If it saves you time, you can support its
