@@ -136,7 +136,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -527,6 +527,25 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               <div style={{ position: "absolute", left: 24, top: 8, width: 14, height: 14, borderRadius: 99, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
               <div style={{ position: "absolute", left: 2, top: 20, width: 20, height: 12, backgroundColor: brand.violet, border: `3px solid ${brand.ink}` }} />
             </div>
+          </div>
+        );
+      }
+      if (art.game === "pinball") {
+        // A table corner: bumpers, a flipper, and the ball.
+        return (
+          <div style={{ display: "flex", position: "relative", width: 220, height: 280, backgroundColor: brand.paper, border: `5px solid ${brand.ink}`, boxShadow: hard(12), transform: "rotate(-3deg)", overflow: "hidden" }}>
+            {[
+              [60, 70, brand.pink],
+              [140, 70, brand.blue],
+              [100, 135, brand.lime],
+            ].map(([x, y, c], i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "absolute", left: (x as number) - 26, top: (y as number) - 26, width: 52, height: 52, borderRadius: 99, backgroundColor: c as string, border: `4px solid ${brand.ink}`, boxShadow: hard(5) }}>
+                <div style={{ display: "flex", width: 20, height: 20, borderRadius: 99, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+              </div>
+            ))}
+            <div style={{ display: "flex", position: "absolute", left: 40, top: 228, width: 70, height: 18, borderRadius: 9, backgroundColor: brand.lime, border: `4px solid ${brand.ink}`, transform: "rotate(22deg)" }} />
+            <div style={{ display: "flex", position: "absolute", left: 112, top: 228, width: 70, height: 18, borderRadius: 9, backgroundColor: brand.lime, border: `4px solid ${brand.ink}`, transform: "rotate(-22deg)" }} />
+            <div style={{ display: "flex", position: "absolute", left: 150, top: 178, width: 22, height: 22, borderRadius: 99, backgroundColor: brand.raised, border: `4px solid ${brand.ink}` }} />
           </div>
         );
       }

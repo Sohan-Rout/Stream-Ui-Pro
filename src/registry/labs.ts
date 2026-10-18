@@ -10,6 +10,7 @@ import { FlappyLab } from "@/components/demos/FlappyLab";
 import { TetrisLab } from "@/components/demos/TetrisLab";
 import { MazeLab } from "@/components/demos/MazeLab";
 import { JumperLab } from "@/components/demos/JumperLab";
+import { PinballLab } from "@/components/demos/PinballLab";
 
 export type LabDoc = {
   slug: string;
@@ -18,8 +19,6 @@ export type LabDoc = {
   file: string;
   Component: ComponentType;
   notes: string[];
-  /** Spans both columns on the Labs page, for experiments that need the room. */
-  wide?: boolean;
 };
 
 export const labs: LabDoc[] = [
@@ -142,12 +141,24 @@ export const labs: LabDoc[] = [
     ],
   },
   {
+    slug: "pinball",
+    name: "Pinball",
+    description: "A neo-brutalist pinball table: pull the plunger, work the flippers, and light up the pop bumpers.",
+    file: "src/components/demos/PinballLab.tsx",
+    Component: PinballLab,
+    notes: [
+      "Hold Space (or Down) to pull the plunger and let go to launch; Z or Left and slash or Right work the flippers. On touch, hold the buttons.",
+      "Flippers hand their own swing speed to the ball, so timing matters: flip as it rolls down for a strong shot up the table.",
+      "Physics live in src/lib/games/pinball.ts: several substeps a frame keep a fast ball from passing through walls, and tests check a full launch reaches the table.",
+      "Pop bumpers score 100 and slingshots 10; three balls, and a weak launch rolls back onto the plunger instead of costing one.",
+    ],
+  },
+  {
     slug: "tetris",
     name: "Tetris",
     description: "Neo-brutalist falling blocks: hard-edged tetrominoes, a ghost preview, and the next three pieces.",
     file: "src/components/demos/TetrisLab.tsx",
     Component: TetrisLab,
-    wide: true,
     notes: [
       "Arrows move and rotate (Z rotates back), Down drops a row, Space drops to the ghost, and P pauses. On touch, tap to rotate, swipe sideways to move, and swipe down to drop.",
       "The rules live in src/lib/games/tetris.ts as pure functions: a 7-bag randomizer, wall kicks, classic scoring, and a level every 10 lines.",

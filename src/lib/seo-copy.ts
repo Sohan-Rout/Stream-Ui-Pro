@@ -249,6 +249,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A retro side-scrolling platformer in React and canvas: coyote time, a jump buffer, coin blocks, walkers, pits, and a flag. Full source code.",
     keywords: ["platformer game React", "retro platformer", "side scroller React", "canvas game React", "React game"],
   },
+  pinball: {
+    title: "Pinball Game in React and Canvas",
+    description:
+      "A neobrutalism pinball game in React and canvas: a spring plunger, flippers that pass on their swing, pop bumpers, and slingshots. Full source.",
+    keywords: ["pinball game React", "canvas pinball", "pinball physics JavaScript", "React game", "browser pinball"],
+  },
   tetris: {
     title: "Tetris Game in React: Neobrutalism Blocks",
     description:

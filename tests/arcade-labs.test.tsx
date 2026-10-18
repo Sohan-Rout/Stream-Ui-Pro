@@ -4,6 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import userEvent from "@testing-library/user-event";
 import { MazeLab } from "@/components/demos/MazeLab";
 import { JumperLab } from "@/components/demos/JumperLab";
+import { PinballLab } from "@/components/demos/PinballLab";
 
 afterEach(cleanup);
 
@@ -58,6 +59,27 @@ describe("JumperLab", () => {
     render(<JumperLab />);
     await userEvent.click(screen.getByRole("button", { name: "Start" }));
     fireEvent.keyDown(game(), { key: "p" });
+    await waitFor(() => expect(announce()).toBe("Paused."));
+  });
+});
+
+describe("PinballLab", () => {
+  const table = () => screen.getByRole("group", { name: /^Pinball/ });
+
+  test("starts on a ready card with three balls and the touch controls", () => {
+    render(<PinballLab />);
+    expect(screen.getByText("Pinball")).toBeTruthy();
+    expect(screen.getByLabelText("3 balls left")).toBeTruthy();
+    for (const name of ["Left flipper", "Right flipper", "Launch", "Pause"]) expect(screen.getByRole("button", { name })).toBeTruthy();
+  });
+
+  test("holding Space starts the game; P pauses it", async () => {
+    render(<PinballLab />);
+    table().focus();
+    fireEvent.keyDown(table(), { key: " " });
+    await waitFor(() => expect(screen.queryByText("Pinball")).toBeNull());
+    fireEvent.keyUp(table(), { key: " " });
+    fireEvent.keyDown(table(), { key: "p" });
     await waitFor(() => expect(announce()).toBe("Paused."));
   });
 });
