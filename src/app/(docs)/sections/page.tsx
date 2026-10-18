@@ -46,53 +46,49 @@ export default function SectionsIndex() {
       </ul>
 
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {sections.map((s, i) => {
-          const featured = i === 0;
-          return (
-            <li
-              key={s.slug}
-              className={cn(
-                "group relative flex flex-col border-2 border-ink p-4 shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none sm:p-5",
-                TINTS[i % TINTS.length],
-                featured && "md:col-span-2",
-              )}
-            >
-              {/* A small browser window around the live preview. */}
-              <div aria-hidden className="flex items-center gap-1.5 border-2 border-b-0 border-ink bg-paper-raised px-3 py-1.5">
-                <span className="size-2 rounded-full border-2 border-ink bg-pink" />
-                <span className="size-2 rounded-full border-2 border-ink bg-orange" />
-                <span className="size-2 rounded-full border-2 border-ink bg-lime" />
-                <span className="ml-2 truncate font-mono text-xs text-ink-muted">{s.slug}.tsx</span>
-              </div>
-              <LiveThumb>
-                <FirstVariant section={s} />
-              </LiveThumb>
+        {sections.map((s, i) => (
+          <li
+            key={s.slug}
+            className={cn(
+              "group relative flex flex-col border-2 border-ink p-4 shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none sm:p-5",
+              TINTS[i % TINTS.length],
+            )}
+          >
+            {/* A small browser window around the live preview. */}
+            <div aria-hidden className="flex items-center gap-1.5 border-2 border-b-0 border-ink bg-paper-raised px-3 py-1.5">
+              <span className="size-2 rounded-full border-2 border-ink bg-pink" />
+              <span className="size-2 rounded-full border-2 border-ink bg-orange" />
+              <span className="size-2 rounded-full border-2 border-ink bg-lime" />
+              <span className="ml-2 truncate font-mono text-xs text-ink-muted">{s.slug}.tsx</span>
+            </div>
+            <LiveThumb>
+              <FirstVariant section={s} />
+            </LiveThumb>
 
-              <div className="mt-5 flex items-baseline gap-3">
-                <span className="font-mono text-xs font-bold text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
-                <h2 className={cn("font-display tracking-tight", featured ? "text-2xl sm:text-3xl" : "text-xl")}>
-                  <Link href={`/sections/${s.slug}`} className="after:absolute after:inset-0">
-                    {s.name}
-                  </Link>
-                </h2>
-              </div>
-              <p className={cn("mt-2 leading-relaxed text-ink-muted", featured ? "max-w-xl" : "text-sm")}>{s.description}</p>
+            <div className="mt-5 flex items-baseline gap-3">
+              <span className="font-mono text-xs font-bold text-ink-muted">{String(i + 1).padStart(2, "0")}</span>
+              <h2 className="font-display text-xl tracking-tight">
+                <Link href={`/sections/${s.slug}`} className="after:absolute after:inset-0">
+                  {s.name}
+                </Link>
+              </h2>
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">{s.description}</p>
 
-              <div className="mt-auto flex items-center justify-between gap-3 pt-5">
-                <span className="border-2 border-ink bg-paper-raised px-2 py-0.5 font-mono text-xs font-bold">
-                  {s.variants.length} {s.variants.length === 1 ? "design" : "designs"}
-                </span>
-                <span
-                  aria-hidden
-                  className="inline-flex items-center gap-1.5 border-2 border-ink bg-lime px-2.5 py-1 font-mono text-xs font-bold text-on-bright shadow-brutal-sm"
-                >
-                  Open
-                  <ArrowRight className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none" />
-                </span>
-              </div>
-            </li>
-          );
-        })}
+            <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+              <span className="border-2 border-ink bg-paper-raised px-2 py-0.5 font-mono text-xs font-bold">
+                {s.variants.length} {s.variants.length === 1 ? "design" : "designs"}
+              </span>
+              <span
+                aria-hidden
+                className="inline-flex items-center gap-1.5 border-2 border-ink bg-lime px-2.5 py-1 font-mono text-xs font-bold text-on-bright shadow-brutal-sm"
+              >
+                Open
+                <ArrowRight className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none" />
+              </span>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
