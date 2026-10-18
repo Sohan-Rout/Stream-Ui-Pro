@@ -176,15 +176,39 @@ const bar = (width: number | string, height: number, color: string) => (
 
 /** What's inside the section window: a sketch of the layout, per variant. */
 function SectionBody({ variant, accent }: { variant?: string; accent: string }) {
-  if (variant === "grid" || variant === "levels") {
+  if (variant === "hero/maze") {
+    const corridor = (flip: boolean) => (
+      <div style={{ display: "flex", alignItems: "center", gap: 10, height: 36, padding: "0 12px", flexDirection: flip ? "row-reverse" : "row", backgroundColor: brand.paper, borderTop: `4px solid ${brand.ink}`, borderBottom: `4px solid ${brand.ink}` }}>
+        {[brand.orange, brand.blue, brand.pink].map((c) => (
+          <div key={c} style={{ display: "flex", width: 18, height: 18, borderTopLeftRadius: 9, borderTopRightRadius: 9, backgroundColor: c, border: `2px solid ${brand.ink}` }} />
+        ))}
+        <div style={{ display: "flex", width: 22, height: 22, borderRadius: 11, backgroundColor: brand.lime, border: `3px solid ${brand.ink}`, borderRightColor: flip ? brand.ink : "transparent", borderLeftColor: flip ? "transparent" : brand.ink }} />
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} style={{ display: "flex", width: 6, height: 6, backgroundColor: brand.ink, marginLeft: flip ? 0 : 8, marginRight: flip ? 8 : 0 }} />
+        ))}
+      </div>
+    );
+    return (
+      <div style={{ display: "flex", flexDirection: "column", height: 180, backgroundColor: brand.violetSoft }}>
+        {corridor(false)}
+        <div style={{ display: "flex", flex: 1, flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8 }}>
+          <div style={{ display: "flex", fontFamily: "Space Mono", fontWeight: 700, fontSize: 14, color: brand.pink }}>READY!</div>
+          {bar(150, 12, brand.ink)}
+          {bar(100, 12, brand.lime)}
+        </div>
+        {corridor(true)}
+      </div>
+    );
+  }
+  if (variant === "features/grid" || variant === "features/levels") {
     // A 3×2 board of feature tiles: plain cells, or numbered level tiles.
     const tones = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange, brand.lime];
     return (
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, padding: 14, backgroundColor: variant === "levels" ? brand.blueSoft : brand.paper }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, padding: 14, backgroundColor: variant === "features/levels" ? brand.blueSoft : brand.paper }}>
         {tones.map((c, i) => (
           <div key={i} style={{ display: "flex", flexDirection: "column", gap: 5, width: 80, padding: 7, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 22, backgroundColor: c, border: `2px solid ${brand.ink}`, fontFamily: "Space Mono", fontWeight: 700, fontSize: 10 }}>
-              {variant === "levels" ? `1-${i + 1}` : ""}
+              {variant === "features/levels" ? `1-${i + 1}` : ""}
             </div>
             {bar("85%", 6, brand.ink)}
             {bar("60%", 5, brand.faint)}
@@ -193,7 +217,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "bento") {
+  if (variant === "features/bento") {
     return (
       <div style={{ display: "flex", gap: 8, padding: 14, height: 180, backgroundColor: brand.paper }}>
         <div style={{ display: "flex", width: 120, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
@@ -207,7 +231,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "maze") {
+  if (variant === "features/maze") {
     // The corridor: chomper, a dot trail ahead, three bots behind, rooms below.
     return (
       <div style={{ display: "flex", flexDirection: "column", height: 180, backgroundColor: brand.violetSoft }}>
@@ -228,7 +252,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "flappy") {
+  if (variant === "hero/flappy") {
     // Pipes, the bird between them, a card, and the ground.
     return (
       <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.blueSoft }}>
@@ -248,7 +272,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "platformer") {
+  if (variant === "hero/platformer") {
     // Sky, a block row with a coin, a pipe, and brick ground.
     const t = 26;
     return (
@@ -272,7 +296,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "blocks") {
+  if (variant === "hero/blocks") {
     // The headline as letter tiles over a block stack.
     const tones = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange];
     const u = 18;
@@ -308,7 +332,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
-  if (variant === "pixel") {
+  if (variant === "hero/pixel") {
     const u = 18;
     const block = (x: number, y: number, color: string, key: string) => (
       <div key={key} style={{ display: "flex", position: "absolute", left: x * u, top: y * u, width: u, height: u, backgroundColor: color, border: `3px solid ${brand.ink}` }} />

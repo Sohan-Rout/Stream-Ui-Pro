@@ -175,6 +175,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "A neobrutalism retro platformer hero for React and Tailwind CSS: bonus blocks that pop coins, a live HUD, pipes, clouds, and a pixel mascot.",
     keywords: [...base, "platformer hero section", "8-bit hero", "retro game landing page", "pixel art hero", "game UI"],
   },
+  "hero/maze": {
+    title: "Arcade Maze Hero Section for React",
+    description:
+      "An arcade maze hero for React and Tailwind CSS: corridors where a chomper eats a dot trail chased by bots, around a READY! headline. CSS only.",
+    keywords: [...base, "arcade hero section", "retro game hero", "maze animation", "game landing page", "React hero"],
+  },
   "hero/flappy": {
     title: "Flappy Hero Section with Scrolling Pipes",
     description:

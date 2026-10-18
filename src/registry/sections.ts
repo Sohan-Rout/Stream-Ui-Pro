@@ -4,6 +4,7 @@ import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSec
 import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
 import { FlappyHeroSection } from "@/components/sections/FlappyHeroSection";
+import { MazeHeroSection } from "@/components/sections/MazeHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
 import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection";
@@ -37,7 +38,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in four playful layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in five playful layouts.",
     variants: [
       {
         id: "pixel",
@@ -76,6 +77,19 @@ export const sections: SectionDoc[] = [
           "Bonus blocks are real buttons: click or press Enter to pop a coin and add to the HUD, once per block. The count is announced to screen readers.",
           "The mascot is an original sprite drawn from a text grid in SPRITE; swap the letters to draw your own.",
           "The bounce, coin pops, and block bumps are decorative and hold still for reduced motion.",
+        ],
+      },
+      {
+        id: "maze",
+        name: "Maze",
+        description: "An arcade start screen: corridors where a chomper eats a dot trail with bots on its tail, around a READY! headline.",
+        file: "src/components/sections/MazeHeroSection.tsx",
+        Component: MazeHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "The two corridors run opposite ways, half a lap apart, and the dots vanish behind each chomper. CSS only; it holds still for reduced motion.",
+          "Swap the score bar numbers for your own (or drop it); READY! and the power pellets blink in place.",
+          "Pairs with the Maze features section. Original characters, in the spirit of arcade maze games.",
         ],
       },
       {
