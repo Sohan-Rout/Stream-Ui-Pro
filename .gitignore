@@ -49,3 +49,6 @@ next-env.d.ts
 /registry/
 /registry.json
 /public/r/
+
+# brag shots (bun scripts/brag.ts)
+/brag/
