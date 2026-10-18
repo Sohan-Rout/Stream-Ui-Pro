@@ -27,7 +27,7 @@ export type Bumper = { x: number; y: number; r: number; points: number };
 
 /** Flipper geometry: pivot, length, capsule radius, and resting/raised angles (radians, y down). */
 export type FlipperSide = "left" | "right";
-export const FLIPPER = { length: 50, radius: 6, rest: 0.5, up: -0.42, speedUp: 22, speedDown: 12 } as const;
+export const FLIPPER = { length: 56, radius: 7, rest: 0.5, up: -0.42, speedUp: 22, speedDown: 12 } as const;
 export const PIVOTS: Record<FlipperSide, Vec> = { left: { x: 95, y: 420 }, right: { x: 225, y: 420 } };
 
 /** The launch lane, between the inner wall and the right wall. */
@@ -202,6 +202,23 @@ function collideSegment(ball: Ball, a: Vec, b: Vec, pad: number, bounce: number,
   return true;
 }
 
+/**
+ * Swing both flippers toward raised or resting over `dt` seconds. Their
+ * angular speed is what kicks the ball.
+ */
+function swing(flippers: PinballGame["flippers"], input: Input, dt: number): PinballGame["flippers"] {
+  const next = { ...flippers };
+  for (const side of ["left", "right"] as const) {
+    const f = flippers[side];
+    const pressed = side === "left" ? input.left : input.right;
+    const target = pressed ? FLIPPER.up : FLIPPER.rest;
+    const speed = pressed ? FLIPPER.speedUp : FLIPPER.speedDown;
+    const delta = Math.max(-speed * dt, Math.min(speed * dt, target - f.angle));
+    next[side] = { angle: f.angle + delta, omega: delta / dt };
+  }
+  return next;
+}
+
 const rotate = <T,>(xs: T[], by: 1 | -1) => (by === 1 ? [xs[xs.length - 1], ...xs.slice(0, -1)] : [...xs.slice(1), xs[0]]);
 
 /** Advance the table by `seconds` with the current input. */
@@ -228,21 +245,14 @@ export function step(game: PinballGame, input: Input, seconds: number): PinballG
     }
   };
 
-  // Flippers swing toward raised or resting; their angular speed is what kicks the ball.
-  // A fresh press also shifts the lit lanes toward that side, as on a real table.
-  const flippers = { ...game.flippers };
+  // A fresh flipper press shifts the lit lanes toward that side, as on a real table.
   for (const side of ["left", "right"] as const) {
-    const f = flippers[side];
-    const pressed = side === "left" ? input.left : input.right;
-    if (pressed && !game.held[side]) {
+    if ((side === "left" ? input.left : input.right) && !game.held[side]) {
       lanes = rotate(lanes, side === "left" ? -1 : 1);
       events.push({ kind: "flip", side });
     }
-    const target = pressed ? FLIPPER.up : FLIPPER.rest;
-    const speed = pressed ? FLIPPER.speedUp : FLIPPER.speedDown;
-    const delta = Math.max(-speed * dt, Math.min(speed * dt, target - f.angle));
-    flippers[side] = { angle: f.angle + delta, omega: delta / dt };
   }
+  let flippers = game.flippers;
   const held = { left: input.left, right: input.right };
 
   // A cleared bank pops back up after a beat.
@@ -265,6 +275,7 @@ export function step(game: PinballGame, input: Input, seconds: number): PinballG
       events.push({ kind: "launch" });
     }
     if (onPlunger) {
+      flippers = swing(flippers, input, dt);
       return { ...base(), charge, ballSave, ball: { ...restingBall(), y: LANE.plungerY - BALL_R + charge * 14 } };
     }
   }
@@ -273,6 +284,8 @@ export function step(game: PinballGame, input: Input, seconds: number): PinballG
   if (ball.x < LANE.left) ballSave = Math.max(0, ballSave - dt);
 
   for (let i = 0; i < SUBSTEPS; i++) {
+    // Flippers move a substep at a time too, so a fast swing can't jump past the ball.
+    flippers = swing(flippers, input, h);
     const prevY = ball.y;
     ball.vy += GRAVITY * h;
     const speed = Math.hypot(ball.vx, ball.vy);

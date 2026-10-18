@@ -106,6 +106,49 @@ describe("flippers", () => {
   });
 });
 
+describe("flippers don't let the ball through", () => {
+  /** How far the ball sits above the flipper's line (negative: it got through). */
+  const above = (g: PinballGame, side: "left" | "right") => {
+    const p = PIVOTS[side];
+    const tip = flipperTip(side, g.flippers[side].angle);
+    const t = (g.ball.x - p.x) / (tip.x - p.x);
+    if (t < 0 || t > 1) return Infinity;
+    return p.y + (tip.y - p.y) * t - g.ball.y;
+  };
+
+  for (const at of [0.3, 0.6, 0.9]) {
+    test(`a full-speed flip with the ball ${Math.round(at * 100)}% along the flipper sends it up, not through`, () => {
+      const tip = flipperTip("left", FLIPPER.rest);
+      const p = PIVOTS.left;
+      const x = p.x + (tip.x - p.x) * at;
+      const y = p.y + (tip.y - p.y) * at - FLIPPER.radius - BALL_R - 1;
+      let g = playing(free(x, y, 0, 120));
+      let fastestUp = 0;
+      for (let i = 0; i < 20; i++) {
+        g = step(g, { ...NO_INPUT, left: true }, DT);
+        expect(above(g, "left")).toBeGreaterThan(0);
+        fastestUp = Math.min(fastestUp, g.ball.vy);
+      }
+      expect(fastestUp).toBeLessThan(-150);
+    });
+  }
+
+  test("a ball dropped on a resting flipper's tip doesn't sink into it", () => {
+    const tip = flipperTip("right", FLIPPER.rest);
+    let g = playing(free(tip.x + 6, tip.y - 30, 0, 500));
+    for (let i = 0; i < 15; i++) {
+      g = step(g, NO_INPUT, DT);
+      expect(above(g, "right")).toBeGreaterThan(-1);
+    }
+  });
+
+  test("the gap between resting flippers is a little wider than the ball", () => {
+    const gap = flipperTip("right", FLIPPER.rest).x - flipperTip("left", FLIPPER.rest).x - FLIPPER.radius * 2;
+    expect(gap).toBeGreaterThan(BALL_R * 2);
+    expect(gap).toBeLessThan(BALL_R * 2 + 8);
+  });
+});
+
 describe("S/UI lanes", () => {
   const laneX = (i: number) => (LANE_POSTS[i] + LANE_POSTS[i + 1]) / 2;
 
