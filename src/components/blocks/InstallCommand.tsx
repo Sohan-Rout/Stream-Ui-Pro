@@ -37,7 +37,7 @@ export function InstallCommand({
       )}
     >
       <code className="flex min-w-0 items-center gap-3 overflow-x-auto px-4 py-3 whitespace-nowrap [scrollbar-width:none]">
-        <span aria-hidden className="text-ink-muted">
+        <span aria-hidden className="font-bold text-pink">
           $
         </span>
         {command}
@@ -46,7 +46,7 @@ export function InstallCommand({
         type="button"
         onClick={copy}
         aria-label={copied ? "Copied" : "Copy install command"}
-        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-ink transition-colors duration-150 hover:bg-lime hover:text-on-bright"
+        className="grid w-12 shrink-0 cursor-pointer place-items-center border-l-2 border-ink bg-lime text-on-bright transition-colors duration-150 hover:bg-lime-soft"
       >
         {copied ? (
           <Check aria-hidden className="size-4.5" />

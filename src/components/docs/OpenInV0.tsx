@@ -9,7 +9,7 @@ export function OpenInV0({ item }: { item: string }) {
       href={openInV0Url(item)}
       target="_blank"
       rel="noopener noreferrer"
-      className={buttonStyles({ variant: "secondary", size: "sm", className: "h-11 self-start" })}
+      className={buttonStyles({ variant: "pink", size: "md", className: "h-12" })}
     >
       Open in v0 <ArrowUpRight aria-hidden />
       <span className="sr-only">(opens in a new tab)</span>
