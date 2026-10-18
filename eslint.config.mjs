@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     // Generated shadcn registry (scripts/build-registry.ts).
     "registry/**",
     "public/r/**",
+    // /brag launch-video scratch work (gitignored).
+    "brag-output*/**",
     "out/**",
     "build/**",
     "next-env.d.ts",

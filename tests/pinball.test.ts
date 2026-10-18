@@ -5,9 +5,13 @@ import {
   BUMPERS,
   FLIPPER,
   LANE,
+  LANE_POSTS,
+  LANE_TOP,
   NO_INPUT,
   PIVOTS,
+  RULES,
   TABLE,
+  TARGETS,
   createGame,
   flipperTip,
   step,
@@ -39,7 +43,8 @@ describe("launching", () => {
     let reachedTable = false;
     for (let t = 0; t < 2 && !reachedTable; t += DT) {
       g = step(g, NO_INPUT, DT);
-      if (g.ball.x < LANE.left - BALL_R) reachedTable = true;
+      // Well out onto the playfield, not just bounced off the top of the lane.
+      if (g.ball.x < 150) reachedTable = true;
     }
     expect(reachedTable).toBe(true);
   });
@@ -67,7 +72,8 @@ describe("the table", () => {
   });
 
   test("a bumper scores 100 and fires the ball away", () => {
-    const b = BUMPERS[0];
+    // The center bumper: open lane above it, so nothing knocks the ball back down.
+    const b = BUMPERS[2];
     const g = run(playing(free(b.x, b.y - b.r - BALL_R - 4, 0, 200)), {}, 0.05);
     expect(g.score).toBe(100);
     expect(g.ball.vy).toBeLessThan(0);
@@ -97,6 +103,82 @@ describe("flippers", () => {
     let g = run(playing(free(x, y)), {}, 0.05);
     g = run(g, { left: true }, 0.08);
     expect(g.ball.vy).toBeLessThan(-300);
+  });
+});
+
+describe("S/UI lanes", () => {
+  const laneX = (i: number) => (LANE_POSTS[i] + LANE_POSTS[i + 1]) / 2;
+
+  test("rolling down through a lane lights it and scores", () => {
+    const g = run(playing(free(laneX(1), LANE_TOP - 2, 0, 300)), {}, 0.1);
+    expect(g.lanes).toEqual([false, true, false, false]);
+    expect(g.score).toBe(RULES.lane);
+  });
+
+  test("lighting the last lane raises the multiplier and resets the lanes", () => {
+    const g = run(playing({ lanes: [true, true, false, true], ...free(laneX(2), LANE_TOP - 2, 0, 300) }), {}, 0.1);
+    expect(g.mult).toBe(2);
+    expect(g.lanes).toEqual([false, false, false, false]);
+  });
+
+  test("a fresh flipper press shifts the lit lanes; holding it doesn't", () => {
+    let g = step(playing({ lanes: [true, false, false, false] }), { ...NO_INPUT, right: true }, DT);
+    expect(g.lanes).toEqual([false, true, false, false]);
+    g = step(g, { ...NO_INPUT, right: true }, DT);
+    expect(g.lanes).toEqual([false, true, false, false]);
+    g = step(step(g, NO_INPUT, DT), { ...NO_INPUT, left: true }, DT);
+    expect(g.lanes).toEqual([true, false, false, false]);
+  });
+
+  test("points are multiplied", () => {
+    const b = BUMPERS[0];
+    const g = run(playing({ mult: 3, ...free(b.x, b.y - b.r - BALL_R - 4, 0, 200) }), {}, 0.05);
+    expect(g.score).toBe(RULES.bumper * 3);
+  });
+});
+
+describe("drop targets", () => {
+  const at = (i: number) => {
+    const t = TARGETS[i];
+    return free(t.a.x + 20, (t.a.y + t.b.y) / 2, -400, 0);
+  };
+
+  test("hitting a target drops it and scores", () => {
+    const g = run(playing(at(0)), {}, 0.08);
+    expect(g.targets).toEqual([true, false, false]);
+    expect(g.score).toBe(RULES.target);
+  });
+
+  test("clearing the bank pays the bonus, raises the multiplier, then resets the bank", () => {
+    let g = run(playing({ targets: [true, false, true], ...at(1) }), {}, 0.08);
+    expect(g.score).toBe(RULES.target + RULES.bank);
+    expect(g.mult).toBe(2);
+    g = run({ ...g, ...free(160, 100) }, {}, RULES.bankResetDelay + 0.1);
+    expect(g.targets).toEqual([false, false, false]);
+  });
+});
+
+describe("ball save and extra ball", () => {
+  test("a drain right after launch is saved", () => {
+    let g = run(playing(), { launch: true }, 1.2);
+    g = step(g, NO_INPUT, DT);
+    expect(g.ballSave).toBe(RULES.ballSave);
+    g = run({ ...g, ...free(160, TABLE.height - 20, 0, 400) }, {}, 0.3);
+    expect(g.balls).toBe(3);
+    expect(g.onPlunger).toBe(true);
+  });
+
+  test("passing the mark awards one extra ball, once", () => {
+    let g = step(playing({ score: RULES.extraBallAt, ...free(160, 100) }), NO_INPUT, DT);
+    expect(g.balls).toBe(4);
+    expect(g.events).toContainEqual({ kind: "extra" });
+    g = step(g, NO_INPUT, DT);
+    expect(g.balls).toBe(4);
+  });
+
+  test("a drain resets the multiplier", () => {
+    const g = run(playing({ mult: 4, ...free(160, TABLE.height - 20, 0, 400) }), {}, 0.3);
+    expect(g.mult).toBe(1);
   });
 });
 

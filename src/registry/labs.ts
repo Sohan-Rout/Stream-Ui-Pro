@@ -143,14 +143,16 @@ export const labs: LabDoc[] = [
   {
     slug: "pinball",
     name: "Pinball",
-    description: "A neo-brutalist pinball table: pull the plunger, work the flippers, and light up the pop bumpers.",
+    description: "A neo-brutalist pinball table: light the S/UI lanes, knock down the drop targets, and stack up the multiplier.",
     file: "src/components/demos/PinballLab.tsx",
     Component: PinballLab,
     notes: [
       "Hold Space (or Down) to pull the plunger and let go to launch; Z or Left and slash or Right work the flippers. On touch, hold the buttons.",
       "Flippers hand their own swing speed to the ball, so timing matters: flip as it rolls down for a strong shot up the table.",
       "Physics live in src/lib/games/pinball.ts: several substeps a frame keep a fast ball from passing through walls, and tests check a full launch reaches the table.",
-      "Pop bumpers score 100 and slingshots 10; three balls, and a weak launch rolls back onto the plunger instead of costing one.",
+      "Light all four S/UI rollover lanes, or clear the pink drop-target bank, to raise the multiplier (up to ×5). Pressing a flipper shifts the lit lanes, as on a real table.",
+      "A drain in the first five seconds after launch is saved, one extra ball comes at 15,000, and a drain resets the multiplier.",
+      "Score popups, banners, a ball trail, and a small shake come from events the physics step reports; the shake and trail turn off under reduced motion. Sounds are synthesized in C major, with a mute button.",
     ],
   },
   {

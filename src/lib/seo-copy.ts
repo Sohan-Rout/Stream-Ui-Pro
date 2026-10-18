@@ -252,7 +252,7 @@ const labCopy: Record<string, SeoCopy> = {
   pinball: {
     title: "Pinball Game in React and Canvas",
     description:
-      "A neobrutalism pinball game in React and canvas: a spring plunger, flippers that pass on their swing, pop bumpers, and slingshots. Full source.",
+      "Neobrutalism pinball in React and canvas: rollover lanes, drop targets, a score multiplier, ball save, and flippers that pass on their swing. Source included.",
     keywords: ["pinball game React", "canvas pinball", "pinball physics JavaScript", "React game", "browser pinball"],
   },
   tetris: {
