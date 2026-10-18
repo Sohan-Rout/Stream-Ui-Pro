@@ -5,6 +5,9 @@ import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
 import { FlappyHeroSection } from "@/components/sections/FlappyHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
+import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection";
+import { LevelsFeaturesSection } from "@/components/sections/LevelsFeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -93,16 +96,53 @@ export const sections: SectionDoc[] = [
   {
     slug: "features",
     name: "Features",
-    description: "Six features in a ruled grid, each with a toned icon tile.",
+    description: "Six features, laid out four ways: a ruled grid, an arcade maze, a bento board, and a level select.",
     variants: [
       {
-        id: "default",
-        name: "Features",
+        id: "grid",
+        name: "Grid",
         description: "Six features in a ruled grid, each with a toned icon tile.",
         file: "src/components/sections/FeaturesSection.tsx",
         Component: FeaturesSection,
         uses: ["lucide-react"],
         notes: ["One, two, or three columns depending on the container width.", "Keep feature copy to one sentence so rows stay even."],
+      },
+      {
+        id: "maze",
+        name: "Maze",
+        description: "A corridor where a chomper eats a dot trail with three bots on its tail, over features set in maze rooms.",
+        file: "src/components/sections/MazeFeaturesSection.tsx",
+        Component: MazeFeaturesSection,
+        uses: ["lucide-react"],
+        notes: [
+          "The dots behind the chomper disappear as it runs: a strip grows at the same pace as it moves. CSS only, still for reduced motion.",
+          "The violet gaps between cards read as maze walls; each card wears a bot as its icon and a +10 pellet.",
+          "Original characters, in the spirit of arcade maze games.",
+        ],
+      },
+      {
+        id: "bento",
+        name: "Bento",
+        description: "One big lead tile and five smaller ones in soft tints, on an asymmetric bento grid.",
+        file: "src/components/sections/BentoFeaturesSection.tsx",
+        Component: BentoFeaturesSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Put your strongest feature first: it gets the big lime tile.",
+          "Four columns from 48rem, two from 36rem, one below; rows share a height so the board stays even.",
+        ],
+      },
+      {
+        id: "levels",
+        name: "Level select",
+        description: "Features as arcade level tiles numbered 1-1 to 1-6, with pixel bevels, star ratings, and a start marker.",
+        file: "src/components/sections/LevelsFeaturesSection.tsx",
+        Component: LevelsFeaturesSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Stars are labeled for screen readers (\"2 of 3 stars\"); use them for maturity, adoption, or anything you rate.",
+          "Tiles lift on hover; drop the Start marker if no feature is the obvious first step.",
+        ],
       },
     ],
   },

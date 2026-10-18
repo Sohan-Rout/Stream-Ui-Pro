@@ -176,6 +176,58 @@ const bar = (width: number | string, height: number, color: string) => (
 
 /** What's inside the section window: a sketch of the layout, per variant. */
 function SectionBody({ variant, accent }: { variant?: string; accent: string }) {
+  if (variant === "grid" || variant === "levels") {
+    // A 3×2 board of feature tiles: plain cells, or numbered level tiles.
+    const tones = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange, brand.lime];
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, padding: 14, backgroundColor: variant === "levels" ? brand.blueSoft : brand.paper }}>
+        {tones.map((c, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", gap: 5, width: 80, padding: 7, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 26, height: 22, backgroundColor: c, border: `2px solid ${brand.ink}`, fontFamily: "Space Mono", fontWeight: 700, fontSize: 10 }}>
+              {variant === "levels" ? `1-${i + 1}` : ""}
+            </div>
+            {bar("85%", 6, brand.ink)}
+            {bar("60%", 5, brand.faint)}
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (variant === "bento") {
+    return (
+      <div style={{ display: "flex", gap: 8, padding: 14, height: 180, backgroundColor: brand.paper }}>
+        <div style={{ display: "flex", width: 120, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, flex: 1 }}>
+          <div style={{ display: "flex", flex: 1, backgroundColor: brand.pinkSoft, border: `3px solid ${brand.ink}` }} />
+          <div style={{ display: "flex", gap: 8, flex: 1 }}>
+            <div style={{ display: "flex", flex: 1, backgroundColor: brand.blueSoft, border: `3px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", flex: 1, backgroundColor: brand.violetSoft, border: `3px solid ${brand.ink}` }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (variant === "maze") {
+    // The corridor: chomper, a dot trail ahead, three bots behind, rooms below.
+    return (
+      <div style={{ display: "flex", flexDirection: "column", height: 180, backgroundColor: brand.violetSoft }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, height: 44, padding: "0 12px", backgroundColor: brand.paper, borderTop: `4px solid ${brand.ink}`, borderBottom: `4px solid ${brand.ink}` }}>
+          {[brand.orange, brand.blue, brand.pink].map((c) => (
+            <div key={c} style={{ display: "flex", width: 22, height: 22, borderTopLeftRadius: 11, borderTopRightRadius: 11, backgroundColor: c, border: `2px solid ${brand.ink}` }} />
+          ))}
+          <div style={{ display: "flex", width: 26, height: 26, borderRadius: 13, backgroundColor: brand.lime, border: `3px solid ${brand.ink}`, borderRightColor: "transparent" }} />
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div key={i} style={{ display: "flex", width: 7, height: 7, backgroundColor: brand.ink, marginLeft: 8 }} />
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: 8, padding: 10 }}>
+          {[0, 1, 2].map((i) => (
+            <div key={i} style={{ display: "flex", flex: 1, height: 90, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (variant === "flappy") {
     // Pipes, the bird between them, a card, and the ground.
     return (

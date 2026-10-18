@@ -133,6 +133,30 @@ export function sectionSeo(doc: { slug: string; name: string }): SeoCopy {
 
 /** Copy for a section variant's own page, like /sections/hero/prompt. */
 const variantCopy: Record<string, SeoCopy> = {
+  "features/grid": {
+    title: "Neobrutalism Feature Grid Section for React",
+    description:
+      "A neobrutalism feature grid for React and Tailwind CSS: six features in a ruled grid with toned icon tiles. Responsive and accessible. Copy it.",
+    keywords: [...base, "feature grid", "features section", "neobrutalism features section", "React features"],
+  },
+  "features/maze": {
+    title: "Arcade Maze Features Section for React",
+    description:
+      "An arcade maze features section for React and Tailwind CSS: a chomper eats a dot trail chased by bots, over features set in maze rooms. CSS only.",
+    keywords: [...base, "arcade features section", "retro game landing page", "maze animation", "features section"],
+  },
+  "features/bento": {
+    title: "Neobrutalism Bento Grid Features for React",
+    description:
+      "A neobrutalism bento grid features section for React and Tailwind CSS: one big lead tile and five smaller ones in soft tints. Copy the code.",
+    keywords: [...base, "bento grid", "bento features", "features section", "React bento grid"],
+  },
+  "features/levels": {
+    title: "Level Select Features Section for React",
+    description:
+      "A level select features section for React and Tailwind CSS: arcade level tiles with pixel bevels, star ratings, and a start marker. Copy it.",
+    keywords: [...base, "level select UI", "game features section", "pixel art features", "features section"],
+  },
   "hero/pixel": {
     title: "Pixel Art AI Prompt Hero for React",
     description:
