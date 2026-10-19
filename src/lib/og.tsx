@@ -252,6 +252,21 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "pricing/bold") {
+    // Three full-color plan cards, the middle one lifted.
+    return (
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-start", height: 180, padding: "22px 16px", backgroundColor: brand.paper }}>
+        {[brand.orange, brand.lime, brand.pink].map((c, i) => (
+          <div key={c} style={{ display: "flex", flexDirection: "column", gap: 8, width: 78, height: 120, marginTop: i === 1 ? 0 : 14, padding: 9, backgroundColor: c, border: `4px solid ${brand.ink}`, boxShadow: hard(6), transform: i === 1 ? "rotate(-3deg)" : "none" }}>
+            <div style={{ display: "flex", width: 34, height: 9, backgroundColor: brand.ink }} />
+            <div style={{ display: "flex", width: 44, height: 20, backgroundColor: brand.ink }} />
+            <div style={{ display: "flex", width: "100%", height: 4, backgroundColor: brand.ink }} />
+            <div style={{ display: "flex", width: "100%", height: 16, marginTop: "auto", backgroundColor: brand.ink }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
   if (variant === "hero/dino") {
     // Sky, a row of letter tiles, the dino mid-jump over a pink cactus, and the ground.
     return (

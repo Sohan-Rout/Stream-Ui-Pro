@@ -11,6 +11,7 @@ import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
 import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection";
 import { LevelsFeaturesSection } from "@/components/sections/LevelsFeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { BoldPricingSection } from "@/components/sections/BoldPricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -177,16 +178,29 @@ export const sections: SectionDoc[] = [
   {
     slug: "pricing",
     name: "Pricing",
-    description: "Three plans with a monthly/yearly switch and a highlighted tier.",
+    description: "Three plans with a monthly/yearly switch, two ways: a ruled classic table and bold color-block cards.",
     variants: [
       {
-        id: "default",
-        name: "Pricing",
-        description: "Three plans with a monthly/yearly switch and a highlighted tier.",
+        id: "classic",
+        name: "Classic",
+        description: "Three plans in a ruled table with a monthly/yearly switch and a highlighted tier.",
         file: "src/components/sections/PricingSection.tsx",
         Component: PricingSection,
         uses: ["Button", "Badge"],
         notes: ["The billing switch is a pressed-button group, announced as a toggle.", "Prices live in one array; edit plans there."],
+      },
+      {
+        id: "bold",
+        name: "Color blocks",
+        description: "Three full-color plan cards (orange, lime, pink) with thick borders and hard shadows; the featured one lifts and tilts.",
+        file: "src/components/sections/BoldPricingSection.tsx",
+        Component: BoldPricingSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Each plan is one bright from the theme with ink text on top. Change a card's tone in the plans array.",
+          "The featured plan lifts, tilts a degree, and wears a Most popular sticker; on small screens the cards stack flat.",
+          "The billing switch is a pressed-button group, announced as a toggle. Hover lifts are off for reduced motion.",
+        ],
       },
     ],
   },
