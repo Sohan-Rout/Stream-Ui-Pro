@@ -83,3 +83,11 @@
   color: var(--ink-muted);
   user-select: none;
 }
+
+/* Scrolls as usual (wheel, touch, keyboard) without showing a scrollbar. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

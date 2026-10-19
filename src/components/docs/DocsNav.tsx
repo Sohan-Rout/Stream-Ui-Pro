@@ -59,7 +59,7 @@ function NavList({ groups }: { groups: NavGroup[] }) {
 export function DocsSidebar({ groups }: { groups: NavGroup[] }) {
   return (
     <aside aria-label="Library" className="hidden w-60 shrink-0 border-r-2 border-ink lg:block">
-      <nav className="sticky top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto p-6">
+      <nav className="sticky top-16 max-h-[calc(100dvh-4rem)] scrollbar-none overflow-y-auto p-6">
         <NavList groups={groups} />
       </nav>
     </aside>
