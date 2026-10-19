@@ -25,7 +25,7 @@ export function NotFoundContent() {
         </Link>
       </div>
 
-      <section aria-labelledby="runner-heading" className="mt-6 flex w-full max-w-3xl flex-col gap-4">
+      <section aria-labelledby="runner-heading" className="mt-6 flex w-full flex-col gap-4">
         <h2 id="runner-heading" className="flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase">
           <span aria-hidden className="h-0.5 w-8 bg-ink" />
           While you&apos;re lost

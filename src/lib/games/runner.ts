@@ -1,18 +1,18 @@
 /**
  * Endless-runner rules for the 404 page. Pure functions in world units (a
- * 600×200 strip), time in seconds, randomness injected. Rendering lives in
+ * 720×240 strip), time in seconds, randomness injected. Rendering lives in
  * the component.
  *
- * The dino runs in place while the world scrolls left. Jump the ground
- * blocks; flying blocks come at three heights once the score passes
+ * The dino runs in place while the world scrolls left. Jump the cacti;
+ * flyers come at three heights once the score passes
  * BIRDS_FROM: jump the low ones, duck the middle ones, run under the high
  * ones. The world speeds up as you go.
  */
 
-export const WORLD = { width: 600, height: 200 } as const;
+export const WORLD = { width: 720, height: 240 } as const;
 /** Top of the ground line. */
-export const GROUND = 170;
-export const DINO = { x: 56, w: 40, h: 44, duckW: 54, duckH: 26 } as const;
+export const GROUND = 200;
+export const DINO = { x: 64, w: 60, h: 56, duckW: 74, duckH: 32 } as const;
 export const SPEED = { start: 320, accel: 9, max: 760 } as const;
 export const BIRDS_FROM = 300;
 
@@ -21,19 +21,19 @@ const JUMP = -800; // px/s
 const SHORT_HOP = -320; // releasing jump early cuts the rise to this
 const FAST_FALL = 3800; // extra gravity while ducking in the air
 const MAX_DT = 1 / 30;
-const HITBOX_INSET = 5;
+const HITBOX_INSET = 7;
 
-export type ObstacleKind = "block" | "tall" | "stack" | "bird-low" | "bird-mid" | "bird-high";
+export type ObstacleKind = "cactus" | "tall" | "cluster" | "bird-low" | "bird-mid" | "bird-high";
 export type Obstacle = { kind: ObstacleKind; x: number; y: number; w: number; h: number };
 
 /** Sizes and heights. Birds are placed by the bottom of their box above the ground. */
 export const SHAPES: Record<ObstacleKind, { w: number; h: number; lift: number }> = {
-  block: { w: 24, h: 36, lift: 0 },
-  tall: { w: 26, h: 52, lift: 0 },
-  stack: { w: 52, h: 36, lift: 0 },
-  "bird-low": { w: 40, h: 24, lift: 4 }, // must jump
-  "bird-mid": { w: 40, h: 24, lift: 32 }, // duck under (or jump)
-  "bird-high": { w: 40, h: 24, lift: 52 }, // run under
+  cactus: { w: 24, h: 42, lift: 0 },
+  tall: { w: 28, h: 58, lift: 0 },
+  cluster: { w: 56, h: 42, lift: 0 },
+  "bird-low": { w: 48, h: 28, lift: 6 }, // must jump
+  "bird-mid": { w: 48, h: 28, lift: 38 }, // duck under (or jump)
+  "bird-high": { w: 48, h: 28, lift: 64 }, // run under
 };
 
 export type RunnerStatus = "ready" | "playing" | "over";
@@ -70,7 +70,7 @@ export const createGame = (status: RunnerStatus = "ready"): RunnerGame => ({
   distance: 0,
   score: 0,
   obstacles: [],
-  nextIn: 260,
+  nextIn: 320,
 });
 
 /** The dino's box in world coordinates (y down), before hitbox inset. */
@@ -92,7 +92,8 @@ const overlaps = (a: { x: number; y: number; w: number; h: number }, b: typeof a
 export function hits(game: Pick<RunnerGame, "height" | "ducking">, o: Obstacle) {
   const d = dinoBox(game);
   const i = HITBOX_INSET;
-  return overlaps({ x: d.x + i, y: d.y + i, w: d.w - i * 2, h: d.h - i }, { x: o.x + 3, y: o.y + 3, w: o.w - 6, h: o.h - 6 });
+  // The tail is thin, so the left edge forgives more than the right.
+  return overlaps({ x: d.x + i * 2, y: d.y + i, w: d.w - i * 3, h: d.h - i }, { x: o.x + 3, y: o.y + 3, w: o.w - 6, h: o.h - 6 });
 }
 
 /** Pick the next obstacle and the gap after it. `random()` is in [0, 1). */
@@ -101,7 +102,7 @@ export function nextObstacle(score: number, speed: number, random: () => number)
   const r = random();
   let kind: ObstacleKind;
   if (birds && r < 0.3) kind = (["bird-low", "bird-mid", "bird-high"] as const)[Math.floor(random() * 3)];
-  else kind = (["block", "block", "tall", "stack"] as const)[Math.floor(random() * 4)];
+  else kind = (["cactus", "cactus", "tall", "cluster"] as const)[Math.floor(random() * 4)];
   // Always room to land and jump again; more room at speed.
   const gap = speed * 0.72 + 70 + random() * speed * 0.6;
   return { kind, gap };

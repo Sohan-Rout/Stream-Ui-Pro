@@ -71,14 +71,14 @@ describe("jumping", () => {
 });
 
 describe("obstacles", () => {
-  test("running into a ground block ends the game", () => {
-    const g = run(playing({ obstacles: [makeObstacle("block", DINO.x + 60)] }), {}, 0.5);
+  test("running into a cactus ends the game", () => {
+    const g = run(playing({ obstacles: [makeObstacle("cactus", DINO.x + 60)] }), {}, 0.5);
     expect(g.status).toBe("over");
   });
 
-  test("a held jump clears the widest block, at the start and at top speed", () => {
+  test("a held jump clears the widest cluster, at the start and at top speed", () => {
     for (const speed of [SPEED.start, SPEED.max]) {
-      const g = run(playing({ speed, obstacles: [makeObstacle("stack", DINO.x + speed * 0.32)] }), { jump: true }, 1.2);
+      const g = run(playing({ speed, obstacles: [makeObstacle("cluster", DINO.x + speed * 0.32)] }), { jump: true }, 1.2);
       expect(g.status).toBe("playing");
     }
   });
@@ -99,7 +99,7 @@ describe("obstacles", () => {
     g = step(g, NONE, DT, () => 0).game;
     expect(g.obstacles).toHaveLength(1);
     expect(g.obstacles[0].x).toBeGreaterThan(WORLD.width - 10);
-    g = run({ ...g, obstacles: [makeObstacle("block", -20)], nextIn: 1e9 }, {}, 0.1);
+    g = run({ ...g, obstacles: [makeObstacle("cactus", -20)], nextIn: 1e9 }, {}, 0.1);
     expect(g.obstacles).toHaveLength(0);
   });
 
