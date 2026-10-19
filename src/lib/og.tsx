@@ -136,7 +136,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" | "whack" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -604,6 +604,23 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
             <div style={{ display: "flex", position: "absolute", left: 200, top: 150, width: 34, height: 28, borderRadius: 12, backgroundColor: brand.pink, border: `4px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 178, width: 260, height: 12, backgroundColor: brand.lime, borderTop: `4px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 190, width: 260, height: 40, backgroundColor: brand.orange }} />
+          </div>
+        );
+      }
+      if (art.game === "whack") {
+        // A 3×3 field of holes: two moles up (one gold), one bomb.
+        const up: Record<number, string> = { 1: brand.violet, 3: brand.lime, 8: brand.ink };
+        return (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, width: 250, padding: 14, backgroundColor: brand.limeSoft, border: `5px solid ${brand.ink}`, boxShadow: hard(12), transform: "rotate(3deg)" }}>
+            {Array.from({ length: 9 }, (_, i) => (
+              <div key={i} style={{ display: "flex", position: "relative", width: 64, height: 64 }}>
+                {up[i] && (
+                  <div style={{ display: "flex", position: "absolute", left: 14, top: 6, width: 36, height: 40, backgroundColor: up[i], border: `4px solid ${brand.ink}`, borderRadius: i === 8 ? 20 : "18px 18px 0 0" }} />
+                )}
+                <div style={{ display: "flex", position: "absolute", left: 4, bottom: 4, width: 56, height: 18, borderRadius: 28, backgroundColor: brand.ink }} />
+                <div style={{ display: "flex", position: "absolute", left: 2, bottom: 0, width: 60, height: 10, borderRadius: "0 0 30px 30px", backgroundColor: brand.orange, border: `3px solid ${brand.ink}`, borderTop: "none" }} />
+              </div>
+            ))}
           </div>
         );
       }

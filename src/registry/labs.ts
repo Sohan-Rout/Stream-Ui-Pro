@@ -12,6 +12,7 @@ import { MazeLab } from "@/components/demos/MazeLab";
 import { JumperLab } from "@/components/demos/JumperLab";
 import { PinballLab } from "@/components/demos/PinballLab";
 import { RunnerLab } from "@/components/demos/RunnerLab";
+import { WhackLab } from "@/components/demos/WhackLab";
 
 export type LabDoc = {
   slug: string;
@@ -185,6 +186,20 @@ labs.push({
     "Past 300, flyers come at three heights: jump the low ones, duck the middle ones, and run under the high ones.",
     "The rules live in src/lib/games/runner.ts as pure functions with tests, including that every gap leaves room to land and jump again, even at top speed.",
     "The scene is drawn in layers that scroll at different speeds, and the canvas renders at its on-screen size so it stays crisp. It's the same game as the site's 404 page, where it listens to the whole window instead of the focused strip.",
+  ],
+});
+
+labs.push({
+  slug: "whack-a-mole",
+  name: "Whack-a-Mole",
+  description: "A neo-brutalist whack-a-mole: 30 seconds, moles that get quicker, gold ones worth more, and bombs to leave alone.",
+  file: "src/components/demos/WhackLab.tsx",
+  Component: WhackLab,
+  notes: [
+    "Click or tap a hole, or press its number key in numpad layout (7 8 9 along the top). Each hole is a real button, so Tab and Enter work too.",
+    "Moles score 10 and gold ones 50; bombs cost 30. Five hits in a row raise the combo multiplier, up to ×4, and a miss, a bomb, or a mole that gets away resets it.",
+    "The rules live in src/lib/games/whack.ts as pure functions with tests: pops speed up and stay up for less time as the clock runs down, and more can be up at once.",
+    "Score popups and the pop-up motion turn off under reduced motion. Your best score is remembered in this browser once you accept the cookie banner.",
   ],
 });
 

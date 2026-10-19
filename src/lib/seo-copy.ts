@@ -267,6 +267,12 @@ const labCopy: Record<string, SeoCopy> = {
       "Neobrutalism pinball in React and canvas: rollover lanes, drop targets, a score multiplier, ball save, and flippers that pass on their swing. Source included.",
     keywords: ["pinball game React", "canvas pinball", "pinball physics JavaScript", "React game", "browser pinball"],
   },
+  "whack-a-mole": {
+    title: "Whack-a-Mole Game in React",
+    description:
+      "A neobrutalism whack-a-mole game in React: moles that speed up, gold moles, bombs, and a combo multiplier. Mouse, touch, and keyboard, source included.",
+    keywords: ["whack a mole React", "React whack-a-mole game", "browser whack a mole", "neobrutalism game", "React game"],
+  },
   runner: {
     title: "Dino Runner Game in React and Canvas",
     description:
