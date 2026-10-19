@@ -92,6 +92,12 @@ export const indexSeo = {
 
 /** Components whose name doesn't read well after "Neobrutalism". */
 const componentOverrides: Record<string, SeoCopy> = {
+  battery: {
+    title: "Battery Indicator Component for React",
+    description:
+      "A neobrutalism battery indicator for React and Tailwind CSS: a fill that changes color as it drains, charging and low states, and segments.",
+    keywords: ["battery indicator React", "battery component", "battery level UI", "neobrutalism battery", "React meter component"],
+  },
   "animated-icon": {
     title: "Animated Icon Component for React",
     description:

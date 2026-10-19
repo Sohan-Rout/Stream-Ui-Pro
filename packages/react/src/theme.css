@@ -280,6 +280,33 @@
     opacity: 0.5;
   }
 
+  /* ---------- Battery ---------- */
+
+  [data-charging] .sui-battery-fill {
+    background-image: repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.45) 0 4px, transparent 4px 8px);
+    background-size: 11.3px 11.3px;
+    animation: sui-battery-charge 0.8s linear infinite;
+  }
+
+  [data-low] .sui-battery-fill {
+    animation: sui-battery-blink 1s steps(1, end) infinite;
+  }
+
+  @keyframes sui-battery-charge {
+    to { background-position: 11.3px 0; }
+  }
+
+  @keyframes sui-battery-blink {
+    50% { opacity: 0.25; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-charging] .sui-battery-fill,
+    [data-low] .sui-battery-fill {
+      animation: none;
+    }
+  }
+
   /* ---------- Equalizer ---------- */
 
   .sui-eq-bar {

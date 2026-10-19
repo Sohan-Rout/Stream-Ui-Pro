@@ -8,6 +8,12 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 
 ## Unreleased
 
+### Added
+
+- `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
+  drains, with a charging state (bolt and moving stripes), a blinking low
+  state, segments, three sizes, and `role="meter"` semantics.
+
 ### Fixed
 
 - Input, Select, Textarea, Accordion, Tabs, and TrackList set their own ink

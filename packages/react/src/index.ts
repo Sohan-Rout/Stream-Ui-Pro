@@ -8,6 +8,7 @@ export { Input, type InputProps } from "./Input";
 export { Checkbox, type CheckboxProps } from "./Checkbox";
 export { Tabs, type TabItem, type TabsProps } from "./Tabs";
 export { Progress, type ProgressProps } from "./Progress";
+export { Battery, type BatteryProps, type BatterySize } from "./Battery";
 export { Avatar, AvatarGroup, type AvatarProps, type AvatarSize } from "./Avatar";
 export {
   AnimatedIcon,

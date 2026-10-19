@@ -17,6 +17,9 @@ import CheckboxGroup from "@/examples/checkbox/group";
 import TabsBasic from "@/examples/tabs/basic";
 import ProgressTones from "@/examples/progress/tones";
 import ProgressInteractive from "@/examples/progress/interactive";
+import BatteryLevels from "@/examples/battery/levels";
+import BatterySegments from "@/examples/battery/segments";
+import BatteryInteractive from "@/examples/battery/interactive";
 import AvatarSizes from "@/examples/avatar/sizes";
 import AvatarGroupExample from "@/examples/avatar/group";
 import AnimatedIconAnimations from "@/examples/animated-icon/animations";
@@ -295,6 +298,42 @@ const entries: ComponentDoc[] = [
       'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax.',
       "Give it a name with aria-label or aria-labelledby.",
       "The fill animates width only when motion is allowed.",
+    ],
+  },
+  {
+    slug: "battery",
+    name: "Battery",
+    description: "A battery level that changes color as it drains, with charging and low states.",
+    status: "beta",
+    file: "packages/react/src/Battery.tsx",
+    usage: `import { Battery } from "@streamuilib/react";
+
+<Battery value={72} charging />`,
+    examples: [
+      { title: "Levels", description: 'With tone="auto" (the default) it goes orange at half and pink when low; low ones blink.', file: ex("battery", "levels"), Component: BatteryLevels },
+      { title: "Segments, sizes, and tones", file: ex("battery", "segments"), Component: BatterySegments },
+      { title: "Interactive", file: ex("battery", "interactive"), Component: BatteryInteractive },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "value", type: "number", description: "Charge from 0 to 100. Clamped and rounded." },
+          { name: "charging", type: "boolean", default: "false", description: "Shows a bolt and sweeps stripes across the fill." },
+          { name: "tone", type: '"auto" | "lime" | "pink" | "blue" | "violet" | "orange"', default: '"auto"', description: "Fill color. auto is pink at or below lowAt, orange at 50 or below, and lime above." },
+          { name: "lowAt", type: "number", default: "20", description: "At or below this the battery reads as low, and blinks unless charging." },
+          { name: "segments", type: "number", description: "Discrete cells instead of a smooth fill, lit to the nearest cell. Any charge lights at least one." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Battery and label size." },
+          { name: "showValue", type: "boolean", default: "true", description: "Show the percentage next to the battery." },
+          { name: "label", type: "string", default: '"Battery"', description: "Accessible name." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Uses role="meter" with aria-valuenow, aria-valuemin, and aria-valuemax, named by label.',
+      'aria-valuetext reads the state too, for example "12%, low" or "72%, charging".',
+      "Charging and low are shown with a bolt and the percentage as well as color and motion.",
+      "The charging stripes and the low blink stop for reduced motion.",
     ],
   },
   {
@@ -859,6 +898,7 @@ export const componentOrder = [
   "dialog",
   "tooltip",
   "progress",
+  "battery",
   "skeleton",
   "avatar",
   "audio-player",
