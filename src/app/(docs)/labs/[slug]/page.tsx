@@ -51,7 +51,7 @@ export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {
 
       <DocSection title="Try it" id="preview">
         <div className="flex min-h-80 items-center justify-center border-2 border-ink bg-violet-soft p-8 shadow-brutal-lg sm:p-12">
-          <div className="w-full max-w-md">
+          <div className={doc.wide ? "w-full" : "w-full max-w-md"}>
             <Live />
           </div>
         </div>

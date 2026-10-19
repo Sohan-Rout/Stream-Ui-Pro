@@ -130,10 +130,11 @@ for (const s of sections) {
 }
 
 // Labs, plus the helpers several games share.
-item("game-utils", { type: "registry:lib", title: "Game utilities", description: "Fair random numbers, a localStorage best score hook, and the palette as hex for canvas games." });
+item("game-utils", { type: "registry:lib", title: "Game utilities", description: "Fair random numbers, a localStorage best score hook, arcade sound blips, and the palette as hex for canvas games." });
 place("src/lib/games/memory.ts", "game-utils", "registry:lib", "games/memory");
 place("src/lib/brand.ts", "game-utils", "registry:lib", "brand");
 place("scripts/registry/best-score.ts", "game-utils", "registry:lib", "games/best-score");
+place("src/lib/games/arcade-sound.ts", "game-utils", "registry:lib", "games/arcade-sound");
 
 for (const l of labs) {
   const name = shadcnName.lab(l.slug);

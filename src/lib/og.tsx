@@ -136,7 +136,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -581,6 +581,33 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
             <div style={{ display: "flex", position: "absolute", left: 200, top: 150, width: 34, height: 28, borderRadius: 12, backgroundColor: brand.pink, border: `4px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 178, width: 260, height: 12, backgroundColor: brand.lime, borderTop: `4px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 190, width: 260, height: 40, backgroundColor: brand.orange }} />
+          </div>
+        );
+      }
+      if (art.game === "runner") {
+        // Sky and sun, a mountain, the dino mid-jump over a pink cactus, and the ground.
+        const px = (x: number, y: number, w: number, h: number, color: string, extra: Record<string, string | number> = {}) => (
+          <div style={{ display: "flex", position: "absolute", left: x, top: y, width: w, height: h, backgroundColor: color, ...extra }} />
+        );
+        return (
+          <div style={{ display: "flex", position: "relative", width: 300, height: 230, backgroundColor: brand.blueSoft, border: `5px solid ${brand.ink}`, boxShadow: hard(12), transform: "rotate(-2deg)", overflow: "hidden" }}>
+            {px(222, 22, 46, 46, brand.orange, { borderRadius: 23, border: `4px solid ${brand.ink}` })}
+            {px(24, 30, 70, 22, brand.raised, { borderRadius: 11, border: `3px solid ${brand.ink}` })}
+            {px(150, 70, 0, 0, "transparent", { borderLeft: "70px solid transparent", borderRight: "70px solid transparent", borderBottom: `100px solid ${brand.ink}` })}
+            {px(156, 76, 0, 0, "transparent", { borderLeft: "64px solid transparent", borderRight: "64px solid transparent", borderBottom: `94px solid ${brand.violetSoft}` })}
+            {/* The dino: tail, body, head, eye, legs. */}
+            {px(36, 104, 26, 12, brand.lime, { border: `3px solid ${brand.ink}`, transform: "rotate(-25deg)" })}
+            {px(58, 92, 40, 40, brand.lime, { border: `4px solid ${brand.ink}`, boxShadow: hard(4) })}
+            {px(80, 68, 44, 30, brand.lime, { border: `4px solid ${brand.ink}`, boxShadow: hard(4) })}
+            {px(104, 74, 10, 10, brand.raised, { border: `3px solid ${brand.ink}` })}
+            {px(92, 88, 8, 4, brand.pink)}
+            {px(64, 132, 10, 14, brand.ink)}
+            {px(84, 128, 10, 14, brand.ink)}
+            {/* A cactus. */}
+            {px(196, 128, 22, 52, brand.pink, { border: `4px solid ${brand.ink}`, boxShadow: hard(3) })}
+            {px(182, 140, 12, 22, brand.pink, { border: `3px solid ${brand.ink}` })}
+            {px(0, 178, 300, 12, brand.lime, { borderTop: `4px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` })}
+            {px(0, 190, 300, 40, brand.orange)}
           </div>
         );
       }

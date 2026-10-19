@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { buttonStyles } from "@streamuilib/react";
-import { RunnerGame } from "./RunnerGame";
+import { RunnerGame } from "@/components/demos/RunnerLab";
 
 export function NotFoundContent() {
   return (

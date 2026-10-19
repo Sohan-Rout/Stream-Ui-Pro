@@ -255,6 +255,12 @@ const labCopy: Record<string, SeoCopy> = {
       "Neobrutalism pinball in React and canvas: rollover lanes, drop targets, a score multiplier, ball save, and flippers that pass on their swing. Source included.",
     keywords: ["pinball game React", "canvas pinball", "pinball physics JavaScript", "React game", "browser pinball"],
   },
+  runner: {
+    title: "Dino Runner Game in React and Canvas",
+    description:
+      "A neobrutalism endless runner in React and canvas: jump cacti, duck flyers, parallax scenery, and rising speed. Keyboard and touch, source included.",
+    keywords: ["dino game React", "endless runner React", "canvas runner game", "browser dino game", "React game"],
+  },
   tetris: {
     title: "Tetris Game in React: Neobrutalism Blocks",
     description:

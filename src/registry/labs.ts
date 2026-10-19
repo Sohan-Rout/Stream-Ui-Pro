@@ -11,6 +11,7 @@ import { TetrisLab } from "@/components/demos/TetrisLab";
 import { MazeLab } from "@/components/demos/MazeLab";
 import { JumperLab } from "@/components/demos/JumperLab";
 import { PinballLab } from "@/components/demos/PinballLab";
+import { RunnerLab } from "@/components/demos/RunnerLab";
 
 export type LabDoc = {
   slug: string;
@@ -19,6 +20,8 @@ export type LabDoc = {
   file: string;
   Component: ComponentType;
   notes: string[];
+  /** A wide game (a landscape strip) gets more room on its own page. */
+  wide?: boolean;
 };
 
 export const labs: LabDoc[] = [
@@ -169,6 +172,21 @@ export const labs: LabDoc[] = [
     ],
   },
 ];
+
+labs.push({
+  slug: "runner",
+  name: "Dino Runner",
+  description: "A neo-brutalist endless runner: jump the pink cacti, duck the flyers, and outrun a world that keeps speeding up.",
+  file: "src/components/demos/RunnerLab.tsx",
+  Component: RunnerLab,
+  wide: true,
+  notes: [
+    "Click the strip (or tap it) to start, then Space or Up to jump and Down to duck. A tap is a short hop and a held jump goes higher; Down in the air drops you faster.",
+    "Past 300, flyers come at three heights: jump the low ones, duck the middle ones, and run under the high ones.",
+    "The rules live in src/lib/games/runner.ts as pure functions with tests, including that every gap leaves room to land and jump again, even at top speed.",
+    "The scene is drawn in layers that scroll at different speeds, and the canvas renders at its on-screen size so it stays crisp. It's the same game as the site's 404 page, where it listens to the whole window instead of the focused strip.",
+  ],
+});
 
 export function getLab(slug: string) {
   return labs.find((l) => l.slug === slug);

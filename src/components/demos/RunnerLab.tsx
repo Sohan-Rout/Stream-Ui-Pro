@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { ArrowDown, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@streamuilib/react";
 import { brand } from "@/lib/brand";
@@ -300,10 +300,14 @@ function ownedByControl(target: EventTarget | null) {
 type Hud = { score: number; status: RunnerStatus; flash: boolean };
 
 /**
- * An endless runner for the 404 page. Space or Up to jump, Down to duck, or
- * tap the strip. It listens on the window, so there's nothing to focus first.
+ * An endless runner. Space or Up to jump, Down to duck, or tap the strip.
+ *
+ * `keys="window"` (the 404 page) listens on the whole window, so there's
+ * nothing to focus first. `keys="board"` (Labs, where several games share a
+ * page) listens only once the strip is clicked or focused, so Space still
+ * scrolls the page otherwise.
  */
-export function RunnerGame() {
+export function RunnerGame({ keys = "window" }: { keys?: "window" | "board" }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameRef = useRef<Game>(createGame());
   const input = useRef<RunnerInput>({ jump: false, duck: false });
@@ -383,34 +387,45 @@ export function RunnerGame() {
     };
     raf = requestAnimationFrame(frame);
 
-    const onKey = (e: KeyboardEvent, down: boolean) => {
+    return () => {
+      cancelAnimationFrame(raf);
+      resize.disconnect();
+    };
+  }, [saveBest]);
+
+  const onKey = useCallback(
+    (e: KeyboardEvent | ReactKeyboardEvent, down: boolean) => {
       if (ownedByControl(e.target) || e.metaKey || e.ctrlKey || e.altKey) return;
       const key = JUMP_KEYS.has(e.key) ? "jump" : DUCK_KEYS.has(e.key) ? "duck" : null;
       if (!key) return;
       e.preventDefault(); // keep Space and the arrows from scrolling the page
       if (down && e.repeat) return;
       press(key, down);
-    };
+    },
+    [press],
+  );
+  const release = useCallback(() => (input.current = { jump: false, duck: false }), []);
+
+  useEffect(() => {
+    if (keys !== "window") return;
     const keydown = (e: KeyboardEvent) => onKey(e, true);
     const keyup = (e: KeyboardEvent) => onKey(e, false);
-    const blur = () => (input.current = { jump: false, duck: false });
     window.addEventListener("keydown", keydown);
     window.addEventListener("keyup", keyup);
-    window.addEventListener("blur", blur);
+    window.addEventListener("blur", release);
     return () => {
-      cancelAnimationFrame(raf);
-      resize.disconnect();
       window.removeEventListener("keydown", keydown);
       window.removeEventListener("keyup", keyup);
-      window.removeEventListener("blur", blur);
+      window.removeEventListener("blur", release);
     };
-  }, [press, saveBest]);
+  }, [keys, onKey, release]);
+  const board = keys === "board";
 
   const message =
     hud.status === "over"
       ? `Game over. Score ${hud.score}. Press Space or tap to run again.`
       : hud.status === "ready"
-        ? "Press Space or tap the strip to run. Jump the blocks; duck the middle flyers."
+        ? `${board ? "Click" : "Press Space"} or tap the strip to run. Jump the cacti; duck the middle flyers.`
         : "";
 
   return (
@@ -445,14 +460,19 @@ export function RunnerGame() {
         role="group"
         aria-label="Runner game. Space or Up to jump, Down to duck, or tap to jump."
         aria-describedby={statusId}
+        tabIndex={board ? 0 : undefined}
+        onKeyDown={board ? (e) => onKey(e, true) : undefined}
+        onKeyUp={board ? (e) => onKey(e, false) : undefined}
+        onBlur={board ? release : undefined}
         onPointerDown={(e) => {
           e.preventDefault();
+          if (board) e.currentTarget.focus();
           e.currentTarget.setPointerCapture(e.pointerId);
           press("jump", true);
         }}
         onPointerUp={() => press("jump", false)}
         onPointerCancel={() => press("jump", false)}
-        className="relative aspect-3/1 w-full cursor-pointer touch-none overflow-hidden border-2 border-ink bg-paper shadow-brutal-lg select-none"
+        className="relative aspect-3/1 w-full cursor-pointer touch-none overflow-hidden border-2 border-ink bg-paper shadow-brutal-lg select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
         <canvas ref={canvasRef} aria-hidden className="block size-full" />
         {hud.status !== "playing" && (
@@ -471,7 +491,7 @@ export function RunnerGame() {
               ) : (
                 <>
                   <Play aria-hidden className="size-4" />
-                  <span className="font-mono text-xs font-bold uppercase pointer-coarse:hidden">Press Space to run</span>
+                  <span className="font-mono text-xs font-bold uppercase pointer-coarse:hidden">{board ? "Click to run" : "Press Space to run"}</span>
                   <span className="hidden font-mono text-xs font-bold uppercase pointer-coarse:inline">Tap to run</span>
                 </>
               )}
@@ -502,4 +522,9 @@ export function RunnerGame() {
       </Button>
     </div>
   );
+}
+
+/** The runner as a Labs experiment: keys work once the strip is clicked or focused. */
+export function RunnerLab() {
+  return <RunnerGame keys="board" />;
 }
