@@ -4,6 +4,7 @@ import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSec
 import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
 import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
 import { FlappyHeroSection } from "@/components/sections/FlappyHeroSection";
+import { DinoHeroSection } from "@/components/sections/DinoHeroSection";
 import { MazeHeroSection } from "@/components/sections/MazeHeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
@@ -38,7 +39,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in five playful layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in six playful layouts.",
     variants: [
       {
         id: "pixel",
@@ -103,6 +104,19 @@ export const sections: SectionDoc[] = [
           "The pipe track is drawn twice side by side and slides one copy's width, so the loop never jumps. Edit GAPS to change where the openings fall.",
           "There's no card behind the text: a thick white outline (text stroke painted under the fill) keeps it readable as the pipes pass behind.",
           "No JavaScript: a server component, with CSS animation that holds still for reduced motion.",
+        ],
+      },
+      {
+        id: "dino",
+        name: "Dino runner",
+        description: "The Dino Runner scene as a backdrop: a dino on autopilot jumps cacti and ducks flyers behind a letter-tile headline.",
+        file: "src/components/sections/DinoHeroSection.tsx",
+        Component: DinoHeroSection,
+        uses: ["lucide-react"],
+        notes: [
+          "The background is the real runner from Labs and the 404 page, played by a perfect autopilot (tested over two-minute runs) and held at a calm top speed.",
+          "The headline is letter tiles that drop in one after another; the subheading keeps a white outline under a hard pink shadow so it reads over the scene.",
+          "The canvas renders at the section's size, shows more scenery on wide screens, pauses off screen, and is a still frame for reduced motion.",
         ],
       },
     ],

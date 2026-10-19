@@ -187,6 +187,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "A neobrutalism hero for React and Tailwind CSS: endlessly scrolling pipes, a flapping bird, and a big outlined headline. CSS only. Copy the code.",
     keywords: [...base, "flappy hero section", "animated hero section", "game landing page", "CSS animation", "React hero"],
   },
+  "hero/dino": {
+    title: "Dino Runner Hero Section for React",
+    description:
+      "A neobrutalism hero for React and Tailwind CSS: a dino runs and jumps cacti on canvas behind a letter-tile headline and shadowed subheading.",
+    keywords: [...base, "dino game hero", "animated canvas hero", "game landing page", "endless runner hero", "React hero"],
+  },
 };
 
 export function variantSeo(section: { slug: string; name: string }, variant: { id: string; name: string }): SeoCopy {

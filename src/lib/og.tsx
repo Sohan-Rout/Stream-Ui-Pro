@@ -252,6 +252,29 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "hero/dino") {
+    // Sky, a row of letter tiles, the dino mid-jump over a pink cactus, and the ground.
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.blueSoft }}>
+        <div style={{ display: "flex", gap: 5, position: "absolute", left: 64, top: 26 }}>
+          {[brand.lime, brand.pink, brand.blue, brand.violet, brand.orange, brand.lime].map((c, i) => (
+            <div key={i} style={{ display: "flex", width: 22, height: 22, backgroundColor: c, border: `3px solid ${brand.ink}` }} />
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 7, position: "absolute", left: 84, top: 64, width: 132 }}>
+          {bar("90%", 10, brand.ink)}
+          <div style={{ display: "flex", gap: 6 }}>
+            <div style={{ display: "flex", width: 44, height: 14, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+            <div style={{ display: "flex", width: 44, height: 14, backgroundColor: brand.raised, border: `3px solid ${brand.ink}` }} />
+          </div>
+        </div>
+        <div style={{ display: "flex", position: "absolute", left: 28, top: 100, width: 24, height: 26, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 40, top: 88, width: 22, height: 16, backgroundColor: brand.lime, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 210, top: 118, width: 16, height: 34, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 28, backgroundColor: brand.orange, borderTop: `6px solid ${brand.lime}`, boxShadow: `inset 0 3px 0 ${brand.ink}` }} />
+      </div>
+    );
+  }
   if (variant === "hero/flappy") {
     // Pipes, the bird between them, a card, and the ground.
     return (

@@ -6,6 +6,7 @@ import {
   GROUND,
   SPEED,
   WORLD,
+  autopilot,
   createGame,
   dinoBox,
   hits,
@@ -139,5 +140,31 @@ describe("speed and score", () => {
   test("nothing moves unless playing", () => {
     const g = createGame();
     expect(step(g, { jump: true, duck: false }, DT, never).game).toBe(g);
+  });
+});
+
+describe("autopilot (the hero background)", () => {
+  /** A small seeded generator, so every run of the test plays the same course. */
+  const seeded = (seed: number) => () => ((seed = (seed * 1664525 + 1013904223) % 2 ** 32) / 2 ** 32);
+
+  for (const seed of [1, 7, 42, 2024]) {
+    test(`plays two minutes without crashing (seed ${seed}), birds and top speed included`, () => {
+      const random = seeded(seed);
+      let g = playing({ nextIn: 300 });
+      let sawBirds = false;
+      for (let t = 0; t < 120; t += DT) {
+        g = step(g, autopilot(g), DT, random, 1100).game;
+        if (g.obstacles.some((o) => o.kind.startsWith("bird"))) sawBirds = true;
+        if (g.status === "over") break;
+      }
+      expect(g.status).toBe("playing");
+      expect(sawBirds).toBe(true);
+      expect(g.speed).toBe(SPEED.max);
+    });
+  }
+
+  test("a wide view spawns obstacles past its right edge", () => {
+    const g = step(playing({ nextIn: 0 }), NONE, DT, () => 0, 1100).game;
+    expect(g.obstacles[0].x).toBeGreaterThan(1100);
   });
 });

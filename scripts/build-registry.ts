@@ -116,6 +116,11 @@ for (const c of components) {
 }
 
 // Section designs: heroes by variant, the rest as "<slug>-section".
+// The runner's rules and drawing, shared by the Dino hero and the Dino Runner lab.
+item("runner-game", { type: "registry:lib", title: "Runner game", description: "Rules, autopilot, and canvas drawing for the neobrutalist endless runner." });
+place("src/lib/games/runner.ts", "runner-game", "registry:lib", "games/runner");
+place("src/lib/games/runner-draw.ts", "runner-game", "registry:lib", "games/runner-draw");
+
 for (const s of sections) {
   for (const v of s.variants) {
     const name = shadcnName.section(s, v);

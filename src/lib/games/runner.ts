@@ -108,8 +108,18 @@ export function nextObstacle(score: number, speed: number, random: () => number)
   return { kind, gap };
 }
 
-/** Advance by `seconds`. Returns the next state and what happened. */
-export function step(game: RunnerGame, input: RunnerInput, seconds: number, random: () => number): { game: RunnerGame; events: RunnerEvent[] } {
+/**
+ * Advance by `seconds`. Returns the next state and what happened.
+ * `viewWidth` is how much world is on screen: new obstacles appear just past
+ * it (a wide hero shows more than the game's own strip).
+ */
+export function step(
+  game: RunnerGame,
+  input: RunnerInput,
+  seconds: number,
+  random: () => number,
+  viewWidth: number = WORLD.width,
+): { game: RunnerGame; events: RunnerEvent[] } {
   if (game.status !== "playing") return { game, events: [] };
   const dt = Math.min(seconds, MAX_DT);
   const events: RunnerEvent[] = [];
@@ -135,7 +145,7 @@ export function step(game: RunnerGame, input: RunnerInput, seconds: number, rand
   nextIn -= moved;
   if (nextIn <= 0) {
     const { kind, gap } = nextObstacle(score, speed, random);
-    obstacles = [...obstacles, makeObstacle(kind, WORLD.width + 10)];
+    obstacles = [...obstacles, makeObstacle(kind, Math.max(WORLD.width, viewWidth) + 10)];
     nextIn = gap;
   }
 
@@ -145,4 +155,21 @@ export function step(game: RunnerGame, input: RunnerInput, seconds: number, rand
     return { game: { ...next, status: "over" }, events };
   }
   return { game: next, events };
+}
+
+/**
+ * A perfect player, for the hero background: jump cacti and low flyers just
+ * before they arrive, duck the middle flyers, and run under the high ones.
+ * Releases jump once airborne so the next press is fresh.
+ */
+export function autopilot(game: RunnerGame): RunnerInput {
+  const front = DINO.x + DINO.w;
+  const ahead = game.obstacles.filter((o) => o.x + o.w > DINO.x + 8).sort((a, b) => a.x - b.x)[0];
+  if (!ahead) return { jump: false, duck: false };
+  const gap = ahead.x - front;
+  const mustJump = ahead.kind === "bird-low" || !ahead.kind.startsWith("bird");
+  const jump = mustJump && game.height === 0 && !game.jumpHeld && gap < game.speed * 0.12 && gap > -DINO.w / 2;
+  const duck = ahead.kind === "bird-mid" && gap < game.speed * 0.3 && game.height === 0;
+  // Keep holding while rising for a full-height jump.
+  return { jump: jump || (game.vy < 0 && game.height > 0), duck };
 }
