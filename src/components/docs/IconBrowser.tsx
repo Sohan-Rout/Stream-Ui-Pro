@@ -130,10 +130,10 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
         icon={<Search />}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder={`Search ${emojis.length} faces… try "cry" or 😂`}
+        placeholder={`Search ${emojis.length} faces…`}
         className="max-w-sm flex-1"
       />
-      <div role="group" aria-label="Emoji colors" className="flex self-start border-2 border-ink shadow-brutal-sm">
+      <div role="group" aria-label="Emoji colors" className="flex shrink-0 border-2 border-ink shadow-brutal-sm">
         {(
           [
             ["mono", "Black & white"],
@@ -146,7 +146,7 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
             aria-pressed={palette === id}
             onClick={() => setPalette(id)}
             className={cn(
-              "cursor-pointer px-4 py-2 font-mono text-xs font-bold uppercase transition-colors duration-150 not-first:border-l-2 not-first:border-ink",
+              "flex h-11 cursor-pointer items-center px-4 font-mono text-xs font-bold uppercase transition-colors duration-150 not-first:border-l-2 not-first:border-ink",
               palette === id ? "bg-ink text-paper" : "bg-paper-raised hover:bg-lime-soft",
             )}
           >
@@ -177,9 +177,8 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
                 </button>
               ))}
             </div>
-            <div className="flex items-center justify-between gap-2 px-3 py-2.5">
+            <div className="px-3 py-2.5">
               <span className="truncate font-display text-sm tracking-tight">{e.name}</span>
-              <span aria-hidden className="text-base">{e.char}</span>
             </div>
           </li>
         ))}
