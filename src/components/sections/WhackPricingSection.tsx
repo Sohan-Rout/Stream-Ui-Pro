@@ -138,7 +138,8 @@ export function WhackPricingSection() {
               {/* The hole's dark pit sits behind the sign... */}
               <span aria-hidden className="absolute inset-x-0 bottom-2 block h-12 rounded-[50%] border-4 border-ink bg-ink" />
               {/* ...everything above it rises out of the hole, and the dirt rim is drawn in front. */}
-              <div className="group relative flex flex-1 flex-col overflow-hidden pt-8 pb-5">
+              {/* The clip ends inside the rim, so a rising sign never shows below its curve. */}
+              <div className="group relative mb-6 flex flex-1 flex-col overflow-hidden pt-8">
                 <div className="whack-pricing-rise flex flex-1 flex-col" style={{ "--i": i } as CSSProperties}>
                   <div className="flex flex-1 flex-col transition-transform duration-150 group-hover:-translate-y-2 motion-reduce:transition-none">
                     <div className="relative">
