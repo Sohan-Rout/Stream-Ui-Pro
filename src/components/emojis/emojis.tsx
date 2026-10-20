@@ -5,6 +5,7 @@
  * which also holds still for reduced motion.
  */
 import type { ComponentType } from "react";
+import { Face, faceDefs, type FaceDef } from "./faces";
 
 const INK = "#0e0f14";
 const PAPER = "#ffffff";
@@ -38,7 +39,7 @@ const SMILE_CSS = `
 /** A big comic grin (black and white, or colored with `colored`): round face, oval eyes with glints, an open smile with a tongue. */
 export function Smile({ animated = false, colored = false, size = 96, title = "Smiling face" }: EmojiProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size} role="img" aria-label={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 132 132" width={size} height={size} role="img" aria-label={title}>
       {animated && <style>{SMILE_CSS}</style>}
       {/* Comic pop lines, only in the animated variant. */}
       {animated && (
@@ -100,7 +101,7 @@ export function Cry({ animated = false, colored = false, size = 96, title = "Cry
   /** A teardrop shape, its tip at (x, y). */
   const drop = (x: number, y: number) => `M${x} ${y} Q${x + 6} ${y + 9} ${x + 6} ${y + 13} A6 6 0 0 1 ${x - 6} ${y + 13} Q${x - 6} ${y + 9} ${x} ${y} Z`;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size} role="img" aria-label={title}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 132 132" width={size} height={size} role="img" aria-label={title}>
       {animated && <style>{CRY_CSS}</style>}
       <g className={animated ? "sui-cry-face" : undefined}>
         {/* The hard shadow, then the face. */}
@@ -141,13 +142,21 @@ export function Cry({ animated = false, colored = false, size = 96, title = "Cry
 export type EmojiDoc = {
   slug: string;
   name: string;
-  /** The React component's name, for copying JSX. */
-  component: string;
+  /** The emoji character, for search. */
+  char: string;
   Component: ComponentType<EmojiProps>;
 };
 
-/** The emoji catalog. More to come. */
-export const emojis: EmojiDoc[] = [
-  { slug: "smile", name: "Smile", component: "Smile", Component: Smile },
-  { slug: "cry", name: "Cry", component: "Cry", Component: Cry },
-];
+const faceDoc = (def: FaceDef): EmojiDoc => {
+  const Component = (props: EmojiProps) => <Face def={def} {...props} />;
+  Component.displayName = `Face(${def.slug})`;
+  return { slug: def.slug, name: def.name, char: def.char, Component };
+};
+
+/** Every face emoji, in Unicode order. Smile (😃) and Cry (😭) are hand-drawn; the rest are built from parts. */
+export const emojis: EmojiDoc[] = faceDefs.flatMap((def): EmojiDoc[] => {
+  const doc = faceDoc(def);
+  if (def.slug === "grinning") return [doc, { slug: "smile", name: "Grinning, big eyes", char: "😃", Component: Smile }];
+  if (def.slug === "crying") return [doc, { slug: "cry", name: "Loudly crying", char: "😭", Component: Cry }];
+  return [doc];
+});

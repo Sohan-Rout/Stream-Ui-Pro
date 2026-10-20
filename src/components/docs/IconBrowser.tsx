@@ -104,7 +104,10 @@ function CatalogCard({
 /** The emoji catalog: each emoji in its still and animated variants, copyable as standalone SVGs. */
 function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (s: string) => void }) {
   const [palette, setPalette] = useState<"mono" | "color">("mono");
+  const [query, setQuery] = useState("");
   const colored = palette === "color";
+  const q = query.trim().toLowerCase();
+  const shown = q ? emojis.filter((e) => e.name.toLowerCase().includes(q) || e.slug.includes(q) || e.char === q) : emojis;
   async function copy(button: HTMLElement, label: string) {
     const svg = button.closest("li")?.querySelector(`[data-variant="${label}"] svg`);
     if (!svg) return;
@@ -117,6 +120,19 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
   }
   return (
     <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap items-center gap-4">
+      <label htmlFor="emoji-search" className="sr-only">
+        Search emojis
+      </label>
+      <Input
+        id="emoji-search"
+        type="search"
+        icon={<Search />}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={`Search ${emojis.length} faces… try "cry" or 😂`}
+        className="max-w-sm flex-1"
+      />
       <div role="group" aria-label="Emoji colors" className="flex self-start border-2 border-ink shadow-brutal-sm">
         {(
           [
@@ -138,11 +154,13 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
           </button>
         ))}
       </div>
+      </div>
       <p aria-live="polite" className="font-mono text-xs text-ink-muted">
         {copied ? <span className="bg-lime px-1.5 py-0.5 font-bold text-on-bright">copied {copied} SVG</span> : "Click a variant to copy it as an SVG. Animated ones carry their own CSS and hold still for reduced motion."}
       </p>
-      <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {emojis.map((e) => (
+      {shown.length === 0 && <p className="font-bold">No faces match “{query}”.</p>}
+      <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {shown.map((e) => (
           <li key={e.slug} className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal">
             <div className="grid grid-cols-2 border-b-2 border-ink">
               {(["still", "animated"] as const).map((v) => (
@@ -152,16 +170,16 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
                   data-variant={`${e.slug} ${colored ? "colored " : ""}${v}`}
                   aria-label={`Copy ${e.name} (${colored ? "colored, " : ""}${v}) as SVG`}
                   onClick={(ev) => copy(ev.currentTarget, `${e.slug} ${colored ? "colored " : ""}${v}`)}
-                  className="group flex cursor-pointer flex-col items-center gap-3 bg-paper bg-dots px-3 pt-6 pb-3 transition-colors duration-150 not-first:border-l-2 not-first:border-ink hover:bg-lime-soft focus-visible:relative focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-blue"
+                  className="group flex cursor-pointer flex-col items-center gap-2 bg-paper bg-dots px-2 pt-4 pb-2 transition-colors duration-150 not-first:border-l-2 not-first:border-ink hover:bg-lime-soft focus-visible:relative focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-blue"
                 >
-                  <e.Component animated={v === "animated"} colored={colored} size={88} />
+                  <e.Component animated={v === "animated"} colored={colored} size={72} />
                   <span className="border-2 border-ink bg-paper-raised px-1.5 font-mono text-xs font-bold uppercase group-hover:bg-lime">{v}</span>
                 </button>
               ))}
             </div>
-            <div className="flex items-center justify-between gap-3 px-4 py-3">
-              <span className="font-display text-lg tracking-tight">{e.name}</span>
-              <span className="font-mono text-xs text-ink-muted">{e.slug}.svg</span>
+            <div className="flex items-center justify-between gap-2 px-3 py-2.5">
+              <span className="truncate font-display text-sm tracking-tight">{e.name}</span>
+              <span aria-hidden className="text-base">{e.char}</span>
             </div>
           </li>
         ))}
@@ -332,7 +350,7 @@ export function IconBrowser() {
           open={set === "emojis"}
           title="Emoji catalog"
           description="Comic emojis in black and white or color, still or animated. Copy one as a standalone SVG."
-          count={`${emojis.length} so far`}
+          count={`${emojis.length} faces`}
           tone="bg-orange"
           onOpen={() => openCatalog("emojis")}
         >

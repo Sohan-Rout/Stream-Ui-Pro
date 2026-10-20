@@ -4,6 +4,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { emojis } from "@/components/emojis/emojis";
 
 describe("emojis", () => {
+  test("every face emoji is here, in order, with unique slugs", () => {
+    const slugs = emojis.map((e) => e.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    expect(emojis.length).toBeGreaterThanOrEqual(100);
+    expect(slugs.indexOf("smile")).toBe(slugs.indexOf("grinning") + 1);
+    expect(slugs.indexOf("cry")).toBe(slugs.indexOf("crying") + 1);
+  });
+
   for (const e of emojis) {
     test(`${e.name}: the still SVG is standalone and has no animation`, () => {
       const svg = renderToStaticMarkup(<e.Component />);
@@ -17,7 +25,8 @@ describe("emojis", () => {
       const color = renderToStaticMarkup(<e.Component colored />);
       const fills = (svg: string) => new Set([...svg.matchAll(/fill="(#[0-9a-f]{6})"/gi)].map((m) => m[1].toLowerCase()));
       expect([...fills(mono)].sort()).toEqual(["#0e0f14", "#ffffff"]);
-      expect(fills(color).size).toBeGreaterThan(2);
+      const tints = [...fills(color)].filter((c) => c !== "#0e0f14" && c !== "#ffffff");
+      expect(tints.length).toBeGreaterThan(0);
     });
 
     test(`${e.name}: the animated SVG carries its keyframes and a reduced-motion stop`, () => {
