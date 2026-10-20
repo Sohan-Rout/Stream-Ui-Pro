@@ -57,3 +57,6 @@ next-env.d.ts
 # third-party agent skills, installed locally (see skills-lock.json)
 /.agents/
 /.claude/skills/brag
+
+# generated brand icons (bun scripts/build-brand-icons.ts)
+/public/brand-icons/

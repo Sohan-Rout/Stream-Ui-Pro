@@ -53,10 +53,10 @@ export const indexSeo = {
     keywords: [...base, "landing page sections", "neobrutalism templates", "React page sections", "Tailwind sections"],
   },
   icons: {
-    title: "2,000+ Animated Icons for React",
+    title: "Animated Icons and Brand Logos for React",
     description:
-      "Search 2,000+ animated icons for React. Add draw, spin, bounce, and wiggle animations, set size and stroke, and copy the JSX. Free and open source.",
-    keywords: ["animated icons", "React animated icons", "animated SVG icons", "icon animation", "Lucide icons", "React icons"],
+      "Search 2,000+ animated icons and 3,400+ brand logos for React. Animate icons with draw, spin, or bounce, then copy the JSX or SVG. Free and open source.",
+    keywords: ["animated icons", "React animated icons", "brand icons", "brand logos SVG", "icon animation", "Lucide icons", "React icons"],
   },
   labs: {
     title: "Creative React UI Experiments",

@@ -20,18 +20,25 @@ import { AnimatedIcon } from "@streamuilib/react";
   <Rocket className="size-5" aria-hidden />
 </AnimatedIcon>`;
 
+const brandUsage = `// bun add react-icons
+import { SiGithub } from "react-icons/si";
+
+// Monochrome; takes the text color. Name it when it stands alone.
+<SiGithub className="size-5" aria-label="GitHub" role="img" />`;
+
 export default function IconsPage() {
   return (
     <div className="flex flex-col gap-14">
       <DocHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Icons" }]}
-        title="Animated icons"
-        description="2,000+ icons for React, drawn on a 24px grid with one stroke weight. Animate them with draw, spin, bounce, and more, then click any icon to copy its JSX."
+        title="Icons"
+        description="2,000+ line icons on a 24px grid that you can animate with draw, spin, bounce, and more, plus 3,400+ brand logos. Click any icon to copy its JSX."
         meta={
           <>
             <Badge tone="paper">24px grid</Badge>
             <Badge tone="paper">tree-shakable</Badge>
             <Badge tone="pink">animated</Badge>
+            <Badge tone="lime">brand logos</Badge>
           </>
         }
       />
@@ -51,8 +58,15 @@ export default function IconsPage() {
             Animated Icon docs
           </Link>
         </p>
+        <p className="max-w-2xl leading-relaxed text-ink-muted">
+          Brand icons come from the{" "}
+          <code className="font-mono text-sm text-ink">react-icons</code> package. Copy them as
+          JSX, or as a standalone SVG to drop in anywhere.
+        </p>
+        <CodeBlock code={brandUsage} filename="brand-icons.tsx" />
         <p className="font-mono text-xs text-ink-muted">
-          Glyphs from Lucide, ISC licensed.
+          Line icons from Lucide, ISC licensed. Brand icons from Simple Icons (CC0) via react-icons; each
+          logo is a trademark of its owner, so follow that brand&apos;s guidelines when you use it.
         </p>
       </DocSection>
     </div>
