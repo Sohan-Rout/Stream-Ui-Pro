@@ -92,6 +92,12 @@ export const indexSeo = {
 
 /** Components whose name doesn't read well after "Neobrutalism". */
 const componentOverrides: Record<string, SeoCopy> = {
+  "comic-badge": {
+    title: "Comic Badge Component for React: Starbursts",
+    description:
+      "Comic-book badges for React and Tailwind CSS: starburst, scalloped seal, splat, blob, speech bubble, and ribbon shapes with ink outlines and hard shadows.",
+    keywords: ["starburst badge", "comic badge React", "sticker badge", "sale badge component", "neobrutalism badge", "speech bubble badge"],
+  },
   battery: {
     title: "Battery Indicator Component for React",
     description:

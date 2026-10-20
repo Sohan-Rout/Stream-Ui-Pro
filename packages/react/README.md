@@ -67,6 +67,7 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `Dialog` | Modal on native `<dialog>`: focus trap, Esc to close, focus return. |
 | `Tooltip` | Hint on hover and focus, Esc to dismiss, linked with aria-describedby. |
 | `Progress` | Determinate progress bar. |
+| `ComicBadge` | Comic-book sticker badges: burst, seal, splat, blob, speech bubble, and ribbon. |
 | `Battery` | Battery level with auto colors, charging and low states, and segments. |
 | `Skeleton` | Loading placeholders that pulse only when motion is allowed. |
 | `Avatar`, `AvatarGroup` | Initials avatars and overlapping stacks. |

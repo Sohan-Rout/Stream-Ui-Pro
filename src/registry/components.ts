@@ -18,6 +18,9 @@ import TabsBasic from "@/examples/tabs/basic";
 import ProgressTones from "@/examples/progress/tones";
 import ProgressInteractive from "@/examples/progress/interactive";
 import BatteryLevels from "@/examples/battery/levels";
+import ComicBadgeShapes from "@/examples/comic-badge/shapes";
+import ComicBadgeTonesSizes from "@/examples/comic-badge/tones-sizes";
+import ComicBadgeAnimated from "@/examples/comic-badge/animated";
 import BatterySegments from "@/examples/battery/segments";
 import BatteryInteractive from "@/examples/battery/interactive";
 import AvatarSizes from "@/examples/avatar/sizes";
@@ -298,6 +301,38 @@ const entries: ComponentDoc[] = [
       'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax.',
       "Give it a name with aria-label or aria-labelledby.",
       "The fill animates width only when motion is allowed.",
+    ],
+  },
+  {
+    slug: "comic-badge",
+    name: "Comic Badge",
+    description: "A comic-book sticker for short labels: a burst, seal, splat, blob, speech bubble, or ribbon.",
+    status: "beta",
+    file: "packages/react/src/ComicBadge.tsx",
+    usage: `import { ComicBadge } from "@streamuilib/react";
+
+<ComicBadge shape="burst">New!</ComicBadge>`,
+    examples: [
+      { title: "Shapes", description: "Six outlines, each with an ink stroke and a hard shadow that follow the shape.", file: ex("comic-badge", "shapes"), Component: ComicBadgeShapes },
+      { title: "Tones and sizes", file: ex("comic-badge", "tones-sizes"), Component: ComicBadgeTonesSizes },
+      { title: "Animated", description: "spin turns only the shape, so the text stays level; wiggle and pulse move the whole badge.", file: ex("comic-badge", "animated"), Component: ComicBadgeAnimated },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "shape", type: '"burst" | "seal" | "splat" | "blob" | "bubble" | "ribbon"', default: '"burst"', description: "The outline. burst, seal, splat, and blob are round and fixed-size; bubble and ribbon grow with their text." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange" | "paper"', default: '"lime"', description: "Fill color, the same tones as Badge." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Badge and text size." },
+          { name: "tilt", type: "number", default: "-6", description: "Rotation in degrees, for a stuck-on-by-hand look. 0 keeps it level." },
+          { name: "animate", type: '"none" | "spin" | "wiggle" | "pulse"', default: '"none"', description: "A looping animation. Stops for reduced motion." },
+          { name: "...props", type: 'ComponentProps<"span">', description: "Native attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      "It's plain inline text, so screen readers read the label; the shape is decorative and hidden.",
+      "Keep labels short: round shapes fit a word or two (use <br /> for a second line).",
+      "Looping animations stop when the user prefers reduced motion.",
     ],
   },
   {
@@ -884,6 +919,7 @@ import { AnimatedIcon } from "@streamuilib/react";
 export const componentOrder = [
   "button",
   "badge",
+  "comic-badge",
   "card",
   "alert",
   "input",

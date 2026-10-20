@@ -9,6 +9,7 @@ export { Checkbox, type CheckboxProps } from "./Checkbox";
 export { Tabs, type TabItem, type TabsProps } from "./Tabs";
 export { Progress, type ProgressProps } from "./Progress";
 export { Battery, type BatteryProps, type BatterySize } from "./Battery";
+export { ComicBadge, type ComicBadgeProps, type ComicBadgeShape, type ComicBadgeSize, type ComicBadgeAnimation } from "./ComicBadge";
 export { Avatar, AvatarGroup, type AvatarProps, type AvatarSize } from "./Avatar";
 export {
   AnimatedIcon,

@@ -280,6 +280,38 @@
     opacity: 0.5;
   }
 
+  /* ---------- Comic badge ---------- */
+
+  [data-sui-comic="spin"] > .sui-comic-shape {
+    animation: sui-comic-spin 14s linear infinite;
+  }
+  [data-sui-comic="wiggle"] {
+    animation: sui-comic-wiggle 1.4s ease-in-out infinite;
+  }
+  [data-sui-comic="pulse"] {
+    animation: sui-comic-pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes sui-comic-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes sui-comic-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-7deg); }
+    75% { transform: rotate(7deg); }
+  }
+  @keyframes sui-comic-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-sui-comic] > .sui-comic-shape,
+    [data-sui-comic] {
+      animation: none;
+    }
+  }
+
   /* ---------- Battery ---------- */
 
   [data-charging] .sui-battery-fill {
