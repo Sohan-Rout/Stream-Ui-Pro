@@ -23,6 +23,7 @@ import {
 } from "@streamuilib/react";
 import RadioGroupHorizontal from "@/examples/radio-group/horizontal";
 import AudioPlayerMini from "@/examples/audio-player/mini";
+import { BadgesPreview } from "@/components/docs/BadgesPreview";
 
 function CardPreview() {
   return (
@@ -127,4 +128,9 @@ export const indexPreviews: Record<string, ComponentType> = {
   "animated-icon": AnimatedIconPreview,
   "audio-player": AudioPlayerMini,
   "track-list": TrackListPreview,
+};
+
+/** Previews for component groups (like Badges) on the /components index. */
+export const groupPreviews: Record<string, ComponentType> = {
+  badge: BadgesPreview,
 };
