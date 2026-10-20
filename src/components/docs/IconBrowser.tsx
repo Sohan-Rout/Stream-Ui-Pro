@@ -2,8 +2,9 @@
 
 import { useDeferredValue, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
 import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
-import { ArrowRight, Check, Ghost, Heart, Music, Rocket, Search, Sparkles, Star, Zap } from "lucide-react";
+import { ArrowRight, Check, Ghost, Heart, Rocket, Search, Sparkles, Zap } from "lucide-react";
 import { BRAND_DIR, BrandGlyph } from "@/components/icons/BrandGlyph";
+import { Smile, emojis } from "@/components/emojis/emojis";
 import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamuilib/react";
 
 const PAGE = 120;
@@ -39,8 +40,8 @@ function openCatalog(set: IconSet) {
   window.dispatchEvent(new Event(CATALOG_EVENT));
 }
 
-const SAMPLE_ICONS = [Rocket, Heart, Zap, Star, Music, Sparkles];
-const SAMPLE_BRANDS = ["github", "figma", "react", "spotify", "discord", "notion"];
+const SAMPLE_ICONS = [Rocket, Heart, Zap, Sparkles];
+const SAMPLE_BRANDS = ["github", "figma", "react", "spotify"];
 
 /** One of the two catalog cards: a strip of samples, the name, the count, and whether it's open. */
 function CatalogCard({
@@ -100,9 +101,55 @@ function CatalogCard({
   );
 }
 
+/** The emoji catalog: each emoji in its still and animated variants, copyable as standalone SVGs. */
+function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (s: string) => void }) {
+  async function copy(button: HTMLElement, label: string) {
+    const svg = button.closest("li")?.querySelector(`[data-variant="${label}"] svg`);
+    if (!svg) return;
+    try {
+      await navigator.clipboard.writeText(svg.outerHTML);
+      onCopied(label);
+    } catch {
+      // Clipboard blocked; nothing useful to do.
+    }
+  }
+  return (
+    <div className="flex flex-col gap-4">
+      <p aria-live="polite" className="font-mono text-xs text-ink-muted">
+        {copied ? <span className="bg-lime px-1.5 py-0.5 font-bold text-on-bright">copied {copied} SVG</span> : "Click a variant to copy it as an SVG. Animated ones carry their own CSS and hold still for reduced motion."}
+      </p>
+      <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {emojis.map((e) => (
+          <li key={e.slug} className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal">
+            <div className="grid grid-cols-2 border-b-2 border-ink">
+              {(["still", "animated"] as const).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  data-variant={`${e.slug} ${v}`}
+                  aria-label={`Copy ${e.name} (${v}) as SVG`}
+                  onClick={(ev) => copy(ev.currentTarget, `${e.slug} ${v}`)}
+                  className="group flex cursor-pointer flex-col items-center gap-3 bg-paper bg-dots px-3 pt-6 pb-3 transition-colors duration-150 not-first:border-l-2 not-first:border-ink hover:bg-lime-soft focus-visible:relative focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-blue"
+                >
+                  <e.Component animated={v === "animated"} size={88} />
+                  <span className="border-2 border-ink bg-paper-raised px-1.5 font-mono text-xs font-bold uppercase group-hover:bg-lime">{v}</span>
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center justify-between gap-3 px-4 py-3">
+              <span className="font-display text-lg tracking-tight">{e.name}</span>
+              <span className="font-mono text-xs text-ink-muted">{e.slug}.svg</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /** A small tile for a sample glyph on a catalog card. */
 const SampleTile = ({ children }: { children: ReactNode }) => (
-  <span className="grid size-10 place-items-center border-2 border-ink bg-paper-raised text-ink">{children}</span>
+  <span className="grid size-9 shrink-0 place-items-center border-2 border-ink bg-paper-raised text-ink">{children}</span>
 );
 
 
@@ -261,24 +308,24 @@ export function IconBrowser() {
         <CatalogCard
           open={set === "emojis"}
           title="Emoji catalog"
-          description="Something a bit different is on the way. Check back soon."
-          count="coming soon"
+          description="Black-and-white comic emojis, still or animated. Copy one as a standalone SVG."
+          count={`${emojis.length} so far`}
           tone="bg-orange"
           onOpen={() => openCatalog("emojis")}
         >
+          <SampleTile>
+            <Smile size={24} />
+          </SampleTile>
           {["?", "?", "?"].map((q, i) => (
             <SampleTile key={i}>
-              <span className="font-display text-lg">{q}</span>
+              <span className="font-display text-base text-ink-muted">{q}</span>
             </SampleTile>
           ))}
         </CatalogCard>
       </div>
 
       {set === "emojis" ? (
-        <div className="flex flex-col items-center gap-3 border-2 border-dashed border-ink bg-paper-raised px-5 py-20 text-center">
-          <p className="font-display text-2xl tracking-tight">Emojis are coming.</p>
-          <p className="max-w-sm text-ink-muted">This catalog is empty for now. We&apos;re making something a bit different for it.</p>
-        </div>
+        <EmojiCatalog onCopied={setCopied} copied={copied} />
       ) : (
         <>
 
