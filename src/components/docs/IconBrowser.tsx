@@ -4,7 +4,7 @@ import { useDeferredValue, useEffect, useMemo, useState, useSyncExternalStore, t
 import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
 import { ArrowRight, Check, Ghost, Heart, Rocket, Search, Sparkles, Zap } from "lucide-react";
 import { BRAND_DIR, BrandGlyph } from "@/components/icons/BrandGlyph";
-import { Smile, emojis } from "@/components/emojis/emojis";
+import { emojis } from "@/components/emojis/emojis";
 import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamuilib/react";
 
 const PAGE = 120;
@@ -42,6 +42,7 @@ function openCatalog(set: IconSet) {
 
 const SAMPLE_ICONS = [Rocket, Heart, Zap, Sparkles];
 const SAMPLE_BRANDS = ["github", "figma", "react", "spotify"];
+const SAMPLE_EMOJIS = ["smile", "joy", "heart-eyes", "cry"];
 
 /** One of the two catalog cards: a strip of samples, the name, the count, and whether it's open. */
 function CatalogCard({
@@ -353,14 +354,14 @@ export function IconBrowser() {
           tone="bg-orange"
           onOpen={() => openCatalog("emojis")}
         >
-          <SampleTile>
-            <Smile size={24} />
-          </SampleTile>
-          {["?", "?", "?"].map((q, i) => (
-            <SampleTile key={i}>
-              <span className="font-display text-base text-ink-muted">{q}</span>
-            </SampleTile>
-          ))}
+          {SAMPLE_EMOJIS.map((slug) => {
+            const E = emojis.find((e) => e.slug === slug)!.Component;
+            return (
+              <SampleTile key={slug}>
+                <E size={26} />
+              </SampleTile>
+            );
+          })}
         </CatalogCard>
       </div>
 
