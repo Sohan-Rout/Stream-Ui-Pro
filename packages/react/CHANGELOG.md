@@ -6,7 +6,7 @@ include breaking changes, and they are called out here.
 
 Each `## x.y.z` section below becomes the notes of its GitHub release.
 
-## Unreleased
+## 0.4.0
 
 ### Added
 
