@@ -8,8 +8,11 @@ import type { ComponentType } from "react";
 
 const INK = "#0e0f14";
 const PAPER = "#ffffff";
+/** Colored variant: a classic emoji yellow, with the theme's pink for tongue and blush. */
+const FACE = "#ffd84d";
+const PINK = "#ff70b3";
 
-type EmojiProps = { animated?: boolean; size?: number; title?: string };
+type EmojiProps = { animated?: boolean; colored?: boolean; size?: number; title?: string };
 
 /** The keyframes for the animated Smile, inside the SVG itself. */
 const SMILE_CSS = `
@@ -31,8 +34,8 @@ const SMILE_CSS = `
 @media (prefers-reduced-motion: reduce) { .sui-smile-face, .sui-smile-eye, .sui-smile-grin, .sui-smile-pop { animation: none; } .sui-smile-pop { opacity: 0; } }
 `;
 
-/** A big comic grin: round face, oval eyes with glints, an open smile with a tongue. */
-export function Smile({ animated = false, size = 96, title = "Smiling face" }: EmojiProps) {
+/** A big comic grin (black and white, or colored with `colored`): round face, oval eyes with glints, an open smile with a tongue. */
+export function Smile({ animated = false, colored = false, size = 96, title = "Smiling face" }: EmojiProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size} role="img" aria-label={title}>
       {animated && <style>{SMILE_CSS}</style>}
@@ -46,7 +49,13 @@ export function Smile({ animated = false, size = 96, title = "Smiling face" }: E
       <g className={animated ? "sui-smile-face" : undefined}>
         {/* The hard shadow, then the face. */}
         <circle cx="64" cy="66" r="44" fill={INK} />
-        <circle cx="58" cy="60" r="44" fill={PAPER} stroke={INK} strokeWidth="6" />
+        <circle cx="58" cy="60" r="44" fill={colored ? FACE : PAPER} stroke={INK} strokeWidth="6" />
+        {colored && (
+          <g fill={PINK}>
+            <ellipse cx="28" cy="70" rx="8" ry="5" />
+            <ellipse cx="88" cy="67" rx="8" ry="5" />
+          </g>
+        )}
         {/* Eyes: tall ink ovals with a white glint. */}
         <g className={animated ? "sui-smile-eye" : undefined}>
           <ellipse cx="43" cy="48" rx="7" ry="11" fill={INK} />
@@ -62,7 +71,7 @@ export function Smile({ animated = false, size = 96, title = "Smiling face" }: E
         {/* An open grin with a tongue. */}
         <g className={animated ? "sui-smile-grin" : undefined}>
           <path d="M34 70 Q58 74 82 70 Q80 98 58 98 Q36 98 34 70 Z" fill={INK} stroke={INK} strokeWidth="5" strokeLinejoin="round" />
-          <path d="M44 88 Q58 80 72 88 Q66 95 58 95 Q50 95 44 88 Z" fill={PAPER} />
+          <path d="M44 88 Q58 80 72 88 Q66 95 58 95 Q50 95 44 88 Z" fill={colored ? PINK : PAPER} />
           <path d="M58 84 L58 92" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
         </g>
       </g>

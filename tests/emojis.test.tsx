@@ -12,6 +12,14 @@ describe("emojis", () => {
       expect(svg).not.toContain("<style");
     });
 
+    test(`${e.name}: colored adds color; black and white stays ink and paper`, () => {
+      const mono = renderToStaticMarkup(<e.Component />);
+      const color = renderToStaticMarkup(<e.Component colored />);
+      const fills = (svg: string) => new Set([...svg.matchAll(/fill="(#[0-9a-f]{6})"/gi)].map((m) => m[1].toLowerCase()));
+      expect([...fills(mono)].sort()).toEqual(["#0e0f14", "#ffffff"]);
+      expect(fills(color).size).toBeGreaterThan(2);
+    });
+
     test(`${e.name}: the animated SVG carries its keyframes and a reduced-motion stop`, () => {
       const svg = renderToStaticMarkup(<e.Component animated />);
       expect(svg).toContain("@keyframes");
