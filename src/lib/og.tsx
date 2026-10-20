@@ -257,7 +257,7 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
     return (
       <div style={{ display: "flex", gap: 12, alignItems: "flex-start", height: 180, padding: "22px 16px", backgroundColor: brand.paper }}>
         {[brand.orange, brand.lime, brand.pink].map((c, i) => (
-          <div key={c} style={{ display: "flex", flexDirection: "column", gap: 8, width: 78, height: 120, marginTop: i === 1 ? 0 : 14, padding: 9, backgroundColor: c, border: `4px solid ${brand.ink}`, boxShadow: hard(6), transform: i === 1 ? "rotate(-3deg)" : "none" }}>
+          <div key={c} style={{ display: "flex", flexDirection: "column", gap: 8, width: 78, height: 120, marginTop: i === 1 ? 0 : 14, padding: 9, backgroundColor: c, border: `4px solid ${brand.ink}`, boxShadow: hard(6), ...(i === 1 && { transform: "rotate(-3deg)" }) }}>
             <div style={{ display: "flex", width: 34, height: 9, backgroundColor: brand.ink }} />
             <div style={{ display: "flex", width: 44, height: 20, backgroundColor: brand.ink }} />
             <div style={{ display: "flex", width: "100%", height: 4, backgroundColor: brand.ink }} />
@@ -633,7 +633,7 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
                   <div style={{ display: "flex", position: "absolute", left: 14, top: 6, width: 36, height: 40, backgroundColor: up[i], border: `4px solid ${brand.ink}`, borderRadius: i === 8 ? 20 : "18px 18px 0 0" }} />
                 )}
                 <div style={{ display: "flex", position: "absolute", left: 4, bottom: 4, width: 56, height: 18, borderRadius: 28, backgroundColor: brand.ink }} />
-                <div style={{ display: "flex", position: "absolute", left: 2, bottom: 0, width: 60, height: 10, borderRadius: "0 0 30px 30px", backgroundColor: brand.orange, border: `3px solid ${brand.ink}`, borderTop: "none" }} />
+                <div style={{ display: "flex", position: "absolute", left: 2, bottom: 0, width: 60, height: 10, borderRadius: "0 0 30px 30px", backgroundColor: brand.orange, border: `3px solid ${brand.ink}`, borderTopWidth: 0 }} />
               </div>
             ))}
           </div>
