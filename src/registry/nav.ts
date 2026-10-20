@@ -1,5 +1,5 @@
 import type { NavGroup } from "@/components/docs/DocsNav";
-import { components } from "./components";
+import { componentEntries } from "./components";
 import { sections } from "./sections";
 import { labs } from "./labs";
 
@@ -7,7 +7,7 @@ export const docsNav: NavGroup[] = [
   {
     title: "Components",
     href: "/components",
-    items: components.map((c) => ({ label: c.name, href: `/components/${c.slug}` })),
+    items: componentEntries.map((c) => ({ label: c.name, href: `/components/${c.slug}` })),
   },
   {
     title: "Sections",

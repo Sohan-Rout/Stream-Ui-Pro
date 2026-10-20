@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@streamuilib/react";
 import { readSource } from "@/lib/source";
-import { components } from "@/registry/components";
+import { componentHref, components } from "@/registry/components";
 import type { SectionVariant } from "@/registry/sections";
 import { DocSection } from "./DocHeader";
 import { CodeBlock } from "./CodeBlock";
@@ -17,7 +17,7 @@ export function BuiltWith({ uses }: { uses: string[] }) {
       {uses.map((u) => {
         const c = components.find((c) => c.name === u);
         return c ? (
-          <Link key={u} href={`/components/${c.slug}`} className="rounded-full focus-visible:outline-offset-2">
+          <Link key={u} href={componentHref(c)} className="rounded-full focus-visible:outline-offset-2">
             <Badge tone="paper" className="hover:bg-lime-soft">{u}</Badge>
           </Link>
         ) : (

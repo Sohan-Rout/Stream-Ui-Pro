@@ -6,7 +6,7 @@ import { describe, expect, test } from "bun:test";
 import { existsSync, readFileSync } from "node:fs";
 import * as pkg from "@streamuilib/react";
 import { readSource } from "@/lib/source";
-import { componentOrder, components } from "@/registry/components";
+import { componentEntries, componentGroupOf, componentGroups, componentHref, componentOrder, components } from "@/registry/components";
 import { getSectionVariant, sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { docsNav, neighbors } from "@/registry/nav";
@@ -129,7 +129,11 @@ describe("docs navigation", () => {
   test("links to every registry page exactly once", () => {
     const hrefs = docsNav.flatMap((g) => [g.href, ...g.items.map((i) => i.href)]);
     expect(new Set(hrefs).size).toBe(hrefs.length);
-    for (const c of components) expect(hrefs).toContain(`/components/${c.slug}`);
+    // Every component is reachable: directly, or through its group's page.
+    for (const c of components) {
+      const hit = componentGroupOf(c);
+      expect(hrefs).toContain(`/components/${hit ? hit.group.slug : c.slug}`);
+    }
     for (const s of sections) expect(hrefs).toContain(`/sections/${s.slug}`);
     for (const l of labs) expect(hrefs).toContain(`/labs/${l.slug}`);
   });
@@ -141,5 +145,27 @@ describe("docs navigation", () => {
     expect(first.next?.href).toBe(`/components/${components[1].slug}`);
     expect(last.next).toBeUndefined();
     expect(last.prev?.href).toBe(`/components/${components.at(-2)!.slug}`);
+  });
+});
+
+describe("component groups", () => {
+  test("Badges groups the classic and comic designs", () => {
+    const badges = componentGroups.find((g) => g.slug === "badge")!;
+    expect(badges.variants.map((v) => [v.id, v.doc.slug])).toEqual([["classic", "badge"], ["comic", "comic-badge"]]);
+  });
+
+  test("grouped components live inside their group; the rest at their own slug", () => {
+    const byslug = (slug: string) => components.find((c) => c.slug === slug)!;
+    expect(componentHref(byslug("comic-badge"))).toBe("/components/badge/comic");
+    expect(componentHref(byslug("badge"))).toBe("/components/badge/classic");
+    expect(componentHref(byslug("button"))).toBe("/components/button");
+  });
+
+  test("each group appears once in the top-level list, where its first member sits", () => {
+    const slugs = componentEntries.map((e) => e.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    expect(slugs).not.toContain("comic-badge");
+    expect(componentEntries.find((e) => e.slug === "badge")?.kind).toBe("group");
+    expect(slugs.indexOf("badge")).toBe(1);
   });
 });

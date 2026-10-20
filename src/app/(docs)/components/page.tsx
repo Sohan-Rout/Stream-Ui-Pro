@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
-import { components } from "@/registry/components";
+import { componentEntries, components } from "@/registry/components";
 import { indexPreviews } from "@/registry/previews";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.components, path: "/components" });
@@ -20,8 +20,8 @@ export default function ComponentsIndex() {
         meta={<Badge tone="paper">{components.length} components</Badge>}
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {components.map((c) => {
-          const Preview = indexPreviews[c.slug] ?? c.examples[0].Component;
+        {componentEntries.map((c) => {
+          const Preview = indexPreviews[c.slug] ?? (c.kind === "doc" ? c.doc : c.group.variants[0].doc).examples[0].Component;
           return (
             <li key={c.slug} className="group relative flex flex-col border-2 border-ink bg-paper-raised shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none">
               {/* Same height on every card, so titles line up across each row. */}

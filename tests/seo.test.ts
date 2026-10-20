@@ -4,7 +4,7 @@ import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import sitemap from "@/app/sitemap";
 import robots from "@/app/robots";
 import manifest from "@/app/manifest";
-import { components } from "@/registry/components";
+import { componentEntries, componentGroups } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 
@@ -66,7 +66,8 @@ describe("sitemap.xml", () => {
       "/legal/privacy",
       "/legal/terms",
       "/legal/cookies",
-      ...components.map((c) => `/components/${c.slug}`),
+      ...componentEntries.map((c) => `/components/${c.slug}`),
+      ...componentGroups.flatMap((g) => g.variants.map((v) => `/components/${g.slug}/${v.id}`)),
       ...sections.map((s) => `/sections/${s.slug}`),
       ...sections.filter((s) => s.variants.length > 1).flatMap((s) => s.variants.map((v) => `/sections/${s.slug}/${v.id}`)),
       ...labs.map((l) => `/labs/${l.slug}`),

@@ -950,3 +950,64 @@ export const components: ComponentDoc[] = [...entries].sort(
 export function getComponent(slug: string) {
   return components.find((c) => c.slug === slug);
 }
+
+/**
+ * A broad component category with several designs: its own page is a grid
+ * of them, and each design gets a page at /components/<group>/<variant>.
+ * Members keep their own slugs (for the package and the shadcn registry).
+ */
+export type ComponentGroup = {
+  slug: string;
+  name: string;
+  description: string;
+  variants: { id: string; name: string; description: string; doc: ComponentDoc }[];
+};
+
+const member = (slug: string) => {
+  const doc = getComponent(slug);
+  if (!doc) throw new Error(`component group: no component "${slug}"`);
+  return doc;
+};
+
+export const componentGroups: ComponentGroup[] = [
+  {
+    slug: "badge",
+    name: "Badges",
+    description: "Short labels for status, counts, and callouts, in two designs: a classic pill and comic-book stickers.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A pill label in six tones for status, counts, and categories.", doc: member("badge") },
+      { id: "comic", name: "Comic", description: "Starbursts, seals, splats, blobs, speech bubbles, and ribbons with hard outlines.", doc: member("comic-badge") },
+    ],
+  },
+];
+
+export const getComponentGroup = (slug: string) => componentGroups.find((g) => g.slug === slug);
+
+function groupOf(doc: ComponentDoc) {
+  for (const g of componentGroups) {
+    const v = g.variants.find((v) => v.doc === doc);
+    if (v) return { group: g, variant: v };
+  }
+}
+
+/** Where a component's page lives: its own slug, or inside its group. */
+export function componentHref(doc: ComponentDoc) {
+  const hit = groupOf(doc);
+  return hit ? `/components/${hit.group.slug}/${hit.variant.id}` : `/components/${doc.slug}`;
+}
+
+export { groupOf as componentGroupOf };
+
+/** The top-level entries in order, for the sidebar, the index, and prev/next: each group once, where its first member sits. */
+export type ComponentEntry = { slug: string; name: string; description: string } & (
+  | { kind: "doc"; doc: ComponentDoc }
+  | { kind: "group"; group: ComponentGroup }
+);
+
+export const componentEntries: ComponentEntry[] = components.flatMap((doc): ComponentEntry[] => {
+  const hit = groupOf(doc);
+  if (!hit) return [{ kind: "doc", slug: doc.slug, name: doc.name, description: doc.description, doc }];
+  if (hit.group.variants[0].doc !== doc) return [];
+  const g = hit.group;
+  return [{ kind: "group", slug: g.slug, name: g.name, description: g.description, group: g }];
+});

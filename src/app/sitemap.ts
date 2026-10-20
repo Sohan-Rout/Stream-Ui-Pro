@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
-import { components } from "@/registry/components";
+import { componentEntries, componentGroups } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 
@@ -21,7 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/legal/privacy", 0.2, "monthly"),
     entry("/legal/terms", 0.2, "monthly"),
     entry("/legal/cookies", 0.2, "monthly"),
-    ...components.map((c) => entry(`/components/${c.slug}`, 0.8, "monthly")),
+    ...componentEntries.map((c) => entry(`/components/${c.slug}`, 0.8, "monthly")),
+    ...componentGroups.flatMap((g) => g.variants.map((v) => entry(`/components/${g.slug}/${v.id}`, 0.8, "monthly"))),
     ...sections.map((s) => entry(`/sections/${s.slug}`, 0.7, "monthly")),
     ...sections
       .filter((s) => s.variants.length > 1)

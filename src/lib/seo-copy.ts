@@ -112,6 +112,24 @@ const componentOverrides: Record<string, SeoCopy> = {
   },
 };
 
+/** A component category page, like Badges: a grid of its designs. */
+export function componentGroupSeo(group: { slug: string; name: string }): SeoCopy {
+  if (group.slug === "badge") {
+    return {
+      title: "Neobrutalism Badge Components for React",
+      description:
+        "Neobrutalism badges for React and Tailwind CSS in two designs: classic pill labels in six tones, and comic starbursts, seals, splats, and speech bubbles.",
+      keywords: [...base, "neobrutalism badge", "React badge component", "starburst badge", "comic badge", "Tailwind badge"],
+    };
+  }
+  const lower = group.name.toLowerCase();
+  return {
+    title: `Neobrutalism ${group.name} for React`,
+    description: `Neobrutalism ${lower} for React and Tailwind CSS v4 in several designs: hard borders, offset shadows, and accessible by default.`,
+    keywords: [...base, `neobrutalism ${lower}`, `React ${lower}`],
+  };
+}
+
 export function componentSeo(doc: { slug: string; name: string }): SeoCopy {
   const override = componentOverrides[doc.slug];
   if (override) return override;

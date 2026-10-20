@@ -1,8 +1,8 @@
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og";
-import { getComponent, components } from "@/registry/components";
+import { componentEntries } from "@/registry/components";
 
 export function generateStaticParams() {
-  return components.map((d) => ({ slug: d.slug }));
+  return componentEntries.map((e) => ({ slug: e.slug }));
 }
 
 export const alt = "Neobrutalism React component from stream/ui";
@@ -11,7 +11,7 @@ export const contentType = ogContentType;
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const doc = getComponent(slug);
+  const doc = componentEntries.find((e) => e.slug === slug);
   return renderOgImage({
     eyebrow: "Component",
     title: doc?.name ?? "stream/ui",

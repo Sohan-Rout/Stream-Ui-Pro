@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pageMetadata } from "@/lib/seo";
-import { componentSeo } from "@/lib/seo-copy";
-import { readSource } from "@/lib/source";
+import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
-import { DocHeader, DocSection } from "@/components/docs/DocHeader";
-import { Example } from "@/components/docs/Example";
-import { CodeBlock } from "@/components/docs/CodeBlock";
-import { PropsTable } from "@/components/docs/PropsTable";
+import { pageMetadata } from "@/lib/seo";
+import { componentGroupSeo, componentSeo } from "@/lib/seo-copy";
+import { DocHeader } from "@/components/docs/DocHeader";
 import { PrevNext } from "@/components/docs/PrevNext";
-import { InstallTabs } from "@/components/blocks/InstallTabs";
-import { OpenInV0 } from "@/components/docs/OpenInV0";
-import { installOptions, shadcnAdd, shadcnName } from "@/registry/shadcn";
-import { components, getComponent } from "@/registry/components";
+import { ComponentDocPage } from "@/components/docs/ComponentDocPage";
+import { componentEntries } from "@/registry/components";
+import { indexPreviews } from "@/registry/previews";
 import { neighbors } from "@/registry/nav";
 
 /**
@@ -24,77 +21,72 @@ import { neighbors } from "@/registry/nav";
 export const instant = false;
 
 export function generateStaticParams() {
-  return components.map((c) => ({ slug: c.slug }));
+  return componentEntries.map((e) => ({ slug: e.slug }));
 }
+
+const entryFor = (slug: string) => componentEntries.find((e) => e.slug === slug);
 
 export async function generateMetadata({ params }: PageProps<"/components/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const doc = getComponent(slug);
-  if (!doc) return {};
-  return pageMetadata({ ...componentSeo(doc), path: `/components/${doc.slug}` });
+  const entry = entryFor(slug);
+  if (!entry) return {};
+  const copy = entry.kind === "group" ? componentGroupSeo(entry.group) : componentSeo(entry.doc);
+  return pageMetadata({ ...copy, path: `/components/${entry.slug}` });
 }
 
+/**
+ * A component's page, or, for a broad category like Badges, a grid of its
+ * designs, each opening its own page at /components/<slug>/<variant>.
+ */
 export default async function ComponentPage({ params }: PageProps<"/components/[slug]">) {
   const { slug } = await params;
-  const doc = getComponent(slug);
-  if (!doc) notFound();
+  const entry = entryFor(slug);
+  if (!entry) notFound();
+  const { prev, next } = neighbors(componentEntries, componentEntries.indexOf(entry), "/components");
 
-  const index = components.indexOf(doc);
-  const { prev, next } = neighbors(components, index, "/components");
+  if (entry.kind === "doc") {
+    const crumbs = [{ label: "Home", href: "/" }, { label: "Components", href: "/components" }, { label: entry.doc.name }];
+    return <ComponentDocPage doc={entry.doc} crumbs={crumbs} prev={prev} next={next} />;
+  }
 
+  const g = entry.group;
   return (
     <article className="flex flex-col gap-14">
       <DocHeader
-        crumbs={[{ label: "Home", href: "/" }, { label: "Components", href: "/components" }, { label: doc.name }]}
-        title={doc.name}
-        description={doc.description}
-        meta={
-          <>
-            <Badge tone={doc.status === "stable" ? "lime" : "blue"}>{doc.status}</Badge>
-            <Badge tone="paper">{doc.file.split("/").pop()}</Badge>
-          </>
-        }
+        crumbs={[{ label: "Home", href: "/" }, { label: "Components", href: "/components" }, { label: g.name }]}
+        title={g.name}
+        description={g.description}
+        meta={<Badge tone="paper">{g.variants.length} variants</Badge>}
       />
-
-      <DocSection title="Examples" id="examples">
-        <div className="flex flex-col gap-12">
-          {doc.examples.map((e) => (
-            <Example key={e.file} {...e} />
-          ))}
-        </div>
-      </DocSection>
-
-      <DocSection title="Installation" id="installation">
-        <div className="flex flex-wrap items-end gap-3">
-          <InstallTabs options={installOptions(shadcnAdd(shadcnName.component(doc.slug)))} />
-          <OpenInV0 item={shadcnName.component(doc.slug)} />
-        </div>
-        <CodeBlock code={doc.usage} filename="usage.tsx" />
-      </DocSection>
-
-      <DocSection title="API" id="api">
-        <div className="flex flex-col gap-6">
-          {doc.props.map((t, i) => (
-            <PropsTable key={i} rows={t.rows} caption={t.caption} />
-          ))}
-        </div>
-      </DocSection>
-
-      <DocSection title="Accessibility" id="accessibility">
-        <ul className="flex flex-col gap-3">
-          {doc.accessibility.map((a) => (
-            <li key={a} className="flex gap-3 leading-relaxed">
-              <span aria-hidden className="mt-2 size-2 shrink-0 bg-lime ring-2 ring-ink" />
-              {a}
+      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {g.variants.map((v) => {
+          const Preview = indexPreviews[v.doc.slug] ?? v.doc.examples[0].Component;
+          return (
+            <li
+              key={v.id}
+              className="group relative flex flex-col border-2 border-ink bg-paper-raised shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none"
+            >
+              <div className="flex h-72 items-center justify-center overflow-hidden border-b-2 border-ink bg-paper bg-dots p-6">
+                {/* Live but inert: the whole card is the link. */}
+                <div inert className="pointer-events-none flex w-full justify-center">
+                  <Preview />
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col gap-2 p-5">
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className="font-display text-xl tracking-tight">
+                    <Link href={`/components/${g.slug}/${v.id}`} className="after:absolute after:inset-0">
+                      {v.name}
+                    </Link>
+                  </h2>
+                  <ArrowUpRight aria-hidden className="size-4.5 shrink-0" />
+                </div>
+                <p className="text-sm leading-relaxed text-ink-muted">{v.description}</p>
+              </div>
             </li>
-          ))}
-        </ul>
-      </DocSection>
-
-      <DocSection title="Source" id="source">
-        <CodeBlock code={readSource(doc.file)} filename={doc.file} collapsible />
-      </DocSection>
-
+          );
+        })}
+      </ul>
       <PrevNext prev={prev} next={next} />
     </article>
   );
