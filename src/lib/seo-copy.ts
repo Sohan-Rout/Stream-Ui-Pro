@@ -205,6 +205,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "Bold neobrutalism pricing cards for React and Tailwind CSS: full-color orange, lime, and pink plans, thick borders, hard shadows, and a billing switch.",
     keywords: [...base, "pricing cards", "colorful pricing section", "neobrutalism pricing", "SaaS pricing page", "React pricing"],
   },
+  "pricing/whack": {
+    title: "Whack-a-Mole Pricing Section for React",
+    description:
+      "A playful neobrutalism pricing section for React and Tailwind CSS: plans held up by moles popping out of holes, a crowned gold mole, and a billing switch.",
+    keywords: [...base, "playful pricing section", "game pricing page", "animated pricing cards", "React pricing", "whack a mole"],
+  },
   "hero/dino": {
     title: "Dino Runner Hero Section for React",
     description:

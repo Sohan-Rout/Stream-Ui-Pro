@@ -12,6 +12,7 @@ import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection
 import { LevelsFeaturesSection } from "@/components/sections/LevelsFeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { BoldPricingSection } from "@/components/sections/BoldPricingSection";
+import { WhackPricingSection } from "@/components/sections/WhackPricingSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -178,7 +179,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "pricing",
     name: "Pricing",
-    description: "Three plans with a monthly/yearly switch, two ways: a ruled classic table and bold color-block cards.",
+    description: "Three plans with a monthly/yearly switch, three ways: a ruled classic table, bold color-block cards, and whack-a-mole signs.",
     variants: [
       {
         id: "classic",
@@ -200,6 +201,19 @@ export const sections: SectionDoc[] = [
           "Each plan is one bright from the theme with ink text on top. Change a card's tone in the plans array.",
           "The featured plan lifts, tilts a degree, and wears a Most popular sticker; on small screens the cards stack flat.",
           "The billing switch is a pressed-button group, announced as a toggle. Hover lifts are off for reduced motion.",
+        ],
+      },
+      {
+        id: "whack",
+        name: "Whack-a-mole",
+        description: "Each plan is a sign held up by a mole popping out of its hole on a grass field; the featured one gets the crowned gold mole.",
+        file: "src/components/sections/WhackPricingSection.tsx",
+        Component: WhackPricingSection,
+        uses: ["lucide-react"],
+        notes: [
+          "The signs pop out of their holes one after another, nudge up on hover, and hold still for reduced motion.",
+          "Each mole's head is a button: bonk it and it squashes with X eyes and a +1. The section counts your bonks next to the eyebrow.",
+          "Pairs with the Whack-a-Mole lab: same violet moles and crowned gold mole. The billing switch is a pressed-button group.",
         ],
       },
     ],

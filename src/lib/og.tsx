@@ -252,6 +252,23 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "pricing/whack") {
+    // Three signs held up by moles over their holes, the middle one gold and crowned.
+    return (
+      <div style={{ display: "flex", gap: 10, alignItems: "flex-end", height: 180, padding: "12px 14px 0", backgroundColor: brand.limeSoft }}>
+        {[brand.violet, brand.lime, brand.violet].map((fur, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative", width: 82, height: i === 1 ? 160 : 140 }}>
+            <div style={{ display: "flex", width: 46, height: 30, backgroundColor: fur, border: `4px solid ${brand.ink}`, borderBottomWidth: 0, borderRadius: "23px 23px 0 0" }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, width: 78, height: i === 1 ? 92 : 74, padding: 7, backgroundColor: brand.raised, border: `4px solid ${brand.ink}` }}>
+              <div style={{ display: "flex", width: 34, height: 8, backgroundColor: brand.ink }} />
+              <div style={{ display: "flex", width: 42, height: 18, backgroundColor: brand.ink }} />
+            </div>
+            <div style={{ display: "flex", position: "absolute", left: -2, bottom: 0, width: 86, height: 20, borderRadius: "0 0 43px 43px", backgroundColor: brand.orange, border: `4px solid ${brand.ink}`, borderTopWidth: 0 }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
   if (variant === "pricing/bold") {
     // Three full-color plan cards, the middle one lifted.
     return (
