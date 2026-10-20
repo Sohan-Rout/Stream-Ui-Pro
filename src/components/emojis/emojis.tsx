@@ -11,6 +11,7 @@ const PAPER = "#ffffff";
 /** Colored variant: a classic emoji yellow, with the theme's pink for tongue and blush. */
 const FACE = "#ffd84d";
 const PINK = "#ff70b3";
+const TEAR = "#70ccee";
 
 type EmojiProps = { animated?: boolean; colored?: boolean; size?: number; title?: string };
 
@@ -79,6 +80,64 @@ export function Smile({ animated = false, colored = false, size = 96, title = "S
   );
 }
 
+/** The keyframes for the animated Cry, inside the SVG itself. */
+const CRY_CSS = `
+.sui-cry-face { transform-box: fill-box; transform-origin: 50% 100%; animation: sui-cry-sob .5s ease-in-out infinite; }
+.sui-cry-mouth { transform-box: fill-box; transform-origin: 50% 0%; animation: sui-cry-wail .5s ease-in-out infinite; }
+.sui-cry-drop { transform-box: fill-box; transform-origin: 50% 0%; animation: sui-cry-drip 1.1s cubic-bezier(.5,0,1,1) infinite; }
+.sui-cry-drop.b { animation-delay: .55s; }
+.sui-cry-drop.c { animation-delay: .3s; }
+.sui-cry-drop.d { animation-delay: .85s; }
+@keyframes sui-cry-sob { 0%, 100% { transform: translateY(0) scale(1, 1); } 30% { transform: translateY(2px) scale(1.03, .97); } 60% { transform: translateY(-1px) scale(.99, 1.01); } }
+@keyframes sui-cry-wail { 0%, 100% { transform: scale(1, 1); } 40% { transform: scale(1.06, .86); } }
+@keyframes sui-cry-drip { 0% { opacity: 0; transform: translateY(-4px) scale(.6); } 15% { opacity: 1; transform: translateY(0) scale(1); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(30px) scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .sui-cry-face, .sui-cry-mouth, .sui-cry-drop { animation: none; } .sui-cry-drop { opacity: 0; } }
+`;
+
+/** A loud comic sob: eyes squeezed shut, worried brows, a wailing mouth, and tears streaming down. */
+export function Cry({ animated = false, colored = false, size = 96, title = "Crying face" }: EmojiProps) {
+  const tear = colored ? TEAR : PAPER;
+  /** A teardrop shape, its tip at (x, y). */
+  const drop = (x: number, y: number) => `M${x} ${y} Q${x + 6} ${y + 9} ${x + 6} ${y + 13} A6 6 0 0 1 ${x - 6} ${y + 13} Q${x - 6} ${y + 9} ${x} ${y} Z`;
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width={size} height={size} role="img" aria-label={title}>
+      {animated && <style>{CRY_CSS}</style>}
+      <g className={animated ? "sui-cry-face" : undefined}>
+        {/* The hard shadow, then the face. */}
+        <circle cx="64" cy="66" r="44" fill={INK} />
+        <circle cx="58" cy="60" r="44" fill={colored ? FACE : PAPER} stroke={INK} strokeWidth="6" />
+        {/* Worried brows, slanting up toward the middle. */}
+        <g stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none">
+          <path d="M30 34 Q38 28 48 31" />
+          <path d="M68 31 Q78 28 86 34" />
+          {/* Eyes squeezed shut: > and <. */}
+          <path d="M33 42 L46 48 L33 54" strokeLinejoin="round" />
+          <path d="M83 42 L70 48 L83 54" strokeLinejoin="round" />
+        </g>
+        {/* Tear streams down each cheek. */}
+        <g fill={tear} stroke={INK} strokeWidth="4" strokeLinejoin="round">
+          <path d="M34 56 Q30 72 30 92 Q34 96 40 92 Q40 72 40 58 Z" />
+          <path d="M82 56 Q86 72 86 92 Q82 96 76 92 Q76 72 76 58 Z" />
+        </g>
+        {/* A wide, wailing mouth with a wobbly lower lip. */}
+        <g className={animated ? "sui-cry-mouth" : undefined}>
+          <path d="M42 72 Q58 64 74 72 Q78 86 70 92 Q64 88 58 92 Q52 88 46 92 Q38 86 42 72 Z" fill={INK} stroke={INK} strokeWidth="5" strokeLinejoin="round" />
+          <path d="M50 86 Q58 80 66 86 Q62 89 58 90 Q54 89 50 86 Z" fill={colored ? PINK : PAPER} />
+        </g>
+      </g>
+      {/* Drops falling off the bottom of each stream, only in the animated variant. */}
+      {animated && (
+        <g fill={tear} stroke={INK} strokeWidth="3" strokeLinejoin="round">
+          <path className="sui-cry-drop" d={drop(35, 94)} />
+          <path className="sui-cry-drop b" d={drop(35, 94)} />
+          <path className="sui-cry-drop c" d={drop(81, 94)} />
+          <path className="sui-cry-drop d" d={drop(81, 94)} />
+        </g>
+      )}
+    </svg>
+  );
+}
+
 export type EmojiDoc = {
   slug: string;
   name: string;
@@ -88,4 +147,7 @@ export type EmojiDoc = {
 };
 
 /** The emoji catalog. More to come. */
-export const emojis: EmojiDoc[] = [{ slug: "smile", name: "Smile", component: "Smile", Component: Smile }];
+export const emojis: EmojiDoc[] = [
+  { slug: "smile", name: "Smile", component: "Smile", Component: Smile },
+  { slug: "cry", name: "Cry", component: "Cry", Component: Cry },
+];
