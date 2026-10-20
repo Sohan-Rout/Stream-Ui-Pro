@@ -136,7 +136,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" | "whack" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" | "whack" | "hammer" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -636,6 +636,24 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
             <div style={{ display: "flex", position: "absolute", left: 200, top: 150, width: 34, height: 28, borderRadius: 12, backgroundColor: brand.pink, border: `4px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 178, width: 260, height: 12, backgroundColor: brand.lime, borderTop: `4px solid ${brand.ink}`, borderBottom: `3px solid ${brand.ink}` }} />
             <div style={{ display: "flex", position: "absolute", left: 0, top: 190, width: 260, height: 40, backgroundColor: brand.orange }} />
+          </div>
+        );
+      }
+      if (art.game === "hammer") {
+        // The mallet mid-swing over a plank of nails.
+        return (
+          <div style={{ display: "flex", position: "relative", width: 280, height: 220 }}>
+            <div style={{ display: "flex", position: "absolute", left: 10, bottom: 10, width: 250, height: 54, backgroundColor: brand.orange, border: `5px solid ${brand.ink}`, boxShadow: hard(10) }} />
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", left: 34 + i * 56, bottom: 64 }}>
+                <div style={{ display: "flex", width: 30, height: 10, backgroundColor: i === 1 ? brand.lime : brand.raised, border: `3px solid ${brand.ink}` }} />
+                <div style={{ display: "flex", width: 9, height: i === 1 ? 6 : 30, backgroundColor: brand.sunken, borderLeft: `3px solid ${brand.ink}`, borderRight: `3px solid ${brand.ink}` }} />
+              </div>
+            ))}
+            <div style={{ display: "flex", position: "absolute", left: 120, top: 0, width: 150, height: 150, transform: "rotate(-35deg)" }}>
+              <div style={{ display: "flex", position: "absolute", left: 66, top: 52, width: 18, height: 96, backgroundColor: brand.orange, border: `4px solid ${brand.ink}` }} />
+              <div style={{ display: "flex", position: "absolute", left: 22, top: 10, width: 106, height: 50, backgroundColor: brand.pink, border: `5px solid ${brand.ink}`, borderLeftWidth: 18, borderRightWidth: 18 }} />
+            </div>
           </div>
         );
       }

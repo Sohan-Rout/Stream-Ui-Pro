@@ -13,6 +13,7 @@ import { JumperLab } from "@/components/demos/JumperLab";
 import { PinballLab } from "@/components/demos/PinballLab";
 import { RunnerLab } from "@/components/demos/RunnerLab";
 import { WhackLab } from "@/components/demos/WhackLab";
+import { HammerLab } from "@/components/demos/HammerLab";
 
 export type LabDoc = {
   slug: string;
@@ -200,6 +201,20 @@ labs.push({
     "Moles score 10 and gold ones 50; bombs cost 30. Five hits in a row raise the combo multiplier, up to ×4, and a miss, a bomb, or a mole that gets away resets it.",
     "The rules live in src/lib/games/whack.ts as pure functions with tests: pops speed up and stay up for less time as the clock runs down, and more can be up at once.",
     "Score popups and the pop-up motion turn off under reduced motion. Your best score is remembered in this browser once you accept the cookie banner.",
+  ],
+});
+
+labs.push({
+  slug: "hammer",
+  name: "Hammer",
+  description: "Your cursor becomes a neo-brutalist mallet: click to swing it from the handle and drive five nails into a plank.",
+  file: "src/components/demos/HammerLab.tsx",
+  Component: HammerLab,
+  notes: [
+    "Inside the board the mouse cursor is a mallet. A click swings it from the end of its handle, lands the head on the spot, and pops a burst and a BONK!.",
+    "Each nail takes three hits to go flush; all five in and you can pull them back out. On touch the mallet jumps to your tap, and with a keyboard each nail is a button.",
+    "The swing is one CSS keyframe around the handle's pivot, restarted per hit. Reduced motion skips the swing and the popups; the hit still lands.",
+    "Mallet is exported on its own (a plain SVG that takes the theme colors), so you can drop it into a whack-a-mole or a 404 page.",
   ],
 });
 

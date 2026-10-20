@@ -285,6 +285,12 @@ const labCopy: Record<string, SeoCopy> = {
       "Neobrutalism pinball in React and canvas: rollover lanes, drop targets, a score multiplier, ball save, and flippers that pass on their swing. Source included.",
     keywords: ["pinball game React", "canvas pinball", "pinball physics JavaScript", "React game", "browser pinball"],
   },
+  hammer: {
+    title: "Hammer Cursor Animation in React and CSS",
+    description:
+      "A neobrutalism mallet cursor in React: click to swing it from the handle and drive nails into a plank, with bursts, sound, and keyboard support.",
+    keywords: ["hammer cursor", "custom cursor React", "CSS swing animation", "mallet animation", "React UI experiment"],
+  },
   "whack-a-mole": {
     title: "Whack-a-Mole Game in React",
     description:

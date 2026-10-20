@@ -19,7 +19,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     accent: "violet",
     art: {
       kind: "lab",
-      game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : slug === "snake" ? "snake" : slug === "flappy" ? "flappy" : slug === "tetris" ? "tetris" : slug === "maze" ? "maze" : slug === "jumper" ? "jumper" : slug === "pinball" ? "pinball" : slug === "runner" ? "runner" : slug === "whack-a-mole" ? "whack" : "dice",
+      game: slug === "tic-tac-toe" ? "tictactoe" : slug === "memory" ? "memory" : slug === "snake" ? "snake" : slug === "flappy" ? "flappy" : slug === "tetris" ? "tetris" : slug === "maze" ? "maze" : slug === "jumper" ? "jumper" : slug === "pinball" ? "pinball" : slug === "runner" ? "runner" : slug === "whack-a-mole" ? "whack" : slug === "hammer" ? "hammer" : "dice",
     },
   });
 }
