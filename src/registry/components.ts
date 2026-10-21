@@ -58,6 +58,12 @@ import AudioPlayerMini from "@/examples/audio-player/mini";
 import AudioPlayerHeadless from "@/examples/audio-player/headless";
 import TrackListBasic from "@/examples/track-list/basic";
 import EqualizerBasic from "@/examples/equalizer/basic";
+import ComicTabsBasic from "@/examples/comic-tabs/basic";
+import ComicAccordionBasic from "@/examples/comic-accordion/basic";
+import ComicAccordionExclusive from "@/examples/comic-accordion/exclusive";
+import ComicDialogBasic from "@/examples/comic-dialog/basic";
+import ComicDialogForm from "@/examples/comic-dialog/form";
+import ComicTooltipBasic from "@/examples/comic-tooltip/basic";
 import ComicInputBasic from "@/examples/comic-input/basic";
 import ComicInputStates from "@/examples/comic-input/states";
 import ComicTextareaBasic from "@/examples/comic-textarea/basic";
@@ -1251,6 +1257,137 @@ import { AnimatedIcon } from "@streamuilib/react";
       "The bubble, track, and thumb are drawn for sight only and hidden.",
     ],
   },
+  {
+    slug: "comic-tabs",
+    name: "Comic Tabs",
+    description: "Tilted caption-box tabs over a comic panel; the active tab stands up straight and its panel pops in.",
+    status: "beta",
+    file: "packages/react/src/ComicTabs.tsx",
+    usage: `import { ComicTabs } from "@streamuilib/react";
+
+<ComicTabs
+  label="Episode"
+  items={[
+    { id: "origin", label: "Origin", content: <p>...</p> },
+    { id: "powers", label: "Powers", content: <p>...</p> },
+  ]}
+/>`,
+    examples: [{ title: "Basic", description: "Click a tab or use the arrow keys, Home, and End.", file: ex("comic-tabs", "basic"), Component: ComicTabsBasic }],
+    props: [
+      {
+        rows: [
+          { name: "items", type: "{ id: string; label: ReactNode; content: ReactNode }[]", description: "Tabs in order. id must be unique." },
+          { name: "label", type: "string", description: "Accessible name for the tab list. Required." },
+          { name: "defaultIndex", type: "number", default: "0", description: "The tab selected on first render." },
+          { name: "className", type: "string", description: "Classes for the wrapper." },
+        ],
+      },
+    ],
+    accessibility: [
+      "WAI-ARIA tabs, the same as Tabs: arrow keys move and select, Home and End jump to the ends.",
+      "Only the active tab is in the tab order; panels are focusable.",
+      "The tilt and pop-in stop when the user prefers reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-accordion",
+    name: "Comic Accordion",
+    description: "Hand-inked panels with a starburst toggle that spins open; the answer pops in on halftone dots.",
+    status: "beta",
+    file: "packages/react/src/ComicAccordion.tsx",
+    usage: `import { ComicAccordion } from "@streamuilib/react";
+
+<ComicAccordion
+  items={[
+    { id: "free", title: "Is it free?", content: "Yes! MIT licensed." },
+  ]}
+/>`,
+    examples: [
+      { title: "Basic", file: ex("comic-accordion", "basic"), Component: ComicAccordionBasic },
+      { title: "One at a time", file: ex("comic-accordion", "exclusive"), Component: ComicAccordionExclusive },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "items", type: "{ id: string; title: ReactNode; content: ReactNode }[]", description: "Sections in order. id must be unique." },
+          { name: "exclusive", type: "boolean", default: "false", description: "Only one item open at a time." },
+          { name: "defaultOpen", type: "string[]", default: "[]", description: "Ids of items open on first render." },
+          { name: "className", type: "string", description: "Classes for the wrapper." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Native <details> and <summary>: Enter and Space toggle, screen readers hear expanded or collapsed, and find-in-page opens matches.",
+      "The starburst toggle is decorative and hidden.",
+      "The spin and pop-in stop when the user prefers reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-dialog",
+    name: "Comic Dialog",
+    description: "A hand-inked modal that slams in over a halftone backdrop, with a caption-box title and a sound effect.",
+    status: "beta",
+    file: "packages/react/src/ComicDialog.tsx",
+    usage: `import { ComicButton, ComicDialog } from "@streamuilib/react";
+
+<ComicDialog
+  title="Delete this project?"
+  sfx="Gulp!"
+  trigger={<ComicButton>Delete project</ComicButton>}
+/>`,
+    examples: [
+      { title: "Confirm", description: "A sound effect on the corner, and comic buttons in the footer.", file: ex("comic-dialog", "basic"), Component: ComicDialogBasic },
+      { title: "With a form", description: 'A form with method="dialog" closes it on submit.', file: ex("comic-dialog", "form"), Component: ComicDialogForm },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "title", type: "ReactNode", description: "Heading on the caption box; also the dialog's accessible name. Required." },
+          { name: "description", type: "ReactNode", description: "Supporting text, linked with aria-describedby." },
+          { name: "sfx", type: "ReactNode", description: "A starburst sound effect on the top-right corner." },
+          { name: "trigger", type: "ReactElement", description: "An element that opens the dialog when clicked." },
+          { name: "open / defaultOpen / onOpenChange", type: "boolean / boolean / (open) => void", description: "Controlled or uncontrolled open state." },
+          { name: "footer", type: "ReactNode", description: "Buttons along the bottom." },
+          { name: "dismissible", type: "boolean", default: "true", description: "Close when the backdrop is clicked." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Native <dialog> opened with showModal(), the same as Dialog: focus moves in and is trapped, Esc closes, and focus returns to the trigger.",
+      "The rest of the page is inert while it's open.",
+      "The close button is labelled; the sound effect is decorative and hidden.",
+      "The slam-in stops when the user prefers reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-tooltip",
+    name: "Comic Tooltip",
+    description: "A speech-bubble tooltip with a tail pointing at its trigger, that pops in with a bounce.",
+    status: "beta",
+    file: "packages/react/src/ComicTooltip.tsx",
+    usage: `import { ComicTooltip } from "@streamuilib/react";
+
+<ComicTooltip content="Share the love!">
+  <button aria-label="Share">...</button>
+</ComicTooltip>`,
+    examples: [{ title: "Tones and sides", description: "Hover or tab to each button.", file: ex("comic-tooltip", "basic"), Component: ComicTooltipBasic }],
+    props: [
+      {
+        rows: [
+          { name: "content", type: "ReactNode", description: "The hint. Keep it short." },
+          { name: "children", type: "ReactElement", description: "One focusable trigger, e.g. an icon button." },
+          { name: "tone", type: '"paper" | "lime" | "pink" | "blue" | "orange"', default: '"paper"', description: "Bubble fill." },
+          { name: "side", type: '"top" | "bottom"', default: '"top"', description: "Where the bubble sits." },
+          { name: "delay", type: "number", default: "150", description: "Hover delay in ms. Focus shows it right away." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Built on Tooltip: it shows on hover and keyboard focus, and hides on Esc, blur, or pointer leave (WCAG 1.4.13).",
+      "The trigger gets aria-describedby, so screen readers read the hint after its name.",
+      "The pop-in stops when the user prefers reduced motion.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -1278,9 +1415,13 @@ export const componentOrder = [
   "slider",
   "comic-slider",
   "tabs",
+  "comic-tabs",
   "accordion",
+  "comic-accordion",
   "dialog",
+  "comic-dialog",
   "tooltip",
+  "comic-tooltip",
   "progress",
   "battery",
   "skeleton",
@@ -1406,6 +1547,42 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "A native range with a hard-edged track, thumb, and toned fill.", doc: member("slider") },
       { id: "comic", name: "Comic", description: "A starburst thumb that turns as it slides, with the value in a bubble.", doc: member("comic-slider") },
+    ],
+  },
+  {
+    slug: "tabs",
+    name: "Tabs",
+    description: "Switch between views in one place, in two designs: classic folder tabs and tilted comic caption tabs.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Folder tabs joined to a bordered panel with a hard shadow.", doc: member("tabs") },
+      { id: "comic", name: "Comic", description: "Tilted caption-box tabs over a comic panel that pops in.", doc: member("comic-tabs") },
+    ],
+  },
+  {
+    slug: "accordion",
+    name: "Accordions",
+    description: "Show and hide sections, in two designs: classic brutal rows and hand-inked comic panels with a spinning starburst.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Bordered rows with a plus that turns into a cross.", doc: member("accordion") },
+      { id: "comic", name: "Comic", description: "Hand-inked panels with a starburst toggle and halftone answers.", doc: member("comic-accordion") },
+    ],
+  },
+  {
+    slug: "dialog",
+    name: "Dialogs",
+    description: "Modal windows, in two designs: the classic brutal panel and a comic panel that slams in with a sound effect.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A bordered panel with a big hard shadow over a dimmed page.", doc: member("dialog") },
+      { id: "comic", name: "Comic", description: "Slams in over a halftone backdrop with a caption-box title.", doc: member("comic-dialog") },
+    ],
+  },
+  {
+    slug: "tooltip",
+    name: "Tooltips",
+    description: "Short hints on hover and focus, in two designs: a classic ink label and a comic speech bubble.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A small ink label with a hard shadow.", doc: member("tooltip") },
+      { id: "comic", name: "Comic", description: "A speech bubble with a tail that pops in with a bounce.", doc: member("comic-tooltip") },
     ],
   },
   {

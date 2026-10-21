@@ -4,7 +4,7 @@
  * compact comic specimens for their Comic cards. Each tile is a 6s CSS loop
  * of decorative, inert markup, with a still frame for reduced motion.
  */
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import {
   ComicBadge,
   ComicCheckbox,
@@ -19,49 +19,7 @@ import {
   Slider,
   Textarea,
 } from "@streamuilib/react";
-
-/** One 6s loop. */
-const LOOP = 6;
-
-/** The 14-spike starburst ComicBadge uses, for thumbs and flashes drawn here. */
-const BURST = (() => {
-  const pts = Array.from({ length: 28 }, (_, i) => {
-    const a = -Math.PI / 2 + (i * Math.PI) / 14;
-    const r = i % 2 ? 37 : 50;
-    return `${(50 + r * Math.cos(a)).toFixed(2)},${(50 + r * Math.sin(a)).toFixed(2)}`;
-  });
-  return `M${pts.join("L")}Z`;
-})();
-
-const DOTS: CSSProperties = {
-  backgroundImage: "radial-gradient(color-mix(in oklab, var(--ink) 13%, transparent) 1.2px, transparent 1.6px)",
-  backgroundSize: "8px 8px",
-};
-
-/** The stage every tile shares: decorative and out of the tab order. */
-function Stage({ name, css, children }: { name: string; css: string; children: ReactNode }) {
-  return (
-    <div className={`${name} relative h-44 w-full max-w-md`}>
-      <style href={name} precedence="default">
-        {css}
-      </style>
-      <div aria-hidden inert className="absolute inset-0">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function Burst({ className, style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 100 100" overflow="visible" className={className} style={style}>
-      <path d={BURST} stroke="var(--ink)" strokeWidth={7} strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-const sketchy = "rounded-[14px_5px_12px_6px/6px_12px_5px_14px]";
-const comicBox = `${sketchy} border-[3px] border-ink bg-paper-raised shadow-[4px_4px_0_var(--ink)]`;
+import { BURST, Burst, comicBox, DOTS, LOOP, Stage } from "./tile";
 
 /* ---------- Inputs ---------- */
 

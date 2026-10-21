@@ -42,6 +42,16 @@ import {
   ComicRadioGroupPreview,
   ComicSwitchPreview,
 } from "@/components/docs/FieldsPreview";
+import {
+  AccordionsPreview,
+  ComicAccordionPreview,
+  ComicDialogPreview,
+  ComicTabsPreview,
+  ComicTooltipPreview,
+  DialogsPreview,
+  TabsPreview,
+  TooltipsPreview,
+} from "@/components/docs/OverlaysPreview";
 
 function CardPreview() {
   return (
@@ -155,6 +165,10 @@ export const indexPreviews: Record<string, ComponentType> = {
   "comic-checkbox": ComicCheckboxPreview,
   "comic-radio-group": ComicRadioGroupPreview,
   "comic-switch": ComicSwitchPreview,
+  "comic-tabs": ComicTabsPreview,
+  "comic-accordion": ComicAccordionPreview,
+  "comic-dialog": ComicDialogPreview,
+  "comic-tooltip": ComicTooltipPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
@@ -170,4 +184,8 @@ export const groupPreviews: Record<string, ComponentType> = {
   "radio-group": RadioGroupsPreview,
   switch: SwitchesPreview,
   slider: SlidersPreview,
+  tabs: TabsPreview,
+  accordion: AccordionsPreview,
+  dialog: DialogsPreview,
+  tooltip: TooltipsPreview,
 };

@@ -70,6 +70,8 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `ComicInput`, `ComicTextarea`, `ComicSelect` | Comic-book text fields: hand-inked corners, halftone dots, and an Oops! sticker when invalid. |
 | `ComicCheckbox`, `ComicRadioGroup` | Hand-inked checkboxes that draw their check in, and radios that fill with a star. |
 | `ComicSwitch`, `ComicSlider` | A switch with a rolling starburst thumb, and a slider with a value bubble. |
+| `ComicTabs`, `ComicAccordion` | Tilted caption-box tabs, and hand-inked accordion panels with a spinning starburst. |
+| `ComicDialog`, `ComicTooltip` | A modal that slams in over a halftone backdrop, and speech-bubble tooltips. |
 | `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |

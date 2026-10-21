@@ -163,7 +163,8 @@ describe("component groups", () => {
     expect(componentHref(byslug("comic-alert"))).toBe("/components/alert/comic");
     expect(componentHref(byslug("comic-input"))).toBe("/components/input/comic");
     expect(componentHref(byslug("comic-radio-group"))).toBe("/components/radio-group/comic");
-    expect(componentHref(byslug("tabs"))).toBe("/components/tabs");
+    expect(componentHref(byslug("comic-tabs"))).toBe("/components/tabs/comic");
+    expect(componentHref(byslug("progress"))).toBe("/components/progress");
   });
 
   test("each group appears once in the top-level list, where its first member sits", () => {

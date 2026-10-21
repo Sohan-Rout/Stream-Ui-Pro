@@ -24,6 +24,14 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
     state in the track (`labels`, default ON! / OFF).
   - `ComicSlider`: a starburst thumb that turns as it slides, with the value
     in a speech bubble (`showValue`, `formatValue`).
+- `ComicTabs`: tilted caption-box tabs over a comic panel; the active tab
+  stands up lime and its panel pops in. Same keyboard support as Tabs.
+- `ComicAccordion`: hand-inked native `<details>` panels with a starburst
+  toggle that spins open and answers on halftone dots.
+- `ComicDialog`: a native modal that slams in over a halftone backdrop, with
+  a caption-box title, a round close button, and an optional `sfx` burst.
+- `ComicTooltip`: a speech-bubble tooltip with a tail and a bouncy pop-in, in
+  five `tone`s, built on Tooltip.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.
