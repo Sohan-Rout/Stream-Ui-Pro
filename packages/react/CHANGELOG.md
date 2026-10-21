@@ -13,6 +13,9 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.
+- `ComicCard`: comic-book panel cards (a skewed panel with halftone dots) with an
+  optional narration `caption` and a starburst `sfx`; lifts on hover and the
+  burst jumps. Compose the inside with CardTitle and CardDescription.
 - `ComicButton`: comic-book buttons (a skewed panel, speech bubble, ribbon,
   burst, seal, splat, or blob) with halftone dots, a lift on hover, a slam into
   the shadow on press, and a "POW!" sound-effect pop on click (`pop` sets the

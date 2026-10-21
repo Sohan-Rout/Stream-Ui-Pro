@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/components/comic-badge", destination: "/components/badge/comic", permanent: true },
       { source: "/components/comic-button", destination: "/components/button/comic", permanent: true },
+      { source: "/components/comic-card", destination: "/components/card/comic", permanent: true },
     ];
   },
   turbopack: {

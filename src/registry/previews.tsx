@@ -25,6 +25,7 @@ import RadioGroupHorizontal from "@/examples/radio-group/horizontal";
 import AudioPlayerMini from "@/examples/audio-player/mini";
 import { BadgesPreview } from "@/components/docs/BadgesPreview";
 import { ButtonsPreview, ComicButtonPreview } from "@/components/docs/ButtonsPreview";
+import { CardsPreview, ComicCardPreview } from "@/components/docs/CardsPreview";
 
 function CardPreview() {
   return (
@@ -130,10 +131,12 @@ export const indexPreviews: Record<string, ComponentType> = {
   "audio-player": AudioPlayerMini,
   "track-list": TrackListPreview,
   "comic-button": ComicButtonPreview,
+  "comic-card": ComicCardPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
 export const groupPreviews: Record<string, ComponentType> = {
   button: ButtonsPreview,
   badge: BadgesPreview,
+  card: CardsPreview,
 };

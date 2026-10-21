@@ -20,6 +20,8 @@ import ProgressInteractive from "@/examples/progress/interactive";
 import BatteryLevels from "@/examples/battery/levels";
 import ComicBadgeShapes from "@/examples/comic-badge/shapes";
 import ComicButtonShapes from "@/examples/comic-button/shapes";
+import ComicCardBasic from "@/examples/comic-card/basic";
+import ComicCardTones from "@/examples/comic-card/tones";
 import ComicButtonSizes from "@/examples/comic-button/sizes";
 import ComicBadgeTonesSizes from "@/examples/comic-badge/tones-sizes";
 import ComicBadgeAnimated from "@/examples/comic-badge/animated";
@@ -303,6 +305,40 @@ const entries: ComponentDoc[] = [
       'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax.',
       "Give it a name with aria-label or aria-labelledby.",
       "The fill animates width only when motion is allowed.",
+    ],
+  },
+  {
+    slug: "comic-card",
+    name: "Comic Card",
+    description: "A comic-book panel: a skewed card with halftone dots, a narration caption, and a starburst sound effect.",
+    status: "beta",
+    file: "packages/react/src/ComicCard.tsx",
+    usage: `import { CardDescription, CardTitle, ComicCard } from "@streamuilib/react";
+
+<ComicCard caption="Meanwhile…" sfx="Kapow!">
+  <CardTitle>Deploys ship in seconds</CardTitle>
+  <CardDescription>Every pull request gets a live URL.</CardDescription>
+</ComicCard>`,
+    examples: [
+      { title: "Captions and sound effects", description: "Hover a panel: it lifts and its sound effect jumps. CardTitle and CardDescription work inside.", file: ex("comic-card", "basic"), Component: ComicCardBasic },
+      { title: "Tones", file: ex("comic-card", "tones"), Component: ComicCardTones },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "tone", type: '"paper" | "lime" | "pink" | "blue" | "violet" | "orange"', default: '"paper"', description: "Panel fill (a soft tint); the caption uses the matching bright." },
+          { name: "caption", type: "ReactNode", description: "A narration box stuck over the top-left corner." },
+          { name: "sfx", type: "ReactNode", description: "A starburst sound effect stuck on the top-right corner. Keep it to a word." },
+          { name: "halftone", type: "boolean", default: "true", description: "Print-style halftone dots over the fill." },
+          { name: "tilt", type: "number", default: "-1", description: "Rotation in degrees. 0 keeps it level." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native attributes; children go inside the panel." },
+        ],
+      },
+    ],
+    accessibility: [
+      "The panel shape is decorative and hidden; the caption, sound effect, and contents are plain text in reading order.",
+      "Use CardTitle with the heading level that fits your page (as=\"h2\" and so on).",
+      "The hover lift and burst animation stop when the user prefers reduced motion.",
     ],
   },
   {
@@ -956,6 +992,7 @@ export const componentOrder = [
   "badge",
   "comic-badge",
   "card",
+  "comic-card",
   "alert",
   "input",
   "textarea",
@@ -1012,6 +1049,15 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "Lifts on hover and sinks into its shadow on press, in four tones and four sizes.", doc: member("button") },
       { id: "comic", name: "Comic", description: "Panels, bubbles, ribbons, and bursts with halftone dots that pop a sound effect on click.", doc: member("comic-button") },
+    ],
+  },
+  {
+    slug: "card",
+    name: "Cards",
+    description: "Surfaces that group related content, in two designs: the classic brutal card and comic-book panels with captions and sound effects.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A bordered surface with a hard shadow, built from header, title, description, content, and footer parts.", doc: member("card") },
+      { id: "comic", name: "Comic", description: "Skewed comic panels with halftone dots, a narration caption, and a starburst sound effect.", doc: member("comic-card") },
     ],
   },
   {

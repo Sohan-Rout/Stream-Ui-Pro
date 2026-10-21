@@ -92,6 +92,12 @@ export const indexSeo = {
 
 /** Components whose name doesn't read well after "Neobrutalism". */
 const componentOverrides: Record<string, SeoCopy> = {
+  "comic-card": {
+    title: "Comic Card Component for React: Panels",
+    description:
+      "Comic-book panel cards for React and Tailwind CSS: skewed panels with halftone dots, narration captions, and starburst sound effects. Copy it.",
+    keywords: ["comic card React", "comic panel UI", "neobrutalism card", "halftone card", "playful card component"],
+  },
   "comic-button": {
     title: "Comic Button Component for React: POW!",
     description:
@@ -126,6 +132,14 @@ export function componentGroupSeo(group: { slug: string; name: string }): SeoCop
       description:
         "Neobrutalism buttons for React and Tailwind CSS in two designs: classic brutal buttons with hard shadows, and comic-book buttons that pop a POW! on click.",
       keywords: [...base, "neobrutalism button", "React button component", "comic button", "Tailwind button", "animated button"],
+    };
+  }
+  if (group.slug === "card") {
+    return {
+      title: "Neobrutalism Card Components for React",
+      description:
+        "Neobrutalism cards for React and Tailwind CSS in two designs: classic brutal cards with hard shadows, and comic panels with captions and sound effects.",
+      keywords: [...base, "neobrutalism card", "React card component", "comic card", "Tailwind card", "comic panel"],
     };
   }
   if (group.slug === "badge") {
