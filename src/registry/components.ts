@@ -21,6 +21,8 @@ import BatteryLevels from "@/examples/battery/levels";
 import ComicBadgeShapes from "@/examples/comic-badge/shapes";
 import ComicButtonShapes from "@/examples/comic-button/shapes";
 import ComicCardBasic from "@/examples/comic-card/basic";
+import ComicAlertTones from "@/examples/comic-alert/tones";
+import ComicAlertActions from "@/examples/comic-alert/actions";
 import ComicCardTones from "@/examples/comic-card/tones";
 import ComicButtonSizes from "@/examples/comic-button/sizes";
 import ComicBadgeTonesSizes from "@/examples/comic-badge/tones-sizes";
@@ -305,6 +307,37 @@ const entries: ComponentDoc[] = [
       'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax.',
       "Give it a name with aria-label or aria-labelledby.",
       "The fill animates width only when motion is allowed.",
+    ],
+  },
+  {
+    slug: "comic-alert",
+    name: "Comic Alert",
+    description: "A comic-book alert: a speech bubble pointing at a starburst, with a shouty title and a stamped sound effect.",
+    status: "beta",
+    file: "packages/react/src/ComicAlert.tsx",
+    usage: `import { ComicAlert } from "@streamuilib/react";
+
+<ComicAlert tone="success" title="Changes saved">Your profile is up to date.</ComicAlert>`,
+    examples: [
+      { title: "Tones", description: "Each tone has its icon, colors, and sound effect: HEY!, YES!, UH-OH!, YIKES! Warnings and errors shake the burst.", file: ex("comic-alert", "tones"), Component: ComicAlertTones },
+      { title: "Actions, icons, and sound effects", description: "Add actions, swap the icon, set your own sound effect or turn it off. Replay remounts it to see the pop-in again.", file: ex("comic-alert", "actions"), Component: ComicAlertActions },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "tone", type: '"info" | "success" | "warning" | "danger"', default: '"info"', description: "Colors, icon, sound effect, and urgency." },
+          { name: "title", type: "ReactNode", description: "The shouty heading in the bubble." },
+          { name: "icon", type: "ReactNode | null", description: "Replaces the tone's icon in the starburst; null drops the starburst and tail." },
+          { name: "action", type: "ReactNode", description: "Buttons or links under the message." },
+          { name: "sfx", type: "ReactNode | false", default: "by tone", description: "The stamped sound effect; false for none." },
+          { name: "...props", type: 'Omit<ComponentProps<"div">, "title">', description: "Native attributes; pass role to override the default." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Warnings and errors use role="alert" so they\'re announced right away; info and success use role="status", the same as Alert.',
+      "The starburst, tail, and sound effect are decorative and hidden; the title and message are the content.",
+      "The pop-in and shake stop when the user prefers reduced motion.",
     ],
   },
   {
@@ -994,6 +1027,7 @@ export const componentOrder = [
   "card",
   "comic-card",
   "alert",
+  "comic-alert",
   "input",
   "textarea",
   "select",
@@ -1058,6 +1092,15 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "A bordered surface with a hard shadow, built from header, title, description, content, and footer parts.", doc: member("card") },
       { id: "comic", name: "Comic", description: "Skewed comic panels with halftone dots, a narration caption, and a starburst sound effect.", doc: member("comic-card") },
+    ],
+  },
+  {
+    slug: "alert",
+    name: "Alerts",
+    description: "Messages for info, success, warnings, and errors, in two designs: the classic brutal box and comic speech bubbles that pop in.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A bordered message box with a toned icon tile, a title, and optional actions.", doc: member("alert") },
+      { id: "comic", name: "Comic", description: "A speech bubble pointing at a starburst, with a shouty title and a stamped sound effect.", doc: member("comic-alert") },
     ],
   },
   {

@@ -13,6 +13,10 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.
+- `ComicAlert`: comic-book alerts, a speech bubble pointing at a starburst with
+  the tone's icon, a shouty title, and a stamped sound effect (HEY!, YES!,
+  UH-OH!, YIKES!). Pops in on mount; warnings and errors shake the burst. Same
+  tones and roles as Alert.
 - `ComicCard`: comic-book panel cards (a skewed panel with halftone dots) with an
   optional narration `caption` and a starburst `sfx`; lifts on hover and the
   burst jumps. Compose the inside with CardTitle and CardDescription.

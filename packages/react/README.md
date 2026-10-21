@@ -67,6 +67,7 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `Dialog` | Modal on native `<dialog>`: focus trap, Esc to close, focus return. |
 | `Tooltip` | Hint on hover and focus, Esc to dismiss, linked with aria-describedby. |
 | `Progress` | Determinate progress bar. |
+| `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |
 | `ComicBadge` | Comic-book sticker badges: burst, seal, splat, blob, speech bubble, and ribbon. |

@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { source: "/components/comic-badge", destination: "/components/badge/comic", permanent: true },
       { source: "/components/comic-button", destination: "/components/button/comic", permanent: true },
       { source: "/components/comic-card", destination: "/components/card/comic", permanent: true },
+      { source: "/components/comic-alert", destination: "/components/alert/comic", permanent: true },
     ];
   },
   turbopack: {

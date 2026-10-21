@@ -26,6 +26,7 @@ import AudioPlayerMini from "@/examples/audio-player/mini";
 import { BadgesPreview } from "@/components/docs/BadgesPreview";
 import { ButtonsPreview, ComicButtonPreview } from "@/components/docs/ButtonsPreview";
 import { CardsPreview, ComicCardPreview } from "@/components/docs/CardsPreview";
+import { AlertsPreview, ComicAlertPreview } from "@/components/docs/AlertsPreview";
 
 function CardPreview() {
   return (
@@ -132,6 +133,7 @@ export const indexPreviews: Record<string, ComponentType> = {
   "track-list": TrackListPreview,
   "comic-button": ComicButtonPreview,
   "comic-card": ComicCardPreview,
+  "comic-alert": ComicAlertPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
@@ -139,4 +141,5 @@ export const groupPreviews: Record<string, ComponentType> = {
   button: ButtonsPreview,
   badge: BadgesPreview,
   card: CardsPreview,
+  alert: AlertsPreview,
 };

@@ -92,6 +92,12 @@ export const indexSeo = {
 
 /** Components whose name doesn't read well after "Neobrutalism". */
 const componentOverrides: Record<string, SeoCopy> = {
+  "comic-alert": {
+    title: "Comic Alert Component for React: Uh-oh!",
+    description:
+      "Comic-book alerts for React and Tailwind CSS: speech bubbles pointing at starbursts, shouty titles, and sound effects, with accessible alert roles.",
+    keywords: ["comic alert React", "speech bubble alert", "animated alert", "neobrutalism alert", "playful notification"],
+  },
   "comic-card": {
     title: "Comic Card Component for React: Panels",
     description:
@@ -140,6 +146,14 @@ export function componentGroupSeo(group: { slug: string; name: string }): SeoCop
       description:
         "Neobrutalism cards for React and Tailwind CSS in two designs: classic brutal cards with hard shadows, and comic panels with captions and sound effects.",
       keywords: [...base, "neobrutalism card", "React card component", "comic card", "Tailwind card", "comic panel"],
+    };
+  }
+  if (group.slug === "alert") {
+    return {
+      title: "Neobrutalism Alert Components for React",
+      description:
+        "Neobrutalism alerts for React and Tailwind CSS in two designs: classic brutal message boxes, and comic speech bubbles with starbursts that pop in.",
+      keywords: [...base, "neobrutalism alert", "React alert component", "comic alert", "Tailwind alert", "notification UI"],
     };
   }
   if (group.slug === "badge") {
