@@ -13,6 +13,10 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.
+- `ComicButton`: comic-book buttons (a skewed panel, speech bubble, ribbon,
+  burst, seal, splat, or blob) with halftone dots, a lift on hover, a slam into
+  the shadow on press, and a "POW!" sound-effect pop on click (`pop` sets the
+  words or turns it off). Motion stops for reduced motion.
 - `ComicBadge`: comic-book sticker badges in six shapes (starburst, scalloped
   seal, splat, blob, speech bubble, ribbon) with ink outlines and hard shadows
   that follow the shape, the Badge tones, three sizes, a hand-placed tilt, and

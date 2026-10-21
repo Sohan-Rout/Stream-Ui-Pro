@@ -92,6 +92,12 @@ export const indexSeo = {
 
 /** Components whose name doesn't read well after "Neobrutalism". */
 const componentOverrides: Record<string, SeoCopy> = {
+  "comic-button": {
+    title: "Comic Button Component for React: POW!",
+    description:
+      "Comic-book buttons for React and Tailwind CSS: panel, speech bubble, ribbon, and starburst shapes with halftone dots that pop a POW! when clicked.",
+    keywords: ["comic button React", "animated button", "starburst button", "neobrutalism button", "playful button component"],
+  },
   "comic-badge": {
     title: "Comic Badge Component for React: Starbursts",
     description:
@@ -114,6 +120,14 @@ const componentOverrides: Record<string, SeoCopy> = {
 
 /** A component category page, like Badges: a grid of its designs. */
 export function componentGroupSeo(group: { slug: string; name: string }): SeoCopy {
+  if (group.slug === "button") {
+    return {
+      title: "Neobrutalism Button Components for React",
+      description:
+        "Neobrutalism buttons for React and Tailwind CSS in two designs: classic brutal buttons with hard shadows, and comic-book buttons that pop a POW! on click.",
+      keywords: [...base, "neobrutalism button", "React button component", "comic button", "Tailwind button", "animated button"],
+    };
+  }
   if (group.slug === "badge") {
     return {
       title: "Neobrutalism Badge Components for React",

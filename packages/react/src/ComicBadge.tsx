@@ -37,7 +37,8 @@ function ring(n: number, r: (i: number) => number, turn = -Math.PI / 2) {
 const SPLAT = [50, 41, 48, 39, 50, 43, 46, 38, 50, 42, 47, 40];
 
 /** Each shape: its path, its viewBox, and whether it's round (fixed square) or wide (sized by its text). */
-const SHAPES: Record<ComicBadgeShape, { d: string; viewBox: string; round: boolean }> = {
+/** The outlines, shared with ComicButton (not exported from the package). */
+export const SHAPES: Record<ComicBadgeShape, { d: string; viewBox: string; round: boolean }> = {
   // The pointed circle: 14 spikes.
   burst: { d: ring(28, (i) => (i % 2 ? 37 : 50)), viewBox: "0 0 100 100", round: true },
   // A scalloped seal: a wavy edge all the way round.

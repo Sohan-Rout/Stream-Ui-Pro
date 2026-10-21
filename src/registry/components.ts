@@ -19,6 +19,8 @@ import ProgressTones from "@/examples/progress/tones";
 import ProgressInteractive from "@/examples/progress/interactive";
 import BatteryLevels from "@/examples/battery/levels";
 import ComicBadgeShapes from "@/examples/comic-badge/shapes";
+import ComicButtonShapes from "@/examples/comic-button/shapes";
+import ComicButtonSizes from "@/examples/comic-button/sizes";
 import ComicBadgeTonesSizes from "@/examples/comic-badge/tones-sizes";
 import ComicBadgeAnimated from "@/examples/comic-badge/animated";
 import BatterySegments from "@/examples/battery/segments";
@@ -301,6 +303,38 @@ const entries: ComponentDoc[] = [
       'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax.',
       "Give it a name with aria-label or aria-labelledby.",
       "The fill animates width only when motion is allowed.",
+    ],
+  },
+  {
+    slug: "comic-button",
+    name: "Comic Button",
+    description: "A comic-book button that lifts, slams into its shadow, and pops a POW! when you click it.",
+    status: "beta",
+    file: "packages/react/src/ComicButton.tsx",
+    usage: `import { ComicButton } from "@streamuilib/react";
+
+<ComicButton onClick={save}>Get started</ComicButton>`,
+    examples: [
+      { title: "Shapes", description: "A skewed panel (the default, for any label), a speech bubble, a ribbon, and round burst, splat, and blob shapes for one-word calls.", file: ex("comic-button", "shapes"), Component: ComicButtonShapes },
+      { title: "Sizes, icons, and options", description: "Set your own pop word, turn the pop or the halftone dots off, or disable it.", file: ex("comic-button", "sizes"), Component: ComicButtonSizes },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "shape", type: '"panel" | "bubble" | "ribbon" | "burst" | "seal" | "splat" | "blob"', default: '"panel"', description: "The outline. panel, bubble, and ribbon grow with their label; the round ones are fixed-size for a word or two." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange" | "paper"', default: '"lime"', description: "Fill color." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Button and label size." },
+          { name: "tilt", type: "number", default: "-2", description: "Rotation in degrees. 0 keeps it level." },
+          { name: "pop", type: "string | string[] | false", default: '["POW!", "BAM!", "ZAP!", "WHAM!", "BOOM!"]', description: "The sound effect that pops out on click; a list cycles. false turns it off." },
+          { name: "halftone", type: "boolean", default: "true", description: "Print-style halftone dots over the fill." },
+          { name: "...props", type: 'ComponentProps<"button">', description: "Native button attributes, including onClick, type, and disabled." },
+        ],
+      },
+    ],
+    accessibility: [
+      "It's a real <button> (type=\"button\" by default) with a visible focus ring, so Tab, Enter, and Space work.",
+      "The shape and the POW! pop are decorative and hidden from screen readers; the label is the accessible name.",
+      "The lift, press, and pop stop when the user prefers reduced motion.",
     ],
   },
   {
@@ -918,6 +952,7 @@ import { AnimatedIcon } from "@streamuilib/react";
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
 export const componentOrder = [
   "button",
+  "comic-button",
   "badge",
   "comic-badge",
   "card",
@@ -970,6 +1005,15 @@ const member = (slug: string) => {
 };
 
 export const componentGroups: ComponentGroup[] = [
+  {
+    slug: "button",
+    name: "Buttons",
+    description: "The primary way to trigger an action, in two designs: the classic brutal button and comic-book buttons that go POW!",
+    variants: [
+      { id: "classic", name: "Classic", description: "Lifts on hover and sinks into its shadow on press, in four tones and four sizes.", doc: member("button") },
+      { id: "comic", name: "Comic", description: "Panels, bubbles, ribbons, and bursts with halftone dots that pop a sound effect on click.", doc: member("comic-button") },
+    ],
+  },
   {
     slug: "badge",
     name: "Badges",

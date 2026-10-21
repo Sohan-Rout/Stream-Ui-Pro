@@ -4,9 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
-  // Comic Badge moved into the Badges category.
+  // Comic designs live inside their categories.
   async redirects() {
-    return [{ source: "/components/comic-badge", destination: "/components/badge/comic", permanent: true }];
+    return [
+      { source: "/components/comic-badge", destination: "/components/badge/comic", permanent: true },
+      { source: "/components/comic-button", destination: "/components/button/comic", permanent: true },
+    ];
   },
   turbopack: {
     rules: {

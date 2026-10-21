@@ -158,14 +158,17 @@ describe("component groups", () => {
     const byslug = (slug: string) => components.find((c) => c.slug === slug)!;
     expect(componentHref(byslug("comic-badge"))).toBe("/components/badge/comic");
     expect(componentHref(byslug("badge"))).toBe("/components/badge/classic");
-    expect(componentHref(byslug("button"))).toBe("/components/button");
+    expect(componentHref(byslug("comic-button"))).toBe("/components/button/comic");
+    expect(componentHref(byslug("card"))).toBe("/components/card");
   });
 
   test("each group appears once in the top-level list, where its first member sits", () => {
     const slugs = componentEntries.map((e) => e.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
     expect(slugs).not.toContain("comic-badge");
+    expect(slugs).not.toContain("comic-button");
     expect(componentEntries.find((e) => e.slug === "badge")?.kind).toBe("group");
-    expect(slugs.indexOf("badge")).toBe(1);
+    expect(componentEntries.find((e) => e.slug === "button")?.kind).toBe("group");
+    expect(slugs.slice(0, 2)).toEqual(["button", "badge"]);
   });
 });
