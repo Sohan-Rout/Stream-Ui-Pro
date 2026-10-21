@@ -60,6 +60,14 @@ import {
   ProgressPreview as ProgressBarsPreview,
   SkeletonsPreview,
 } from "@/components/docs/FeedbackPreview";
+import {
+  AnimatedIconsPreview,
+  AudioPlayersPreview,
+  ComicAudioPlayerPreview,
+  ComicTrackListPreview,
+  EqualizersPreview,
+  TrackListsPreview,
+} from "@/components/docs/MediaPreview";
 
 function CardPreview() {
   return (
@@ -179,6 +187,8 @@ export const indexPreviews: Record<string, ComponentType> = {
   "comic-tooltip": ComicTooltipPreview,
   "comic-progress": ComicProgressPreview,
   "comic-battery": ComicBatteryPreview,
+  "comic-audio-player": ComicAudioPlayerPreview,
+  "comic-track-list": ComicTrackListPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
@@ -202,4 +212,8 @@ export const groupPreviews: Record<string, ComponentType> = {
   battery: BatteriesPreview,
   skeleton: SkeletonsPreview,
   avatar: AvatarsPreview,
+  "audio-player": AudioPlayersPreview,
+  "track-list": TrackListsPreview,
+  equalizer: EqualizersPreview,
+  "animated-icon": AnimatedIconsPreview,
 };

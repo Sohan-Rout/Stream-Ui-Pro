@@ -165,7 +165,13 @@ describe("component groups", () => {
     expect(componentHref(byslug("comic-radio-group"))).toBe("/components/radio-group/comic");
     expect(componentHref(byslug("comic-tabs"))).toBe("/components/tabs/comic");
     expect(componentHref(byslug("comic-battery"))).toBe("/components/battery/comic");
-    expect(componentHref(byslug("equalizer"))).toBe("/components/equalizer");
+    expect(componentHref(byslug("comic-equalizer"))).toBe("/components/equalizer/comic");
+    expect(componentHref(byslug("animated-icon"))).toBe("/components/animated-icon/classic");
+  });
+
+  test("every component belongs to a group, with a classic and a comic design", () => {
+    for (const c of components) expect(componentGroupOf(c)).toBeTruthy();
+    for (const g of componentGroups) expect(g.variants.map((v) => v.id)).toEqual(["classic", "comic"]);
   });
 
   test("each group appears once in the top-level list, where its first member sits", () => {

@@ -58,6 +58,12 @@ import AudioPlayerMini from "@/examples/audio-player/mini";
 import AudioPlayerHeadless from "@/examples/audio-player/headless";
 import TrackListBasic from "@/examples/track-list/basic";
 import EqualizerBasic from "@/examples/equalizer/basic";
+import ComicAudioPlayerFull from "@/examples/comic-audio-player/full";
+import ComicAudioPlayerBasic from "@/examples/comic-audio-player/basic";
+import ComicTrackListBasic from "@/examples/comic-track-list/basic";
+import ComicEqualizerBasic from "@/examples/comic-equalizer/basic";
+import ComicAnimatedIconShapes from "@/examples/comic-animated-icon/shapes";
+import ComicAnimatedIconTriggers from "@/examples/comic-animated-icon/triggers";
 import ComicProgressTones from "@/examples/comic-progress/tones";
 import ComicProgressInteractive from "@/examples/comic-progress/interactive";
 import ComicBatteryLevels from "@/examples/comic-battery/levels";
@@ -1524,6 +1530,129 @@ import { AnimatedIcon } from "@streamuilib/react";
       "The hover jump stops for reduced motion.",
     ],
   },
+  {
+    slug: "comic-audio-player",
+    name: "Comic Audio Player",
+    description: "A hand-inked player with a cover sticker, a comic meter, a starburst play button, and comic sliders.",
+    status: "beta",
+    file: "packages/react/src/ComicAudioPlayer.tsx",
+    usage: `import { ComicAudioPlayer } from "@streamuilib/react";
+
+<ComicAudioPlayer
+  playlist
+  tracks={[{ title: "Hard Edges", artist: "stream/ui", src: "/audio/hard-edges.mp3", tone: "lime" }]}
+/>`,
+    examples: [
+      {
+        title: "With a playlist",
+        description: "These demo tracks are generated in your browser, so there are no audio files to download.",
+        file: ex("comic-audio-player", "full"),
+        Component: ComicAudioPlayerFull,
+      },
+      { title: "Player only", file: ex("comic-audio-player", "basic"), Component: ComicAudioPlayerBasic },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "tracks", type: "Track[]", description: "{ title, src, artist?, cover?, tone?, duration? }. Required." },
+          { name: "playlist", type: "boolean", default: "false", description: "Show the comic track list." },
+          { name: "defaultIndex", type: "number", default: "0", description: "Track selected first." },
+          { name: "defaultVolume", type: "number", default: "0.8", description: "Start volume, 0 to 1." },
+          { name: "loop", type: "boolean", default: "true", description: "Wrap from the last track to the first." },
+          { name: "className", type: "string", description: "Classes for the player panel." },
+        ],
+      },
+    ],
+    accessibility: [
+      "The same controls as AudioPlayer: labelled buttons, Seek and Volume sliders with readable values, and a polite now-playing announcement.",
+      "The play button's sound effect, the meter, and the notes are decorative and hidden.",
+      "The spinning disc, meter, and pops stop for reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-track-list",
+    name: "Comic Track List",
+    description: "A comic playlist with dashed ink dividers and the current track on halftone dots with a NOW! sticker.",
+    status: "beta",
+    file: "packages/react/src/ComicTrackList.tsx",
+    usage: `import { ComicTrackList } from "@streamuilib/react";
+
+<ComicTrackList tracks={tracks} index={index} playing onSelect={setIndex} />`,
+    examples: [{ title: "Basic", file: ex("comic-track-list", "basic"), Component: ComicTrackListBasic }],
+    props: [
+      {
+        rows: [
+          { name: "tracks", type: "Track[]", description: "The playlist." },
+          { name: "index", type: "number", description: "The current track." },
+          { name: "playing", type: "boolean", default: "false", description: "Bounces the current track's meter and shows NOW!" },
+          { name: "onSelect", type: "(index: number) => void", description: "Called when a track is clicked." },
+        ],
+      },
+    ],
+    accessibility: [
+      "An ordered list of buttons; the current one has aria-current and a hidden \"Now playing\" prefix, like TrackList.",
+      "The meter and sticker are decorative and hidden.",
+    ],
+  },
+  {
+    slug: "comic-equalizer",
+    name: "Comic Equalizer",
+    description: "Thick-inked bars in mixed brights that bounce out of step, with music notes floating up.",
+    status: "beta",
+    file: "packages/react/src/ComicEqualizer.tsx",
+    usage: `import { ComicEqualizer } from "@streamuilib/react";
+
+<ComicEqualizer playing={isPlaying} />`,
+    examples: [{ title: "Sizes, tones, and notes", file: ex("comic-equalizer", "basic"), Component: ComicEqualizerBasic }],
+    props: [
+      {
+        rows: [
+          { name: "playing", type: "boolean", default: "true", description: "Animate the bars and notes; when false they rest." },
+          { name: "bars", type: "number", default: "5", description: "How many bars." },
+          { name: "tone", type: '"mix" | "lime" | "pink" | "blue" | "violet" | "orange"', default: '"mix"', description: "Bar color; mix gives each bar its own." },
+          { name: "notes", type: "boolean", default: "true", description: "Music notes floating up while it plays." },
+          { name: "className", type: "string", description: "Size it with height classes, e.g. h-14." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Purely decorative and aria-hidden; pair it with text that says what's playing.",
+      "Under prefers-reduced-motion the bars hold still and the notes stay put.",
+    ],
+  },
+  {
+    slug: "comic-animated-icon",
+    name: "Comic Animated Icon",
+    description: "AnimatedIcon on a comic sticker: impact lines burst out every time the icon animates.",
+    status: "beta",
+    file: "packages/react/src/ComicAnimatedIcon.tsx",
+    usage: `import { Bell } from "lucide-react";
+import { ComicAnimatedIcon } from "@streamuilib/react";
+
+<ComicAnimatedIcon animation="shake" shape="burst">
+  <Bell aria-hidden />
+</ComicAnimatedIcon>`,
+    examples: [
+      { title: "Shapes and tones", description: "Hover each sticker.", file: ex("comic-animated-icon", "shapes"), Component: ComicAnimatedIconShapes },
+      { title: "Triggers", file: ex("comic-animated-icon", "triggers"), Component: ComicAnimatedIconTriggers },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "animation", type: '"draw" | "spin" | "bounce" | "wiggle" | "pulse" | "shake" | "pop"', description: "The icon's motion. Required." },
+          { name: "trigger", type: '"hover" | "loop" | "once"', default: '"hover"', description: "When it plays; the impact lines burst at the same time." },
+          { name: "shape", type: '"burst" | "seal" | "splat" | "blob"', default: '"burst"', description: "The sticker behind the icon." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange" | "paper"', default: '"lime"', description: "Sticker color." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Sticker size; the icon scales with it." },
+          { name: "duration", type: "number", description: "Length of one cycle in ms." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Decorative by default: give the icon aria-hidden and label whatever it sits in.",
+      "Every animation, the sticker turn, and the impact lines stop for reduced motion.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -1567,9 +1696,13 @@ export const componentOrder = [
   "avatar",
   "comic-avatar",
   "audio-player",
+  "comic-audio-player",
   "track-list",
+  "comic-track-list",
   "equalizer",
+  "comic-equalizer",
   "animated-icon",
+  "comic-animated-icon",
 ];
 
 export const components: ComponentDoc[] = [...entries].sort(
@@ -1759,6 +1892,42 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "Round initials in five tones that stack like coins.", doc: member("avatar") },
       { id: "comic", name: "Comic", description: "Initials on starbursts, seals, splats, and blobs that jump on hover.", doc: member("comic-avatar") },
+    ],
+  },
+  {
+    slug: "audio-player",
+    name: "Audio Players",
+    description: "Music players with playlists, in two designs: the classic brutal player and a hand-inked comic one with a starburst play button.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A full player and a mini bar with seek, volume, and a playlist, plus the useAudioPlayer hook.", doc: member("audio-player") },
+      { id: "comic", name: "Comic", description: "A cover sticker, a comic meter, a starburst play button that sings La la!", doc: member("comic-audio-player") },
+    ],
+  },
+  {
+    slug: "track-list",
+    name: "Track Lists",
+    description: "Playlists, in two designs: classic ruled rows and a comic list with a NOW! sticker on the current track.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Ruled rows with a live meter on the current track.", doc: member("track-list") },
+      { id: "comic", name: "Comic", description: "Dashed ink dividers, halftone on the current track, and a NOW! sticker.", doc: member("comic-track-list") },
+    ],
+  },
+  {
+    slug: "equalizer",
+    name: "Equalizers",
+    description: "Now-playing meters, in two designs: classic thin bars and thick comic bars with floating music notes.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Thin bordered bars that bounce out of step.", doc: member("equalizer") },
+      { id: "comic", name: "Comic", description: "Thick-inked bars in mixed brights with music notes floating up.", doc: member("comic-equalizer") },
+    ],
+  },
+  {
+    slug: "animated-icon",
+    name: "Animated Icons",
+    description: "Animate any SVG icon, in two designs: the bare icon, or on a comic sticker that bursts impact lines.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Draw, spin, bounce, wiggle, pulse, shake, or pop any icon on hover, loop, or once.", doc: member("animated-icon") },
+      { id: "comic", name: "Comic", description: "The icon on a starburst, seal, splat, or blob that bursts impact lines.", doc: member("comic-animated-icon") },
     ],
   },
   {

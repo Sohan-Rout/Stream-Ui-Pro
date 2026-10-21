@@ -74,6 +74,8 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `ComicDialog`, `ComicTooltip` | A modal that slams in over a halftone backdrop, and speech-bubble tooltips. |
 | `ComicProgress`, `ComicBattery` | A progress bar with speed lines and a starburst, and a battery that shouts ZAP! and LOW! |
 | `ComicSkeleton`, `ComicAvatar` | Halftone loading blocks, and initials on comic stickers. |
+| `ComicAudioPlayer`, `ComicTrackList`, `ComicEqualizer` | A hand-inked music player, playlist, and meter with floating notes. |
+| `ComicAnimatedIcon` | AnimatedIcon on a comic sticker that bursts impact lines. |
 | `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |

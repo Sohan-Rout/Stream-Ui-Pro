@@ -41,6 +41,15 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 - `ComicSkeleton`: a dashed loading block of drifting halftone dots.
 - `ComicAvatar` and `ComicAvatarGroup`: initials on a blob, starburst, seal,
   or splat sticker that jumps on hover; groups overlap at alternating tilts.
+- `ComicAudioPlayer`: a hand-inked player with a tilted cover sticker, a comic
+  meter, a starburst play button that pops "La la!", comic seek and volume
+  sliders, and an optional `ComicTrackList` playlist. Built on useAudioPlayer.
+- `ComicTrackList`: a playlist with dashed ink dividers and the current track
+  on halftone dots with a NOW! sticker.
+- `ComicEqualizer`: thick-inked bars in mixed brights (`tone="mix"`) with
+  music `notes` floating up while it plays.
+- `ComicAnimatedIcon`: AnimatedIcon on a starburst, seal, splat, or blob
+  sticker that bursts impact lines whenever the icon animates.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.
