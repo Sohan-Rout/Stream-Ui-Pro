@@ -252,6 +252,24 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "features/flappy") {
+    // Pipe cards above and below, with the bird in the gap.
+    const pipe = (x: number, top: boolean) => (
+      <div key={`${x}${top}`} style={{ display: "flex", flexDirection: "column", position: "absolute", left: x, top: top ? 0 : 108, width: 60, height: 52 }}>
+        {!top && <div style={{ display: "flex", width: 68, height: 14, marginLeft: -4, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />}
+        <div style={{ display: "flex", flex: 1, backgroundColor: brand.pink, borderLeft: `3px solid ${brand.ink}`, borderRight: `3px solid ${brand.ink}` }} />
+        {top && <div style={{ display: "flex", width: 68, height: 14, marginLeft: -4, backgroundColor: brand.pink, border: `3px solid ${brand.ink}` }} />}
+      </div>
+    );
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, backgroundColor: brand.blueSoft }}>
+        {[22, 118, 214].map((x) => pipe(x, true))}
+        {[22, 118, 214].map((x) => pipe(x, false))}
+        <div style={{ display: "flex", position: "absolute", left: 126, top: 64, width: 30, height: 26, borderRadius: 4, backgroundColor: brand.orange, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 20, backgroundColor: brand.lime, borderTop: `3px solid ${brand.ink}` }} />
+      </div>
+    );
+  }
   if (variant === "pricing/whack") {
     // Three signs held up by moles over their holes, the middle one gold and crowned.
     return (

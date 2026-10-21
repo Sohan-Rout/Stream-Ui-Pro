@@ -181,6 +181,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "A neobrutalism bento grid features section for React and Tailwind CSS: one big lead tile and five smaller ones in soft tints. Copy the code.",
     keywords: [...base, "bento grid", "bento features", "features section", "React bento grid"],
   },
+  "features/flappy": {
+    title: "Flappy Bird Style Features Section for React",
+    description:
+      "A playful features section for React and Tailwind CSS: features on pink pipe cards with a bird flapping through the gap. CSS only. Copy it.",
+    keywords: [...base, "flappy features section", "game features section", "animated features section", "playful landing page"],
+  },
   "features/levels": {
     title: "Level Select Features Section for React",
     description:

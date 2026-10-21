@@ -10,6 +10,7 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
 import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection";
 import { LevelsFeaturesSection } from "@/components/sections/LevelsFeaturesSection";
+import { FlappyFeaturesSection } from "@/components/sections/FlappyFeaturesSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { BoldPricingSection } from "@/components/sections/BoldPricingSection";
 import { WhackPricingSection } from "@/components/sections/WhackPricingSection";
@@ -126,7 +127,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "features",
     name: "Features",
-    description: "Six features, laid out four ways: a ruled grid, an arcade maze, a bento board, and a level select.",
+    description: "Six features, laid out five ways: a ruled grid, an arcade maze, a bento board, a level select, and flappy pipes.",
     variants: [
       {
         id: "grid",
@@ -172,6 +173,19 @@ export const sections: SectionDoc[] = [
         notes: [
           "Stars are labeled for screen readers (\"2 of 3 stars\"); use them for maturity, adoption, or anything you rate.",
           "Tiles lift on hover; drop the Start marker if no feature is the obvious first step.",
+        ],
+      },
+      {
+        id: "flappy",
+        name: "Flappy pipes",
+        description: "Features on pink pipe cards: three hang from above, three stand on scrolling grass, and the bird flaps through the gap.",
+        file: "src/components/sections/FlappyFeaturesSection.tsx",
+        Component: FlappyFeaturesSection,
+        uses: ["lucide-react"],
+        notes: [
+          "Each card is a pipe: the cap holds the icon and title, the body holds the description. Top pipes hang down, bottom pipes stand up.",
+          "The bird flies the width of the section through the gap between the rows, bobbing and flapping; clouds drift and the grass scrolls. CSS only.",
+          "Pairs with the Flappy hero: same pipes, bird, and grass. Everything holds still for reduced motion.",
         ],
       },
     ],
