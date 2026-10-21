@@ -32,6 +32,15 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
   a caption-box title, a round close button, and an optional `sfx` burst.
 - `ComicTooltip`: a speech-bubble tooltip with a tail and a bouncy pop-in, in
   five `tone`s, built on Tooltip.
+- `ComicProgress`: a hand-inked bar with speed lines racing along the fill,
+  the percentage on a starburst at the front, and a "Done!" sticker at 100%
+  (`showValue`, `doneLabel`).
+- `ComicBattery`: a hand-inked battery that drains from lime to pink, with a
+  ZAP! burst when charging and a shaking LOW! when low (`sfx`). Same
+  `role="meter"` semantics as Battery.
+- `ComicSkeleton`: a dashed loading block of drifting halftone dots.
+- `ComicAvatar` and `ComicAvatarGroup`: initials on a blob, starburst, seal,
+  or splat sticker that jumps on hover; groups overlap at alternating tilts.
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.

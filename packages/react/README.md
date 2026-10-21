@@ -72,6 +72,8 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `ComicSwitch`, `ComicSlider` | A switch with a rolling starburst thumb, and a slider with a value bubble. |
 | `ComicTabs`, `ComicAccordion` | Tilted caption-box tabs, and hand-inked accordion panels with a spinning starburst. |
 | `ComicDialog`, `ComicTooltip` | A modal that slams in over a halftone backdrop, and speech-bubble tooltips. |
+| `ComicProgress`, `ComicBattery` | A progress bar with speed lines and a starburst, and a battery that shouts ZAP! and LOW! |
+| `ComicSkeleton`, `ComicAvatar` | Halftone loading blocks, and initials on comic stickers. |
 | `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |

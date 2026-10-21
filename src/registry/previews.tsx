@@ -52,6 +52,14 @@ import {
   TabsPreview,
   TooltipsPreview,
 } from "@/components/docs/OverlaysPreview";
+import {
+  AvatarsPreview,
+  BatteriesPreview,
+  ComicBatteryPreview,
+  ComicProgressPreview,
+  ProgressPreview as ProgressBarsPreview,
+  SkeletonsPreview,
+} from "@/components/docs/FeedbackPreview";
 
 function CardPreview() {
   return (
@@ -169,6 +177,8 @@ export const indexPreviews: Record<string, ComponentType> = {
   "comic-accordion": ComicAccordionPreview,
   "comic-dialog": ComicDialogPreview,
   "comic-tooltip": ComicTooltipPreview,
+  "comic-progress": ComicProgressPreview,
+  "comic-battery": ComicBatteryPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
@@ -188,4 +198,8 @@ export const groupPreviews: Record<string, ComponentType> = {
   accordion: AccordionsPreview,
   dialog: DialogsPreview,
   tooltip: TooltipsPreview,
+  progress: ProgressBarsPreview,
+  battery: BatteriesPreview,
+  skeleton: SkeletonsPreview,
+  avatar: AvatarsPreview,
 };

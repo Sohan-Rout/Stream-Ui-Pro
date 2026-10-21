@@ -502,6 +502,58 @@
     .sui-comic-tip:not([hidden]) { animation: none; }
   }
 
+  /* ---------- Comic progress, battery, skeleton, avatar ---------- */
+
+  .sui-comic-progress-fill {
+    background-image: repeating-linear-gradient(-60deg, rgb(255 255 255 / 0.4) 0 5px, transparent 5px 14px);
+    background-size: 32.3px 28px;
+    animation: sui-comic-speed 0.7s linear infinite;
+  }
+  @keyframes sui-comic-speed {
+    to { background-position: 32.3px 0; }
+  }
+  [data-done] > .sui-comic-progress-burst {
+    animation: sui-comic-check-pop 420ms cubic-bezier(0.2, 0.9, 0.3, 1.5);
+  }
+
+  [data-charging] .sui-comic-battery-sfx {
+    animation: sui-comic-zap 0.9s ease-in-out infinite;
+  }
+  [data-low] .sui-comic-battery-sfx {
+    animation: sui-comic-alert-shake 420ms ease-in-out infinite;
+  }
+  @keyframes sui-comic-zap {
+    0%, 100% { scale: 1; rotate: 0deg; }
+    50% { scale: 1.15; rotate: 8deg; }
+  }
+
+  .sui-comic-skeleton {
+    background-image: radial-gradient(color-mix(in oklab, var(--ink) 22%, transparent) 1.4px, transparent 1.9px);
+    background-size: 9px 9px;
+    animation: sui-comic-skeleton 1.4s linear infinite;
+  }
+  @keyframes sui-comic-skeleton {
+    0% { background-position: 0 0; opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { background-position: 18px 9px; opacity: 0.7; }
+  }
+
+  .sui-comic-avatar {
+    transition: translate 180ms cubic-bezier(0.2, 0.9, 0.3, 1.5), scale 180ms cubic-bezier(0.2, 0.9, 0.3, 1.5);
+  }
+  .sui-comic-avatar:hover {
+    translate: 0 -4px;
+    scale: 1.08;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sui-comic-progress-fill, [data-done] > .sui-comic-progress-burst, [data-charging] .sui-comic-battery-sfx,
+    [data-low] .sui-comic-battery-sfx, .sui-comic-skeleton { animation: none; }
+    .sui-comic-avatar { transition: none; }
+    .sui-comic-avatar:hover { translate: none; scale: none; }
+  }
+
   /* ---------- Comic alert ---------- */
 
   .sui-comic-alert-bubble {

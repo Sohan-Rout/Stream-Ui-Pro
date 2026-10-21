@@ -58,6 +58,14 @@ import AudioPlayerMini from "@/examples/audio-player/mini";
 import AudioPlayerHeadless from "@/examples/audio-player/headless";
 import TrackListBasic from "@/examples/track-list/basic";
 import EqualizerBasic from "@/examples/equalizer/basic";
+import ComicProgressTones from "@/examples/comic-progress/tones";
+import ComicProgressInteractive from "@/examples/comic-progress/interactive";
+import ComicBatteryLevels from "@/examples/comic-battery/levels";
+import ComicBatteryInteractive from "@/examples/comic-battery/interactive";
+import ComicSkeletonBasic from "@/examples/comic-skeleton/basic";
+import ComicSkeletonCard from "@/examples/comic-skeleton/card";
+import ComicAvatarShapes from "@/examples/comic-avatar/shapes";
+import ComicAvatarGroupExample from "@/examples/comic-avatar/group";
 import ComicTabsBasic from "@/examples/comic-tabs/basic";
 import ComicAccordionBasic from "@/examples/comic-accordion/basic";
 import ComicAccordionExclusive from "@/examples/comic-accordion/exclusive";
@@ -1388,6 +1396,134 @@ import { AnimatedIcon } from "@streamuilib/react";
       "The pop-in stops when the user prefers reduced motion.",
     ],
   },
+  {
+    slug: "comic-progress",
+    name: "Comic Progress",
+    description: "A hand-inked progress bar with speed lines, the percentage on a starburst, and a Done! sticker.",
+    status: "beta",
+    file: "packages/react/src/ComicProgress.tsx",
+    usage: `import { ComicProgress } from "@streamuilib/react";
+
+<ComicProgress value={60} aria-label="Upload" />`,
+    examples: [
+      { title: "Tones", description: "Speed lines race along the fill; at 100% a sticker slaps on.", file: ex("comic-progress", "tones"), Component: ComicProgressTones },
+      { title: "Steps", description: "Use max for anything that isn't a percentage.", file: ex("comic-progress", "interactive"), Component: ComicProgressInteractive },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "value", type: "number", description: "Current value. Clamped between 0 and max." },
+          { name: "max", type: "number", default: "100", description: "Value that means complete." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange"', default: '"pink"', description: "Fill color." },
+          { name: "showValue", type: "boolean", default: "true", description: "The percentage on a starburst at the front of the fill." },
+          { name: "doneLabel", type: "ReactNode | false", default: '"Done!"', description: "The sticker at 100%; false for none." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native attributes; pass aria-label or aria-labelledby." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Uses role="progressbar" with aria-valuenow, aria-valuemin, and aria-valuemax, like Progress.',
+      "Give it a name with aria-label or aria-labelledby.",
+      "The starburst and sticker are decorative; the speed lines stop for reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-battery",
+    name: "Comic Battery",
+    description: "A hand-inked battery that drains from lime to pink, with a ZAP! when charging and a shaking LOW!",
+    status: "beta",
+    file: "packages/react/src/ComicBattery.tsx",
+    usage: `import { ComicBattery } from "@streamuilib/react";
+
+<ComicBattery value={72} charging />`,
+    examples: [
+      { title: "Levels and states", file: ex("comic-battery", "levels"), Component: ComicBatteryLevels },
+      { title: "Interactive", description: "Drag the charge and plug it in.", file: ex("comic-battery", "interactive"), Component: ComicBatteryInteractive },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "value", type: "number", description: "Charge from 0 to 100. Clamped." },
+          { name: "charging", type: "boolean", default: "false", description: "Races stripes across the fill and slaps on a ZAP! burst." },
+          { name: "tone", type: '"auto" | "lime" | "pink" | "blue" | "violet" | "orange"', default: '"auto"', description: "Fill color; auto goes orange at half and pink when low." },
+          { name: "lowAt", type: "number", default: "20", description: "At or below this the battery is low and shows LOW!" },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Battery size." },
+          { name: "showValue", type: "boolean", default: "true", description: "Show the percentage beside it." },
+          { name: "sfx", type: "[ReactNode, ReactNode] | false", default: '["Zap!", "Low!"]', description: "The charging and low stickers; false for none." },
+          { name: "label", type: "string", default: '"Battery"', description: "Accessible name." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Uses role="meter" with aria-valuetext that reads the state, for example "12%, low", like Battery.',
+      "The stickers are decorative; the state is in the accessible value and the percentage.",
+      "The stripes, zap, and shake stop for reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-skeleton",
+    name: "Comic Skeleton",
+    description: "A dashed, hand-inked loading block whose halftone dots drift like a printing press warming up.",
+    status: "beta",
+    file: "packages/react/src/ComicSkeleton.tsx",
+    usage: `import { ComicSkeleton } from "@streamuilib/react";
+
+<div aria-busy="true" aria-label="Loading">
+  <ComicSkeleton className="h-4 w-40" />
+</div>`,
+    examples: [
+      { title: "Profile", file: ex("comic-skeleton", "basic"), Component: ComicSkeletonBasic },
+      { title: "In a comic panel", file: ex("comic-skeleton", "card"), Component: ComicSkeletonCard },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "className", type: "string", description: "Size and shape it: h-4 w-40, size-12 rounded-full." },
+          { name: "...props", type: 'ComponentProps<"div">', description: "Native div attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      "Hidden from screen readers; put aria-busy and a label on the loading region instead.",
+      "The drifting dots stop for reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-avatar",
+    name: "Comic Avatar",
+    description: "Initials on a starburst, seal, splat, or blob sticker, with an ink outline that follows the shape.",
+    status: "beta",
+    file: "packages/react/src/ComicAvatar.tsx",
+    usage: `import { ComicAvatar } from "@streamuilib/react";
+
+<ComicAvatar initials="AL" name="Ada Lovelace" shape="burst" />`,
+    examples: [
+      { title: "Shapes, tones, and sizes", file: ex("comic-avatar", "shapes"), Component: ComicAvatarShapes },
+      { title: "Group", description: "Stickers slapped on at alternating tilts. Hover one.", file: ex("comic-avatar", "group"), Component: ComicAvatarGroupExample },
+    ],
+    props: [
+      {
+        caption: "ComicAvatar",
+        rows: [
+          { name: "initials", type: "string", description: "One or two characters." },
+          { name: "name", type: "string", description: 'Full name; gives it role="img" and an accessible name.' },
+          { name: "shape", type: '"blob" | "burst" | "seal" | "splat"', default: '"blob"', description: "The sticker shape." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange" | "paper"', default: '"lime"', description: "Fill color." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Avatar size." },
+          { name: "tilt", type: "number", default: "0", description: "Tilt in degrees." },
+        ],
+      },
+      {
+        caption: "ComicAvatarGroup",
+        rows: [{ name: "...props", type: 'ComponentProps<"div">', description: 'A role="group"; name it with aria-label.' }],
+      },
+    ],
+    accessibility: [
+      'With a name it is role="img" with that label, so screen readers hear the full name, not the initials.',
+      "The group is a labelled role=\"group\".",
+      "The hover jump stops for reduced motion.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -1423,9 +1559,13 @@ export const componentOrder = [
   "tooltip",
   "comic-tooltip",
   "progress",
+  "comic-progress",
   "battery",
+  "comic-battery",
   "skeleton",
+  "comic-skeleton",
   "avatar",
+  "comic-avatar",
   "audio-player",
   "track-list",
   "equalizer",
@@ -1583,6 +1723,42 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "A small ink label with a hard shadow.", doc: member("tooltip") },
       { id: "comic", name: "Comic", description: "A speech bubble with a tail that pops in with a bounce.", doc: member("comic-tooltip") },
+    ],
+  },
+  {
+    slug: "progress",
+    name: "Progress Bars",
+    description: "Show how far along a task is, in two designs: the classic brutal bar and a comic bar with speed lines and a starburst.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A bordered bar with a hard shadow and a toned fill.", doc: member("progress") },
+      { id: "comic", name: "Comic", description: "Speed lines, the percentage on a starburst, and a Done! sticker.", doc: member("comic-progress") },
+    ],
+  },
+  {
+    slug: "battery",
+    name: "Batteries",
+    description: "Battery levels, in two designs: the classic brutal battery and a hand-inked comic one that shouts ZAP! and LOW!",
+    variants: [
+      { id: "classic", name: "Classic", description: "A hard-edged body and cap with segments, charging stripes, and a low blink.", doc: member("battery") },
+      { id: "comic", name: "Comic", description: "A hand-inked body with a ZAP! when charging and a shaking LOW!", doc: member("comic-battery") },
+    ],
+  },
+  {
+    slug: "skeleton",
+    name: "Skeletons",
+    description: "Loading placeholders, in two designs: classic pulsing blocks and comic halftone blocks that drift.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Bordered blocks that pulse while content loads.", doc: member("skeleton") },
+      { id: "comic", name: "Comic", description: "Dashed, hand-inked blocks of drifting halftone dots.", doc: member("comic-skeleton") },
+    ],
+  },
+  {
+    slug: "avatar",
+    name: "Avatars",
+    description: "Initials for people, in two designs: classic round avatars and comic stickers in four shapes.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Round initials in five tones that stack like coins.", doc: member("avatar") },
+      { id: "comic", name: "Comic", description: "Initials on starbursts, seals, splats, and blobs that jump on hover.", doc: member("comic-avatar") },
     ],
   },
   {
