@@ -10,6 +10,20 @@ Each `## x.y.z` section below becomes the notes of its GitHub release.
 
 ### Added
 
+- Comic form fields, each keeping the native element underneath:
+  - `ComicInput`, `ComicTextarea`, `ComicSelect`: a thick ink frame with
+    hand-inked corners, halftone dots, and a shadow that lifts on focus. Invalid
+    fields tint pink and get an "Oops!" sticker (`sfx` sets or drops it).
+    ComicTextarea is a speech bubble with a `tail`; ComicSelect's arrow sits
+    on a starburst that spins on focus.
+  - `ComicCheckbox`: a hand-inked box whose check mark draws in with a
+    starburst flash.
+  - `ComicRadio` and `ComicRadioGroup`: hand-inked blobs that fill with a
+    spinning star, under a caption-box legend.
+  - `ComicSwitch`: a halftone pill with a rolling starburst thumb and the
+    state in the track (`labels`, default ON! / OFF).
+  - `ComicSlider`: a starburst thumb that turns as it slides, with the value
+    in a speech bubble (`showValue`, `formatValue`).
 - `Battery`: a battery level meter whose fill goes lime, orange, then pink as it
   drains, with a charging state (bolt and moving stripes), a blinking low
   state, segments, three sizes, and `role="meter"` semantics.

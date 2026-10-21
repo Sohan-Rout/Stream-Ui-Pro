@@ -67,6 +67,9 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `Dialog` | Modal on native `<dialog>`: focus trap, Esc to close, focus return. |
 | `Tooltip` | Hint on hover and focus, Esc to dismiss, linked with aria-describedby. |
 | `Progress` | Determinate progress bar. |
+| `ComicInput`, `ComicTextarea`, `ComicSelect` | Comic-book text fields: hand-inked corners, halftone dots, and an Oops! sticker when invalid. |
+| `ComicCheckbox`, `ComicRadioGroup` | Hand-inked checkboxes that draw their check in, and radios that fill with a star. |
+| `ComicSwitch`, `ComicSlider` | A switch with a rolling starburst thumb, and a slider with a value bubble. |
 | `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |

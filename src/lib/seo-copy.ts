@@ -167,15 +167,24 @@ export function componentGroupSeo(group: { slug: string; name: string }): SeoCop
   const lower = group.name.toLowerCase();
   return {
     title: `Neobrutalism ${group.name} for React`,
-    description: `Neobrutalism ${lower} for React and Tailwind CSS v4 in several designs: hard borders, offset shadows, and accessible by default.`,
+    description: `Neobrutalism ${lower} for React and Tailwind CSS in two designs: classic brutal ${lower} with hard shadows, and comic-book ${lower}.`,
     keywords: [...base, `neobrutalism ${lower}`, `React ${lower}`],
   };
 }
 
-export function componentSeo(doc: { slug: string; name: string }): SeoCopy {
+export function componentSeo(doc: { slug: string; name: string; description?: string }): SeoCopy {
   const override = componentOverrides[doc.slug];
   if (override) return override;
   const lower = doc.name.toLowerCase();
+  // The comic designs: "Comic Switch Component for React", led by what it looks like.
+  if (doc.slug.startsWith("comic-") && doc.description) {
+    const kind = lower.replace(/^comic /, "");
+    return {
+      title: `${doc.name} Component for React`,
+      description: `${doc.description} A comic-book ${kind} for React and Tailwind CSS.`,
+      keywords: [...base, `comic ${kind} React`, `comic book ${kind}`, `neobrutalism ${kind}`, `playful ${kind} component`],
+    };
+  }
   return {
     title: `Neobrutalism ${doc.name} Component for React`,
     description: `A neobrutalism ${lower} component for React and Tailwind CSS v4: hard borders, offset shadows, every state styled, and accessible by default.`,

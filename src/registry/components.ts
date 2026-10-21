@@ -58,6 +58,20 @@ import AudioPlayerMini from "@/examples/audio-player/mini";
 import AudioPlayerHeadless from "@/examples/audio-player/headless";
 import TrackListBasic from "@/examples/track-list/basic";
 import EqualizerBasic from "@/examples/equalizer/basic";
+import ComicInputBasic from "@/examples/comic-input/basic";
+import ComicInputStates from "@/examples/comic-input/states";
+import ComicTextareaBasic from "@/examples/comic-textarea/basic";
+import ComicTextareaStates from "@/examples/comic-textarea/states";
+import ComicSelectBasic from "@/examples/comic-select/basic";
+import ComicSelectStates from "@/examples/comic-select/states";
+import ComicCheckboxBasic from "@/examples/comic-checkbox/basic";
+import ComicCheckboxGroup from "@/examples/comic-checkbox/group";
+import ComicRadioGroupBasic from "@/examples/comic-radio-group/basic";
+import ComicRadioGroupHorizontal from "@/examples/comic-radio-group/horizontal";
+import ComicSwitchBasic from "@/examples/comic-switch/basic";
+import ComicSwitchControlled from "@/examples/comic-switch/controlled";
+import ComicSliderBasic from "@/examples/comic-slider/basic";
+import ComicSliderTones from "@/examples/comic-slider/tones";
 
 export type ExampleEntry = {
   title: string;
@@ -1016,6 +1030,227 @@ import { AnimatedIcon } from "@streamuilib/react";
       "Under prefers-reduced-motion the bars hold still at a fixed height.",
     ],
   },
+  {
+    slug: "comic-input",
+    name: "Comic Input",
+    description: "A comic-book text field: hand-inked corners, halftone dots, and an Oops! sticker when invalid.",
+    status: "beta",
+    file: "packages/react/src/ComicInput.tsx",
+    usage: `import { ComicInput } from "@streamuilib/react";
+
+<label htmlFor="name">Hero name</label>
+<ComicInput id="name" placeholder="Captain Brutal" />`,
+    examples: [
+      { title: "Basic", description: "With a label, an icon, or both. The frame lifts toward the light on focus.", file: ex("comic-input", "basic"), Component: ComicInputBasic },
+      { title: "Invalid and disabled", description: "Invalid tints the frame and slams on a sticker; set your own word with sfx.", file: ex("comic-input", "states"), Component: ComicInputStates },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "icon", type: "ReactNode", description: "Leading icon. Rendered aria-hidden." },
+          { name: "invalid", type: "boolean", default: "false", description: "Sets aria-invalid, tints the frame pink, and slaps on the sticker." },
+          { name: "sfx", type: "ReactNode | false", default: '"Oops!"', description: "The sticker shown when invalid; false for none." },
+          { name: "frameClassName", type: "string", description: "Classes for the outer frame (width, tilt)." },
+          { name: "...props", type: 'ComponentProps<"input">', description: "Every native input attribute; className goes to the <input>." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A real <input>: pair it with a <label>, and link error text with aria-describedby.",
+      "The sticker is decorative and hidden; aria-invalid carries the state.",
+      "The frame shows the focus ring and the lift; motion stops for reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-textarea",
+    name: "Comic Textarea",
+    description: "A comic-book textarea: a speech bubble to write in, with halftone dots and a tail.",
+    status: "beta",
+    file: "packages/react/src/ComicTextarea.tsx",
+    usage: `import { ComicTextarea } from "@streamuilib/react";
+
+<label htmlFor="msg">Say something!</label>
+<ComicTextarea id="msg" />`,
+    examples: [
+      { title: "Basic", file: ex("comic-textarea", "basic"), Component: ComicTextareaBasic },
+      { title: "Invalid, and without the tail", file: ex("comic-textarea", "states"), Component: ComicTextareaStates },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "tail", type: "boolean", default: "true", description: "The speech-bubble tail off the bottom left." },
+          { name: "invalid", type: "boolean", default: "false", description: "Sets aria-invalid, tints the frame pink, and slaps on the sticker." },
+          { name: "sfx", type: "ReactNode | false", default: '"Oops!"', description: "The sticker shown when invalid; false for none." },
+          { name: "frameClassName", type: "string", description: "Classes for the outer frame (width, tilt)." },
+          { name: "rows", type: "number", default: "4", description: "Visible lines." },
+          { name: "...props", type: 'ComponentProps<"textarea">', description: "Every native textarea attribute." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A real <textarea>: pair it with a <label>, and link error text with aria-describedby.",
+      "The tail and sticker are decorative and hidden.",
+    ],
+  },
+  {
+    slug: "comic-select",
+    name: "Comic Select",
+    description: "A native select in the comic frame, with the arrow on a starburst that spins on focus.",
+    status: "beta",
+    file: "packages/react/src/ComicSelect.tsx",
+    usage: `import { ComicSelect } from "@streamuilib/react";
+
+<ComicSelect aria-label="Power">
+  <option>Flight</option>
+  <option>Speed</option>
+</ComicSelect>`,
+    examples: [
+      { title: "Basic", file: ex("comic-select", "basic"), Component: ComicSelectBasic },
+      { title: "Invalid and disabled", file: ex("comic-select", "states"), Component: ComicSelectStates },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "invalid", type: "boolean", default: "false", description: "Sets aria-invalid and tints the frame pink." },
+          { name: "frameClassName", type: "string", description: "Classes for the outer frame." },
+          { name: "...props", type: 'ComponentProps<"select">', description: "Every native select attribute; pass <option>s as children." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A native <select>: the platform's own picker on phones, typeahead, and full keyboard and screen reader support.",
+      "The starburst arrow is decorative and hidden.",
+    ],
+  },
+  {
+    slug: "comic-checkbox",
+    name: "Comic Checkbox",
+    description: "A hand-inked checkbox whose check mark draws itself in with a starburst flash.",
+    status: "beta",
+    file: "packages/react/src/ComicCheckbox.tsx",
+    usage: `import { ComicCheckbox } from "@streamuilib/react";
+
+<ComicCheckbox name="terms" label="I agree to the terms" />`,
+    examples: [
+      { title: "Basic", description: "Check it: the mark draws in and a burst flashes behind the box.", file: ex("comic-checkbox", "basic"), Component: ComicCheckboxBasic },
+      { title: "Group", file: ex("comic-checkbox", "group"), Component: ComicCheckboxGroup },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "label", type: "ReactNode", description: "Text next to the box; clicking it toggles the box." },
+          { name: "...props", type: 'Omit<ComponentProps<"input">, "type">', description: "Native checkbox attributes: checked, defaultChecked, name, value, disabled." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A real checkbox, visually hidden, so forms, Space to toggle, and screen readers work unchanged.",
+      "The focus ring shows on the box when the hidden input has keyboard focus.",
+      "The draw-in and flash stop when the user prefers reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-radio-group",
+    name: "Comic Radio Group",
+    description: "Hand-inked radios that fill with a spinning star, under a comic caption legend.",
+    status: "beta",
+    file: "packages/react/src/ComicRadio.tsx",
+    usage: `import { ComicRadio, ComicRadioGroup } from "@streamuilib/react";
+
+<ComicRadioGroup legend="Delivery">
+  <ComicRadio name="delivery" value="standard" label="Standard" defaultChecked />
+  <ComicRadio name="delivery" value="jetpack" label="Jetpack" />
+</ComicRadioGroup>`,
+    examples: [
+      { title: "Basic", file: ex("comic-radio-group", "basic"), Component: ComicRadioGroupBasic },
+      { title: "Horizontal", file: ex("comic-radio-group", "horizontal"), Component: ComicRadioGroupHorizontal },
+    ],
+    props: [
+      {
+        caption: "ComicRadioGroup",
+        rows: [
+          { name: "legend", type: "ReactNode", description: "The group's name, on a tilted caption box." },
+          { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "Stack or wrap the radios." },
+        ],
+      },
+      {
+        caption: "ComicRadio",
+        rows: [
+          { name: "label", type: "ReactNode", description: "The option's text." },
+          { name: "description", type: "ReactNode", description: "A secondary line under the label." },
+          { name: "...props", type: 'Omit<ComponentProps<"input">, "type">', description: "Native radio attributes; give a group the same name." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A native fieldset and legend: screen readers announce the group name with each radio.",
+      "Real radios underneath, so arrow keys move between options in a group.",
+    ],
+  },
+  {
+    slug: "comic-switch",
+    name: "Comic Switch",
+    description: "A halftone pill with a starburst thumb that rolls across and shouts ON!",
+    status: "beta",
+    file: "packages/react/src/ComicSwitch.tsx",
+    usage: `import { ComicSwitch } from "@streamuilib/react";
+
+<label>
+  <ComicSwitch defaultChecked /> Sound effects
+</label>`,
+    examples: [
+      { title: "Basic", file: ex("comic-switch", "basic"), Component: ComicSwitchBasic },
+      { title: "Controlled, with your own words", file: ex("comic-switch", "controlled"), Component: ComicSwitchControlled },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "checked", type: "boolean", description: "Controlled state." },
+          { name: "defaultChecked", type: "boolean", default: "false", description: "Initial state when uncontrolled." },
+          { name: "onCheckedChange", type: "(checked: boolean) => void", description: "Called with the new state." },
+          { name: "labels", type: "[ReactNode, ReactNode] | false", default: '["On!", "Off"]', description: "Words in the track, on then off; false for none." },
+          { name: "...props", type: 'ComponentProps<"button">', description: "Native button attributes, like disabled and aria-label." },
+        ],
+      },
+    ],
+    accessibility: [
+      'A button with role="switch" and aria-checked; Space and Enter toggle it.',
+      "The words in the track are decorative; name the switch with a <label> or aria-label.",
+      "The roll stops when the user prefers reduced motion.",
+    ],
+  },
+  {
+    slug: "comic-slider",
+    name: "Comic Slider",
+    description: "A halftone track with a starburst thumb and the value in a speech bubble.",
+    status: "beta",
+    file: "packages/react/src/ComicSlider.tsx",
+    usage: `import { ComicSlider } from "@streamuilib/react";
+
+<ComicSlider value={power} onValueChange={setPower} aria-label="Power" />`,
+    examples: [
+      { title: "Basic", description: "Drag it or use the arrow keys; the burst turns as it goes.", file: ex("comic-slider", "basic"), Component: ComicSliderBasic },
+      { title: "Tones, ranges, and formats", file: ex("comic-slider", "tones"), Component: ComicSliderTones },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "value", type: "number", description: "Current value (controlled)." },
+          { name: "onValueChange", type: "(value: number) => void", description: "Called with the new value." },
+          { name: "min / max / step", type: "number", default: "0 / 100 / 1", description: "The range." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange"', default: '"lime"', description: "Fill color." },
+          { name: "showValue", type: "boolean", default: "true", description: "The value bubble over the thumb." },
+          { name: "formatValue", type: "(value: number) => ReactNode", description: "Formats the bubble's text." },
+          { name: "...props", type: 'ComponentProps<"input">', description: "Native range attributes, like aria-label and aria-valuetext." },
+        ],
+      },
+    ],
+    accessibility: [
+      "A native range input sits on top, invisible, so arrow keys, Page Up and Down, Home and End, touch, and screen readers all work.",
+      "Pass aria-valuetext when the number alone doesn't say enough.",
+      "The bubble, track, and thumb are drawn for sight only and hidden.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -1029,12 +1264,19 @@ export const componentOrder = [
   "alert",
   "comic-alert",
   "input",
+  "comic-input",
   "textarea",
+  "comic-textarea",
   "select",
+  "comic-select",
   "checkbox",
+  "comic-checkbox",
   "radio-group",
+  "comic-radio-group",
   "switch",
+  "comic-switch",
   "slider",
+  "comic-slider",
   "tabs",
   "accordion",
   "dialog",
@@ -1101,6 +1343,69 @@ export const componentGroups: ComponentGroup[] = [
     variants: [
       { id: "classic", name: "Classic", description: "A bordered message box with a toned icon tile, a title, and optional actions.", doc: member("alert") },
       { id: "comic", name: "Comic", description: "A speech bubble pointing at a starburst, with a shouty title and a stamped sound effect.", doc: member("comic-alert") },
+    ],
+  },
+  {
+    slug: "input",
+    name: "Inputs",
+    description: "Single-line text fields, in two designs: the classic brutal field and comic-book fields with hand-inked corners.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A bordered field with a hard shadow, an optional icon, and an invalid state.", doc: member("input") },
+      { id: "comic", name: "Comic", description: "Hand-inked corners, halftone dots, and an Oops! sticker when invalid.", doc: member("comic-input") },
+    ],
+  },
+  {
+    slug: "textarea",
+    name: "Textareas",
+    description: "Multi-line text fields, in two designs: the classic brutal box and a comic speech bubble to write in.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A resizable bordered box with a hard shadow and an invalid state.", doc: member("textarea") },
+      { id: "comic", name: "Comic", description: "A speech bubble with a tail, halftone dots, and an Oops! sticker.", doc: member("comic-textarea") },
+    ],
+  },
+  {
+    slug: "select",
+    name: "Selects",
+    description: "Native dropdowns, in two designs: the classic brutal frame and a comic frame with a spinning starburst arrow.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A native select in the brutal frame with a chevron.", doc: member("select") },
+      { id: "comic", name: "Comic", description: "The comic frame with the arrow on a starburst that spins on focus.", doc: member("comic-select") },
+    ],
+  },
+  {
+    slug: "checkbox",
+    name: "Checkboxes",
+    description: "Native checkboxes, in two designs: the classic hard-edged box and a hand-inked box with a starburst flash.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A square face with a hard shadow that fills lime when checked.", doc: member("checkbox") },
+      { id: "comic", name: "Comic", description: "A hand-inked box whose check mark draws in with a burst behind it.", doc: member("comic-checkbox") },
+    ],
+  },
+  {
+    slug: "radio-group",
+    name: "Radio Groups",
+    description: "Pick one of a few options, in two designs: classic round radios and hand-inked blobs with a spinning star.",
+    variants: [
+      { id: "classic", name: "Classic", description: "Round radios with a hard shadow inside a fieldset and legend.", doc: member("radio-group") },
+      { id: "comic", name: "Comic", description: "Hand-inked blobs that fill with a star, under a caption-box legend.", doc: member("comic-radio-group") },
+    ],
+  },
+  {
+    slug: "switch",
+    name: "Switches",
+    description: "On and off toggles, in two designs: the classic square switch and a comic pill with a rolling starburst.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A square track and thumb that slides across and turns lime.", doc: member("switch") },
+      { id: "comic", name: "Comic", description: "A halftone pill with a starburst thumb that rolls over and shouts ON!", doc: member("comic-switch") },
+    ],
+  },
+  {
+    slug: "slider",
+    name: "Sliders",
+    description: "Range inputs, in two designs: the classic brutal track and a comic track with a starburst and a value bubble.",
+    variants: [
+      { id: "classic", name: "Classic", description: "A native range with a hard-edged track, thumb, and toned fill.", doc: member("slider") },
+      { id: "comic", name: "Comic", description: "A starburst thumb that turns as it slides, with the value in a bubble.", doc: member("comic-slider") },
     ],
   },
   {

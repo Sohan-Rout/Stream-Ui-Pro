@@ -3,8 +3,8 @@
  * descriptions past ~160, and every page should lead with its target phrase.
  */
 import { describe, expect, test } from "bun:test";
-import { componentSeo, homeSeo, indexSeo, labSeo, sectionSeo, titleSuffix, variantSeo, type SeoCopy } from "@/lib/seo-copy";
-import { components } from "@/registry/components";
+import { componentGroupSeo, componentSeo, homeSeo, indexSeo, labSeo, sectionSeo, titleSuffix, variantSeo, type SeoCopy } from "@/lib/seo-copy";
+import { componentGroups, components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 
@@ -12,6 +12,7 @@ const pages: [string, SeoCopy, boolean][] = [
   ["home", homeSeo, false],
   ...Object.entries(indexSeo).map(([k, v]) => [`/${k}`, v, true] as [string, SeoCopy, boolean]),
   ...components.map((c) => [`/components/${c.slug}`, componentSeo(c), true] as [string, SeoCopy, boolean]),
+  ...componentGroups.map((g) => [`/components/${g.slug} (group)`, componentGroupSeo(g), true] as [string, SeoCopy, boolean]),
   ...sections.map((s) => [`/sections/${s.slug}`, sectionSeo(s), true] as [string, SeoCopy, boolean]),
   ...sections
     .filter((s) => s.variants.length > 1)

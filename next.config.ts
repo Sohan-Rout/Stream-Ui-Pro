@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
       { source: "/components/comic-button", destination: "/components/button/comic", permanent: true },
       { source: "/components/comic-card", destination: "/components/card/comic", permanent: true },
       { source: "/components/comic-alert", destination: "/components/alert/comic", permanent: true },
+      ...["input", "textarea", "select", "checkbox", "radio-group", "switch", "slider"].map((slug) => ({
+        source: `/components/comic-${slug}`,
+        destination: `/components/${slug}/comic`,
+        permanent: true,
+      })),
     ];
   },
   turbopack: {

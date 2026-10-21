@@ -27,6 +27,21 @@ import { BadgesPreview } from "@/components/docs/BadgesPreview";
 import { ButtonsPreview, ComicButtonPreview } from "@/components/docs/ButtonsPreview";
 import { CardsPreview, ComicCardPreview } from "@/components/docs/CardsPreview";
 import { AlertsPreview, ComicAlertPreview } from "@/components/docs/AlertsPreview";
+import {
+  InputsPreview,
+  TextareasPreview,
+  SelectsPreview,
+  CheckboxesPreview,
+  RadioGroupsPreview,
+  SwitchesPreview,
+  SlidersPreview,
+  ComicInputPreview,
+  ComicTextareaPreview,
+  ComicSelectPreview,
+  ComicCheckboxPreview,
+  ComicRadioGroupPreview,
+  ComicSwitchPreview,
+} from "@/components/docs/FieldsPreview";
 
 function CardPreview() {
   return (
@@ -134,6 +149,12 @@ export const indexPreviews: Record<string, ComponentType> = {
   "comic-button": ComicButtonPreview,
   "comic-card": ComicCardPreview,
   "comic-alert": ComicAlertPreview,
+  "comic-input": ComicInputPreview,
+  "comic-textarea": ComicTextareaPreview,
+  "comic-select": ComicSelectPreview,
+  "comic-checkbox": ComicCheckboxPreview,
+  "comic-radio-group": ComicRadioGroupPreview,
+  "comic-switch": ComicSwitchPreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */
@@ -142,4 +163,11 @@ export const groupPreviews: Record<string, ComponentType> = {
   badge: BadgesPreview,
   card: CardsPreview,
   alert: AlertsPreview,
+  input: InputsPreview,
+  textarea: TextareasPreview,
+  select: SelectsPreview,
+  checkbox: CheckboxesPreview,
+  "radio-group": RadioGroupsPreview,
+  switch: SwitchesPreview,
+  slider: SlidersPreview,
 };

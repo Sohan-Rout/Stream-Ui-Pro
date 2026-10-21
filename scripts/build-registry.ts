@@ -99,10 +99,11 @@ const pkgFile = (name: string) => {
 };
 
 // Shared helpers.
-item("utils", { type: "registry:lib", title: "Utilities", description: "cn() class merging that knows the theme's utilities, tone colors, and form-field framing." });
+item("utils", { type: "registry:lib", title: "Utilities", description: "cn() class merging that knows the theme's utilities, tone colors, form-field framing, and the comic-book helpers." });
 place(`${PKG}/cn.ts`, "utils", "registry:lib", "cn");
 place(`${PKG}/tones.ts`, "utils", "registry:lib", "tones");
 place(`${PKG}/field.ts`, "utils", "registry:lib", "field");
+place(`${PKG}/comic.ts`, "utils", "registry:lib", "comic");
 
 item("use-audio-player", { type: "registry:hook", title: "useAudioPlayer", description: "Playlist playback on a native <audio> element: play, pause, seek, volume, previous/next, auto-advance." });
 place(`${PKG}/music.ts`, "use-audio-player", "registry:lib", "music");
