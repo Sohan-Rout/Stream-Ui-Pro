@@ -113,12 +113,12 @@ export const sections: SectionDoc[] = [
       {
         id: "jungle",
         name: "Jungle run",
-        description: "A round ape runs through a parallax jungle and leaps for bananas while a counter keeps score, under a sky-high headline.",
+        description: "A gorilla knuckle-runs through a parallax jungle and leaps for bananas, under a sky-high headline.",
         file: "src/components/sections/JungleHeroSection.tsx",
         uses: ["lucide-react"],
         notes: [
           "Hills, palms, and the ground scroll at their own speeds: each layer is drawn twice side by side and slides one copy's width, so the loop never jumps.",
-          "The leap and the banana share one cycle, so the ape always peaks as the banana reaches it. The counter is a CSS counter on an animated integer property.",
+          "The leap and the banana share one cycle, so the gorilla always peaks as the banana reaches it, and a +1 pops.",
           "It has its own jungle palette as custom properties on the section. No JavaScript: a server component, and all motion holds still for reduced motion.",
         ],
       },

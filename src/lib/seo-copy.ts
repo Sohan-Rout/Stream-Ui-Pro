@@ -295,7 +295,7 @@ const variantCopy: Record<string, SeoCopy> = {
   "hero/jungle": {
     title: "Jungle Runner Hero Section for React",
     description:
-      "A playful hero for React and Tailwind CSS: an ape runs a parallax jungle and leaps for bananas while a counter keeps score. CSS only, no JavaScript.",
+      "A playful hero for React and Tailwind CSS: a gorilla runs through a parallax jungle and leaps for bananas, under a big headline. CSS only, no JavaScript.",
     keywords: [...base, "jungle hero section", "game landing page", "parallax hero", "animated hero section", "React hero"],
   },
   "hero/comic": {
