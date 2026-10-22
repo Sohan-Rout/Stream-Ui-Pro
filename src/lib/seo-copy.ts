@@ -292,6 +292,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "A playful neobrutalism pricing section for React and Tailwind CSS: plans held up by moles popping out of holes, a crowned gold mole, and a billing switch.",
     keywords: [...base, "playful pricing section", "game pricing page", "animated pricing cards", "React pricing", "whack a mole"],
   },
+  "hero/comic": {
+    title: "Comic Book Hero Section for React",
+    description:
+      "A comic-book cover hero for React and Tailwind CSS: speed-line sunburst, halftone dots, a KA-BOOM! starburst headline, and a speech bubble pitch.",
+    keywords: [...base, "comic hero section", "comic book landing page", "playful hero", "animated hero section", "React hero"],
+  },
   "hero/dino": {
     title: "Dino Runner Hero Section for React",
     description:

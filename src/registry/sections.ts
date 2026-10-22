@@ -23,7 +23,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in six playful layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in seven playful layouts.",
     variants: [
       {
         id: "pixel",
@@ -95,6 +95,18 @@ export const sections: SectionDoc[] = [
           "The background is the real runner from Labs and the 404 page, played by a perfect autopilot (tested over two-minute runs) and held at a calm top speed.",
           "The headline is letter tiles that drop in one after another; the subheading keeps a white outline under a hard pink shadow so it reads over the scene.",
           "The canvas renders at the section's size, shows more scenery on wide screens, pauses off screen, and is a still frame for reduced motion.",
+        ],
+      },
+      {
+        id: "comic",
+        name: "Comic cover",
+        description: "The hero as a comic-book cover: a sunburst of speed lines, a masthead, a KA-BOOM! starburst headline, and the pitch in a speech bubble.",
+        file: "src/components/sections/ComicHeroSection.tsx",
+        uses: ["lucide-react"],
+        notes: [
+          "The rays are one repeating conic gradient that turns slowly, with a halftone layer over it; no images.",
+          "The headline is real text: the white letters get a thick ink stroke painted under the fill and a hard shadow, and the punchline sits on an SVG starburst.",
+          "No JavaScript: a server component. Everything pops in once and the rays turn; all of it holds still for reduced motion.",
         ],
       },
     ],
