@@ -104,8 +104,9 @@ export const sections: SectionDoc[] = [
         file: "src/components/sections/ComicHeroSection.tsx",
         uses: ["lucide-react"],
         notes: [
+          "It has its own vintage print palette (newsprint paper, golden yellow, brick red) instead of the library brights, set as custom properties on the section so it's one place to retune.",
           "The rays are one repeating conic gradient that turns slowly, with a halftone layer over it; no images.",
-          "The headline is real text: the white letters get a thick ink stroke painted under the fill and a hard shadow, and the punchline sits on an SVG starburst.",
+          "The headline is real text in ink with a brick-red offset shadow, and the punchline sits on an SVG starburst.",
           "No JavaScript: a server component. Everything pops in once and the rays turn; all of it holds still for reduced motion.",
         ],
       },

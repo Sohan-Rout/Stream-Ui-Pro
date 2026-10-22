@@ -326,7 +326,8 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
     );
   }
   if (variant === "hero/comic") {
-    // A comic cover: rays, a pink masthead, two headline bars, and a lime starburst.
+    // A vintage comic cover (its own print palette): rays, a red masthead, headline bars, and a yellow starburst.
+    const print = { paper: "#f8f3e6", ray: "#efe5d3", yellow: "#f2cc6a", red: "#c4513a" };
     const rays = Array.from({ length: 12 }, (_, i) => {
       const a = (i * Math.PI) / 6;
       const b = a + Math.PI / 12;
@@ -338,22 +339,22 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       return `${(40 + r * Math.cos(a)).toFixed(1)},${(40 + r * Math.sin(a)).toFixed(1)}`;
     });
     return (
-      <div style={{ display: "flex", position: "relative", height: 180, overflow: "hidden", backgroundColor: brand.paper }}>
+      <div style={{ display: "flex", position: "relative", height: 180, overflow: "hidden", backgroundColor: print.paper }}>
         <svg width="300" height="180" viewBox="0 0 300 180" style={{ position: "absolute", left: 0, top: 0 }}>
           {rays.map((d, i) => (
-            <path key={i} d={d} fill={brand.pinkSoft} />
+            <path key={i} d={d} fill={print.ray} />
           ))}
         </svg>
-        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, top: 0, height: 22, backgroundColor: brand.pink, borderBottom: `4px solid ${brand.ink}` }}>
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, top: 0, height: 22, backgroundColor: print.red, borderBottom: `4px solid ${brand.ink}` }}>
           <div style={{ display: "flex", width: 90, height: 18, backgroundColor: brand.ink }} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, position: "absolute", left: 40, top: 46, width: 140 }}>
-          {bar("100%", 18, brand.raised)}
-          {bar("60%", 18, brand.raised)}
+          {bar("100%", 18, brand.ink)}
+          {bar("60%", 18, brand.ink)}
           <div style={{ display: "flex", width: 90, height: 22, marginTop: 6, backgroundColor: brand.raised, border: `3px solid ${brand.ink}`, borderRadius: 10 }} />
         </div>
         <svg width="80" height="80" viewBox="0 0 80 80" style={{ position: "absolute", left: 186, top: 50 }}>
-          <path d={`M${star.join("L")}Z`} fill={brand.lime} stroke={brand.ink} strokeWidth="4" strokeLinejoin="round" />
+          <path d={`M${star.join("L")}Z`} fill={print.yellow} stroke={brand.ink} strokeWidth="4" strokeLinejoin="round" />
         </svg>
       </div>
     );

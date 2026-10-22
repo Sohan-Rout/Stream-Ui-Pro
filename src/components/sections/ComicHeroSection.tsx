@@ -14,16 +14,28 @@ function burst(n: number, outer: number, inner: number) {
 const BIG_BURST = burst(16, 50, 36);
 const SMALL_BURST = burst(12, 50, 34);
 
+/**
+ * A vintage print palette, not the library's brights: newsprint paper, faint
+ * ink rays, a golden yellow, and one brick red. Set on the section as custom
+ * properties, so it's one place to retune.
+ */
+const PALETTE = {
+  "--comic-paper": "oklch(0.965 0.022 85)",
+  "--comic-ray": "oklch(0.925 0.03 80)",
+  "--comic-yellow": "oklch(0.87 0.12 88)",
+  "--comic-red": "oklch(0.58 0.16 32)",
+} as CSSProperties;
+
 const DOTS: CSSProperties = {
-  backgroundImage: "radial-gradient(color-mix(in oklab, var(--ink) 16%, transparent) 1.4px, transparent 1.9px)",
+  backgroundImage: "radial-gradient(color-mix(in oklab, var(--ink) 11%, transparent) 1.3px, transparent 1.8px)",
   backgroundSize: "10px 10px",
 };
 
 /** Sound effects stuck around the cover: word, spot, tone, tilt, and when it pops in. */
 const STICKERS = [
-  { word: "Zap!", className: "top-[18%] left-[3%] @7xl:left-[7%]", fill: "fill-pink", tilt: -12, at: 1.1 },
-  { word: "Pow!", className: "top-[26%] right-[3%] @7xl:right-[7%]", fill: "fill-blue", tilt: 10, at: 1.3 },
-  { word: "Wham!", className: "bottom-[12%] left-[5%] @7xl:left-[10%]", fill: "fill-orange", tilt: 8, at: 1.5 },
+  { word: "Zap!", className: "top-[18%] left-[3%] @7xl:left-[7%]", fill: "var(--comic-yellow)", text: "var(--ink)", tilt: -12, at: 1.1 },
+  { word: "Pow!", className: "top-[26%] right-[3%] @7xl:right-[7%]", fill: "var(--comic-red)", text: "var(--comic-paper)", tilt: 10, at: 1.3 },
+  { word: "Wham!", className: "bottom-[12%] left-[5%] @7xl:left-[10%]", fill: "var(--paper-raised)", text: "var(--ink)", tilt: 8, at: 1.5 },
 ];
 
 /**
@@ -36,7 +48,7 @@ const STICKERS = [
  */
 export function ComicHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h1" | "h2" | "h3" }) {
   return (
-    <section className="@container relative isolate overflow-hidden border-b-4 border-ink bg-orange-soft text-ink">
+    <section className="@container relative isolate overflow-hidden border-b-4 border-ink text-ink" style={{ ...PALETTE, backgroundColor: "var(--comic-paper)" }}>
       <style href="comic-hero" precedence="default">{`
         @keyframes comic-hero-rays { to { rotate: 360deg; } }
         @keyframes comic-hero-pop {
@@ -60,27 +72,27 @@ export function ComicHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h
       <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
         <div
           className="comic-hero-rays absolute top-1/2 left-1/2 aspect-square w-[260%] -translate-1/2 @3xl:w-[180%]"
-          style={{ background: "repeating-conic-gradient(var(--orange-soft) 0deg 7.5deg, var(--paper) 7.5deg 15deg)" }}
+          style={{ background: "repeating-conic-gradient(var(--comic-ray) 0deg 7.5deg, var(--comic-paper) 7.5deg 15deg)" }}
         />
         <div className="absolute inset-0" style={DOTS} />
       </div>
 
       {/* The masthead strip across the top of the cover. */}
-      <div aria-hidden className="flex items-stretch justify-between border-b-4 border-ink bg-pink">
+      <div aria-hidden className="flex items-stretch justify-between border-b-4 border-ink" style={{ backgroundColor: "var(--comic-red)", color: "var(--comic-paper)" }}>
         <span className="border-r-4 border-ink bg-ink px-3 py-1.5 font-display text-base tracking-tight text-paper @3xl:px-5 @3xl:text-2xl">
           ACME COMICS
         </span>
         <span className="flex items-center gap-3 px-3 font-mono text-xs font-bold tracking-widest uppercase @3xl:px-5 @3xl:text-sm">
           <span className="hidden @md:inline">Launch special</span>
-          <span className="border-2 border-ink bg-paper-raised px-1.5 py-0.5">No. 1</span>
+          <span className="border-2 border-ink bg-paper-raised px-1.5 py-0.5 text-ink">No. 1</span>
         </span>
       </div>
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-10 pb-16 text-center @3xl:pt-16 @3xl:pb-24">
         {/* Narration caption. */}
         <p
-          className="comic-hero-slide border-[3px] border-ink bg-lime px-3 py-1 font-mono text-xs font-bold tracking-wide text-on-bright uppercase shadow-[4px_4px_0_var(--ink)] @3xl:text-sm"
-          style={{ "--tilt": "-2deg", "--at": "0.05s" } as CSSProperties}
+          className="comic-hero-slide border-[3px] border-ink px-3 py-1 font-mono text-xs font-bold tracking-wide uppercase shadow-[4px_4px_0_var(--ink)] @3xl:text-sm"
+          style={{ "--tilt": "-2deg", "--at": "0.05s", backgroundColor: "var(--comic-yellow)" } as CSSProperties}
         >
           Meanwhile, at Acme HQ…
         </p>
@@ -88,23 +100,23 @@ export function ComicHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h
         <Heading className="mt-6 flex flex-col items-center font-display leading-[0.95] tracking-tight">
           <span
             className="comic-hero-slide text-5xl @md:text-6xl @3xl:text-8xl @5xl:text-9xl"
-            style={{ "--at": "0.2s", WebkitTextStroke: "3px var(--ink)", paintOrder: "stroke fill", textShadow: "5px 5px 0 var(--ink)", color: "var(--paper-raised)" } as CSSProperties}
+            style={{ "--at": "0.2s", textShadow: "4px 4px 0 var(--comic-red)" } as CSSProperties}
           >
             Your launch
           </span>
           <span className="mt-2 flex flex-wrap items-center justify-center gap-x-4 @3xl:mt-3">
             <span
               className="comic-hero-slide text-5xl @md:text-6xl @3xl:text-8xl @5xl:text-9xl"
-              style={{ "--at": "0.35s", WebkitTextStroke: "3px var(--ink)", paintOrder: "stroke fill", textShadow: "5px 5px 0 var(--ink)", color: "var(--paper-raised)" } as CSSProperties}
+              style={{ "--at": "0.35s", textShadow: "4px 4px 0 var(--comic-red)" } as CSSProperties}
             >
               goes
             </span>
             {/* The punchline on a big starburst. */}
             <span className="comic-hero-pop relative grid place-items-center px-10 py-8 @3xl:px-16 @3xl:py-12" style={{ "--tilt": "-6deg", "--at": "0.55s" } as CSSProperties}>
               <svg aria-hidden viewBox="0 0 100 100" preserveAspectRatio="none" overflow="visible" className="comic-hero-throb absolute inset-0 size-full drop-shadow-[6px_6px_0_var(--ink)]">
-                <path d={BIG_BURST} className="fill-lime stroke-ink" strokeWidth={4} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+                <path d={BIG_BURST} className="stroke-ink" fill="var(--comic-yellow)" strokeWidth={4} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
               </svg>
-              <span className="relative text-4xl text-on-bright @md:text-5xl @3xl:text-7xl @5xl:text-8xl">KA-BOOM!</span>
+              <span className="relative text-4xl @md:text-5xl @3xl:text-7xl @5xl:text-8xl" style={{ color: "var(--comic-red)", textShadow: "3px 3px 0 var(--ink)" }}>KA-BOOM!</span>
             </span>
           </span>
         </Heading>
@@ -121,14 +133,14 @@ export function ComicHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a
             href="#"
-            className="comic-hero-pop inline-flex h-14 items-center gap-2 border-4 border-ink bg-lime px-7 font-display text-lg text-on-bright uppercase shadow-[6px_6px_0_var(--ink)] transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--ink)] active:translate-x-1 active:translate-y-1 active:shadow-none focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue motion-reduce:transition-none"
-            style={{ "--tilt": "-2deg", "--at": "1s", ...DOTS, backgroundColor: "var(--lime)" } as CSSProperties}
+            className="comic-hero-pop inline-flex h-14 items-center gap-2 border-4 border-ink bg-ink px-7 font-display text-lg text-paper uppercase shadow-[6px_6px_0_var(--comic-red)] transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--comic-red)] active:translate-x-1 active:translate-y-1 active:shadow-none focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue motion-reduce:transition-none"
+            style={{ "--tilt": "-2deg", "--at": "1s" } as CSSProperties}
           >
             Start the story <ArrowRight aria-hidden className="size-5" />
           </a>
           <a
             href="#"
-            className="comic-hero-pop inline-flex h-14 items-center rounded-full border-4 border-ink bg-paper-raised px-7 font-display text-lg uppercase shadow-[6px_6px_0_var(--ink)] transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-pink-soft hover:shadow-[8px_8px_0_var(--ink)] active:translate-x-1 active:translate-y-1 active:shadow-none focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue motion-reduce:transition-none"
+            className="comic-hero-pop inline-flex h-14 items-center rounded-full border-4 border-ink bg-paper-raised px-7 font-display text-lg uppercase shadow-[6px_6px_0_var(--ink)] transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--ink)] active:translate-x-1 active:translate-y-1 active:shadow-none focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue motion-reduce:transition-none"
             style={{ "--tilt": "2deg", "--at": "1.1s" } as CSSProperties}
           >
             See the code
@@ -145,9 +157,9 @@ export function ComicHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "h
           style={{ "--tilt": `${s.tilt}deg`, "--at": `${s.at}s` } as CSSProperties}
         >
           <svg viewBox="0 0 100 100" overflow="visible" className="absolute inset-0 size-full drop-shadow-[4px_4px_0_var(--ink)]">
-            <path d={SMALL_BURST} className={`${s.fill} stroke-ink`} strokeWidth={4} strokeLinejoin="round" />
+            <path d={SMALL_BURST} className="stroke-ink" fill={s.fill} strokeWidth={4} strokeLinejoin="round" />
           </svg>
-          <span className="relative font-display text-lg text-on-bright @5xl:text-xl">{s.word}</span>
+          <span className="relative font-display text-lg @5xl:text-xl" style={{ color: s.text }}>{s.word}</span>
         </span>
       ))}
     </section>
