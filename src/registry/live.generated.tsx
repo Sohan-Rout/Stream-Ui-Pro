@@ -106,6 +106,7 @@ export const live: Record<string, ComponentType<any>> = {
   "src/components/sections/FlappyHeroSection.tsx": dynamic(() => import("@/components/sections/FlappyHeroSection").then((m) => m.FlappyHeroSection)),
   "src/components/sections/DinoHeroSection.tsx": dynamic(() => import("@/components/sections/DinoHeroSection").then((m) => m.DinoHeroSection)),
   "src/components/sections/ComicHeroSection.tsx": dynamic(() => import("@/components/sections/ComicHeroSection").then((m) => m.ComicHeroSection)),
+  "src/components/sections/JungleHeroSection.tsx": dynamic(() => import("@/components/sections/JungleHeroSection").then((m) => m.JungleHeroSection)),
   "src/components/sections/FeaturesSection.tsx": dynamic(() => import("@/components/sections/FeaturesSection").then((m) => m.FeaturesSection)),
   "src/components/sections/MazeFeaturesSection.tsx": dynamic(() => import("@/components/sections/MazeFeaturesSection").then((m) => m.MazeFeaturesSection)),
   "src/components/sections/BentoFeaturesSection.tsx": dynamic(() => import("@/components/sections/BentoFeaturesSection").then((m) => m.BentoFeaturesSection)),

@@ -325,6 +325,24 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "hero/jungle") {
+    // Mint sky, a hill, two palms, a banana, the ape on the grass, and the ground.
+    const jungle = { sky: "#dff3ec", hill: "#b5dcc6", leaf: "#6fb27a", bark: "#97704c", grass: "#9fd06b", dirt: "#a88a63", banana: "#f2d66b", fur: "#6e4a35" };
+    return (
+      <div style={{ display: "flex", position: "relative", height: 180, overflow: "hidden", backgroundColor: jungle.sky }}>
+        <div style={{ display: "flex", position: "absolute", left: -40, right: -40, bottom: 26, height: 70, borderRadius: "50% 50% 0 0", backgroundColor: jungle.hill, border: `3px solid ${brand.ink}` }} />
+        {[40, 210].map((x) => (
+          <div key={x} style={{ display: "flex", position: "absolute", left: x, bottom: 26, width: 10, height: 96, backgroundColor: jungle.bark, border: `3px solid ${brand.ink}` }} />
+        ))}
+        {[18, 188].map((x) => (
+          <div key={x} style={{ display: "flex", position: "absolute", left: x, bottom: 112, width: 56, height: 24, borderRadius: 28, backgroundColor: jungle.leaf, border: `3px solid ${brand.ink}` }} />
+        ))}
+        <div style={{ display: "flex", position: "absolute", left: 150, top: 40, width: 30, height: 14, borderRadius: "0 0 18px 18px", backgroundColor: jungle.banana, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 96, bottom: 28, width: 40, height: 40, borderRadius: 20, backgroundColor: jungle.fur, border: `3px solid ${brand.ink}` }} />
+        <div style={{ display: "flex", position: "absolute", left: 0, right: 0, bottom: 0, height: 28, backgroundColor: jungle.dirt, borderTop: `8px solid ${jungle.grass}`, boxShadow: `inset 0 3px 0 ${brand.ink}` }} />
+      </div>
+    );
+  }
   if (variant === "hero/comic") {
     // A vintage comic cover (its own print palette): rays, a red masthead, headline bars, and a yellow starburst.
     const print = { paper: "#f8f3e6", ray: "#efe5d3", yellow: "#f2cc6a", red: "#c4513a" };

@@ -23,7 +23,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "hero",
     name: "Hero",
-    description: "The top of a landing page: a headline, a pitch, and a first action, in seven playful layouts.",
+    description: "The top of a landing page: a headline, a pitch, and a first action, in eight playful layouts.",
     variants: [
       {
         id: "pixel",
@@ -108,6 +108,18 @@ export const sections: SectionDoc[] = [
           "The rays are one repeating conic gradient that turns slowly, with a halftone layer over it; no images.",
           "The headline is real text in ink with a brick-red offset shadow, and the punchline sits on an SVG starburst.",
           "No JavaScript: a server component. Everything pops in once and the rays turn; all of it holds still for reduced motion.",
+        ],
+      },
+      {
+        id: "jungle",
+        name: "Jungle run",
+        description: "A round ape runs through a parallax jungle and leaps for bananas while a counter keeps score, under a sky-high headline.",
+        file: "src/components/sections/JungleHeroSection.tsx",
+        uses: ["lucide-react"],
+        notes: [
+          "Hills, palms, and the ground scroll at their own speeds: each layer is drawn twice side by side and slides one copy's width, so the loop never jumps.",
+          "The leap and the banana share one cycle, so the ape always peaks as the banana reaches it. The counter is a CSS counter on an animated integer property.",
+          "It has its own jungle palette as custom properties on the section. No JavaScript: a server component, and all motion holds still for reduced motion.",
         ],
       },
     ],
