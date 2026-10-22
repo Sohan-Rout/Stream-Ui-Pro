@@ -83,61 +83,73 @@ function limb(x1: number, y1: number, x2: number, y2: number, w1: number, w2: nu
   return `M${p(x1, y1, w1, 1)} L${p(x2, y2, w2, 1)} A${w2 / 2} ${w2 / 2} 0 0 0 ${p(x2, y2, w2, -1)} L${p(x1, y1, w1, -1)} A${w1 / 2} ${w1 / 2} 0 0 0 ${p(x1, y1, w1, 1)} Z`;
 }
 
-const FAR_ARM = limb(76, 52, 66, 98, 20, 14);
-const FAR_LEG = limb(42, 74, 26, 98, 22, 15);
-const NEAR_LEG = limb(56, 80, 66, 102, 22, 15);
-const NEAR_ARM = limb(96, 50, 116, 96, 22, 15);
+const FAR_ARM = limb(64, 66, 48, 86, 10, 8);
+const FAR_LEG = limb(58, 96, 44, 120, 12, 10);
+const NEAR_LEG = limb(64, 98, 78, 120, 12, 10);
+const NEAR_ARM = limb(70, 66, 92, 78, 10, 8);
 
 /**
- * The runner: a gorilla in side profile, knuckle-running to the right. Its
- * body leans into the run, the arms and legs swing from shoulder and hip in
- * opposite pairs, and the tails of a banana-yellow headband flap behind.
+ * The runner: a monkey sprinting upright to the right. A long curly tail, big
+ * round ears, a heart-shaped face with big eyes and a grin, long arms
+ * pumping against the legs, and the tails of a banana-yellow headband
+ * flapping behind.
  */
 function Ape() {
   const fur = "var(--jungle-fur)";
   const back = "var(--jungle-fur-dark)";
   const face = "var(--jungle-face)";
   return (
-    <svg viewBox="0 0 140 112" overflow="visible" className="size-full" aria-hidden>
+    <svg viewBox="0 0 130 130" overflow="visible" className="size-full" aria-hidden>
       <g stroke="var(--ink)" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
-        {/* Far limbs, in shadow behind the body. */}
-        <g className="jungle-hero-limb-b" style={{ transformOrigin: "76px 52px" }}>
-          <path d={FAR_ARM} fill={back} />
-          <ellipse cx="66" cy="99" rx="9" ry="6" fill={back} />
+        {/* The tail: an ink line with fur down its middle, curling up at the tip. */}
+        <g className="jungle-hero-tail" style={{ transformOrigin: "50px 94px" }}>
+          <path d="M50 94 C 26 100, 8 86, 12 66 C 16 48, 36 48, 36 62 C 36 72, 24 72, 25 64" fill="none" strokeWidth="11" />
+          <path d="M50 94 C 26 100, 8 86, 12 66 C 16 48, 36 48, 36 62 C 36 72, 24 72, 25 64" fill="none" stroke={fur} strokeWidth="4.5" />
         </g>
-        <g className="jungle-hero-limb-a" style={{ transformOrigin: "42px 74px" }}>
+
+        {/* Far limbs, in shadow. */}
+        <g className="jungle-hero-limb-b" style={{ transformOrigin: "58px 96px" }}>
           <path d={FAR_LEG} fill={back} />
-          <ellipse cx="24" cy="100" rx="10" ry="5" fill={back} />
+          <ellipse cx="41" cy="122" rx="9" ry="5" fill={face} />
+        </g>
+        <g className="jungle-hero-limb-a" style={{ transformOrigin: "64px 66px" }}>
+          <path d={FAR_ARM} fill={back} />
+          <circle cx="47" cy="88" r="5" fill={face} />
+        </g>
+
+        {/* Body and belly. */}
+        <ellipse cx="62" cy="82" rx="18" ry="22" fill={fur} transform="rotate(12 62 82)" />
+        <ellipse cx="67" cy="86" rx="10" ry="14" fill={face} strokeWidth="3" transform="rotate(12 67 86)" />
+
+        {/* Near leg. */}
+        <g className="jungle-hero-limb-a" style={{ transformOrigin: "64px 98px" }}>
+          <path d={NEAR_LEG} fill={fur} />
+          <ellipse cx="82" cy="122" rx="9" ry="5" fill={face} />
         </g>
 
         {/* Headband tails, flapping behind the head. */}
-        <g className="jungle-hero-flap" style={{ transformOrigin: "86px 22px" }}>
-          <path d="M86 22 L62 12 L66 20 L60 26 Z" fill="var(--jungle-banana)" />
+        <g className="jungle-hero-flap" style={{ transformOrigin: "56px 30px" }}>
+          <path d="M57 30 L36 21 L40 30 L34 37 Z" fill="var(--jungle-banana)" strokeWidth="3" />
         </g>
 
-        {/* Body: a broad back leaning forward, with a lighter chest. */}
-        <path d="M28 74 C 22 46, 50 26, 82 28 C 104 30, 114 50, 104 66 C 94 84, 40 94, 28 74 Z" fill={fur} />
+        {/* Head: a big ear, the round head, a heart-shaped face, eyes, nose, and a grin. */}
+        <circle cx="51" cy="44" r="11" fill={fur} />
+        <circle cx="51" cy="44" r="5.5" fill={face} strokeWidth="3" />
+        <circle cx="72" cy="40" r="22" fill={fur} />
+        <path d="M66 32 C 64 21, 79 19, 82 28 C 85 19, 100 22, 97 33 C 103 40, 100 55, 86 57 C 73 58, 63 50, 66 40 C 64 37, 64 34, 66 32 Z" fill={face} strokeWidth="3" />
+        <circle cx="76" cy="33" r="5" fill="var(--paper-raised)" strokeWidth="2.5" />
+        <circle cx="90" cy="33" r="5" fill="var(--paper-raised)" strokeWidth="2.5" />
+        <circle cx="77.8" cy="33.6" r="2.4" fill="var(--ink)" stroke="none" />
+        <circle cx="91.8" cy="33.6" r="2.4" fill="var(--ink)" stroke="none" />
+        <circle cx="86" cy="43" r="1.4" fill="var(--ink)" stroke="none" />
+        <circle cx="91" cy="43" r="1.4" fill="var(--ink)" stroke="none" />
+        <path d="M78 48 C 83 54, 92 54, 97 47" fill="none" strokeWidth="3" />
+        <path d="M54 30 C 62 17, 84 13, 95 21 L93 26 C 84 20, 66 22, 57 35 Z" fill="var(--jungle-banana)" strokeWidth="3" />
 
-        {/* Head, a size up so the face reads at a glance: eye, muzzle, ear, and the headband across the brow. */}
-        <g transform="translate(104 30) scale(1.18) translate(-104 -30)">
-          <path d="M84 30 C 84 12, 112 8, 118 22 C 124 34, 118 46, 104 46 C 92 46, 84 40, 84 30 Z" fill={fur} />
-          <path d="M98 31 C 110 25, 128 27, 128 38 C 128 47, 116 51, 105 47 C 98 44, 94 35, 98 31 Z" fill={face} strokeWidth="3" />
-          <circle cx="111" cy="29" r="4.6" fill="var(--paper-raised)" strokeWidth="2.5" />
-          <circle cx="112.6" cy="29.4" r="2.3" fill="var(--ink)" stroke="none" />
-          <circle cx="123" cy="35" r="1.7" fill="var(--ink)" stroke="none" />
-          <path d="M111 43 C 115 45, 120 44, 123 41" fill="none" strokeWidth="2.5" />
-          <circle cx="90" cy="32" r="4.5" fill={face} strokeWidth="3" />
-          <path d="M86 20 C 96 13, 110 12, 118 17 L117 23 C 109 18, 96 19, 87 26 Z" fill="var(--jungle-banana)" strokeWidth="3" />
-        </g>
-
-        {/* Near limbs, over the body. */}
-        <g className="jungle-hero-limb-b" style={{ transformOrigin: "56px 80px" }}>
-          <path d={NEAR_LEG} fill={fur} />
-          <ellipse cx="68" cy="104" rx="11" ry="5.5" fill={fur} />
-        </g>
-        <g className="jungle-hero-limb-a" style={{ transformOrigin: "96px 50px" }}>
+        {/* Near arm, pumping forward. */}
+        <g className="jungle-hero-limb-b" style={{ transformOrigin: "70px 66px" }}>
           <path d={NEAR_ARM} fill={fur} />
-          <ellipse cx="117" cy="98" rx="9.5" ry="7.5" fill={fur} />
+          <circle cx="94" cy="79" r="5.5" fill={face} />
         </g>
       </g>
     </svg>
@@ -145,7 +157,7 @@ function Ape() {
 }
 
 /**
- * Jungle run hero: a round ape runs through a parallax jungle (hills, palms,
+ * Jungle run hero: a monkey runs through a parallax jungle (hills, palms,
  * hanging vines, and the ground scrolling at their own speeds), leaping to
  * grab a banana every few seconds.
  * The headline and buttons sit in the sky above it. No JavaScript: a server
@@ -162,6 +174,7 @@ export function JungleHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
         @keyframes jungle-hero-scroll { to { translate: -50% 0; } }
         @keyframes jungle-hero-stride { 0%, 100% { rotate: -22deg; } 50% { rotate: 22deg; } }
         @keyframes jungle-hero-flap { 0%, 100% { rotate: 0deg; } 50% { rotate: -14deg; } }
+        @keyframes jungle-hero-tail { 0%, 100% { rotate: -6deg; } 50% { rotate: 8deg; } }
         @keyframes jungle-hero-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
         @keyframes jungle-hero-leap {
           0%, ${((PEAK - 0.16) * 100).toFixed(1)}%, 100% { translate: 0 0; rotate: 0deg; }
@@ -190,10 +203,11 @@ export function JungleHeroSection({ headingAs: Heading = "h1" }: { headingAs?: "
         .jungle-hero-banana { animation: jungle-hero-banana ${CYCLE}s linear infinite; }
         .jungle-hero-plus { animation: jungle-hero-plus ${CYCLE}s ease-out infinite; }
         .jungle-hero-flap { animation: jungle-hero-flap .2s ease-in-out infinite; }
+        .jungle-hero-tail { animation: jungle-hero-tail .64s ease-in-out infinite; }
         .jungle-hero-vine { animation: jungle-hero-sway 5s ease-in-out infinite; transform-origin: top center; }
         @media (prefers-reduced-motion: reduce) {
           .jungle-hero-hills, .jungle-hero-palms, .jungle-hero-ground, .jungle-hero-runner, .jungle-hero-body,
-          .jungle-hero-limb-a, .jungle-hero-limb-b, .jungle-hero-banana, .jungle-hero-plus, .jungle-hero-flap, .jungle-hero-vine { animation: none; }
+          .jungle-hero-limb-a, .jungle-hero-limb-b, .jungle-hero-banana, .jungle-hero-plus, .jungle-hero-flap, .jungle-hero-tail, .jungle-hero-vine { animation: none; }
           .jungle-hero-banana { left: 60%; }
           .jungle-hero-plus { opacity: 0; }
         }
