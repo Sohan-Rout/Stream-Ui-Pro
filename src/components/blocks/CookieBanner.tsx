@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { usePathname } from "next/navigation";
 import { Cookie } from "lucide-react";
 import { Button } from "@streamuilib/react";

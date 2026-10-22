@@ -24,13 +24,14 @@ describe("TicTacToeLab", () => {
   });
 
   test("taken cells and moves during the CPU's turn are ignored", async () => {
-    render(<TicTacToeLab cpuDelay={50} />);
+    // Long enough that the CPU can't move before the clicks below, even on a busy machine.
+    render(<TicTacToeLab cpuDelay={600} />);
     await userEvent.click(cell(2, 2));
     expect(status().textContent).toBe("CPU is thinking…");
     await userEvent.click(cell(2, 2));
     await userEvent.click(cell(1, 1));
     expect(cell(1, 1).getAttribute("aria-label")).toBe("Row 1, column 1: empty");
-    await waitFor(() => expect(status().textContent).toBe("Your move (X)"));
+    await waitFor(() => expect(status().textContent).toBe("Your move (X)"), { timeout: 3000 });
   });
 
   test("two players: marks alternate and a line wins and scores", async () => {

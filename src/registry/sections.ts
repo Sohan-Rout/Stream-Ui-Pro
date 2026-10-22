@@ -1,22 +1,4 @@
-import type { ComponentType } from "react";
 import type { SectionSlug } from "@/components/blocks/SectionThumbs";
-import { PixelPromptHeroSection } from "@/components/sections/PixelPromptHeroSection";
-import { BlocksHeroSection } from "@/components/sections/BlocksHeroSection";
-import { PlatformerHeroSection } from "@/components/sections/PlatformerHeroSection";
-import { FlappyHeroSection } from "@/components/sections/FlappyHeroSection";
-import { DinoHeroSection } from "@/components/sections/DinoHeroSection";
-import { MazeHeroSection } from "@/components/sections/MazeHeroSection";
-import { FeaturesSection } from "@/components/sections/FeaturesSection";
-import { MazeFeaturesSection } from "@/components/sections/MazeFeaturesSection";
-import { BentoFeaturesSection } from "@/components/sections/BentoFeaturesSection";
-import { LevelsFeaturesSection } from "@/components/sections/LevelsFeaturesSection";
-import { FlappyFeaturesSection } from "@/components/sections/FlappyFeaturesSection";
-import { PricingSection } from "@/components/sections/PricingSection";
-import { BoldPricingSection } from "@/components/sections/BoldPricingSection";
-import { WhackPricingSection } from "@/components/sections/WhackPricingSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import { FaqSection } from "@/components/sections/FaqSection";
-import { FooterSection } from "@/components/sections/FooterSection";
 
 /** One design of a section. Heroes take `headingAs` so docs previews can demote their h1. */
 export type SectionVariant = {
@@ -25,7 +7,6 @@ export type SectionVariant = {
   name: string;
   description: string;
   file: string;
-  Component: ComponentType<{ headingAs?: "h1" | "h2" | "h3" }>;
   uses: string[];
   notes: string[];
 };
@@ -49,7 +30,6 @@ export const sections: SectionDoc[] = [
         name: "Pixel prompt",
         description: "The prompt box in an arcade screen over a pixel grid, with tetrominoes falling onto a locked stack.",
         file: "src/components/sections/PixelPromptHeroSection.tsx",
-        Component: PixelPromptHeroSection,
         uses: ["lucide-react"],
         notes: [
           "Pieces fall one grid cell per tick (CSS steps), so the motion reads like a game, not a slide. They're decorative and hold still for reduced motion.",
@@ -62,7 +42,6 @@ export const sections: SectionDoc[] = [
         name: "Falling blocks",
         description: "A centered headline built from letter tiles that drop into place, over a grid of falling tetrominoes.",
         file: "src/components/sections/BlocksHeroSection.tsx",
-        Component: BlocksHeroSection,
         uses: ["lucide-react"],
         notes: [
           "Each letter is its own tile and drops in a few steps, one after another, like pieces landing. Screen readers get the plain headline text instead.",
@@ -75,7 +54,6 @@ export const sections: SectionDoc[] = [
         name: "Platformer",
         description: "A retro platformer scene: a HUD, bonus blocks that pop coins, pipes, clouds, and a bouncing pixel mascot.",
         file: "src/components/sections/PlatformerHeroSection.tsx",
-        Component: PlatformerHeroSection,
         uses: ["lucide-react"],
         notes: [
           "Bonus blocks are real buttons: click or press Enter to pop a coin and add to the HUD, once per block. The count is announced to screen readers.",
@@ -88,7 +66,6 @@ export const sections: SectionDoc[] = [
         name: "Maze",
         description: "An arcade start screen: corridors where a chomper eats a dot trail with bots on its tail, around a READY! headline.",
         file: "src/components/sections/MazeHeroSection.tsx",
-        Component: MazeHeroSection,
         uses: ["lucide-react"],
         notes: [
           "The two corridors run opposite ways, half a lap apart, and the dots vanish behind each chomper. CSS only; it holds still for reduced motion.",
@@ -101,7 +78,6 @@ export const sections: SectionDoc[] = [
         name: "Flappy",
         description: "A sky of endlessly scrolling pipes and a bobbing, flapping bird over a big outlined headline.",
         file: "src/components/sections/FlappyHeroSection.tsx",
-        Component: FlappyHeroSection,
         uses: ["lucide-react"],
         notes: [
           "The pipe track is drawn twice side by side and slides one copy's width, so the loop never jumps. Edit GAPS to change where the openings fall.",
@@ -114,7 +90,6 @@ export const sections: SectionDoc[] = [
         name: "Dino runner",
         description: "The Dino Runner scene as a backdrop: a dino on autopilot jumps cacti and ducks flyers behind a letter-tile headline.",
         file: "src/components/sections/DinoHeroSection.tsx",
-        Component: DinoHeroSection,
         uses: ["lucide-react"],
         notes: [
           "The background is the real runner from Labs and the 404 page, played by a perfect autopilot (tested over two-minute runs) and held at a calm top speed.",
@@ -134,7 +109,6 @@ export const sections: SectionDoc[] = [
         name: "Grid",
         description: "Six features in a ruled grid, each with a toned icon tile.",
         file: "src/components/sections/FeaturesSection.tsx",
-        Component: FeaturesSection,
         uses: ["lucide-react"],
         notes: ["One, two, or three columns depending on the container width.", "Keep feature copy to one sentence so rows stay even."],
       },
@@ -143,7 +117,6 @@ export const sections: SectionDoc[] = [
         name: "Maze",
         description: "A corridor where a chomper eats a dot trail with three bots on its tail, over features set in maze rooms.",
         file: "src/components/sections/MazeFeaturesSection.tsx",
-        Component: MazeFeaturesSection,
         uses: ["lucide-react"],
         notes: [
           "The dots behind the chomper disappear as it runs: a strip grows at the same pace as it moves. CSS only, still for reduced motion.",
@@ -156,7 +129,6 @@ export const sections: SectionDoc[] = [
         name: "Bento",
         description: "One big lead tile and five smaller ones in soft tints, on an asymmetric bento grid.",
         file: "src/components/sections/BentoFeaturesSection.tsx",
-        Component: BentoFeaturesSection,
         uses: ["lucide-react"],
         notes: [
           "Put your strongest feature first: it gets the big lime tile.",
@@ -168,7 +140,6 @@ export const sections: SectionDoc[] = [
         name: "Level select",
         description: "Features as arcade level tiles numbered 1-1 to 1-6, with pixel bevels, star ratings, and a start marker.",
         file: "src/components/sections/LevelsFeaturesSection.tsx",
-        Component: LevelsFeaturesSection,
         uses: ["lucide-react"],
         notes: [
           "Stars are labeled for screen readers (\"2 of 3 stars\"); use them for maturity, adoption, or anything you rate.",
@@ -180,7 +151,6 @@ export const sections: SectionDoc[] = [
         name: "Flappy pipes",
         description: "Features on pink pipe cards: three hang from above, three stand on scrolling grass, and the bird flaps through the gap.",
         file: "src/components/sections/FlappyFeaturesSection.tsx",
-        Component: FlappyFeaturesSection,
         uses: ["lucide-react"],
         notes: [
           "Each card is a pipe: the cap holds the icon and title, the body holds the description. Top pipes hang down, bottom pipes stand up.",
@@ -200,7 +170,6 @@ export const sections: SectionDoc[] = [
         name: "Classic",
         description: "Three plans in a ruled table with a monthly/yearly switch and a highlighted tier.",
         file: "src/components/sections/PricingSection.tsx",
-        Component: PricingSection,
         uses: ["Button", "Badge"],
         notes: ["The billing switch is a pressed-button group, announced as a toggle.", "Prices live in one array; edit plans there."],
       },
@@ -209,7 +178,6 @@ export const sections: SectionDoc[] = [
         name: "Color blocks",
         description: "Three full-color plan cards (orange, lime, pink) with thick borders and hard shadows; the featured one lifts and tilts.",
         file: "src/components/sections/BoldPricingSection.tsx",
-        Component: BoldPricingSection,
         uses: ["lucide-react"],
         notes: [
           "Each plan is one bright from the theme with ink text on top. Change a card's tone in the plans array.",
@@ -222,7 +190,6 @@ export const sections: SectionDoc[] = [
         name: "Whack-a-mole",
         description: "Each plan is a sign held up by a mole popping out of its hole on a grass field; the featured one gets the crowned gold mole.",
         file: "src/components/sections/WhackPricingSection.tsx",
-        Component: WhackPricingSection,
         uses: ["lucide-react"],
         notes: [
           "The signs pop out of their holes one after another, nudge up on hover, and hold still for reduced motion.",
@@ -242,7 +209,6 @@ export const sections: SectionDoc[] = [
         name: "Testimonials",
         description: "Three customer quotes with names and roles.",
         file: "src/components/sections/TestimonialsSection.tsx",
-        Component: TestimonialsSection,
         uses: ["Avatar"],
         notes: ["Each quote is a figure with blockquote and figcaption.", "Replace the sample quotes with real ones before shipping."],
       },
@@ -258,7 +224,6 @@ export const sections: SectionDoc[] = [
         name: "FAQ",
         description: "An accordion of common questions next to a contact line.",
         file: "src/components/sections/FaqSection.tsx",
-        Component: FaqSection,
         uses: ["lucide-react"],
         notes: ["Built on native <details>, so it works without JavaScript.", "The first item starts open."],
       },
@@ -274,7 +239,6 @@ export const sections: SectionDoc[] = [
         name: "Footer",
         description: "A newsletter signup and three columns of links.",
         file: "src/components/sections/FooterSection.tsx",
-        Component: FooterSection,
         uses: ["Input", "Button"],
         notes: ["Each link column is its own labelled nav landmark.", "Point the form action at your email provider."],
       },

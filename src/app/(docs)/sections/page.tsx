@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowRight, Layers, LayoutTemplate, Terminal } from "lucide-react";
 import { cn } from "@streamuilib/react";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { LiveThumb } from "@/components/docs/LiveThumb";
+import { InfiniteGrid } from "@/components/docs/InfiniteGrid";
 import { sections, type SectionDoc } from "@/registry/sections";
+import { Live } from "@/components/docs/Live";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sections, path: "/sections" });
 
@@ -14,8 +16,7 @@ export const metadata: Metadata = pageMetadata({ ...indexSeo.sections, path: "/s
 const TINTS = ["bg-lime-soft", "bg-pink-soft", "bg-blue-soft", "bg-violet-soft", "bg-orange-soft"];
 
 function FirstVariant({ section }: { section: SectionDoc }) {
-  const Live = section.variants[0].Component;
-  return <Live headingAs="h3" />;
+  return <Live file={section.variants[0].file} headingAs="h3" />;
 }
 
 export default function SectionsIndex() {
@@ -45,12 +46,13 @@ export default function SectionsIndex() {
         ))}
       </ul>
 
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {/* A row up front; each live preview's code loads only when its card appears. */}
+      <InfiniteGrid batch={3} noun="sections" className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {sections.map((s, i) => (
           <li
             key={s.slug}
             className={cn(
-              "group relative flex flex-col border-2 border-ink p-4 shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none sm:p-5",
+              "group relative flex flex-col border-2 border-ink p-4 shadow-brutal [contain-intrinsic-size:auto_560px] [content-visibility:auto] transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none sm:p-5",
               TINTS[i % TINTS.length],
             )}
           >
@@ -89,7 +91,7 @@ export default function SectionsIndex() {
             </div>
           </li>
         ))}
-      </ul>
+      </InfiniteGrid>
     </div>
   );
 }

@@ -5,7 +5,7 @@
 import { afterEach, describe, expect, mock, test } from "bun:test";
 import { act, cleanup, render } from "@testing-library/react";
 
-mock.module("next/navigation", () => ({ usePathname: () => "/" }));
+mock.module("next/navigation", () => ({ usePathname: () => "/", useRouter: () => ({ prefetch() {} }) }));
 const { SmoothScroll } = await import("@/components/blocks/SmoothScroll");
 
 let reduced = false;

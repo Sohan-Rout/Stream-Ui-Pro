@@ -7,7 +7,7 @@ import { act, cleanup, render, renderHook, screen } from "@testing-library/react
 import userEvent from "@testing-library/user-event";
 
 let pathname = "/";
-mock.module("next/navigation", () => ({ usePathname: () => pathname }));
+mock.module("next/navigation", () => ({ usePathname: () => pathname, useRouter: () => ({ prefetch() {} }) }));
 
 const { CONSENT_KEY, readConsent, setConsent } = await import("@/lib/consent");
 const { CookieBanner, CookieSettingsButton } = await import("@/components/blocks/CookieBanner");

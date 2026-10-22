@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowRight, Heart } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { Rail } from "@/components/ui/Section";

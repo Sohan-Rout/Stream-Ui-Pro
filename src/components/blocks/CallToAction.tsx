@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Section } from "@/components/ui/Section";
 import { buttonStyles } from "@streamuilib/react";
 import { InstallTabs } from "./InstallTabs";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@streamuilib/react";
 

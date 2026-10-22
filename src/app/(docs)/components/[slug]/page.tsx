@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
@@ -11,6 +11,7 @@ import { ComponentDocPage } from "@/components/docs/ComponentDocPage";
 import { componentEntries } from "@/registry/components";
 import { indexPreviews } from "@/registry/previews";
 import { neighbors } from "@/registry/nav";
+import { Live } from "@/components/docs/Live";
 
 /**
  * Everything on this page belongs to one URL's slug, so there's no shared
@@ -60,7 +61,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       />
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {g.variants.map((v) => {
-          const Preview = indexPreviews[v.doc.slug] ?? v.doc.examples[0].Component;
+          const Preview = indexPreviews[v.doc.slug];
           return (
             <li
               key={v.id}
@@ -69,7 +70,7 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
               <div className="flex h-72 items-center justify-center overflow-hidden border-b-2 border-ink bg-paper bg-dots p-6">
                 {/* Live but inert: the whole card is the link. */}
                 <div inert className="pointer-events-none flex w-full justify-center">
-                  <Preview />
+                  {Preview ? <Preview /> : <Live file={v.doc.examples[0].file} />}
                 </div>
               </div>
               <div className="flex flex-1 flex-col gap-2 p-5">

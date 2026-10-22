@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { siteConfig } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";

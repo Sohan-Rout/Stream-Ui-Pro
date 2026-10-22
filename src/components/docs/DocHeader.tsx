@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ChevronRight } from "lucide-react";
 import { absoluteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";

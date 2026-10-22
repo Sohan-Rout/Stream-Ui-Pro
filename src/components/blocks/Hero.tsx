@@ -1,6 +1,6 @@
 import { ArrowRight, Check, Music, Sparkles } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Badge, buttonStyles } from "@streamuilib/react";

@@ -8,12 +8,17 @@ import { components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { indexPreviews } from "@/registry/previews";
+import { loadAllLive } from "./live";
+
+const live = await loadAllLive();
+const C = (file: string) => live.get(file)!;
 
 describe("component examples render", () => {
   for (const c of components) {
     for (const ex of c.examples) {
       test(`${c.name} › ${ex.title}`, () => {
-        const { container } = render(<ex.Component />);
+        const Example = C(ex.file);
+        const { container } = render(<Example />);
         expect(container.innerHTML.length).toBeGreaterThan(0);
       });
     }
@@ -38,7 +43,8 @@ describe("sections render", () => {
   for (const s of sections) {
     for (const v of s.variants) {
       test(`${s.name}: ${v.name}`, () => {
-        const { container } = render(<v.Component />);
+        const Variant = C(v.file);
+        const { container } = render(<Variant />);
         expect(container.querySelector("section, footer")).not.toBeNull();
       });
     }
@@ -51,10 +57,11 @@ describe("hero headings", () => {
   const heroes = sections.find((s) => s.slug === "hero")!.variants;
   for (const v of heroes) {
     test(`${v.name}: h1 by default, any level on request`, () => {
-      const { container, unmount } = render(<v.Component />);
+      const Hero = C(v.file);
+      const { container, unmount } = render(<Hero />);
       expect(container.querySelectorAll("h1")).toHaveLength(1);
       unmount();
-      const demoted = render(<v.Component headingAs="h3" />).container;
+      const demoted = render(<Hero headingAs="h3" />).container;
       expect(demoted.querySelector("h1")).toBeNull();
       expect(demoted.querySelector("h3")).not.toBeNull();
     });
@@ -64,7 +71,8 @@ describe("hero headings", () => {
 describe("labs render", () => {
   for (const l of labs) {
     test(l.name, () => {
-      const { container } = render(<l.Component />);
+      const Lab = C(l.file);
+      const { container } = render(<Lab />);
       expect(container.innerHTML.length).toBeGreaterThan(0);
     });
   }
@@ -75,9 +83,10 @@ describe("ids stay unique when several examples share a page", () => {
     test(c.name, () => {
       const { container } = render(
         <>
-          {c.examples.map((ex) => (
-            <ex.Component key={ex.title} />
-          ))}
+          {c.examples.map((ex) => {
+            const Example = C(ex.file);
+            return <Example key={ex.title} />;
+          })}
         </>,
       );
       const ids = [...container.querySelectorAll("[id]")].map((el) => el.id);

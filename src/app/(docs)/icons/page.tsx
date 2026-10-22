@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Badge } from "@streamuilib/react";
 import { DocHeader, DocSection } from "@/components/docs/DocHeader";
 import { CodeBlock } from "@/components/docs/CodeBlock";

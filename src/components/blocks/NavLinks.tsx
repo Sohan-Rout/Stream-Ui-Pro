@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { usePathname } from "next/navigation";
 
 type NavItem = { label: string; href: string };

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { labs } from "@/registry/labs";
+import { InfiniteGrid } from "@/components/docs/InfiniteGrid";
+import { Live } from "@/components/docs/Live";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.labs, path: "/labs" });
 
@@ -18,14 +20,15 @@ export default function LabsIndex() {
         description="Creative UI experiments in React and CSS that haven't graduated into the main library yet. Their APIs can change between releases."
         meta={<Badge tone="orange">experimental</Badge>}
       />
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {/* Six games up front; each one's code loads only when its card appears. */}
+      <InfiniteGrid batch={6} noun="experiments" className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {labs.map((l) => (
           <li
             key={l.slug}
-            className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal"
+            className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal [contain-intrinsic-size:auto_520px] [content-visibility:auto]"
           >
             <div className="flex flex-1 items-center justify-center border-b-2 border-ink bg-violet-soft p-6">
-              <l.Component />
+              <Live file={l.file} />
             </div>
             <div className="flex flex-col gap-1 p-5">
               <Link
@@ -39,7 +42,7 @@ export default function LabsIndex() {
             </div>
           </li>
         ))}
-      </ul>
+      </InfiniteGrid>
     </div>
   );
 }

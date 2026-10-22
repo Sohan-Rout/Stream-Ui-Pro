@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bun run ui:build && bun run icons:build && next dev",
-    "build": "bun run ui:build && bun run registry:build && bun run icons:build && next build",
+    "dev": "bun run ui:build && bun run live:build && bun run icons:build && next dev",
+    "build": "bun run ui:build && bun run live:build && bun run registry:build && bun run icons:build && next build",
     "start": "next start",
     "lint": "eslint",
     "ui:build": "bun run --cwd packages/react build",
@@ -13,7 +13,8 @@
     "typecheck": "next typegen && tsc --noEmit && bun run --cwd packages/react typecheck",
     "check": "bun run lint && bun run typecheck && bun run test && bun run build",
     "registry:build": "bun scripts/build-registry.ts && shadcn build",
-    "icons:build": "bun scripts/build-brand-icons.ts"
+    "icons:build": "bun scripts/build-brand-icons.ts",
+    "live:build": "bun scripts/build-live-map.ts"
   },
   "dependencies": {
     "@streamuilib/react": "workspace:*",

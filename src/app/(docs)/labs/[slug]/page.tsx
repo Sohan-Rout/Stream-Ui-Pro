@@ -12,6 +12,7 @@ import { shadcnAdd, shadcnName } from "@/registry/shadcn";
 import { InstallCommand } from "@/components/blocks/InstallCommand";
 import { OpenInV0 } from "@/components/docs/OpenInV0";
 import { neighbors } from "@/registry/nav";
+import { Live } from "@/components/docs/Live";
 
 /**
  * Everything on this page belongs to one URL's slug, so there's no shared
@@ -38,7 +39,6 @@ export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {
   if (!doc) notFound();
 
   const { prev, next } = neighbors(labs, labs.indexOf(doc), "/labs");
-  const Live = doc.Component;
 
   return (
     <article className="flex flex-col gap-14">
@@ -52,7 +52,7 @@ export default async function LabPage({ params }: PageProps<"/labs/[slug]">) {
       <DocSection title="Try it" id="preview">
         <div className="flex min-h-80 items-center justify-center border-2 border-ink bg-violet-soft p-8 shadow-brutal-lg sm:p-12">
           <div className={doc.wide ? "w-full" : "w-full max-w-md"}>
-            <Live />
+            <Live file={doc.file} />
           </div>
         </div>
       </DocSection>

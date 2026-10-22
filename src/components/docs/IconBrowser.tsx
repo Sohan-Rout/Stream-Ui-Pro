@@ -308,6 +308,22 @@ export function IconBrowser() {
   const visible = matches.slice(0, limit);
   const visibleBrands = brandMatches.slice(0, limit);
 
+  // Infinite scroll: the next page mounts as the end comes within reach, or once
+  // it's been scrolled past. The Show more button stays for keyboards and
+  // browsers without the observer.
+  // A callback ref: the button mounts after the catalog does, not on first render.
+  const [moreEl, setMoreEl] = useState<HTMLDivElement | null>(null);
+  const hasMore = count > limit;
+  useEffect(() => {
+    const el = moreEl;
+    if (!el || !hasMore || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) setLimit((l) => l + PAGE);
+    }, { rootMargin: "100000px 0px 900px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [moreEl, hasMore, limit]);
+
   return (
     <div className="flex flex-col gap-6">
       <div role="group" aria-label="Icon catalog" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -486,10 +502,12 @@ export function IconBrowser() {
         </div>
       )}
 
-      {count > limit && (
-        <Button variant="secondary" className="self-center" onClick={() => setLimit((l) => l + PAGE)}>
-          Show more ({(count - limit).toLocaleString("en-US")} left)
-        </Button>
+      {hasMore && (
+        <div ref={setMoreEl} className="flex justify-center">
+          <Button variant="secondary" onClick={() => setLimit((l) => l + PAGE)}>
+            Show more ({(count - limit).toLocaleString("en-US")} left)
+          </Button>
+        </div>
       )}
         </>
       )}

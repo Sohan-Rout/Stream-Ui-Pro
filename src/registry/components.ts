@@ -1,103 +1,9 @@
-import type { ComponentType } from "react";
 import type { PropRow } from "@/components/docs/PropsTable";
-
-import ButtonVariants from "@/examples/button/variants";
-import ButtonSizes from "@/examples/button/sizes";
-import ButtonWithIcons from "@/examples/button/with-icons";
-import ButtonAsLink from "@/examples/button/as-link";
-import BadgeTones from "@/examples/badge/tones";
-import BadgeWithIcon from "@/examples/badge/with-icon";
-import SwitchBasic from "@/examples/switch/basic";
-import SwitchControlled from "@/examples/switch/controlled";
-import InputBasic from "@/examples/input/basic";
-import InputWithIcon from "@/examples/input/with-icon";
-import InputStates from "@/examples/input/states";
-import CheckboxBasic from "@/examples/checkbox/basic";
-import CheckboxGroup from "@/examples/checkbox/group";
-import TabsBasic from "@/examples/tabs/basic";
-import ProgressTones from "@/examples/progress/tones";
-import ProgressInteractive from "@/examples/progress/interactive";
-import BatteryLevels from "@/examples/battery/levels";
-import ComicBadgeShapes from "@/examples/comic-badge/shapes";
-import ComicButtonShapes from "@/examples/comic-button/shapes";
-import ComicCardBasic from "@/examples/comic-card/basic";
-import ComicAlertTones from "@/examples/comic-alert/tones";
-import ComicAlertActions from "@/examples/comic-alert/actions";
-import ComicCardTones from "@/examples/comic-card/tones";
-import ComicButtonSizes from "@/examples/comic-button/sizes";
-import ComicBadgeTonesSizes from "@/examples/comic-badge/tones-sizes";
-import ComicBadgeAnimated from "@/examples/comic-badge/animated";
-import BatterySegments from "@/examples/battery/segments";
-import BatteryInteractive from "@/examples/battery/interactive";
-import AvatarSizes from "@/examples/avatar/sizes";
-import AvatarGroupExample from "@/examples/avatar/group";
-import AnimatedIconAnimations from "@/examples/animated-icon/animations";
-import AnimatedIconTriggers from "@/examples/animated-icon/triggers";
-import AnimatedIconInButton from "@/examples/animated-icon/in-button";
-import CardBasic from "@/examples/card/basic";
-import CardTones from "@/examples/card/tones";
-import AlertTones from "@/examples/alert/tones";
-import AlertWithAction from "@/examples/alert/with-action";
-import TextareaBasic from "@/examples/textarea/basic";
-import TextareaStates from "@/examples/textarea/states";
-import SelectBasic from "@/examples/select/basic";
-import SelectStates from "@/examples/select/states";
-import RadioGroupBasic from "@/examples/radio-group/basic";
-import RadioGroupHorizontal from "@/examples/radio-group/horizontal";
-import AccordionBasic from "@/examples/accordion/basic";
-import AccordionExclusive from "@/examples/accordion/exclusive";
-import DialogBasic from "@/examples/dialog/basic";
-import DialogForm from "@/examples/dialog/form";
-import TooltipBasic from "@/examples/tooltip/basic";
-import SkeletonBasic from "@/examples/skeleton/basic";
-import SkeletonCard from "@/examples/skeleton/card";
-import SliderBasic from "@/examples/slider/basic";
-import SliderTones from "@/examples/slider/tones";
-import AudioPlayerFull from "@/examples/audio-player/full";
-import AudioPlayerMini from "@/examples/audio-player/mini";
-import AudioPlayerHeadless from "@/examples/audio-player/headless";
-import TrackListBasic from "@/examples/track-list/basic";
-import EqualizerBasic from "@/examples/equalizer/basic";
-import ComicAudioPlayerFull from "@/examples/comic-audio-player/full";
-import ComicAudioPlayerBasic from "@/examples/comic-audio-player/basic";
-import ComicTrackListBasic from "@/examples/comic-track-list/basic";
-import ComicEqualizerBasic from "@/examples/comic-equalizer/basic";
-import ComicAnimatedIconShapes from "@/examples/comic-animated-icon/shapes";
-import ComicAnimatedIconTriggers from "@/examples/comic-animated-icon/triggers";
-import ComicProgressTones from "@/examples/comic-progress/tones";
-import ComicProgressInteractive from "@/examples/comic-progress/interactive";
-import ComicBatteryLevels from "@/examples/comic-battery/levels";
-import ComicBatteryInteractive from "@/examples/comic-battery/interactive";
-import ComicSkeletonBasic from "@/examples/comic-skeleton/basic";
-import ComicSkeletonCard from "@/examples/comic-skeleton/card";
-import ComicAvatarShapes from "@/examples/comic-avatar/shapes";
-import ComicAvatarGroupExample from "@/examples/comic-avatar/group";
-import ComicTabsBasic from "@/examples/comic-tabs/basic";
-import ComicAccordionBasic from "@/examples/comic-accordion/basic";
-import ComicAccordionExclusive from "@/examples/comic-accordion/exclusive";
-import ComicDialogBasic from "@/examples/comic-dialog/basic";
-import ComicDialogForm from "@/examples/comic-dialog/form";
-import ComicTooltipBasic from "@/examples/comic-tooltip/basic";
-import ComicInputBasic from "@/examples/comic-input/basic";
-import ComicInputStates from "@/examples/comic-input/states";
-import ComicTextareaBasic from "@/examples/comic-textarea/basic";
-import ComicTextareaStates from "@/examples/comic-textarea/states";
-import ComicSelectBasic from "@/examples/comic-select/basic";
-import ComicSelectStates from "@/examples/comic-select/states";
-import ComicCheckboxBasic from "@/examples/comic-checkbox/basic";
-import ComicCheckboxGroup from "@/examples/comic-checkbox/group";
-import ComicRadioGroupBasic from "@/examples/comic-radio-group/basic";
-import ComicRadioGroupHorizontal from "@/examples/comic-radio-group/horizontal";
-import ComicSwitchBasic from "@/examples/comic-switch/basic";
-import ComicSwitchControlled from "@/examples/comic-switch/controlled";
-import ComicSliderBasic from "@/examples/comic-slider/basic";
-import ComicSliderTones from "@/examples/comic-slider/tones";
 
 export type ExampleEntry = {
   title: string;
   description?: string;
   file: string;
-  Component: ComponentType;
 };
 
 export type ComponentDoc = {
@@ -127,14 +33,13 @@ const entries: ComponentDoc[] = [
 
 <Button variant="primary" size="md">Save changes</Button>`,
     examples: [
-      { title: "Variants", file: ex("button", "variants"), Component: ButtonVariants },
-      { title: "Sizes", description: "Icon buttons need an aria-label.", file: ex("button", "sizes"), Component: ButtonSizes },
-      { title: "With icons", description: "Icons size themselves; mark them aria-hidden.", file: ex("button", "with-icons"), Component: ButtonWithIcons },
+      { title: "Variants", file: ex("button", "variants") },
+      { title: "Sizes", description: "Icon buttons need an aria-label.", file: ex("button", "sizes") },
+      { title: "With icons", description: "Icons size themselves; mark them aria-hidden.", file: ex("button", "with-icons") },
       {
         title: "As a link",
         description: "Navigation should be a link, not a button. buttonStyles() gives a link the same look.",
         file: ex("button", "as-link"),
-        Component: ButtonAsLink,
       },
     ],
     props: [
@@ -173,8 +78,8 @@ const entries: ComponentDoc[] = [
 
 <Badge tone="lime">stable</Badge>`,
     examples: [
-      { title: "Tones", file: ex("badge", "tones"), Component: BadgeTones },
-      { title: "With icon or dot", file: ex("badge", "with-icon"), Component: BadgeWithIcon },
+      { title: "Tones", file: ex("badge", "tones") },
+      { title: "With icon or dot", file: ex("badge", "with-icon") },
     ],
     props: [
       {
@@ -201,8 +106,8 @@ const entries: ComponentDoc[] = [
 <span id="alerts">Email alerts</span>
 <Switch aria-labelledby="alerts" defaultChecked />`,
     examples: [
-      { title: "Basic", file: ex("switch", "basic"), Component: SwitchBasic },
-      { title: "Controlled", description: "Pass checked and onCheckedChange to own the state.", file: ex("switch", "controlled"), Component: SwitchControlled },
+      { title: "Basic", file: ex("switch", "basic") },
+      { title: "Controlled", description: "Pass checked and onCheckedChange to own the state.", file: ex("switch", "controlled") },
     ],
     props: [
       {
@@ -232,9 +137,9 @@ const entries: ComponentDoc[] = [
 <label htmlFor="email">Email</label>
 <Input id="email" type="email" />`,
     examples: [
-      { title: "Basic", file: ex("input", "basic"), Component: InputBasic },
-      { title: "With icon", file: ex("input", "with-icon"), Component: InputWithIcon },
-      { title: "Invalid and disabled", file: ex("input", "states"), Component: InputStates },
+      { title: "Basic", file: ex("input", "basic") },
+      { title: "With icon", file: ex("input", "with-icon") },
+      { title: "Invalid and disabled", file: ex("input", "states") },
     ],
     props: [
       {
@@ -263,8 +168,8 @@ const entries: ComponentDoc[] = [
 
 <Checkbox name="terms" label="I agree to the terms" />`,
     examples: [
-      { title: "Basic", file: ex("checkbox", "basic"), Component: CheckboxBasic },
-      { title: "Group", description: "Wrap related options in a fieldset with a legend.", file: ex("checkbox", "group"), Component: CheckboxGroup },
+      { title: "Basic", file: ex("checkbox", "basic") },
+      { title: "Group", description: "Wrap related options in a fieldset with a legend.", file: ex("checkbox", "group") },
     ],
     props: [
       {
@@ -297,7 +202,7 @@ const entries: ComponentDoc[] = [
     { id: "activity", label: "Activity", content: <p>…</p> },
   ]}
 />`,
-    examples: [{ title: "Basic", description: "Use the arrow keys, Home, and End to move between tabs.", file: ex("tabs", "basic"), Component: TabsBasic }],
+    examples: [{ title: "Basic", description: "Use the arrow keys, Home, and End to move between tabs.", file: ex("tabs", "basic") }],
     props: [
       {
         rows: [
@@ -324,8 +229,8 @@ const entries: ComponentDoc[] = [
 
 <Progress value={60} aria-label="Upload" />`,
     examples: [
-      { title: "Tones", file: ex("progress", "tones"), Component: ProgressTones },
-      { title: "Steps", description: "Use max for anything that isn't a percentage.", file: ex("progress", "interactive"), Component: ProgressInteractive },
+      { title: "Tones", file: ex("progress", "tones") },
+      { title: "Steps", description: "Use max for anything that isn't a percentage.", file: ex("progress", "interactive") },
     ],
     props: [
       {
@@ -353,8 +258,8 @@ const entries: ComponentDoc[] = [
 
 <ComicAlert tone="success" title="Changes saved">Your profile is up to date.</ComicAlert>`,
     examples: [
-      { title: "Tones", description: "Each tone has its icon, colors, and sound effect: HEY!, YES!, UH-OH!, YIKES! Warnings and errors shake the burst.", file: ex("comic-alert", "tones"), Component: ComicAlertTones },
-      { title: "Actions, icons, and sound effects", description: "Add actions, swap the icon, set your own sound effect or turn it off. Replay remounts it to see the pop-in again.", file: ex("comic-alert", "actions"), Component: ComicAlertActions },
+      { title: "Tones", description: "Each tone has its icon, colors, and sound effect: HEY!, YES!, UH-OH!, YIKES! Warnings and errors shake the burst.", file: ex("comic-alert", "tones") },
+      { title: "Actions, icons, and sound effects", description: "Add actions, swap the icon, set your own sound effect or turn it off. Replay remounts it to see the pop-in again.", file: ex("comic-alert", "actions") },
     ],
     props: [
       {
@@ -387,8 +292,8 @@ const entries: ComponentDoc[] = [
   <CardDescription>Every pull request gets a live URL.</CardDescription>
 </ComicCard>`,
     examples: [
-      { title: "Captions and sound effects", description: "Hover a panel: it lifts and its sound effect jumps. CardTitle and CardDescription work inside.", file: ex("comic-card", "basic"), Component: ComicCardBasic },
-      { title: "Tones", file: ex("comic-card", "tones"), Component: ComicCardTones },
+      { title: "Captions and sound effects", description: "Hover a panel: it lifts and its sound effect jumps. CardTitle and CardDescription work inside.", file: ex("comic-card", "basic") },
+      { title: "Tones", file: ex("comic-card", "tones") },
     ],
     props: [
       {
@@ -418,8 +323,8 @@ const entries: ComponentDoc[] = [
 
 <ComicButton onClick={save}>Get started</ComicButton>`,
     examples: [
-      { title: "Shapes", description: "A skewed panel (the default, for any label), a speech bubble, a ribbon, and round burst, splat, and blob shapes for one-word calls.", file: ex("comic-button", "shapes"), Component: ComicButtonShapes },
-      { title: "Sizes, icons, and options", description: "Set your own pop word, turn the pop or the halftone dots off, or disable it.", file: ex("comic-button", "sizes"), Component: ComicButtonSizes },
+      { title: "Shapes", description: "A skewed panel (the default, for any label), a speech bubble, a ribbon, and round burst, splat, and blob shapes for one-word calls.", file: ex("comic-button", "shapes") },
+      { title: "Sizes, icons, and options", description: "Set your own pop word, turn the pop or the halftone dots off, or disable it.", file: ex("comic-button", "sizes") },
     ],
     props: [
       {
@@ -450,9 +355,9 @@ const entries: ComponentDoc[] = [
 
 <ComicBadge shape="burst">New!</ComicBadge>`,
     examples: [
-      { title: "Shapes", description: "Six outlines, each with an ink stroke and a hard shadow that follow the shape.", file: ex("comic-badge", "shapes"), Component: ComicBadgeShapes },
-      { title: "Tones and sizes", file: ex("comic-badge", "tones-sizes"), Component: ComicBadgeTonesSizes },
-      { title: "Animated", description: "spin turns only the shape, so the text stays level; wiggle and pulse move the whole badge.", file: ex("comic-badge", "animated"), Component: ComicBadgeAnimated },
+      { title: "Shapes", description: "Six outlines, each with an ink stroke and a hard shadow that follow the shape.", file: ex("comic-badge", "shapes") },
+      { title: "Tones and sizes", file: ex("comic-badge", "tones-sizes") },
+      { title: "Animated", description: "spin turns only the shape, so the text stays level; wiggle and pulse move the whole badge.", file: ex("comic-badge", "animated") },
     ],
     props: [
       {
@@ -482,9 +387,9 @@ const entries: ComponentDoc[] = [
 
 <Battery value={72} charging />`,
     examples: [
-      { title: "Levels", description: 'With tone="auto" (the default) it goes orange at half and pink when low; low ones blink.', file: ex("battery", "levels"), Component: BatteryLevels },
-      { title: "Segments, sizes, and tones", file: ex("battery", "segments"), Component: BatterySegments },
-      { title: "Interactive", file: ex("battery", "interactive"), Component: BatteryInteractive },
+      { title: "Levels", description: 'With tone="auto" (the default) it goes orange at half and pink when low; low ones blink.', file: ex("battery", "levels") },
+      { title: "Segments, sizes, and tones", file: ex("battery", "segments") },
+      { title: "Interactive", file: ex("battery", "interactive") },
     ],
     props: [
       {
@@ -518,8 +423,8 @@ const entries: ComponentDoc[] = [
 
 <Avatar initials="AL" name="Ada Lovelace" />`,
     examples: [
-      { title: "Sizes", file: ex("avatar", "sizes"), Component: AvatarSizes },
-      { title: "Group", file: ex("avatar", "group"), Component: AvatarGroupExample },
+      { title: "Sizes", file: ex("avatar", "sizes") },
+      { title: "Group", file: ex("avatar", "group") },
     ],
     props: [
       {
@@ -559,19 +464,16 @@ import { AnimatedIcon } from "@streamuilib/react";
         title: "Animations",
         description: "Hover a tile. draw traces the strokes; the rest move the whole glyph.",
         file: ex("animated-icon", "animations"),
-        Component: AnimatedIconAnimations,
       },
       {
         title: "Triggers",
         description: "loop for busy states, once for confirmations, hover for everything else.",
         file: ex("animated-icon", "triggers"),
-        Component: AnimatedIconTriggers,
       },
       {
         title: "Inside a button",
         description: "With the hover trigger, hovering or focusing the parent button plays the animation.",
         file: ex("animated-icon", "in-button"),
-        Component: AnimatedIconInButton,
       },
     ],
     props: [
@@ -615,8 +517,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <CardContent>…</CardContent>
 </Card>`,
     examples: [
-      { title: "Composed card", file: ex("card", "basic"), Component: CardBasic },
-      { title: "Tones", description: "Soft tints keep large surfaces light.", file: ex("card", "tones"), Component: CardTones },
+      { title: "Composed card", file: ex("card", "basic") },
+      { title: "Tones", description: "Soft tints keep large surfaces light.", file: ex("card", "tones") },
     ],
     props: [
       {
@@ -650,8 +552,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <Alert tone="success" title="Changes saved" />`,
     examples: [
-      { title: "Tones", file: ex("alert", "tones"), Component: AlertTones },
-      { title: "With actions", file: ex("alert", "with-action"), Component: AlertWithAction },
+      { title: "Tones", file: ex("alert", "tones") },
+      { title: "With actions", file: ex("alert", "with-action") },
     ],
     props: [
       {
@@ -682,8 +584,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 <label htmlFor="msg">Message</label>
 <Textarea id="msg" rows={4} />`,
     examples: [
-      { title: "Basic", file: ex("textarea", "basic"), Component: TextareaBasic },
-      { title: "Invalid and disabled", file: ex("textarea", "states"), Component: TextareaStates },
+      { title: "Basic", file: ex("textarea", "basic") },
+      { title: "Invalid and disabled", file: ex("textarea", "states") },
     ],
     props: [
       {
@@ -714,8 +616,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <option value="bom">Asia (Mumbai)</option>
 </Select>`,
     examples: [
-      { title: "Basic", file: ex("select", "basic"), Component: SelectBasic },
-      { title: "Invalid and disabled", file: ex("select", "states"), Component: SelectStates },
+      { title: "Basic", file: ex("select", "basic") },
+      { title: "Invalid and disabled", file: ex("select", "states") },
     ],
     props: [
       {
@@ -746,8 +648,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <Radio name="billing" value="yearly" label="Yearly" />
 </RadioGroup>`,
     examples: [
-      { title: "With descriptions", file: ex("radio-group", "basic"), Component: RadioGroupBasic },
-      { title: "Horizontal", file: ex("radio-group", "horizontal"), Component: RadioGroupHorizontal },
+      { title: "With descriptions", file: ex("radio-group", "basic") },
+      { title: "Horizontal", file: ex("radio-group", "horizontal") },
     ],
     props: [
       {
@@ -791,12 +693,11 @@ import { AnimatedIcon } from "@streamuilib/react";
   ]}
 />`,
     examples: [
-      { title: "Basic", file: ex("accordion", "basic"), Component: AccordionBasic },
+      { title: "Basic", file: ex("accordion", "basic") },
       {
         title: "One open at a time",
         description: "exclusive uses the native details name attribute, so opening one closes the others.",
         file: ex("accordion", "exclusive"),
-        Component: AccordionExclusive,
       },
     ],
     props: [
@@ -827,8 +728,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   This can't be undone.
 </Dialog>`,
     examples: [
-      { title: "Confirm", description: "Controlled with open and onOpenChange so the footer buttons can close it.", file: ex("dialog", "basic"), Component: DialogBasic },
-      { title: "With a form", file: ex("dialog", "form"), Component: DialogForm },
+      { title: "Confirm", description: "Controlled with open and onOpenChange so the footer buttons can close it.", file: ex("dialog", "basic") },
+      { title: "With a form", file: ex("dialog", "form") },
     ],
     props: [
       {
@@ -863,7 +764,7 @@ import { AnimatedIcon } from "@streamuilib/react";
 <Tooltip content="Notifications">
   <Button size="icon" aria-label="Notifications">…</Button>
 </Tooltip>`,
-    examples: [{ title: "On icon buttons", description: "Hover or Tab to the buttons. Esc hides the hint.", file: ex("tooltip", "basic"), Component: TooltipBasic }],
+    examples: [{ title: "On icon buttons", description: "Hover or Tab to the buttons. Esc hides the hint.", file: ex("tooltip", "basic") }],
     props: [
       {
         rows: [
@@ -893,8 +794,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <Skeleton className="h-4 w-40" />
 </div>`,
     examples: [
-      { title: "Profile row", file: ex("skeleton", "basic"), Component: SkeletonBasic },
-      { title: "Loading card", file: ex("skeleton", "card"), Component: SkeletonCard },
+      { title: "Profile row", file: ex("skeleton", "basic") },
+      { title: "Loading card", file: ex("skeleton", "card") },
     ],
     props: [
       {
@@ -919,8 +820,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <Slider aria-label="Volume" value={volume} onValueChange={setVolume} />`,
     examples: [
-      { title: "With a label and readout", file: ex("slider", "basic"), Component: SliderBasic },
-      { title: "Tones", file: ex("slider", "tones"), Component: SliderTones },
+      { title: "With a label and readout", file: ex("slider", "basic") },
+      { title: "Tones", file: ex("slider", "tones") },
     ],
     props: [
       {
@@ -961,14 +862,12 @@ import { AnimatedIcon } from "@streamuilib/react";
         title: "Full player with playlist",
         description: "These demo tracks are generated in your browser, so there are no audio files to download.",
         file: ex("audio-player", "full"),
-        Component: AudioPlayerFull,
       },
-      { title: "Mini player", file: ex("audio-player", "mini"), Component: AudioPlayerMini },
+      { title: "Mini player", file: ex("audio-player", "mini") },
       {
         title: "Build your own with useAudioPlayer",
         description: "The hook handles playback; you choose the layout.",
         file: ex("audio-player", "headless"),
-        Component: AudioPlayerHeadless,
       },
     ],
     props: [
@@ -1008,7 +907,7 @@ import { AnimatedIcon } from "@streamuilib/react";
     usage: `import { TrackList } from "@streamuilib/react";
 
 <TrackList tracks={tracks} index={current} playing onSelect={setCurrent} />`,
-    examples: [{ title: "Basic", description: "Pick a track to move the meter.", file: ex("track-list", "basic"), Component: TrackListBasic }],
+    examples: [{ title: "Basic", description: "Pick a track to move the meter.", file: ex("track-list", "basic") }],
     props: [
       {
         rows: [
@@ -1034,7 +933,7 @@ import { AnimatedIcon } from "@streamuilib/react";
     usage: `import { Equalizer } from "@streamuilib/react";
 
 <Equalizer playing={isPlaying} bars={4} tone="pink" />`,
-    examples: [{ title: "Sizes and tones", file: ex("equalizer", "basic"), Component: EqualizerBasic }],
+    examples: [{ title: "Sizes and tones", file: ex("equalizer", "basic") }],
     props: [
       {
         rows: [
@@ -1061,8 +960,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 <label htmlFor="name">Hero name</label>
 <ComicInput id="name" placeholder="Captain Brutal" />`,
     examples: [
-      { title: "Basic", description: "With a label, an icon, or both. The frame lifts toward the light on focus.", file: ex("comic-input", "basic"), Component: ComicInputBasic },
-      { title: "Invalid and disabled", description: "Invalid tints the frame and slams on a sticker; set your own word with sfx.", file: ex("comic-input", "states"), Component: ComicInputStates },
+      { title: "Basic", description: "With a label, an icon, or both. The frame lifts toward the light on focus.", file: ex("comic-input", "basic") },
+      { title: "Invalid and disabled", description: "Invalid tints the frame and slams on a sticker; set your own word with sfx.", file: ex("comic-input", "states") },
     ],
     props: [
       {
@@ -1092,8 +991,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 <label htmlFor="msg">Say something!</label>
 <ComicTextarea id="msg" />`,
     examples: [
-      { title: "Basic", file: ex("comic-textarea", "basic"), Component: ComicTextareaBasic },
-      { title: "Invalid, and without the tail", file: ex("comic-textarea", "states"), Component: ComicTextareaStates },
+      { title: "Basic", file: ex("comic-textarea", "basic") },
+      { title: "Invalid, and without the tail", file: ex("comic-textarea", "states") },
     ],
     props: [
       {
@@ -1125,8 +1024,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <option>Speed</option>
 </ComicSelect>`,
     examples: [
-      { title: "Basic", file: ex("comic-select", "basic"), Component: ComicSelectBasic },
-      { title: "Invalid and disabled", file: ex("comic-select", "states"), Component: ComicSelectStates },
+      { title: "Basic", file: ex("comic-select", "basic") },
+      { title: "Invalid and disabled", file: ex("comic-select", "states") },
     ],
     props: [
       {
@@ -1152,8 +1051,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <ComicCheckbox name="terms" label="I agree to the terms" />`,
     examples: [
-      { title: "Basic", description: "Check it: the mark draws in and a burst flashes behind the box.", file: ex("comic-checkbox", "basic"), Component: ComicCheckboxBasic },
-      { title: "Group", file: ex("comic-checkbox", "group"), Component: ComicCheckboxGroup },
+      { title: "Basic", description: "Check it: the mark draws in and a burst flashes behind the box.", file: ex("comic-checkbox", "basic") },
+      { title: "Group", file: ex("comic-checkbox", "group") },
     ],
     props: [
       {
@@ -1182,8 +1081,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <ComicRadio name="delivery" value="jetpack" label="Jetpack" />
 </ComicRadioGroup>`,
     examples: [
-      { title: "Basic", file: ex("comic-radio-group", "basic"), Component: ComicRadioGroupBasic },
-      { title: "Horizontal", file: ex("comic-radio-group", "horizontal"), Component: ComicRadioGroupHorizontal },
+      { title: "Basic", file: ex("comic-radio-group", "basic") },
+      { title: "Horizontal", file: ex("comic-radio-group", "horizontal") },
     ],
     props: [
       {
@@ -1219,8 +1118,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <ComicSwitch defaultChecked /> Sound effects
 </label>`,
     examples: [
-      { title: "Basic", file: ex("comic-switch", "basic"), Component: ComicSwitchBasic },
-      { title: "Controlled, with your own words", file: ex("comic-switch", "controlled"), Component: ComicSwitchControlled },
+      { title: "Basic", file: ex("comic-switch", "basic") },
+      { title: "Controlled, with your own words", file: ex("comic-switch", "controlled") },
     ],
     props: [
       {
@@ -1249,8 +1148,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <ComicSlider value={power} onValueChange={setPower} aria-label="Power" />`,
     examples: [
-      { title: "Basic", description: "Drag it or use the arrow keys; the burst turns as it goes.", file: ex("comic-slider", "basic"), Component: ComicSliderBasic },
-      { title: "Tones, ranges, and formats", file: ex("comic-slider", "tones"), Component: ComicSliderTones },
+      { title: "Basic", description: "Drag it or use the arrow keys; the burst turns as it goes.", file: ex("comic-slider", "basic") },
+      { title: "Tones, ranges, and formats", file: ex("comic-slider", "tones") },
     ],
     props: [
       {
@@ -1286,7 +1185,7 @@ import { AnimatedIcon } from "@streamuilib/react";
     { id: "powers", label: "Powers", content: <p>...</p> },
   ]}
 />`,
-    examples: [{ title: "Basic", description: "Click a tab or use the arrow keys, Home, and End.", file: ex("comic-tabs", "basic"), Component: ComicTabsBasic }],
+    examples: [{ title: "Basic", description: "Click a tab or use the arrow keys, Home, and End.", file: ex("comic-tabs", "basic") }],
     props: [
       {
         rows: [
@@ -1317,8 +1216,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   ]}
 />`,
     examples: [
-      { title: "Basic", file: ex("comic-accordion", "basic"), Component: ComicAccordionBasic },
-      { title: "One at a time", file: ex("comic-accordion", "exclusive"), Component: ComicAccordionExclusive },
+      { title: "Basic", file: ex("comic-accordion", "basic") },
+      { title: "One at a time", file: ex("comic-accordion", "exclusive") },
     ],
     props: [
       {
@@ -1350,8 +1249,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   trigger={<ComicButton>Delete project</ComicButton>}
 />`,
     examples: [
-      { title: "Confirm", description: "A sound effect on the corner, and comic buttons in the footer.", file: ex("comic-dialog", "basic"), Component: ComicDialogBasic },
-      { title: "With a form", description: 'A form with method="dialog" closes it on submit.', file: ex("comic-dialog", "form"), Component: ComicDialogForm },
+      { title: "Confirm", description: "A sound effect on the corner, and comic buttons in the footer.", file: ex("comic-dialog", "basic") },
+      { title: "With a form", description: 'A form with method="dialog" closes it on submit.', file: ex("comic-dialog", "form") },
     ],
     props: [
       {
@@ -1384,7 +1283,7 @@ import { AnimatedIcon } from "@streamuilib/react";
 <ComicTooltip content="Share the love!">
   <button aria-label="Share">...</button>
 </ComicTooltip>`,
-    examples: [{ title: "Tones and sides", description: "Hover or tab to each button.", file: ex("comic-tooltip", "basic"), Component: ComicTooltipBasic }],
+    examples: [{ title: "Tones and sides", description: "Hover or tab to each button.", file: ex("comic-tooltip", "basic") }],
     props: [
       {
         rows: [
@@ -1412,8 +1311,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <ComicProgress value={60} aria-label="Upload" />`,
     examples: [
-      { title: "Tones", description: "Speed lines race along the fill; at 100% a sticker slaps on.", file: ex("comic-progress", "tones"), Component: ComicProgressTones },
-      { title: "Steps", description: "Use max for anything that isn't a percentage.", file: ex("comic-progress", "interactive"), Component: ComicProgressInteractive },
+      { title: "Tones", description: "Speed lines race along the fill; at 100% a sticker slaps on.", file: ex("comic-progress", "tones") },
+      { title: "Steps", description: "Use max for anything that isn't a percentage.", file: ex("comic-progress", "interactive") },
     ],
     props: [
       {
@@ -1443,8 +1342,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <ComicBattery value={72} charging />`,
     examples: [
-      { title: "Levels and states", file: ex("comic-battery", "levels"), Component: ComicBatteryLevels },
-      { title: "Interactive", description: "Drag the charge and plug it in.", file: ex("comic-battery", "interactive"), Component: ComicBatteryInteractive },
+      { title: "Levels and states", file: ex("comic-battery", "levels") },
+      { title: "Interactive", description: "Drag the charge and plug it in.", file: ex("comic-battery", "interactive") },
     ],
     props: [
       {
@@ -1478,8 +1377,8 @@ import { AnimatedIcon } from "@streamuilib/react";
   <ComicSkeleton className="h-4 w-40" />
 </div>`,
     examples: [
-      { title: "Profile", file: ex("comic-skeleton", "basic"), Component: ComicSkeletonBasic },
-      { title: "In a comic panel", file: ex("comic-skeleton", "card"), Component: ComicSkeletonCard },
+      { title: "Profile", file: ex("comic-skeleton", "basic") },
+      { title: "In a comic panel", file: ex("comic-skeleton", "card") },
     ],
     props: [
       {
@@ -1504,8 +1403,8 @@ import { AnimatedIcon } from "@streamuilib/react";
 
 <ComicAvatar initials="AL" name="Ada Lovelace" shape="burst" />`,
     examples: [
-      { title: "Shapes, tones, and sizes", file: ex("comic-avatar", "shapes"), Component: ComicAvatarShapes },
-      { title: "Group", description: "Stickers slapped on at alternating tilts. Hover one.", file: ex("comic-avatar", "group"), Component: ComicAvatarGroupExample },
+      { title: "Shapes, tones, and sizes", file: ex("comic-avatar", "shapes") },
+      { title: "Group", description: "Stickers slapped on at alternating tilts. Hover one.", file: ex("comic-avatar", "group") },
     ],
     props: [
       {
@@ -1547,9 +1446,8 @@ import { AnimatedIcon } from "@streamuilib/react";
         title: "With a playlist",
         description: "These demo tracks are generated in your browser, so there are no audio files to download.",
         file: ex("comic-audio-player", "full"),
-        Component: ComicAudioPlayerFull,
       },
-      { title: "Player only", file: ex("comic-audio-player", "basic"), Component: ComicAudioPlayerBasic },
+      { title: "Player only", file: ex("comic-audio-player", "basic") },
     ],
     props: [
       {
@@ -1578,7 +1476,7 @@ import { AnimatedIcon } from "@streamuilib/react";
     usage: `import { ComicTrackList } from "@streamuilib/react";
 
 <ComicTrackList tracks={tracks} index={index} playing onSelect={setIndex} />`,
-    examples: [{ title: "Basic", file: ex("comic-track-list", "basic"), Component: ComicTrackListBasic }],
+    examples: [{ title: "Basic", file: ex("comic-track-list", "basic") }],
     props: [
       {
         rows: [
@@ -1603,7 +1501,7 @@ import { AnimatedIcon } from "@streamuilib/react";
     usage: `import { ComicEqualizer } from "@streamuilib/react";
 
 <ComicEqualizer playing={isPlaying} />`,
-    examples: [{ title: "Sizes, tones, and notes", file: ex("comic-equalizer", "basic"), Component: ComicEqualizerBasic }],
+    examples: [{ title: "Sizes, tones, and notes", file: ex("comic-equalizer", "basic") }],
     props: [
       {
         rows: [
@@ -1633,8 +1531,8 @@ import { ComicAnimatedIcon } from "@streamuilib/react";
   <Bell aria-hidden />
 </ComicAnimatedIcon>`,
     examples: [
-      { title: "Shapes and tones", description: "Hover each sticker.", file: ex("comic-animated-icon", "shapes"), Component: ComicAnimatedIconShapes },
-      { title: "Triggers", file: ex("comic-animated-icon", "triggers"), Component: ComicAnimatedIconTriggers },
+      { title: "Shapes and tones", description: "Hover each sticker.", file: ex("comic-animated-icon", "shapes") },
+      { title: "Triggers", file: ex("comic-animated-icon", "triggers") },
     ],
     props: [
       {

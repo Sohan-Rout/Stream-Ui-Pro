@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Badge } from "@streamuilib/react";
 import { readSource } from "@/lib/source";
 import { componentHref, components } from "@/registry/components";
@@ -8,6 +8,7 @@ import { CodeBlock } from "./CodeBlock";
 import { InstallCommand } from "@/components/blocks/InstallCommand";
 import { shadcnAdd } from "@/registry/shadcn";
 import { OpenInV0 } from "./OpenInV0";
+import { Live } from "@/components/docs/Live";
 
 /** "Built with" badges, linking to each component's page. */
 export function BuiltWith({ uses }: { uses: string[] }) {
@@ -30,7 +31,6 @@ export function BuiltWith({ uses }: { uses: string[] }) {
 
 /** Preview, notes, and source for one section design: the body of its page. */
 export function SectionDocBody({ variant, item }: { variant: SectionVariant; item: string }) {
-  const Live = variant.Component;
   return (
     <>
       <DocSection title="Install" id="install">
@@ -53,7 +53,7 @@ export function SectionDocBody({ variant, item }: { variant: SectionVariant; ite
             <span className="ml-3 font-mono text-xs text-ink-muted">{variant.file.split("/").pop()}</span>
           </div>
           {/* The page already has its h1, so the preview's headline drops a level. */}
-          <Live headingAs="h3" />
+          <Live file={variant.file} headingAs="h3" />
         </div>
       </DocSection>
 

@@ -156,6 +156,23 @@ JavaScript to the page.
 The page at `/components/<slug>` and its navigation links appear automatically.
 Sections and labs work the same way with their own registry files.
 
+The registries hold data only: names, props, and file paths, never component
+imports. Importing a component there would ship its code to every page that
+reads the registry, the docs sidebar included. Pages render examples, sections,
+and labs with `<Live file="..." />`, which loads only the files a page shows.
+`bun run live:build` regenerates the map behind it (`src/registry/live.generated.tsx`);
+`bun dev` and `bun run build` run it for you, and a test fails if it's stale.
+
+### Staying light
+
+- Each page loads only the code for the examples, sections, and labs it shows.
+- The Components, Sections, Labs, and Icons lists render a first batch and load
+  more as you scroll (with a Show more button for keyboards), so their live
+  previews load and animate only once they're reached.
+- Cards off screen skip rendering (`content-visibility: auto`).
+- Links prefetch on hover, focus, or touch instead of on sight, and not at all
+  when the visitor has Save-Data on or a 2G connection.
+
 ## Testing
 
 Tests use `bun test` with [Testing Library](https://testing-library.com) on a
@@ -170,6 +187,7 @@ bun run test
 | `packages/react/test/*.test.tsx` | Component behavior as users and screen readers see it: roles, states, keyboard navigation, form submission |
 | `packages/react/test/build.test.ts` | The published output: `"use client"` on line 1 of client modules only, `.js` import extensions, production JSX, complete exports, peer ranges |
 | `tests/registry.test.ts` | Every docs page: unique slugs, real source files, examples, package exports, navigation |
+| `tests/live-map.test.ts` | The registries stay data-only, and the generated live map is up to date |
 | `tests/render.test.tsx` | Every example, section, and lab mounts without crashing, with no duplicate ids |
 | `tests/seo.test.ts` | Canonical URLs, share-card metadata, sitemap, robots, manifest |
 | `tests/dice.test.tsx` | The die always lands on the rolled face, opposite faces sum to 7, rolls cover 1 to 6 |

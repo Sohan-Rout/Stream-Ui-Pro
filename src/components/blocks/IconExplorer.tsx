@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight, Bell, Bug, Camera, Cloud, Code, Cpu, Dices, Flame, Ghost, Globe, Heart, Layers,

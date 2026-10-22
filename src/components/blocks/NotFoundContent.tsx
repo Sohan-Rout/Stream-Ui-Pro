@@ -1,7 +1,7 @@
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowLeft } from "lucide-react";
 import { buttonStyles } from "@streamuilib/react";
-import { RunnerGame } from "@/components/demos/RunnerLab";
+import { LazyRunner } from "./LazyRunner";
 
 export function NotFoundContent() {
   return (
@@ -30,7 +30,7 @@ export function NotFoundContent() {
           <span aria-hidden className="h-0.5 w-8 bg-ink" />
           While you&apos;re lost
         </h2>
-        <RunnerGame />
+        <LazyRunner />
       </section>
     </div>
   );

@@ -1,6 +1,6 @@
 import { SiGithub } from "react-icons/si";
 import { Heart } from "lucide-react";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { siteConfig } from "@/lib/site";
 import { Section } from "@/components/ui/Section";
 import { Logo } from "./Logo";

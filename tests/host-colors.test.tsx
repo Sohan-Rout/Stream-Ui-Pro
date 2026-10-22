@@ -9,6 +9,9 @@ import { cleanup, render } from "@testing-library/react";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
 import { Accordion, Card, Input, Tabs, TrackList } from "@streamuilib/react";
+import { loadAllLive } from "./live";
+
+const live = await loadAllLive();
 
 afterEach(cleanup);
 
@@ -18,14 +21,16 @@ describe("sets its own text color", () => {
   for (const s of sections) {
     for (const v of s.variants) {
       test(`${s.name}: ${v.name}`, () => {
-        rootHasInk(render(<v.Component />).container.firstElementChild);
+        const Variant = live.get(v.file)!;
+        rootHasInk(render(<Variant />).container.firstElementChild);
       });
     }
   }
 
   for (const l of labs) {
     test(`lab: ${l.name}`, () => {
-      rootHasInk(render(<l.Component />).container.firstElementChild);
+      const Lab = live.get(l.file)!;
+      rootHasInk(render(<Lab />).container.firstElementChild);
     });
   }
 

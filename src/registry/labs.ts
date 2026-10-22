@@ -1,26 +1,8 @@
-import type { ComponentType } from "react";
-import { ShapeRollerLab } from "@/components/demos/ShapeRollerLab";
-import { MagneticLab } from "@/components/demos/MagneticLab";
-import { WobbleLab } from "@/components/demos/WobbleLab";
-import { DiceLab } from "@/components/demos/DiceLab";
-import { TicTacToeLab } from "@/components/demos/TicTacToeLab";
-import { MemoryLab } from "@/components/demos/MemoryLab";
-import { SnakeLab } from "@/components/demos/SnakeLab";
-import { FlappyLab } from "@/components/demos/FlappyLab";
-import { TetrisLab } from "@/components/demos/TetrisLab";
-import { MazeLab } from "@/components/demos/MazeLab";
-import { JumperLab } from "@/components/demos/JumperLab";
-import { PinballLab } from "@/components/demos/PinballLab";
-import { RunnerLab } from "@/components/demos/RunnerLab";
-import { WhackLab } from "@/components/demos/WhackLab";
-import { HammerLab } from "@/components/demos/HammerLab";
-
 export type LabDoc = {
   slug: string;
   name: string;
   description: string;
   file: string;
-  Component: ComponentType;
   notes: string[];
   /** A wide game (a landscape strip) gets more room on its own page. */
   wide?: boolean;
@@ -32,7 +14,6 @@ export const labs: LabDoc[] = [
     name: "Shape roller",
     description: "Randomizes shape, color, and rotation on each roll.",
     file: "src/components/demos/ShapeRollerLab.tsx",
-    Component: ShapeRollerLab,
     notes: [
       "The first render is fixed and randomness only runs on click, so server and client markup match.",
       "Re-keying the shape replays its wiggle animation on every roll.",
@@ -43,7 +24,6 @@ export const labs: LabDoc[] = [
     name: "Magnetic button",
     description: "The button drifts toward the cursor within its area.",
     file: "src/components/demos/MagneticLab.tsx",
-    Component: MagneticLab,
     notes: [
       "Only reacts to mouse pointers; touch and pen are ignored.",
       "Does nothing when the user prefers reduced motion.",
@@ -54,7 +34,6 @@ export const labs: LabDoc[] = [
     name: "Wobble type",
     description: "Staggered CSS transitions on hover. No JavaScript.",
     file: "src/components/demos/WobbleLab.tsx",
-    Component: WobbleLab,
     notes: ["Each letter gets its own transition-delay, which creates the wave.", "The word keeps a single aria-label so it reads as one word."],
   },
   {
@@ -62,7 +41,6 @@ export const labs: LabDoc[] = [
     name: "Dice roller",
     description: "A 3D die that tumbles and lands on a random face.",
     file: "src/components/demos/DiceLab.tsx",
-    Component: DiceLab,
     notes: [
       "The die is six CSS faces in a preserve-3d cube; each roll adds two full turns on both axes, then the rotation that shows the result.",
       "Rolls come from crypto.getRandomValues, and opposite faces add up to 7 like a real die.",
@@ -74,7 +52,6 @@ export const labs: LabDoc[] = [
     name: "Cross and circle",
     description: "Tic-tac-toe against an easy or unbeatable CPU, or a friend.",
     file: "src/components/demos/TicTacToeLab.tsx",
-    Component: TicTacToeLab,
     notes: [
       "Hard mode uses minimax with alpha-beta pruning, so it never loses; easy plays randomly but takes a win when it sees one.",
       "The rules live in src/lib/games/tictactoe.ts as pure functions, tested by playing every possible game against the hard CPU.",
@@ -86,7 +63,6 @@ export const labs: LabDoc[] = [
     name: "Memory match",
     description: "Flip cards in 3D to find all eight pairs in as few moves as you can.",
     file: "src/components/demos/MemoryLab.tsx",
-    Component: MemoryLab,
     notes: [
       "The deck shuffles on your first flip with an unbiased Fisher–Yates shuffle, so the server and browser render the same face-down grid.",
       "Cards flip with CSS 3D transforms and backface-visibility; under reduced motion they switch instantly.",
@@ -98,7 +74,6 @@ export const labs: LabDoc[] = [
     name: "Snake",
     description: "The classic snake game in three looks: classic, funky, and pixelated.",
     file: "src/components/demos/SnakeLab.tsx",
-    Component: SnakeLab,
     notes: [
       "Steer with the arrow keys or WASD on the focused board, swipe on touch screens, or use the on-screen pad. Space pauses.",
       "The rules live in src/lib/games/snake.ts as pure functions: walls and your own body end the game, and up to two turns are buffered between ticks.",
@@ -111,7 +86,6 @@ export const labs: LabDoc[] = [
     name: "Flappy",
     description: "A neo-brutalist flappy bird: flap through the gaps between hard-shadowed pipes.",
     file: "src/components/demos/FlappyLab.tsx",
-    Component: FlappyLab,
     notes: [
       "The world draws on a <canvas> at 60fps outside React; React state only changes when the score or status does.",
       "Physics live in src/lib/games/flappy.ts as pure functions in world units and seconds, so they're tested without a browser.",
@@ -124,7 +98,6 @@ export const labs: LabDoc[] = [
     name: "Muncher",
     description: "A maze chase: eat every dot, dodge three bots, and grab a power pellet to turn the tables.",
     file: "src/components/demos/MazeLab.tsx",
-    Component: MazeLab,
     notes: [
       "Arrows or WASD steer on the focused board (a turn pressed early waits for the opening), swipe on touch screens, or use the pad. Space pauses.",
       "Each bot hunts differently: one chases you, one cuts you off ahead, and a shy one backs off up close. Power pellets scare them for a while; eat them for 200, 400, then 800.",
@@ -137,7 +110,6 @@ export const labs: LabDoc[] = [
     name: "Jumper",
     description: "A side-scrolling platformer: run, jump, bump blocks for coins, stomp walkers, and reach the flag.",
     file: "src/components/demos/JumperLab.tsx",
-    Component: JumperLab,
     notes: [
       "Arrows or A/D run, Space, Up, or W jumps (let go early for a short hop), and P pauses. On touch, hold the arrows and tap jump.",
       "Coyote time and a jump buffer make jumps forgiving: you can still jump a moment after leaving a ledge, or a moment before landing.",
@@ -150,7 +122,6 @@ export const labs: LabDoc[] = [
     name: "Pinball",
     description: "A neo-brutalist pinball table: light the S/UI lanes, knock down the drop targets, and stack up the multiplier.",
     file: "src/components/demos/PinballLab.tsx",
-    Component: PinballLab,
     notes: [
       "Hold Space (or Down) to pull the plunger and let go to launch; Z or Left and slash or Right work the flippers. On touch, hold the buttons.",
       "Flippers hand their own swing speed to the ball, so timing matters: flip as it rolls down for a strong shot up the table.",
@@ -165,7 +136,6 @@ export const labs: LabDoc[] = [
     name: "Tetris",
     description: "Neo-brutalist falling blocks: hard-edged tetrominoes, a ghost preview, and the next three pieces.",
     file: "src/components/demos/TetrisLab.tsx",
-    Component: TetrisLab,
     notes: [
       "Arrows move and rotate (Z rotates back), Down drops a row, Space drops to the ghost, and P pauses. On touch, tap to rotate, swipe sideways to move, and swipe down to drop.",
       "The rules live in src/lib/games/tetris.ts as pure functions: a 7-bag randomizer, wall kicks, classic scoring, and a level every 10 lines.",
@@ -180,7 +150,6 @@ labs.push({
   name: "Dino Runner",
   description: "A neo-brutalist endless runner: jump the pink cacti, duck the flyers, and outrun a world that keeps speeding up.",
   file: "src/components/demos/RunnerLab.tsx",
-  Component: RunnerLab,
   wide: true,
   notes: [
     "Click the strip (or tap it) to start, then Space or Up to jump and Down to duck. A tap is a short hop and a held jump goes higher; Down in the air drops you faster.",
@@ -195,7 +164,6 @@ labs.push({
   name: "Whack-a-Mole",
   description: "A neo-brutalist whack-a-mole: 30 seconds, moles that get quicker, gold ones worth more, and bombs to leave alone.",
   file: "src/components/demos/WhackLab.tsx",
-  Component: WhackLab,
   notes: [
     "Click or tap a hole, or press its number key in numpad layout (7 8 9 along the top). Each hole is a real button, so Tab and Enter work too.",
     "Moles score 10 and gold ones 50; bombs cost 30. Five hits in a row raise the combo multiplier, up to ×4, and a miss, a bomb, or a mole that gets away resets it.",
@@ -209,7 +177,6 @@ labs.push({
   name: "Hammer",
   description: "Your cursor becomes a neo-brutalist mallet: click to swing it from the handle and drive five nails into a plank.",
   file: "src/components/demos/HammerLab.tsx",
-  Component: HammerLab,
   notes: [
     "Inside the board the mouse cursor is a mallet. A click swings it from the end of its handle, lands the head on the spot, and pops a burst and a BONK!.",
     "Each nail takes three hits to go flush; all five in and you can pull them back out. On touch the mallet jumps to your tap, and with a keyboard each nail is a button.",

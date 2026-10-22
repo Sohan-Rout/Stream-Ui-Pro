@@ -60,7 +60,6 @@ describe("components registry", () => {
       for (const ex of c.examples) {
         expect(ex.file).toStartWith(`src/examples/${c.slug}/`);
         expect(readSource(ex.file)).toContain("export default function");
-        expect(typeof ex.Component).toBe("function");
       }
     }
   });

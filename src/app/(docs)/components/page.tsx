@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
 import { DocHeader } from "@/components/docs/DocHeader";
 import { componentEntries, components } from "@/registry/components";
 import { groupPreviews, indexPreviews } from "@/registry/previews";
+import { InfiniteGrid } from "@/components/docs/InfiniteGrid";
+import { Live } from "@/components/docs/Live";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.components, path: "/components" });
 
@@ -19,19 +21,18 @@ export default function ComponentsIndex() {
         description="Accessible neobrutalism components for React and Tailwind CSS v4. Every state is styled, and every component is typed."
         meta={<Badge tone="paper">{components.length} components</Badge>}
       />
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {/* Eight cards up front, the rest as you scroll: each tile is live, so fewer at once loads and animates less. */}
+      <InfiniteGrid batch={8} noun="components" className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {componentEntries.map((c) => {
-          const Preview =
-            c.kind === "group"
-              ? (groupPreviews[c.slug] ?? c.group.variants[0].doc.examples[0].Component)
-              : (indexPreviews[c.slug] ?? c.doc.examples[0].Component);
+          const Preview = c.kind === "group" ? groupPreviews[c.slug] : indexPreviews[c.slug];
+          const fallback = c.kind === "group" ? c.group.variants[0].doc.examples[0].file : c.doc.examples[0].file;
           return (
-            <li key={c.slug} className="group relative flex flex-col border-2 border-ink bg-paper-raised shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none">
+            <li key={c.slug} className="group relative flex flex-col border-2 border-ink bg-paper-raised shadow-brutal transition-[translate,box-shadow] duration-150 [contain-intrinsic-size:auto_400px] [content-visibility:auto] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none">
               {/* Same height on every card, so titles line up across each row. */}
               <div className="flex h-56 items-center justify-center overflow-hidden border-b-2 border-ink bg-paper bg-dots p-6">
                 {/* Live but inert: the whole card is the link. */}
                 <div inert className="pointer-events-none flex w-full justify-center">
-                  <Preview />
+                  {Preview ? <Preview /> : <Live file={fallback} />}
                 </div>
               </div>
               <div className="flex flex-1 flex-col gap-2 p-5">
@@ -48,7 +49,7 @@ export default function ComponentsIndex() {
             </li>
           );
         })}
-      </ul>
+      </InfiniteGrid>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@streamuilib/react";
@@ -12,6 +12,7 @@ import { BuiltWith, SectionDocBody } from "@/components/docs/SectionParts";
 import { getSection, sections } from "@/registry/sections";
 import { shadcnName } from "@/registry/shadcn";
 import { neighbors } from "@/registry/nav";
+import { Live } from "@/components/docs/Live";
 
 /**
  * Everything on this page belongs to one URL's slug, so there's no shared
@@ -58,14 +59,13 @@ export default async function SectionPage({ params }: PageProps<"/sections/[slug
       {many ? (
         <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {doc.variants.map((v) => {
-            const Live = v.Component;
             return (
               <li
                 key={v.id}
                 className="group relative flex flex-col border-2 border-ink bg-paper-raised p-4 shadow-brutal transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg motion-reduce:transition-none"
               >
                 <LiveThumb>
-                  <Live headingAs="h3" />
+                  <Live file={v.file} headingAs="h3" />
                 </LiveThumb>
                 <div className="mt-4 flex items-center justify-between gap-3">
                   <h2 className="font-display text-xl tracking-tight">
