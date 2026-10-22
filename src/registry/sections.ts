@@ -257,15 +257,27 @@ export const sections: SectionDoc[] = [
   {
     slug: "footer",
     name: "Footer",
-    description: "A newsletter signup and three columns of links.",
+    description: "A newsletter signup and three columns of links, two ways: a ruled classic grid and the last page of a comic.",
     variants: [
       {
-        id: "default",
-        name: "Footer",
-        description: "A newsletter signup and three columns of links.",
+        id: "classic",
+        name: "Classic",
+        description: "A newsletter signup and three columns of links in a ruled grid.",
         file: "src/components/sections/FooterSection.tsx",
         uses: ["Input", "Button"],
         notes: ["Each link column is its own labelled nav landmark.", "Point the form action at your email provider."],
+      },
+      {
+        id: "comic",
+        name: "Comic",
+        description: "The last page of a comic: a \"The end?\" signup panel, a brand panel with a starburst, and link columns as tilted panels.",
+        file: "src/components/sections/ComicFooterSection.tsx",
+        uses: ["Comic Input", "lucide-react"],
+        notes: [
+          "Shares the Comic cover hero's vintage print palette (newsprint, golden yellow, brick red), so the two bookend a page.",
+          "Each link column is its own labelled nav landmark under a caption box; the signup uses ComicInput with a real <label>.",
+          "No JavaScript and no motion: a server component. Point the form action at your email provider.",
+        ],
       },
     ],
   },

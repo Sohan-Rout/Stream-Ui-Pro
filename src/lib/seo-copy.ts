@@ -292,6 +292,18 @@ const variantCopy: Record<string, SeoCopy> = {
       "A playful neobrutalism pricing section for React and Tailwind CSS: plans held up by moles popping out of holes, a crowned gold mole, and a billing switch.",
     keywords: [...base, "playful pricing section", "game pricing page", "animated pricing cards", "React pricing", "whack a mole"],
   },
+  "footer/classic": {
+    title: "Neobrutalism Newsletter Footer for React",
+    description:
+      "A neobrutalism footer for React and Tailwind CSS: a newsletter signup and three labelled columns of links in a ruled grid. Responsive and accessible.",
+    keywords: [...base, "footer section", "website footer", "newsletter footer", "React footer"],
+  },
+  "footer/comic": {
+    title: "Comic Book Footer Section for React",
+    description:
+      "A comic-book footer for React and Tailwind CSS: a \"The end?\" newsletter panel, a brand panel with a starburst, and link columns as comic panels.",
+    keywords: [...base, "comic footer", "playful footer section", "newsletter footer", "React footer"],
+  },
   "hero/jungle": {
     title: "Jungle Runner Hero Section for React",
     description:

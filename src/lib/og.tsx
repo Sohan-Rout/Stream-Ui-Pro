@@ -325,6 +325,30 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "footer/comic") {
+    // The comic's last page: a signup panel, a red brand panel, three link panels, and the back strip.
+    const print = { paper: "#f8f3e6", yellow: "#f2cc6a", red: "#c4513a" };
+    const panel = (w: number, h: number, bg: string, tilt: number) => (
+      <div style={{ display: "flex", width: w, height: h, backgroundColor: bg, border: `4px solid ${brand.ink}`, boxShadow: hard(4), transform: `rotate(${tilt}deg)` }} />
+    );
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, height: 180, padding: "18px 16px 0", backgroundColor: print.paper }}>
+        <div style={{ display: "flex", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 6, width: 150, height: 66, padding: "0 10px", backgroundColor: brand.raised, border: `4px solid ${brand.ink}`, boxShadow: hard(4), transform: "rotate(-1deg)" }}>
+            {bar("70%", 12, brand.ink)}
+            {bar("90%", 10, brand.sunken)}
+          </div>
+          {panel(100, 66, print.red, 1.5)}
+        </div>
+        <div style={{ display: "flex", gap: 10 }}>
+          {panel(76, 46, brand.raised, -1.5)}
+          {panel(76, 46, brand.raised, 1)}
+          {panel(76, 46, brand.raised, -0.5)}
+        </div>
+        <div style={{ display: "flex", marginTop: "auto", height: 14, backgroundColor: brand.ink }} />
+      </div>
+    );
+  }
   if (variant === "hero/jungle") {
     // Mint sky, a hill, two palms, a banana, the ape on the grass, and the ground.
     const jungle = { sky: "#dff3ec", hill: "#b5dcc6", leaf: "#6fb27a", bark: "#97704c", grass: "#9fd06b", dirt: "#a88a63", banana: "#f2d66b", fur: "#6e4a35" };

@@ -118,6 +118,7 @@ export const live: Record<string, ComponentType<any>> = {
   "src/components/sections/TestimonialsSection.tsx": dynamic(() => import("@/components/sections/TestimonialsSection").then((m) => m.TestimonialsSection)),
   "src/components/sections/FaqSection.tsx": dynamic(() => import("@/components/sections/FaqSection").then((m) => m.FaqSection)),
   "src/components/sections/FooterSection.tsx": dynamic(() => import("@/components/sections/FooterSection").then((m) => m.FooterSection)),
+  "src/components/sections/ComicFooterSection.tsx": dynamic(() => import("@/components/sections/ComicFooterSection").then((m) => m.ComicFooterSection)),
   "src/components/demos/ShapeRollerLab.tsx": dynamic(() => import("@/components/demos/ShapeRollerLab").then((m) => m.ShapeRollerLab)),
   "src/components/demos/MagneticLab.tsx": dynamic(() => import("@/components/demos/MagneticLab").then((m) => m.MagneticLab)),
   "src/components/demos/WobbleLab.tsx": dynamic(() => import("@/components/demos/WobbleLab").then((m) => m.WobbleLab)),
