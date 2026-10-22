@@ -15,7 +15,9 @@ const live = await loadAllLive();
 
 afterEach(cleanup);
 
-const rootHasInk = (el: Element | null) => expect(el?.classList.contains("text-ink")).toBe(true);
+// Ink, or paper on a section that draws its own dark background.
+const rootHasInk = (el: Element | null) =>
+  expect(el?.classList.contains("text-ink") || (el?.classList.contains("text-paper") && el.classList.contains("bg-ink"))).toBe(true);
 
 describe("sets its own text color", () => {
   for (const s of sections) {

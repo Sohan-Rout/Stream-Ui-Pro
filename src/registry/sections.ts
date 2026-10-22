@@ -257,7 +257,7 @@ export const sections: SectionDoc[] = [
   {
     slug: "footer",
     name: "Footer",
-    description: "A newsletter signup and three columns of links, two ways: a ruled classic grid and the last page of a comic.",
+    description: "A newsletter signup and three columns of links, three ways: a ruled classic grid, the last page of a comic, and bold brights on dark.",
     variants: [
       {
         id: "classic",
@@ -276,6 +276,18 @@ export const sections: SectionDoc[] = [
         notes: [
           "Shares the Comic cover hero's vintage print palette (newsprint, golden yellow, brick red), so the two bookend a page.",
           "Each link column is its own labelled nav landmark under a caption box; the signup uses ComicInput with a real <label>.",
+          "No JavaScript and no motion: a server component. Point the form action at your email provider.",
+        ],
+      },
+      {
+        id: "bold",
+        name: "Bold",
+        description: "The library's brights on dark ink: a rainbow stripe, a loud signup, bright column chips, and a giant multicolor wordmark.",
+        file: "src/components/sections/BoldFooterSection.tsx",
+        uses: ["Input", "Button"],
+        notes: [
+          "A dark section that sets its own paper text color, so it reads the same inside any app.",
+          "Each link column underlines (and outlines on focus) in its own chip color. The wordmark is decorative and sized to the footer's width with container units.",
           "No JavaScript and no motion: a server component. Point the form action at your email provider.",
         ],
       },

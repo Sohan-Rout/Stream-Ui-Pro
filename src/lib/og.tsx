@@ -325,6 +325,37 @@ function SectionBody({ variant, accent }: { variant?: string; accent: string }) 
       </div>
     );
   }
+  if (variant === "footer/bold") {
+    // Dark ink: a rainbow stripe, a headline bar with a lime word, three chip columns, and a multicolor wordmark.
+    const brights = [brand.lime, brand.pink, brand.blue, brand.violet, brand.orange];
+    return (
+      <div style={{ display: "flex", flexDirection: "column", height: 180, backgroundColor: brand.ink }}>
+        <div style={{ display: "flex", height: 8 }}>
+          {brights.map((c) => (
+            <div key={c} style={{ display: "flex", flex: 1, backgroundColor: c }} />
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: 14, padding: "16px 16px 0" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7, width: 110 }}>
+            {bar("100%", 10, brand.raised)}
+            <div style={{ display: "flex", width: 50, height: 14, backgroundColor: brand.lime }} />
+          </div>
+          {brights.slice(0, 3).map((c) => (
+            <div key={c} style={{ display: "flex", flexDirection: "column", gap: 6, width: 46 }}>
+              <div style={{ display: "flex", width: 36, height: 10, backgroundColor: c }} />
+              {bar(30, 5, "#8a8b90")}
+              {bar(26, 5, "#8a8b90")}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: 6, marginTop: "auto", padding: "0 16px 14px" }}>
+          {brights.slice(0, 4).map((c) => (
+            <div key={c} style={{ display: "flex", width: 46, height: 44, backgroundColor: c }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (variant === "footer/comic") {
     // The comic's last page: a signup panel, a red brand panel, three link panels, and the back strip.
     const print = { paper: "#f8f3e6", yellow: "#f2cc6a", red: "#c4513a" };

@@ -304,6 +304,12 @@ const variantCopy: Record<string, SeoCopy> = {
       "A comic-book footer for React and Tailwind CSS: a \"The end?\" newsletter panel, a brand panel with a starburst, and link columns as comic panels.",
     keywords: [...base, "comic footer", "playful footer section", "newsletter footer", "React footer"],
   },
+  "footer/bold": {
+    title: "Colorful Dark Footer Section for React",
+    description:
+      "A bold footer for React and Tailwind CSS: bright lime, pink, and blue on dark ink, a newsletter signup, link columns, and a giant multicolor wordmark.",
+    keywords: [...base, "dark footer", "colorful footer section", "newsletter footer", "React footer"],
+  },
   "hero/jungle": {
     title: "Jungle Runner Hero Section for React",
     description:
