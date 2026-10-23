@@ -17,7 +17,7 @@ export type ScreenBuddyProps = {
   expressions?: BuddyExpression[];
   /** Milliseconds between expressions or faces; 0 stops the cycle (taps still change it). */
   interval?: number;
-  /** How icons or SVGs on the screen move. The eyes have their own life. */
+  /** How icons or SVGs on the screen move (default bounce). The eyes have their own life. */
   animation?: ScreenAnimation;
   /** The bezel's glow. */
   glow?: Glow;
@@ -98,7 +98,7 @@ export function ScreenBuddy({
   faces,
   expressions = ALL_EXPRESSIONS,
   interval = 2600,
-  animation = "float",
+  animation = "bounce",
   glow = "amber",
   size = 200,
   label = "Screen buddy",
@@ -306,13 +306,17 @@ const SHOWS = [
   { id: "icons", label: "A few icons" },
   { id: "svg", label: "Custom SVG" },
 ] as const;
-const ANIMATIONS: ScreenAnimation[] = ["float", "bounce", "wiggle", "pulse", "spin", "none"];
+const ANIMATIONS: ScreenAnimation[] = ["bounce", "float", "wiggle", "pulse", "spin", "none"];
 const GLOW_SWATCHES: Glow[] = ["amber", "lime", "pink", "blue", "violet"];
 
-/** The lab: the buddy, with pickers for what it shows, how icons move, and its glow. */
-export function ScreenBuddyLab() {
+/**
+ * The lab: the buddy, with pickers for what it shows, how icons move, and its
+ * glow. `preview` (the Labs index card) shows just the buddy; the pickers
+ * live on the lab's own page.
+ */
+export function ScreenBuddyLab({ preview = false }: { preview?: boolean }) {
   const [show, setShow] = useState<(typeof SHOWS)[number]["id"]>("eyes");
-  const [animation, setAnimation] = useState<ScreenAnimation>("float");
+  const [animation, setAnimation] = useState<ScreenAnimation>("bounce");
   const [glow, setGlow] = useState<Glow>("amber");
 
   const props: ScreenBuddyProps =
@@ -334,37 +338,39 @@ export function ScreenBuddyLab() {
     <div className="flex w-full flex-col items-center gap-4 text-ink">
       <ScreenBuddy {...props} animation={animation} glow={glow} size={170} />
 
-      <div className="flex flex-col items-center gap-3">
-        <div role="group" aria-label="Show" className="flex flex-wrap justify-center gap-2">
-          {SHOWS.map((s) => (
-            <button key={s.id} type="button" aria-pressed={show === s.id} onClick={() => setShow(s.id)} className={pill(show === s.id)}>
-              {s.label}
-            </button>
-          ))}
-        </div>
-        {show !== "eyes" && (
-          <div role="group" aria-label="Animation" className="flex flex-wrap justify-center gap-2">
-            {ANIMATIONS.map((a) => (
-              <button key={a} type="button" aria-pressed={animation === a} onClick={() => setAnimation(a)} className={pill(animation === a)}>
-                {a}
+      {!preview && (
+        <div className="flex flex-col items-center gap-3">
+          <div role="group" aria-label="Show" className="flex flex-wrap justify-center gap-2">
+            {SHOWS.map((s) => (
+              <button key={s.id} type="button" aria-pressed={show === s.id} onClick={() => setShow(s.id)} className={pill(show === s.id)}>
+                {s.label}
               </button>
             ))}
           </div>
-        )}
-        <div role="group" aria-label="Glow" className="flex gap-2">
-          {GLOW_SWATCHES.map((g) => (
-            <button
-              key={g}
-              type="button"
-              aria-label={`${g} glow`}
-              aria-pressed={glow === g}
-              onClick={() => setGlow(g)}
-              className={cn("size-7 rounded-full border-2 border-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue", glow === g && "ring-2 ring-ink ring-offset-2")}
-              style={{ background: `linear-gradient(135deg, ${GLOWS[g][1]}, ${GLOWS[g][0]})` }}
-            />
-          ))}
+          {show !== "eyes" && (
+            <div role="group" aria-label="Animation" className="flex flex-wrap justify-center gap-2">
+              {ANIMATIONS.map((a) => (
+                <button key={a} type="button" aria-pressed={animation === a} onClick={() => setAnimation(a)} className={pill(animation === a)}>
+                  {a}
+                </button>
+              ))}
+            </div>
+          )}
+          <div role="group" aria-label="Glow" className="flex gap-2">
+            {GLOW_SWATCHES.map((g) => (
+              <button
+                key={g}
+                type="button"
+                aria-label={`${g} glow`}
+                aria-pressed={glow === g}
+                onClick={() => setGlow(g)}
+                className={cn("size-7 rounded-full border-2 border-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue", glow === g && "ring-2 ring-ink ring-offset-2")}
+                style={{ background: `linear-gradient(135deg, ${GLOWS[g][1]}, ${GLOWS[g][0]})` }}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

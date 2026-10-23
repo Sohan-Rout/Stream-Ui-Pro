@@ -16,7 +16,8 @@ function LabCard({ lab: l }: { lab: LabDoc }) {
   return (
     <li className="flex flex-col border-2 border-ink bg-paper-raised shadow-brutal [contain-intrinsic-size:auto_520px] [content-visibility:auto]">
       <div className="flex flex-1 items-center justify-center border-b-2 border-ink bg-violet-soft p-6">
-        <Live file={l.file} />
+        {/* preview: labs with extra controls show just the piece itself on the card. */}
+        <Live file={l.file} preview />
       </div>
       <div className="flex flex-col gap-1 p-5">
         <Link href={`/labs/${l.slug}`} className="flex items-center justify-between gap-3 font-display text-xl tracking-tight underline-offset-4 hover:underline">
