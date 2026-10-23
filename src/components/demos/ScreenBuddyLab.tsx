@@ -213,23 +213,30 @@ export function ScreenBuddy({
             );
           })}
 
-          {/* The dial on its right flank: a short stack of discs standing off the side. */}
-          {Array.from({ length: 6 }, (_, i) => (
-            <span
-              key={`dial-${i}`}
-              aria-hidden
-              className="absolute block rounded-full border-[3px] border-ink"
-              style={{
-                width: S * 0.3,
-                height: S * 0.3,
-                left: S - S * 0.15 - 3,
-                top: S * 0.38,
-                transform: `rotateY(90deg) translateZ(${S * 0.15 + 4 + i * 3}px)`,
-                background: i === 5 ? BODY : SIDE,
-                backgroundImage: i === 5 ? `repeating-conic-gradient(${BODY} 0 12deg, ${SIDE} 12deg 24deg)` : undefined,
-              }}
-            />
-          ))}
+          {/* The dial on its right flank: three thin discs seated almost flush against the side,
+              centered in its depth, with soft ridges and a small cap. */}
+          {Array.from({ length: 3 }, (_, i) => {
+            const d = S * 0.24;
+            const top = i === 2;
+            return (
+              <span
+                key={`dial-${i}`}
+                aria-hidden
+                className="absolute grid place-items-center rounded-full border-[3px]"
+                style={{
+                  width: d,
+                  height: d,
+                  left: S - d / 2,
+                  top: S * 0.42,
+                  transform: `rotateY(90deg) translateZ(${1 + i * 2.5}px)`,
+                  background: top ? `repeating-conic-gradient(${BODY} 0 10deg, color-mix(in oklab, ${SIDE} 70%, ${BODY}) 10deg 20deg)` : SIDE,
+                  borderColor: top || i === 0 ? "var(--ink)" : SIDE,
+                }}
+              >
+                {top && <span className="block size-[38%] rounded-full border-[3px] border-ink" style={{ background: BODY }} />}
+              </span>
+            );
+          })}
 
           {/* The front: the bezel, its glow, and the screen. */}
           <div
