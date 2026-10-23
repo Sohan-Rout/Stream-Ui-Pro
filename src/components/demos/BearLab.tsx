@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useId, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { cn } from "@streamuilib/react";
-import { blip } from "@/lib/games/arcade-sound";
-import { Mallet } from "./HammerLab";
+import { blip, NOTE } from "@/lib/games/arcade-sound";
+import { Mallet } from "@/lib/games/mallet";
 
 /** Swing geometry, matching the Hammer lab's mallet: it pivots on the end of its handle. */
 const PIVOT = { x: 100, y: 190 };
@@ -25,6 +25,28 @@ const MAX_BUMP = 3;
 const COOL_DOWN = 2200; // ms without a bonk before the bump goes down a size
 
 const WORDS = ["BONK!", "THUNK!", "BOP!", "DOINK!"];
+
+/**
+ * Cute sounds, pitched for laptop and phone speakers (nothing much below
+ * 300 Hz, which small speakers can't play): a wooden tok for the mallet,
+ * then the bear's squeaky-toy "eep!" in one of three voices.
+ */
+const SQUEAKS: Parameters<typeof blip>[0][] = [
+  // "Eep!": a quick squeak up.
+  [{ f: 880, to: 1760, at: 0.04, dur: 0.12, type: "sine", gain: 0.16 }],
+  // "Ow-oo": up, then down.
+  [{ f: 990, to: 1480, at: 0.04, dur: 0.08, type: "sine", gain: 0.15 }, { f: 1480, to: 830, at: 0.12, dur: 0.14, type: "sine", gain: 0.13 }],
+  // "Mew": a soft fall.
+  [{ f: 1320, to: 740, at: 0.04, dur: 0.18, type: "triangle", gain: 0.18 }],
+];
+/** The mallet's wooden tok on his head. */
+const TOK: Parameters<typeof blip>[0] = [{ f: 760, to: 420, dur: 0.05, type: "square", gain: 0.06 }];
+/** A springy boing as the bump pops up. */
+const BOING: Parameters<typeof blip>[0] = [0, 1, 2, 3, 4].map((k) => ({ f: 420 + k * 70, to: 520 + k * 90, at: 0.16 + k * 0.04, dur: 0.05, type: "sine" as const, gain: 0.08 - k * 0.012 }));
+/** Twinkling stars when he's seeing them: a little C-major sparkle. */
+const SPARKLE: Parameters<typeof blip>[0] = [NOTE.C6, NOTE.E6, NOTE.G6, NOTE.E6].map((f, k) => ({ f, at: 0.22 + k * 0.07, dur: 0.12, type: "triangle" as const, gain: 0.06 }));
+/** A miss: a soft swish through the air. */
+const WHOOSH: Parameters<typeof blip>[0] = [{ f: 700, to: 320, dur: 0.14, type: "sine", gain: 0.07 }];
 
 type Hit = { id: number; x: number; y: number; word: string; tilt: number };
 
@@ -150,11 +172,13 @@ export function BearLab() {
   const [now, setNow] = useState(0);
   const [muted, setMuted] = useState(false);
   const mutedRef = useRef(false);
+  const bumpRef = useRef(0);
   const hitId = useRef(0);
   const statusId = useId();
 
   // The bump goes down a size after each quiet spell.
   useEffect(() => {
+    bumpRef.current = bump;
     if (bump === 0) return;
     const t = setTimeout(() => setBump((b) => Math.max(0, b - 1)), COOL_DOWN);
     return () => clearTimeout(t);
@@ -173,7 +197,7 @@ export function BearLab() {
     setAim({ x, y });
     setSwing((n) => n + 1);
     if (!onBear) {
-      if (!mutedRef.current) blip([{ f: 300, to: 180, dur: 0.12, type: "triangle", gain: 0.06 }]);
+      if (!mutedRef.current) blip(WHOOSH);
       return;
     }
     const id = ++hitId.current;
@@ -185,11 +209,10 @@ export function BearLab() {
     setDazedUntil(until);
     setNow(Date.now());
     if (!mutedRef.current) {
-      // A hollow bonk, then a little spring for the bump.
-      blip([
-        { f: 240, to: 90, dur: 0.16, type: "triangle", gain: 0.2 },
-        { f: 520, to: 1300, at: 0.08, dur: 0.18, type: "sine", gain: 0.05 },
-      ]);
+      // Tok, then his squeak (a different voice each time), a boing as the bump
+      // grows, and a sparkle once he's seeing stars.
+      const next = Math.min(MAX_BUMP, bumpRef.current + 1);
+      blip([...TOK, ...SQUEAKS[id % SQUEAKS.length], ...(next > bumpRef.current ? BOING : []), ...(next >= MAX_BUMP ? SPARKLE : [])]);
     }
   }, []);
 

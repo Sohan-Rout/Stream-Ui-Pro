@@ -4,6 +4,9 @@ import { useCallback, useId, useRef, useState, type CSSProperties, type PointerE
 import { RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { Button, cn } from "@streamuilib/react";
 import { blip } from "@/lib/games/arcade-sound";
+import { Mallet } from "@/lib/games/mallet";
+
+export { Mallet };
 
 const NAILS = 5;
 /** Hits to drive a nail flush. */
@@ -16,24 +19,6 @@ const REST = -20; // degrees: raised
 const STRIKE = -55; // degrees: head down on the target
 const SIZE = 0.62; // drawn at 62%
 
-/**
- * The mallet: a pink barrel head with ink end caps on a wooden handle,
- * drawn upright. The parent rotates it around PIVOT.
- */
-export function Mallet({ className, style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg aria-hidden viewBox="0 0 200 200" overflow="visible" className={className} style={style}>
-      <g stroke="var(--ink)" strokeWidth="6" strokeLinejoin="round">
-        <rect x="91" y="78" width="18" height="118" rx="7" fill="var(--orange)" />
-        <rect x="86" y="170" width="28" height="26" rx="6" fill="var(--ink)" />
-        <rect x="44" y="34" width="112" height="56" rx="12" fill="var(--pink)" />
-        <rect x="38" y="30" width="20" height="64" rx="6" fill="var(--ink)" />
-        <rect x="142" y="30" width="20" height="64" rx="6" fill="var(--ink)" />
-      </g>
-      <rect x="66" y="44" width="56" height="10" rx="5" fill="var(--paper-raised)" opacity="0.75" />
-    </svg>
-  );
-}
 
 /** Where the mallet's box goes so its head lands on (x, y) at the strike angle. */
 function placeFor(x: number, y: number) {

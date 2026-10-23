@@ -181,7 +181,7 @@ labs.push({
     "Inside the board the mouse cursor is a mallet. A click swings it from the end of its handle, lands the head on the spot, and pops a burst and a BONK!.",
     "Each nail takes three hits to go flush; all five in and you can pull them back out. On touch the mallet jumps to your tap, and with a keyboard each nail is a button.",
     "The swing is one CSS keyframe around the handle's pivot, restarted per hit. Reduced motion skips the swing and the popups; the hit still lands.",
-    "Mallet is exported on its own (a plain SVG that takes the theme colors), so you can drop it into a whack-a-mole or a 404 page.",
+    "Mallet lives on its own in lib/games/mallet.tsx (a plain SVG that takes the theme colors), so you can drop it into a whack-a-mole or a 404 page; Bonk the bear swings it too.",
   ],
 });
 
@@ -193,6 +193,7 @@ labs.push({
   notes: [
     "Inside the board the cursor is the Hammer lab's mallet. A swing anywhere is a whiff; on his head it's a bonk: he squashes, his eyes go X, stars circle, and a BONK! pops.",
     "The bump on his crown grows a size per bonk (up to three) and goes down a size after each quiet spell, so let him rest.",
+    "Sounds are synthesized, no audio files: a wooden tok, his squeaky-toy eep in three voices, a boing as the bump grows, and a sparkle when he's seeing stars. All pitched above 300 Hz so laptop and phone speakers play them.",
     "His head is a real button: Enter or Space bonks from the keyboard, and the count is announced. On touch the mallet jumps to your tap.",
     "Reduced motion skips the swing, squash, orbit, and popups; the bonk still counts and the X-eyes and bump still show.",
   ],

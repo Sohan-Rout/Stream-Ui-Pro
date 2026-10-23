@@ -15,7 +15,7 @@
  *
  * Usage: bun scripts/build-registry.ts   (REGISTRY_URL overrides the base URL)
  */
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { components } from "@/registry/components";
 import { sections } from "@/registry/sections";
@@ -173,7 +173,8 @@ function resolveAlias(spec: string, from: string, owner: string): string | null 
   if (spec === "@/lib/games/best-score") return "scripts/registry/best-score.ts";
   const game = spec.match(/^@\/lib\/games\/([\w-]+)$/);
   if (game) {
-    const file = `src/lib/games/${game[1]}.ts`;
+    // Shared game code is .ts, or .tsx when it draws (the mallet).
+    const file = existsSync(path.join(ROOT, `src/lib/games/${game[1]}.tsx`)) ? `src/lib/games/${game[1]}.tsx` : `src/lib/games/${game[1]}.ts`;
     // Game rules travel with the first lab that uses them.
     if (!placements.has(file)) place(file, owner, "registry:lib", `games/${game[1]}`);
     return file;
