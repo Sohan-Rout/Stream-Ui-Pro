@@ -206,7 +206,7 @@ labs.push({
 
 labs.push({
   slug: "bear",
-  category: "critter",
+  category: "game",
   name: "Bonk the bear",
   description: "A cartoon bear sits on his rug; your cursor is the Hammer mallet. Bonk his head for X-eyes, dizzy stars, and a growing bump.",
   file: "src/components/demos/BearLab.tsx",
