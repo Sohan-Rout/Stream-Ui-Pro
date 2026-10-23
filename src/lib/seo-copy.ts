@@ -116,6 +116,12 @@ const componentOverrides: Record<string, SeoCopy> = {
       "Comic-book badges for React and Tailwind CSS: starburst, scalloped seal, splat, blob, speech bubble, and ribbon shapes with ink outlines and hard shadows.",
     keywords: ["starburst badge", "comic badge React", "sticker badge", "sale badge component", "neobrutalism badge", "speech bubble badge"],
   },
+  cube: {
+    title: "3D CSS Cube Component for React",
+    description:
+      "A 3D cube for React and Tailwind CSS in pure CSS: solid bright faces, a lined side, or beveled faces with popped-out edges. Spins on loop or hover.",
+    keywords: ["3D cube CSS", "CSS cube React", "3D cube component", "neobrutalism cube", "CSS 3D transform"],
+  },
   battery: {
     title: "Battery Indicator Component for React",
     description:

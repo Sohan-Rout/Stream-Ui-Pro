@@ -168,9 +168,10 @@ describe("component groups", () => {
     expect(componentHref(byslug("animated-icon"))).toBe("/components/animated-icon/classic");
   });
 
-  test("every component belongs to a group, with a classic and a comic design", () => {
-    for (const c of components) expect(componentGroupOf(c)).toBeTruthy();
+  test("every group pairs a classic and a comic design", () => {
     for (const g of componentGroups) expect(g.variants.map((v) => v.id)).toEqual(["classic", "comic"]);
+    // A component with no comic twin (like Cube, whose designs are variants) stands on its own.
+    expect(componentGroupOf(components.find((c) => c.slug === "cube")!)).toBeUndefined();
   });
 
   test("each group appears once in the top-level list, where its first member sits", () => {

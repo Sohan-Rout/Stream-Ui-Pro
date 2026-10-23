@@ -20,7 +20,7 @@ Docs and live examples: **[streamui.org](https://streamui.org)**. Setup and usag
 
 | Part | What you get |
 | --- | --- |
-| **Components** | Button, Badge, Card, Alert, Input, Textarea, Select, Checkbox, Radio Group, Switch, Slider, Tabs, Accordion, Dialog, Tooltip, Progress, Battery, Skeleton, Avatar, Audio Player, Track List, Equalizer, and Animated Icon, each in two designs: Classic (hard borders and offset shadows) and Comic (hand-inked outlines, halftone dots, starbursts, and sound effects). Keyboard support and focus states included. |
+| **Components** | Button, Badge, Card, Alert, Input, Textarea, Select, Checkbox, Radio Group, Switch, Slider, Tabs, Accordion, Dialog, Tooltip, Progress, Battery, Skeleton, Avatar, Audio Player, Track List, Equalizer, and Animated Icon, each in two designs: Classic (hard borders and offset shadows) and Comic (hand-inked outlines, halftone dots, starbursts, and sound effects). Plus a pure-CSS 3D Cube, solid, lined, or beveled. Keyboard support and focus states included. |
 | **Sections** | Hero, Features, Pricing, Testimonials, FAQ, and Footer, built from the components. They size themselves with container queries, so they fit a full page or a narrow column. |
 | **Icons** | The full Lucide set, searchable, with size, stroke, and animation controls. Click an icon to copy its JSX. |
 | **Animated icons** | Wrap any SVG icon in `<AnimatedIcon>` to draw, spin, bounce, wiggle, pulse, shake, or pop it on hover, on a loop, or once. Pure CSS, off under reduced motion. |

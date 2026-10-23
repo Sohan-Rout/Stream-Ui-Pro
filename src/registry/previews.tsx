@@ -65,6 +65,7 @@ import {
   AudioPlayersPreview,
   ComicAudioPlayerPreview,
   ComicTrackListPreview,
+  CubePreview,
   EqualizersPreview,
   TrackListsPreview,
 } from "@/components/docs/MediaPreview";
@@ -189,6 +190,7 @@ export const indexPreviews: Record<string, ComponentType> = {
   "comic-battery": ComicBatteryPreview,
   "comic-audio-player": ComicAudioPlayerPreview,
   "comic-track-list": ComicTrackListPreview,
+  cube: CubePreview,
 };
 
 /** Previews for component groups (like Badges) on the /components index. */

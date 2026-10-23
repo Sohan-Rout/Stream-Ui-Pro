@@ -15,6 +15,13 @@ changed, so upgrading from 0.4.0 needs no code changes.
 
 ### Added
 
+**Shapes**
+
+- `Cube`: a real 3D cube in pure CSS (six faces in a preserve-3d scene, no
+  JavaScript), in three `variant`s: `solid` bright faces, `lined` paper with
+  one hatched side, or `beveled` faces with popped-out edges. Three sizes, a
+  `tone`, and `spin` on a loop or on hover; decorative unless given a `label`.
+
 **Basics**
 
 - `ComicButton`: comic-book buttons (a skewed panel, speech bubble, ribbon,

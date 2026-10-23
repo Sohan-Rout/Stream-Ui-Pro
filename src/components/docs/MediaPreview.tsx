@@ -6,7 +6,7 @@
  */
 import type { CSSProperties } from "react";
 import { Bell, Disc3, Heart, Pause, Rocket, SkipForward, Star } from "lucide-react";
-import { ComicAnimatedIcon, ComicBadge, ComicEqualizer, ComicTrackList, Equalizer } from "@streamuilib/react";
+import { ComicAnimatedIcon, ComicBadge, ComicEqualizer, ComicTrackList, Cube, Equalizer } from "@streamuilib/react";
 import { BURST, comicBox, Cursor, DOTS, LOOP, pct, Stage } from "./tile";
 
 const sticker =
@@ -247,5 +247,18 @@ export function AnimatedIconsPreview() {
         </ComicAnimatedIcon>
       </div>
     </Stage>
+  );
+}
+
+/* ---------- Cube ---------- */
+
+/** The Cube card on /components: the three designs, turning slowly out of step. */
+export function CubePreview() {
+  return (
+    <div aria-hidden className="flex items-center justify-center gap-2">
+      <Cube size="sm" spin="loop" />
+      <Cube size="md" variant="lined" tone="pink" spin="loop" className="[&_.sui-cube-scene]:[animation-delay:-3s]" />
+      <Cube size="sm" variant="beveled" tone="blue" spin="loop" className="[&_.sui-cube-scene]:[animation-delay:-6s]" />
+    </div>
   );
 }

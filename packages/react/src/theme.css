@@ -611,6 +611,28 @@
     .sui-comic-icon-shape { transition: none; }
   }
 
+  /* ---------- Cube ---------- */
+
+  .sui-cube {
+    perspective: 900px;
+  }
+  .sui-cube-scene {
+    transform-style: preserve-3d;
+    transform: rotateX(-28deg) rotateY(-38deg);
+  }
+  .sui-cube[data-spin="loop"] .sui-cube-scene,
+  .sui-cube[data-spin="hover"]:hover .sui-cube-scene,
+  :is(:hover, :focus-visible) > .sui-cube[data-spin="hover"] .sui-cube-scene {
+    animation: sui-cube-spin 9s linear infinite;
+  }
+  @keyframes sui-cube-spin {
+    from { transform: rotateX(-28deg) rotateY(-38deg); }
+    to { transform: rotateX(-28deg) rotateY(322deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sui-cube[data-spin] .sui-cube-scene { animation: none !important; }
+  }
+
   /* ---------- Comic alert ---------- */
 
   .sui-comic-alert-bubble {

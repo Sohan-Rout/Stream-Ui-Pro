@@ -76,6 +76,7 @@ are marked `"use client"` individually, so helpers like `cn()` and
 | `ComicSkeleton`, `ComicAvatar` | Halftone loading blocks, and initials on comic stickers. |
 | `ComicAudioPlayer`, `ComicTrackList`, `ComicEqualizer` | A hand-inked music player, playlist, and meter with floating notes. |
 | `ComicAnimatedIcon` | AnimatedIcon on a comic sticker that bursts impact lines. |
+| `Cube` | A 3D cube in pure CSS: solid, lined, or beveled, with an optional spin. |
 | `ComicAlert` | Comic-book alerts: a speech bubble, a starburst icon, and a sound effect. |
 | `ComicCard` | Comic-book panel cards with a narration caption and a starburst sound effect. |
 | `ComicButton` | Comic-book buttons that pop a POW! on click: panel, bubble, ribbon, and burst shapes. |

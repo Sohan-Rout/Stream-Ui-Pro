@@ -1551,6 +1551,38 @@ import { ComicAnimatedIcon } from "@streamuilib/react";
       "Every animation, the sticker turn, and the impact lines stop for reduced motion.",
     ],
   },
+  {
+    slug: "cube",
+    name: "Cube",
+    description: "A real 3D cube in pure CSS, three ways: solid bright faces, a lined side, or beveled faces with popped-out edges.",
+    status: "beta",
+    file: "packages/react/src/Cube.tsx",
+    usage: `import { Cube } from "@streamuilib/react";
+
+<Cube variant="beveled" tone="blue" spin="loop" />`,
+    examples: [
+      { title: "Variants", description: "Solid faces, a hatched side on paper, or raised beveled keys.", file: ex("cube", "variants") },
+      { title: "Sizes and tones", file: ex("cube", "sizes") },
+      { title: "Spin", description: "On a loop, or on hover. Both stop for reduced motion.", file: ex("cube", "spin") },
+    ],
+    props: [
+      {
+        rows: [
+          { name: "variant", type: '"solid" | "lined" | "beveled"', default: '"solid"', description: "Solid bright faces, paper with one hatched side, or raised faces with popped-out edges." },
+          { name: "tone", type: '"lime" | "pink" | "blue" | "violet" | "orange"', default: '"lime"', description: "The main color; solid and beveled cycle the other brights round the faces." },
+          { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "56, 96, or 144px along an edge." },
+          { name: "spin", type: '"none" | "loop" | "hover"', default: '"none"', description: "Turn continuously, while hovered (or its parent is focused), or not at all." },
+          { name: "label", type: "string", description: 'Accessible name; gives it role="img". Without one it is hidden as decoration.' },
+          { name: "...props", type: 'ComponentProps<"span">', description: "Native span attributes." },
+        ],
+      },
+    ],
+    accessibility: [
+      'Decorative by default (aria-hidden); pass label to make it a named role="img".',
+      "Six real faces in a CSS preserve-3d scene, so no canvas or JavaScript; it renders on the server.",
+      "Spinning stops when the user prefers reduced motion.",
+    ],
+  },
 ];
 
 /** Sidebar and prev/next order: basics, form fields, disclosure and overlays, feedback, media. */
@@ -1601,6 +1633,7 @@ export const componentOrder = [
   "comic-equalizer",
   "animated-icon",
   "comic-animated-icon",
+  "cube",
 ];
 
 export const components: ComponentDoc[] = [...entries].sort(

@@ -51,6 +51,7 @@ export { Tooltip, type TooltipProps } from "./Tooltip";
 export { Skeleton } from "./Skeleton";
 export { Slider, type SliderProps } from "./Slider";
 export { Equalizer, type EqualizerProps } from "./Equalizer";
+export { Cube, type CubeProps, type CubeSize, type CubeSpin, type CubeVariant } from "./Cube";
 export { formatTime, type Track } from "./music";
 export { TrackList, type TrackListProps } from "./TrackList";
 export { useAudioPlayer, type AudioPlayerControls, type UseAudioPlayerOptions } from "./useAudioPlayer";
