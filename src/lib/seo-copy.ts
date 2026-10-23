@@ -414,6 +414,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A 90s boombox in pure CSS 3D for React: tilt it, power it on, and tune four synthesized chiptune stations out of the static. Keyboard friendly.",
     keywords: ["retro radio React", "CSS 3D boombox", "Web Audio radio", "90s radio UI", "React UI experiment"],
   },
+  "screen-buddy": {
+    title: "Cute 3D Device Mascot in React and CSS",
+    description:
+      "A cute 3D device mascot for React: a rounded cube with a glowing bezel whose screen eyes blink and change mood, or show any icon or SVG.",
+    keywords: ["cute mascot React", "CSS 3D device", "emoji screen animation", "animated mascot component", "React UI experiment"],
+  },
   bear: {
     title: "Bonk the Bear: Hammer Cursor Game in React",
     description:

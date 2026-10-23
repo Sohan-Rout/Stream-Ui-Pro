@@ -186,6 +186,12 @@ function resolveAlias(spec: string, from: string, owner: string): string | null 
     if (!placements.has(file)) place(file, owner, "registry:lib", `audio/${audio[1]}`);
     return file;
   }
+  if (spec === "@/components/emojis/faces") {
+    const file = "src/components/emojis/faces.tsx";
+    // The emoji face kit travels with the first lab that uses it.
+    if (!placements.has(file)) place(file, owner, "registry:component", "emojis/faces");
+    return file;
+  }
   if (spec.startsWith("@/")) throw new Error(`${from}: no registry mapping for ${spec}`);
   return null;
 }

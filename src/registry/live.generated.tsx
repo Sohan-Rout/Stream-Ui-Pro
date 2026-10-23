@@ -140,4 +140,5 @@ export const live: Record<string, ComponentType<any>> = {
   "src/components/demos/HammerLab.tsx": dynamic(() => import("@/components/demos/HammerLab").then((m) => m.HammerLab)),
   "src/components/demos/BearLab.tsx": dynamic(() => import("@/components/demos/BearLab").then((m) => m.BearLab)),
   "src/components/demos/RadioLab.tsx": dynamic(() => import("@/components/demos/RadioLab").then((m) => m.RadioLab)),
+  "src/components/demos/ScreenBuddyLab.tsx": dynamic(() => import("@/components/demos/ScreenBuddyLab").then((m) => m.ScreenBuddyLab)),
 };

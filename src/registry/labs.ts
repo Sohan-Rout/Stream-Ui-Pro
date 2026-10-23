@@ -234,6 +234,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "screen-buddy",
+  category: "critter",
+  name: "Screen buddy",
+  description: "A soft 3D cube of a mascot with a glowing bezel and a dark screen for a face, whose eyes blink, glance, and change mood.",
+  file: "src/components/demos/ScreenBuddyLab.tsx",
+  notes: [
+    "Its two glowing eyes blink and glance about, and cycle through moods: happy, love, wink, surprised, sleepy, sad. Tap it for the next one; it hops.",
+    "ScreenBuddy is exported on its own: pass content (one icon or SVG) or faces (a list to cycle) to show anything on the screen, glowing; plus expressions, animation, glow, size, and interval.",
+    "The rounded body is real CSS 3D: rounded slices stacked in depth, so the corners stay round as it tilts toward the pointer. The dial on its flank is a stack of discs.",
+    "Reduced motion keeps it still: no tilt, hop, blink, or screen animation; the faces still change.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
