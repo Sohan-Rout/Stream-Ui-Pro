@@ -402,6 +402,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A neobrutalism mallet cursor in React: click to swing it from the handle and drive nails into a plank, with bursts, sound, and keyboard support.",
     keywords: ["hammer cursor", "custom cursor React", "CSS swing animation", "mallet animation", "React UI experiment"],
   },
+  bear: {
+    title: "Bonk the Bear: Hammer Cursor Game in React",
+    description:
+      "A playful React game: your cursor is a mallet, and bonking the cartoon bear's head gives X-eyes, dizzy stars, and a bump. Keyboard and touch friendly.",
+    keywords: ["hammer cursor game", "bonk game React", "custom cursor React", "cartoon bear animation", "React UI experiment"],
+  },
   "whack-a-mole": {
     title: "Whack-a-Mole Game in React",
     description:

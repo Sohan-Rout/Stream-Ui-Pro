@@ -185,6 +185,19 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "bear",
+  name: "Bonk the bear",
+  description: "A cartoon bear sits on his rug; your cursor is the Hammer mallet. Bonk his head for X-eyes, dizzy stars, and a growing bump.",
+  file: "src/components/demos/BearLab.tsx",
+  notes: [
+    "Inside the board the cursor is the Hammer lab's mallet. A swing anywhere is a whiff; on his head it's a bonk: he squashes, his eyes go X, stars circle, and a BONK! pops.",
+    "The bump on his crown grows a size per bonk (up to three) and goes down a size after each quiet spell, so let him rest.",
+    "His head is a real button: Enter or Space bonks from the keyboard, and the count is announced. On touch the mallet jumps to your tap.",
+    "Reduced motion skips the swing, squash, orbit, and popups; the bonk still counts and the X-eyes and bump still show.",
+  ],
+});
+
 export function getLab(slug: string) {
   return labs.find((l) => l.slug === slug);
 }
