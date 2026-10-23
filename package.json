@@ -14,7 +14,7 @@
     "check": "bun run lint && bun run typecheck && bun run test && bun run build",
     "registry:build": "bun scripts/build-registry.ts && shadcn build",
     "icons:build": "bun scripts/build-brand-icons.ts",
-    "live:build": "bun scripts/build-live-map.ts"
+    "live:build": "bun scripts/build-live-map.ts && bun scripts/build-icon-count.ts"
   },
   "dependencies": {
     "@streamuilib/react": "workspace:*",

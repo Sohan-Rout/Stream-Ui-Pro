@@ -6,6 +6,18 @@ import { buttonStyles } from "@streamuilib/react";
 import { GitHubButton } from "./GitHubButton";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
+import { components } from "@/registry/components";
+import { sections } from "@/registry/sections";
+import { labs } from "@/registry/labs";
+import { LUCIDE_ICON_COUNT } from "@/lib/icon-count.generated";
+
+/** How many of each the mobile menu lists beside its links, from the registries. */
+const NAV_COUNTS: Record<string, string> = {
+  "/components": String(components.length),
+  "/sections": String(sections.length),
+  "/icons": `${(LUCIDE_ICON_COUNT / 1000).toFixed(1)}k`,
+  "/labs": String(labs.length),
+};
 import { NavLinks } from "./NavLinks";
 
 export function SiteHeader() {
@@ -35,7 +47,7 @@ export function SiteHeader() {
           >
             Get started <ArrowRight aria-hidden />
           </Link>
-          <MobileMenu items={siteConfig.nav} />
+          <MobileMenu items={siteConfig.nav.map((item) => ({ ...item, count: NAV_COUNTS[item.href] }))} />
         </div>
       </Rail>
     </header>

@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn, buttonStyles } from "@streamuilib/react";
 
-type NavItem = { label: string; href: string };
+/** `count` is how many the page holds, shown beside the link ("46", "2.1k"). */
+type NavItem = { label: string; href: string; count?: string };
 
 export function MobileMenu({ items }: { items: readonly NavItem[] }) {
   const [open, setOpen] = useState(false);
@@ -41,7 +42,7 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
         )}
       >
         <ul className="divide-y-2 divide-ink">
-          {items.map((item, i) => (
+          {items.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
@@ -50,9 +51,7 @@ export function MobileMenu({ items }: { items: readonly NavItem[] }) {
                 className="flex items-center justify-between px-5 py-4 text-lg font-bold hover:bg-lime hover:text-on-bright aria-[current=page]:bg-lime aria-[current=page]:text-on-bright"
               >
                 {item.label}
-                <span className="font-mono text-xs text-ink-muted">
-                  0{i + 1}
-                </span>
+                {item.count && <span className="font-mono text-xs text-ink-muted">{item.count}</span>}
               </Link>
             </li>
           ))}
