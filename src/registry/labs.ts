@@ -262,6 +262,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "byte",
+  category: "critter",
+  name: "Byte",
+  description: "A little voxel critter made of real 3D cubes: it waddles, blinks its pixel eyes, and types a dev command when you tap it.",
+  file: "src/components/demos/ByteLab.tsx",
+  notes: [
+    "Every pixel is a real CSS cube (six faces, lit from the top-left), arranged on a grid: ear blocks, a three-row body, arm nubs, and four legs that waddle in pairs.",
+    "Its eyes are body cubes with a blinking pixel pupil and a glint, with pink cheeks under them. It tilts toward the pointer.",
+    "Tap it and it hops and types a line in a speech bubble, in turn: bun dev, git push, ship it! Byte is exported on its own; pass lines to give it your own.",
+    "Reduced motion stops the waddle, bob, hop, blink, and typing; the bubble still shows the line.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },

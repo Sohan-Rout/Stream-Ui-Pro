@@ -426,6 +426,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A cute 3D arcade-style ghost for React: it floats with a rippling hem, follows the pointer with its eyes, and turns blue when you tap it.",
     keywords: ["arcade ghost animation", "3D ghost CSS", "cute ghost React", "eyes follow cursor", "React UI experiment"],
   },
+  byte: {
+    title: "3D Voxel Critter Mascot in React and CSS",
+    description:
+      "A cute voxel mascot for React, built from real CSS 3D cubes: it waddles, blinks, tilts toward the pointer, and types dev commands when tapped.",
+    keywords: ["voxel character CSS", "3D pixel mascot", "CSS 3D cubes", "cute mascot React", "React UI experiment"],
+  },
   bear: {
     title: "Bonk the Bear: Hammer Cursor Game in React",
     description:
