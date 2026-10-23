@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent, type WheelEvent } from "react";
+import { Power } from "lucide-react";
 import { cn } from "@streamuilib/react";
 import { renderTrack, SAMPLE_RATE, type TrackSpec } from "@/lib/audio/synth";
 
@@ -282,7 +283,7 @@ export function RadioLab() {
 
   const needle = ((freq - FM_MIN) / (FM_MAX - FM_MIN)) * 100;
   const display = power ? `${freq.toFixed(1)} FM` : "";
-  const readout = !power ? "" : locked ? tuned.name : best > 0.15 ? `${tuned.name}?` : "· · static · ·";
+  const readout = !power ? "" : locked ? tuned.name : best > 0.15 ? `${tuned.name}?` : "static";
 
   return (
     <div className="flex w-full flex-col items-center gap-3 text-ink">
@@ -334,6 +335,13 @@ export function RadioLab() {
                 backgroundRepeat: "no-repeat",
               }}
             />
+            {/* Bottom and back, so no tilt shows through the box. */}
+            <div
+              aria-hidden
+              className="absolute border-4 border-ink bg-pink"
+              style={{ width: W, height: D, top: (H - D) / 2, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, backgroundImage: "linear-gradient(color-mix(in oklab, var(--ink) 30%, transparent), color-mix(in oklab, var(--ink) 30%, transparent))" }}
+            />
+            <div aria-hidden className="absolute inset-0 border-4 border-ink bg-pink" style={{ transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
             {/* Left side, for when it tilts the other way. */}
             <div
               aria-hidden
@@ -353,7 +361,7 @@ export function RadioLab() {
 
             {/* The front face, with every control on it. */}
             <div
-              className="absolute inset-0 rounded-[10px] border-4 border-ink bg-pink"
+              className="absolute inset-0 border-4 border-ink bg-pink"
               style={{ transform: `translateZ(${D / 2}px)`, backgroundImage: "radial-gradient(color-mix(in oklab, var(--ink) 10%, transparent) 1.2px, transparent 1.7px)", backgroundSize: "10px 10px" }}
             >
               <div className="absolute inset-0 flex items-center justify-between px-4">
@@ -377,8 +385,8 @@ export function RadioLab() {
                       className="absolute top-1 block h-11 w-1 -translate-x-1/2 bg-[oklch(0.58_0.2_28)] transition-[left] duration-100 motion-reduce:transition-none"
                       style={{ left: `calc(0.5rem + (100% - 1rem) * ${needle / 100})` }}
                     />
-                    <div className="absolute inset-x-2 bottom-1.5 flex items-baseline justify-between font-mono text-xs font-bold">
-                      <span aria-hidden>{display}</span>
+                    <div className="absolute inset-x-2 bottom-1.5 flex items-baseline justify-between gap-2 font-mono text-[11px] font-bold">
+                      <span aria-hidden className="shrink-0 whitespace-nowrap">{display}</span>
                       <span aria-live="polite" className={cn("truncate", !locked && "opacity-70")}>
                         {readout}
                       </span>
@@ -406,7 +414,7 @@ export function RadioLab() {
                         power ? "translate-y-1 bg-orange shadow-[0_1px_0_var(--ink)]" : "bg-paper-raised shadow-[0_5px_0_var(--ink)]",
                       )}
                     >
-                      <span aria-hidden className={cn("size-2.5 rounded-full border-2 border-ink", power ? "bg-lime" : "bg-paper-sunken")} />
+                      <Power aria-hidden className={cn("size-5", power ? "text-ink" : "text-ink-muted")} strokeWidth={3} />
                     </button>
                     <Knob
                       label="Vol"
