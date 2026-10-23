@@ -1,5 +1,9 @@
+export type LabCategory = "component" | "game" | "critter";
+
 export type LabDoc = {
   slug: string;
+  /** Which catalog card on /labs it sits under. */
+  category: LabCategory;
   name: string;
   description: string;
   file: string;
@@ -11,6 +15,7 @@ export type LabDoc = {
 export const labs: LabDoc[] = [
   {
     slug: "shape-roller",
+    category: "component",
     name: "Shape roller",
     description: "Randomizes shape, color, and rotation on each roll.",
     file: "src/components/demos/ShapeRollerLab.tsx",
@@ -21,6 +26,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "magnetic",
+    category: "component",
     name: "Magnetic button",
     description: "The button drifts toward the cursor within its area.",
     file: "src/components/demos/MagneticLab.tsx",
@@ -31,6 +37,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "wobble",
+    category: "component",
     name: "Wobble type",
     description: "Staggered CSS transitions on hover. No JavaScript.",
     file: "src/components/demos/WobbleLab.tsx",
@@ -38,6 +45,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "dice",
+    category: "component",
     name: "Dice roller",
     description: "A 3D die that tumbles and lands on a random face.",
     file: "src/components/demos/DiceLab.tsx",
@@ -49,6 +57,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "tic-tac-toe",
+    category: "game",
     name: "Cross and circle",
     description: "Tic-tac-toe against an easy or unbeatable CPU, or a friend.",
     file: "src/components/demos/TicTacToeLab.tsx",
@@ -60,6 +69,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "memory",
+    category: "game",
     name: "Memory match",
     description: "Flip cards in 3D to find all eight pairs in as few moves as you can.",
     file: "src/components/demos/MemoryLab.tsx",
@@ -71,6 +81,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "snake",
+    category: "game",
     name: "Snake",
     description: "The classic snake game in three looks: classic, funky, and pixelated.",
     file: "src/components/demos/SnakeLab.tsx",
@@ -83,6 +94,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "flappy",
+    category: "game",
     name: "Flappy",
     description: "A neo-brutalist flappy bird: flap through the gaps between hard-shadowed pipes.",
     file: "src/components/demos/FlappyLab.tsx",
@@ -95,6 +107,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "maze",
+    category: "game",
     name: "Muncher",
     description: "A maze chase: eat every dot, dodge three bots, and grab a power pellet to turn the tables.",
     file: "src/components/demos/MazeLab.tsx",
@@ -107,6 +120,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "jumper",
+    category: "game",
     name: "Jumper",
     description: "A side-scrolling platformer: run, jump, bump blocks for coins, stomp walkers, and reach the flag.",
     file: "src/components/demos/JumperLab.tsx",
@@ -119,6 +133,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "pinball",
+    category: "game",
     name: "Pinball",
     description: "A neo-brutalist pinball table: light the S/UI lanes, knock down the drop targets, and stack up the multiplier.",
     file: "src/components/demos/PinballLab.tsx",
@@ -133,6 +148,7 @@ export const labs: LabDoc[] = [
   },
   {
     slug: "tetris",
+    category: "game",
     name: "Tetris",
     description: "Neo-brutalist falling blocks: hard-edged tetrominoes, a ghost preview, and the next three pieces.",
     file: "src/components/demos/TetrisLab.tsx",
@@ -147,6 +163,7 @@ export const labs: LabDoc[] = [
 
 labs.push({
   slug: "runner",
+  category: "game",
   name: "Dino Runner",
   description: "A neo-brutalist endless runner: jump the pink cacti, duck the flyers, and outrun a world that keeps speeding up.",
   file: "src/components/demos/RunnerLab.tsx",
@@ -161,6 +178,7 @@ labs.push({
 
 labs.push({
   slug: "whack-a-mole",
+  category: "game",
   name: "Whack-a-Mole",
   description: "A neo-brutalist whack-a-mole: 30 seconds, moles that get quicker, gold ones worth more, and bombs to leave alone.",
   file: "src/components/demos/WhackLab.tsx",
@@ -174,6 +192,7 @@ labs.push({
 
 labs.push({
   slug: "hammer",
+  category: "component",
   name: "Hammer",
   description: "Your cursor becomes a neo-brutalist mallet: click to swing it from the handle and drive five nails into a plank.",
   file: "src/components/demos/HammerLab.tsx",
@@ -187,6 +206,7 @@ labs.push({
 
 labs.push({
   slug: "bear",
+  category: "critter",
   name: "Bonk the bear",
   description: "A cartoon bear sits on his rug; your cursor is the Hammer mallet. Bonk his head for X-eyes, dizzy stars, and a growing bump.",
   file: "src/components/demos/BearLab.tsx",
@@ -201,6 +221,7 @@ labs.push({
 
 labs.push({
   slug: "radio",
+  category: "component",
   name: "Retro radio",
   description: "A 90s boombox in real CSS 3D that tilts toward your pointer: power it on and tune four chiptune stations out of the static.",
   file: "src/components/demos/RadioLab.tsx",
@@ -212,6 +233,13 @@ labs.push({
     "Music is synthesized in the browser from note patterns, so there are no audio files. Reduced motion keeps the box still and the speakers from pumping.",
   ],
 });
+
+/** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
+export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
+  { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
+  { id: "game", hash: "games", name: "Mini games", description: "Small arcade games in React and canvas, each playable with a mouse, touch, or keyboard." },
+  { id: "critter", hash: "critters", name: "Critter Club", description: "Cute animated critters with feelings. Poke them, bonk them, watch them react." },
+];
 
 export function getLab(slug: string) {
   return labs.find((l) => l.slug === slug);

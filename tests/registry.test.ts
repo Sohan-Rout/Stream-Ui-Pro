@@ -8,7 +8,7 @@ import * as pkg from "@streamuilib/react";
 import { readSource } from "@/lib/source";
 import { componentEntries, componentGroupOf, componentGroups, componentHref, componentOrder, components } from "@/registry/components";
 import { getSectionVariant, sections } from "@/registry/sections";
-import { labs } from "@/registry/labs";
+import { labCategories, labs } from "@/registry/labs";
 import { docsNav, neighbors } from "@/registry/nav";
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -183,5 +183,19 @@ describe("component groups", () => {
     expect(componentEntries.find((e) => e.slug === "button")?.kind).toBe("group");
     expect(slugs.slice(0, 4)).toEqual(["button", "badge", "card", "alert"]);
     expect(slugs).not.toContain("comic-card");
+  });
+});
+
+describe("lab categories", () => {
+  test("every lab sits in a category, and every category has labs", () => {
+    const ids = new Set(labCategories.map((c) => c.id));
+    for (const l of labs) expect(ids.has(l.category)).toBe(true);
+    for (const c of labCategories) expect(labs.some((l) => l.category === c.id)).toBe(true);
+  });
+
+  test("each category's URL fragment is unique and URL-safe", () => {
+    const hashes = labCategories.map((c) => c.hash);
+    expect(new Set(hashes).size).toBe(hashes.length);
+    for (const h of hashes) expect(h).toMatch(/^[a-z]+$/);
   });
 });
