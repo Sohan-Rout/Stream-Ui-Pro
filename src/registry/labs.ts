@@ -248,6 +248,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "ghost",
+  category: "critter",
+  name: "Ghosty",
+  description: "A thick 3D arcade-style ghost that floats with a rippling hem, follows your pointer with its eyes, and turns blue when you scare it.",
+  file: "src/components/demos/GhostLab.tsx",
+  notes: [
+    "The ghost is its SVG silhouette stacked in slices in CSS 3D, so it has real thickness as it tilts toward the pointer; the face sits a hair in front.",
+    "Its eyes follow the pointer, and two hem frames swap while it floats, so the skirt ripples.",
+    "Tap it to scare it: it turns blue with a wobbly mouth, flashes white near the end, and recovers. Ghosty is exported on its own, in red, pink, cyan, or orange.",
+    "Reduced motion stops the float, the ripple, and the tilt; the eyes still follow and the scare still plays.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
