@@ -199,6 +199,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "radio",
+  name: "Retro radio",
+  description: "A 90s boombox in real CSS 3D that tilts toward your pointer: power it on and tune four chiptune stations out of the static.",
+  file: "src/components/demos/RadioLab.tsx",
+  wide: true,
+  notes: [
+    "The box is real CSS 3D: front, top, and side faces in a preserve-3d scene, tilted toward the pointer. The handle and antenna stand at their own depths.",
+    "Every station loops at once from the first press of Power (browsers only allow sound after a gesture); tuning mixes them against band-passed static by how close the needle is.",
+    "Pull up the antenna to widen each station's window. The knobs drag, scroll, or take the arrow keys and Page Up/Down, and read out as sliders with the station name.",
+    "Music is synthesized in the browser from note patterns, so there are no audio files. Reduced motion keeps the box still and the speakers from pumping.",
+  ],
+});
+
 export function getLab(slug: string) {
   return labs.find((l) => l.slug === slug);
 }

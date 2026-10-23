@@ -179,6 +179,13 @@ function resolveAlias(spec: string, from: string, owner: string): string | null 
     if (!placements.has(file)) place(file, owner, "registry:lib", `games/${game[1]}`);
     return file;
   }
+  const audio = spec.match(/^@\/lib\/audio\/([\w-]+)$/);
+  if (audio) {
+    const file = `src/lib/audio/${audio[1]}.ts`;
+    // Synth code travels with the first lab that uses it, like game rules.
+    if (!placements.has(file)) place(file, owner, "registry:lib", `audio/${audio[1]}`);
+    return file;
+  }
   if (spec.startsWith("@/")) throw new Error(`${from}: no registry mapping for ${spec}`);
   return null;
 }
