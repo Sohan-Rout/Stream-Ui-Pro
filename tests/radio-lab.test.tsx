@@ -1,4 +1,4 @@
-/** Retro radio: power, keyboard tuning onto a station, volume, and the antenna. */
+/** Retro radio: power, keyboard tuning onto a station, volume, and locking on. */
 import { afterEach, describe, expect, test } from "bun:test";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { RadioLab } from "@/components/demos/RadioLab";
@@ -34,13 +34,13 @@ describe("RadioLab", () => {
     expect(vol.getAttribute("aria-valuetext")).toBe("Volume 10 of 10");
   });
 
-  test("the antenna widens reception: a near miss comes in with it up", () => {
+  test("near a station it's static; close enough, it locks on", () => {
     render(<RadioLab />);
-    // 101.6 is 0.3 MHz off OFFSET 101: static with the antenna down, locked with it up.
+    // 101.7 is 0.4 MHz off OFFSET 101: only a faint signal. 101.4 locks on.
     for (let i = 0; i < 9; i++) act(() => fireEvent.keyDown(tune(), { key: "PageUp" }));
-    for (let i = 0; i < 2; i++) act(() => fireEvent.keyDown(tune(), { key: "ArrowUp" }));
-    expect(tune().getAttribute("aria-valuetext")).toBe("101.6 FM, static");
-    act(() => fireEvent.click(screen.getByRole("button", { name: "Pull up the antenna" })));
-    expect(tune().getAttribute("aria-valuetext")).toBe("101.6 FM, OFFSET 101");
+    for (let i = 0; i < 3; i++) act(() => fireEvent.keyDown(tune(), { key: "ArrowUp" }));
+    expect(tune().getAttribute("aria-valuetext")).toBe("101.7 FM, static");
+    for (let i = 0; i < 3; i++) act(() => fireEvent.keyDown(tune(), { key: "ArrowDown" }));
+    expect(tune().getAttribute("aria-valuetext")).toBe("101.4 FM, OFFSET 101");
   });
 });

@@ -72,8 +72,8 @@ const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const round1 = (v: number) => Math.round(v * 10) / 10;
 
 /** How strongly each station comes in at frequency `f`: 1 dead on, 0 past the window. */
-function strengths(f: number, antenna: boolean) {
-  const window = antenna ? 0.9 : 0.45; // MHz either side
+function strengths(f: number) {
+  const window = 0.6; // MHz either side
   return STATIONS.map((s) => clamp(1 - Math.abs(f - s.f) / window, 0, 1));
 }
 
@@ -222,20 +222,19 @@ function Speaker({ pumping, power }: { pumping: number; power: boolean }) {
  * Retro radio: a 90s boombox in real CSS 3D (front, top, and side faces in a
  * preserve-3d box) that tilts toward your pointer. Power it on, turn the
  * tuning knob across the FM dial, and four stations of synthesized chiptune
- * fade in out of the static; pull up the antenna for better reception.
+ * fade in out of the static. The antenna stays up, leaning out at 45°.
  * Knobs drag, scroll, or take the arrow keys; it all works with a keyboard.
  */
 export function RadioLab() {
   const [power, setPower] = useState(false);
   const [freq, setFreq] = useState(92.4);
   const [volume, setVolume] = useState(6);
-  const [antenna, setAntenna] = useState(false);
   const [tilt, setTilt] = useState({ x: -10, y: -24 });
   const [scale, setScale] = useState(1);
   const engine = useRef<Engine | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
-  const levels = strengths(freq, antenna);
+  const levels = strengths(freq);
   const best = Math.max(...levels);
   const tuned = STATIONS[levels.indexOf(best)];
   const locked = best > 0.6;
@@ -251,7 +250,7 @@ export function RadioLab() {
     return () => ro.disconnect();
   }, []);
 
-  // Mix the stations and static to the dial, the antenna, and the volume.
+  // Mix the stations and static to the dial and the volume.
   useEffect(() => {
     const e = engine.current;
     if (!e) return;
@@ -291,10 +290,9 @@ export function RadioLab() {
         @keyframes radio-lab-pump { 0%, 100% { scale: 1; } 30% { scale: calc(1 + var(--pump)); } }
         .radio-lab-pump { animation: radio-lab-pump 0.47s cubic-bezier(.3,0,.4,1) infinite; }
         .radio-lab-box { transition: transform 180ms ease-out; }
-        .radio-lab-antenna { transition: height 300ms cubic-bezier(.3,1.3,.5,1); }
         @media (prefers-reduced-motion: reduce) {
           .radio-lab-pump { animation: none; }
-          .radio-lab-box, .radio-lab-antenna { transition: none; }
+          .radio-lab-box { transition: none; }
         }
       `}</style>
 
@@ -303,9 +301,9 @@ export function RadioLab() {
         onPointerMove={onStageMove}
         onPointerLeave={() => setTilt({ x: -10, y: -24 })}
         className="flex w-full justify-center py-6"
-        style={{ perspective: "1400px", height: (H + 110) * scale }}
+        style={{ perspective: "1400px", height: (H + 190) * scale }}
       >
-        <div style={{ width: W, height: H, transform: `scale(${scale})`, transformOrigin: "top center", marginTop: 70 * scale }}>
+        <div style={{ width: W, height: H, transform: `scale(${scale})`, transformOrigin: "top center", marginTop: 150 * scale }}>
           <div
             className="radio-lab-box relative"
             style={{ width: W, height: H, transformStyle: "preserve-3d", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
@@ -346,9 +344,10 @@ export function RadioLab() {
             {/* The handle, over the middle of the box. */}
             <div aria-hidden className="absolute left-1/2 block h-16 w-64 -translate-x-1/2 rounded-t-[2rem] border-[10px] border-b-0 border-ink" style={{ top: -60, transform: "translateZ(0px)" }} />
 
-            {/* The antenna, standing up from the back-right corner when pulled up. */}
-            <div aria-hidden className="absolute right-6" style={{ bottom: H, transform: `translateZ(${-D / 2 + 10}px)` }}>
-              <span className="radio-lab-antenna block w-2 border-x-2 border-t-2 border-ink bg-paper-sunken" style={{ height: antenna ? 170 : 26 }} />
+            {/* The antenna: always up, leaning out from the back-right corner at 45°. */}
+            <div aria-hidden className="absolute right-10 origin-bottom" style={{ bottom: H, transform: `translateZ(${-D / 2 + 10}px) rotate(45deg)` }}>
+              <span className="absolute -bottom-1 -left-2 block h-3 w-6 rounded-t-md border-[3px] border-ink bg-ink" />
+              <span className="block h-44 w-2 border-x-2 border-t-2 border-ink bg-paper-sunken" style={{ backgroundImage: "linear-gradient(transparent 0 32%, var(--ink) 32% 34%, transparent 34% 64%, var(--ink) 64% 66%, transparent 66%)" }} />
               <span className="absolute -top-2 -left-1 block size-4 rounded-full border-[3px] border-ink bg-orange" />
             </div>
 
@@ -430,14 +429,6 @@ export function RadioLab() {
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
-        <button
-          type="button"
-          aria-pressed={antenna}
-          onClick={() => setAntenna((a) => !a)}
-          className="border-2 border-ink bg-paper-raised px-3 py-1.5 font-bold uppercase shadow-brutal-sm hover:bg-lime-soft focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue"
-        >
-          {antenna ? "Antenna down" : "Pull up the antenna"}
-        </button>
         <span className="text-ink-muted">Drag, scroll, or arrow-key the knobs. Stations at 90.5, 95.9, 101.3, 106.7.</span>
       </div>
     </div>
