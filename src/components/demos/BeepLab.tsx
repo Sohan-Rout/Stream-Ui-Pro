@@ -302,8 +302,8 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
               {/* Soft plastic: blur the shape's alpha into a height map, light it, keep it inside, and outline it. */}
               {(
                 [
-                  ["big", 10, 6, true, 3.2],
-                  ["small", 4.5, 3.5, false, 2.8],
+                  ["big", 10, 6, true, 2.2],
+                  ["small", 4.5, 3.5, false, 1.8],
                 ] as const
               ).map(([name, blur, height, goo, outline]) => (
                 <filter key={name} id={`${uid}-${name}`} x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
@@ -336,7 +336,7 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
                   <feComposite in="shaded" in2="shine" operator="arithmetic" k1="0" k2="1" k3="0.6" k4="0" result="lit" />
                   <feComposite in="lit" in2="shape" operator="in" result="surface" />
                   <feMorphology in="shape" operator="dilate" radius={outline} result="fat" />
-                  <feFlood style={{ floodColor: "var(--ink)" }} result="ink" />
+                  <feFlood style={{ floodColor: "var(--ink)", floodOpacity: 0.5 }} result="ink" />
                   <feComposite in="ink" in2="fat" operator="in" result="line" />
                   <feComposite in="surface" in2="line" operator="over" />
                 </filter>
@@ -383,7 +383,7 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
                 <g transform={`translate(${screenAt.sx} ${screenAt.sy}) scale(${facing} 1)`} opacity={Math.min(1, (facing - 0.12) * 5)}>
                   <path d={RECESS_PATH} fill="black" opacity="0.3" filter={`url(#${uid}-soft)`} />
                   <path d={SCREEN_PATH} fill={`url(#${uid}-screen)`} />
-                  <path d={SCREEN_PATH} fill="none" stroke="black" strokeOpacity="0.55" strokeWidth="2" />
+                  <path d={SCREEN_PATH} fill="none" stroke="black" strokeOpacity="0.3" strokeWidth="1.5" />
                   <path d="M-30 33.5 Q0 37.5 30 33.5" fill="none" stroke="white" strokeOpacity="0.45" strokeWidth="2" strokeLinecap="round" />
                   <path d="M-34 -18 Q-30 -27 -16 -29" fill="none" stroke="white" strokeOpacity="0.22" strokeWidth="3.5" strokeLinecap="round" />
                   {glowing(
