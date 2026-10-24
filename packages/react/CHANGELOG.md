@@ -6,6 +6,18 @@ include breaking changes, and they are called out here.
 
 Each `## x.y.z` section below becomes the notes of its GitHub release.
 
+## 0.6.0
+
+A new shape component. Nothing existing changed, so upgrading from 0.5.0
+needs no code changes.
+
+### Added
+
+- `Cube`: a real 3D cube in pure CSS (six faces in a preserve-3d scene, no
+  JavaScript), in three `variant`s: `solid` bright faces, `lined` paper with
+  one hatched side, or `beveled` faces with popped-out edges. Three sizes, a
+  `tone`, and `spin` on a loop or on hover; decorative unless given a `label`.
+
 ## 0.5.0
 
 Every component now has a comic-book design. Each one keeps its classic
@@ -14,13 +26,6 @@ and all motion stops under `prefers-reduced-motion`. Nothing existing
 changed, so upgrading from 0.4.0 needs no code changes.
 
 ### Added
-
-**Shapes**
-
-- `Cube`: a real 3D cube in pure CSS (six faces in a preserve-3d scene, no
-  JavaScript), in three `variant`s: `solid` bright faces, `lined` paper with
-  one hatched side, or `beveled` faces with popped-out edges. Three sizes, a
-  `tone`, and `spin` on a loop or on hover; decorative unless given a `label`.
 
 **Basics**
 

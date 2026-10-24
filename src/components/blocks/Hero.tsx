@@ -10,7 +10,7 @@ import { componentGroups } from "@/registry/components";
 import { CritterStage } from "./CritterStage";
 import pkg from "../../../packages/react/package.json";
 
-/** "0.5.0" → "v0.5". */
+/** "0.6.0" → "v0.6". */
 const version = `v${pkg.version.split(".").slice(0, 2).join(".")}`;
 
 export function Hero() {
