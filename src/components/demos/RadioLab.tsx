@@ -261,8 +261,19 @@ export function RadioLab() {
     e.hiss.gain.setTargetAtTime(0.05 + (1 - best) * 0.3, t, 0.06);
   }, [power, volume, levels, best]);
 
-  // Close the audio when the lab goes away.
-  useEffect(() => () => void engine.current?.ctx.close(), []);
+  // Close the audio when the lab goes away, and forget it, so coming back (or
+  // Strict Mode's double run) starts a fresh engine instead of closing it twice.
+  // Next keeps a hidden page's state, so switch off too: it returns silent
+  // and off, not showing "on" with no sound.
+  useEffect(
+    () => () => {
+      const ctx = engine.current?.ctx;
+      engine.current = null;
+      if (ctx && ctx.state !== "closed") ctx.close().catch(() => {});
+      setPower(false);
+    },
+    [],
+  );
 
   const togglePower = useCallback(() => {
     // The audio starts on the first press: browsers only allow sound after a user gesture.
