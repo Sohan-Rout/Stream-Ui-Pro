@@ -280,10 +280,10 @@ export function Quackers({ color = "yellow", size = 180, label = "Quackers" }: Q
               {/* Soft plastic: blur the shape's alpha into a height map, light it, and keep it inside the shape. */}
               {(
                 [
-                  ["big", 9, 6, true],
-                  ["small", 4, 3.5, false],
+                  ["big", 9, 6, true, 2.6],
+                  ["small", 4, 3.5, false, 2.2],
                 ] as const
-              ).map(([name, blur, height, goo]) => (
+              ).map(([name, blur, height, goo, outline]) => (
                 <filter key={name} id={`${uid}-${name}`} x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
                   {goo ? (
                     <>
@@ -314,7 +314,12 @@ export function Quackers({ color = "yellow", size = 180, label = "Quackers" }: Q
                   <feComposite in="base" in2="diffuse" operator="arithmetic" k1="0.8" k2="0.3" k3="0" k4="0" result="shaded" />
                   <feComposite in="spec" in2="shape" operator="in" result="shine" />
                   <feComposite in="shaded" in2="shine" operator="arithmetic" k1="0" k2="1" k3="0.7" k4="0" result="lit" />
-                  <feComposite in="lit" in2="shape" operator="in" />
+                  <feComposite in="lit" in2="shape" operator="in" result="surface" />
+                  {/* One bold ink outline around the whole silhouette, under the surface. */}
+                  <feMorphology in="shape" operator="dilate" radius={outline} result="fat" />
+                  <feFlood style={{ floodColor: "var(--ink)" }} result="ink" />
+                  <feComposite in="ink" in2="fat" operator="in" result="line" />
+                  <feComposite in="surface" in2="line" operator="over" />
                 </filter>
               ))}
             </defs>
