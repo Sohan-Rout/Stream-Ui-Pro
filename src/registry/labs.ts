@@ -325,8 +325,8 @@ labs.push({
   description: "A glossy robot with a screen face, cat-ear nubs, and floating arms: it turns toward your pointer, waves, winks, spins, jumps, and thinks.",
   file: "src/components/demos/BeepLab.tsx",
   notes: [
-    "A small 3D model: round parts for the head, bottom, and ear nubs (lit with SVG lighting into one smooth plastic surface with a bold outline), and two floating paddle arms that swing front and back as it turns.",
-    "The dark screen is stuck to the front: it slides across the body and narrows as Beep turns, and hides round the back. Its square eyes and smile glow, and blink.",
+    "A small 3D model: round parts for the head, bottom, and ear nubs (lit with SVG lighting into one smooth plastic surface with a bold outline), and two curved mitten arms that hang from its shoulders, narrowing edge-on and swinging front and back as it turns.",
+    "The screen is set into the front: a soft recess around it, curved glass with a glare, and sides that bow out as if wrapped on the body. It slides and narrows as Beep turns, is clipped to the body so it wraps round the edge, and hides round the back. Its square eyes and smile glow, and blink.",
     "Each tap is the next trick: a wave, a wink, a spin, a jump with both arms up, and a think with scanning eyes, each with its own little square-wave beeps.",
     "Beep is exported on its own: pick a body color (white, mint, peach, lilac) and a glow (white, cyan, lime, pink). Reduced motion skips the floating, turning, and arm swings; the faces still change.",
   ],

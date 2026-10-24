@@ -78,7 +78,29 @@ const BODY_PARTS: Part[] = [
     { key: `ear-tip${side}`, x: side * 33, y: -54, z: 2, a: 7, b: 8, c: 7 },
   ]),
 ];
-const ARM = (side: -1 | 1): Part => ({ key: `arm${side}`, x: side * 74, y: 8, z: 0, a: 11, b: 24, c: 12 });
+/**
+ * A right arm, hanging from its shoulder at (0, 0): a curved mitten paddle,
+ * slim at the shoulder and fuller at the end. The left arm is its mirror.
+ */
+const ARM_PATH = "M-7 0 C-2 -4 8 -3 11 6 C15 18 16 34 10 44 C5 51 -5 51 -9 43 C-13 34 -12 18 -11 9 C-10 4 -10 1 -7 0 Z";
+
+/** The screen: a rounded rectangle whose sides bow out a little, as if wrapped on the body. */
+function screenPath(w: number, h: number, r: number, bow: number) {
+  const [x, y] = [w / 2, h / 2];
+  return [
+    `M${-x + r} ${-y}`,
+    `Q0 ${-y - bow} ${x - r} ${-y}`,
+    `Q${x} ${-y} ${x} ${-y + r}`,
+    `Q${x + bow} 0 ${x} ${y - r}`,
+    `Q${x} ${y} ${x - r} ${y}`,
+    `Q0 ${y + bow} ${-x + r} ${y}`,
+    `Q${-x} ${y} ${-x} ${y - r}`,
+    `Q${-x - bow} 0 ${-x} ${-y + r}`,
+    `Q${-x} ${-y} ${-x + r} ${-y}Z`,
+  ].join(" ");
+}
+const SCREEN_PATH = screenPath(88, 66, 22, 5);
+const RECESS_PATH = screenPath(98, 76, 26, 6);
 
 /** Turns a part by `yaw` and looks down by `pitch`: its on-screen ellipse and depth. */
 function project(q: Part, yawDeg: number, pitchDeg: number) {
@@ -197,23 +219,23 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
 
   // The body as flat ellipses (lit into one surface by the filter), and where the arms and screen land.
   const body = BODY_PARTS.map((q) => ({ key: q.key, ...project(q, yaw, PITCH) }));
-  const arms = ([-1, 1] as const).map((side) => ({ side, ...project(ARM(side), yaw, PITCH) }));
+  // Each arm hangs from a shoulder on the body's side; seen edge-on it narrows.
+  const turn = (yaw * Math.PI) / 180;
+  const armWidth = Math.hypot(Math.cos(turn), 0.5 * Math.sin(turn));
+  const arms = ([-1, 1] as const).map((side) => ({ side, ...project({ key: `arm${side}`, x: side * 50, y: 2, z: 0, a: 1, b: 1, c: 1 }, yaw, PITCH) }));
   const centre = project({ key: "c", x: 0, y: 0, z: 0, a: 1, b: 1, c: 1 }, yaw, PITCH);
   const screenAt = project({ key: "s", x: 0, y: -6, z: 46, a: 1, b: 1, c: 1 }, yaw, PITCH);
   const facing = Math.cos((yaw * Math.PI) / 180);
 
-  /** One floating arm, tilted out at the top, waving or raised for some tricks. */
+  /** One arm: hanging down and out from its shoulder, waving or raised for some tricks. */
   const arm = (a: (typeof arms)[number]) => {
-    const waving = id === "wave" && a.side === 1;
-    const up = id === "jump";
-    const shoulder = { x: a.sx, y: a.sy - a.ry * 0.8 };
+    const anim = (id === "wave" && a.side === 1) ? "beep-wave" : id === "jump" ? "beep-up" : "";
     return (
       <g key={a.side} filter={`url(#${uid}-small)`}>
-        <g
-          className={cn(waving && "beep-wave", up && (a.side === 1 ? "beep-up-r" : "beep-up-l"))}
-          style={{ transformBox: "view-box", transformOrigin: `${shoulder.x}px ${shoulder.y}px` }}
-        >
-          <ellipse cx={a.sx} cy={a.sy} rx={a.rx} ry={a.ry} fill={fill} transform={`rotate(${a.side * 18} ${a.sx} ${a.sy})`} />
+        <g transform={`translate(${a.sx} ${a.sy}) scale(${a.side * armWidth * 0.88} 0.88) rotate(-32)`}>
+          <g className={anim} style={{ transformBox: "fill-box", transformOrigin: "40% 4%" }}>
+            <path d={ARM_PATH} fill={fill} />
+          </g>
         </g>
       </g>
     );
@@ -258,18 +280,16 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
         @keyframes beep-shadow { 0%, 100% { scale: 1; opacity: 1; } 50% { scale: 0.86; opacity: 0.7; } }
         @keyframes beep-jump { 0%, 100% { translate: 0 0; scale: 1 1; } 14% { translate: 0 0; scale: 1.08 0.9; } 46% { translate: 0 -24%; scale: 0.96 1.05; } 78% { translate: 0 0; scale: 1.06 0.94; } }
         @keyframes beep-wave { 0%, 100% { rotate: 0deg; } 15% { rotate: -150deg; } 30% { rotate: -118deg; } 45% { rotate: -152deg; } 60% { rotate: -118deg; } 75% { rotate: -150deg; } }
-        @keyframes beep-up-r { 0%, 100% { rotate: 0deg; } 30%, 70% { rotate: -155deg; } }
-        @keyframes beep-up-l { 0%, 100% { rotate: 0deg; } 30%, 70% { rotate: 155deg; } }
+        @keyframes beep-up { 0%, 100% { rotate: 0deg; } 30%, 70% { rotate: -100deg; } }
         @keyframes beep-scan { 0%, 100% { translate: 0 0; } 25% { translate: -6px 0; } 75% { translate: 6px 0; } }
         .beep-float { animation: beep-float 2.8s ease-in-out infinite; }
         .beep-shadow { animation: beep-shadow 2.8s ease-in-out infinite; }
         .beep-jump { animation: beep-jump 1s cubic-bezier(.3,0,.3,1); transform-origin: 50% 90%; }
         .beep-wave { animation: beep-wave 1.4s ease-in-out; }
-        .beep-up-r { animation: beep-up-r 1s ease-in-out; }
-        .beep-up-l { animation: beep-up-l 1s ease-in-out; }
+        .beep-up { animation: beep-up 1s ease-in-out; }
         .beep-scan { animation: beep-scan 0.9s ease-in-out 2; }
         @media (prefers-reduced-motion: reduce) {
-          .beep-float, .beep-shadow, .beep-jump, .beep-wave, .beep-up-r, .beep-up-l, .beep-scan { animation: none; }
+          .beep-float, .beep-shadow, .beep-jump, .beep-wave, .beep-up, .beep-scan { animation: none; }
         }
       `}</style>
 
@@ -329,10 +349,23 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              <linearGradient id={`${uid}-screen`} x1="0" y1="0" x2="0.4" y2="1">
-                <stop offset="0%" stopColor={`color-mix(in oklab, ${SCREEN} 80%, white)`} />
+              {/* Glass: a touch lighter up top, darker toward the edges, like a curved screen. */}
+              <radialGradient id={`${uid}-screen`} cx="42%" cy="30%" r="75%">
+                <stop offset="0%" stopColor={`color-mix(in oklab, ${SCREEN} 82%, white)`} />
                 <stop offset="55%" stopColor={SCREEN} />
-              </linearGradient>
+                <stop offset="100%" stopColor={`color-mix(in oklab, ${SCREEN} 70%, black)`} />
+              </radialGradient>
+              <filter id={`${uid}-soft`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.6" />
+              </filter>
+              {/* The body's outline (without the ears), so the screen wraps round its edge rather than sticking out. */}
+              <clipPath id={`${uid}-face`}>
+                {body
+                  .filter((q) => q.key === "head" || q.key === "bottom")
+                  .map((q) => (
+                    <ellipse key={q.key} cx={q.sx} cy={q.sy} rx={q.rx - 3} ry={q.ry - 3} />
+                  ))}
+              </clipPath>
             </defs>
 
             {far.map(arm)}
@@ -343,17 +376,23 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
               ))}
             </g>
 
-            {/* The screen face, stuck to the front: it slides and narrows as Beep turns, and hides round the back. */}
+            {/* The screen, set into the front: a soft recess around it, curved glass, a glare, and the glowing face.
+                It slides and narrows as Beep turns, wraps round the body's edge, and hides round the back. */}
             {facing > 0.12 && (
-              <g transform={`translate(${screenAt.sx} ${screenAt.sy}) scale(${facing} 1)`} opacity={Math.min(1, (facing - 0.12) * 5)}>
-                <rect x="-44" y="-33" width="88" height="64" rx="22" fill={`url(#${uid}-screen)`} stroke="var(--ink)" strokeWidth="2.5" />
-                <path d="M-33 -22 Q-29 -28 -18 -28" fill="none" stroke="white" strokeOpacity="0.25" strokeWidth="3" strokeLinecap="round" />
-                {glowing(
-                  <>
-                    {eyes}
-                    {mouth}
-                  </>,
-                )}
+              <g clipPath={`url(#${uid}-face)`}>
+                <g transform={`translate(${screenAt.sx} ${screenAt.sy}) scale(${facing} 1)`} opacity={Math.min(1, (facing - 0.12) * 5)}>
+                  <path d={RECESS_PATH} fill="black" opacity="0.3" filter={`url(#${uid}-soft)`} />
+                  <path d={SCREEN_PATH} fill={`url(#${uid}-screen)`} />
+                  <path d={SCREEN_PATH} fill="none" stroke="black" strokeOpacity="0.55" strokeWidth="2" />
+                  <path d="M-30 33.5 Q0 37.5 30 33.5" fill="none" stroke="white" strokeOpacity="0.45" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M-34 -18 Q-30 -27 -16 -29" fill="none" stroke="white" strokeOpacity="0.22" strokeWidth="3.5" strokeLinecap="round" />
+                  {glowing(
+                    <>
+                      {eyes}
+                      {mouth}
+                    </>,
+                  )}
+                </g>
               </g>
             )}
 
