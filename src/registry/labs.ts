@@ -276,6 +276,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "mochi",
+  category: "critter",
+  name: "Mochi",
+  description: "A squishy jelly blob in faux 3D: it glances around, turns to show the heart on its back, and does a different cute trick every tap.",
+  file: "src/components/demos/MochiLab.tsx",
+  notes: [
+    "The body is a glossy gumdrop that looks the same from every side, so it never turns; the face, cheeks, arms, leaf sprout, and back heart sit at angles around it and slide, foreshorten, and hide as it rotates.",
+    "On its own it glances left and right and every so often turns all the way round to show its back, then comes back. It turns toward the pointer while you hover.",
+    "Each tap is the next trick: a squash-and-stretch hop with hearts, a twirl with happy eyes, a wave, a jelly jiggle, heart eyes, and a tiny nap with floating Zs. Each one has its own synthesized blip, pitched above 300 Hz.",
+    "Mochi is exported on its own, in mint, pink, lemon, or sky. Reduced motion skips the turning easing and the squash animations; the expressions still change.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
