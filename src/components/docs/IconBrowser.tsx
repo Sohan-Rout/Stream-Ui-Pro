@@ -5,6 +5,7 @@ import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
 import { ArrowRight, Check, Ghost, Heart, Rocket, Search, Sparkles, Zap } from "lucide-react";
 import { BRAND_DIR, BrandGlyph } from "@/components/icons/BrandGlyph";
 import { emojis } from "@/components/emojis/emojis";
+import type { EmojiVariant } from "@/components/emojis/faces";
 import { AnimatedIcon, Button, cn, iconAnimations, Input, type IconAnimation, type IconTrigger } from "@streamuilib/react";
 
 const PAGE = 120;
@@ -104,9 +105,9 @@ function CatalogCard({
 
 /** The emoji catalog: each emoji in its still and animated variants, copyable as standalone SVGs. */
 function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (s: string) => void }) {
-  const [palette, setPalette] = useState<"mono" | "color">("mono");
+  const [palette, setPalette] = useState<EmojiVariant>("mono");
   const [query, setQuery] = useState("");
-  const colored = palette === "color";
+  const label = palette === "mono" ? "" : palette === "color" ? "colored " : "3d ";
   const q = query.trim().toLowerCase();
   const shown = q ? emojis.filter((e) => e.name.toLowerCase().includes(q) || e.slug.includes(q) || e.char === q) : emojis;
   async function copy(button: HTMLElement, label: string) {
@@ -139,6 +140,7 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
           [
             ["mono", "Black & white"],
             ["color", "Colored"],
+            ["3d", "3D"],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -168,12 +170,12 @@ function EmojiCatalog({ copied, onCopied }: { copied: string | null; onCopied: (
                 <button
                   key={v}
                   type="button"
-                  data-variant={`${e.slug} ${colored ? "colored " : ""}${v}`}
-                  aria-label={`Copy ${e.name} (${colored ? "colored, " : ""}${v}) as SVG`}
-                  onClick={(ev) => copy(ev.currentTarget, `${e.slug} ${colored ? "colored " : ""}${v}`)}
+                  data-variant={`${e.slug} ${label}${v}`}
+                  aria-label={`Copy ${e.name} (${label ? `${label.trim()}, ` : ""}${v}) as SVG`}
+                  onClick={(ev) => copy(ev.currentTarget, `${e.slug} ${label}${v}`)}
                   className="group flex cursor-pointer flex-col items-center gap-2 bg-paper bg-dots px-2 pt-4 pb-2 transition-colors duration-150 not-first:border-l-2 not-first:border-ink hover:bg-lime-soft focus-visible:relative focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-blue"
                 >
-                  <e.Component animated={v === "animated"} colored={colored} size={72} />
+                  <e.Component animated={v === "animated"} variant={palette} size={72} />
                   <span className="border-2 border-ink bg-paper-raised px-1.5 font-mono text-xs font-bold uppercase group-hover:bg-lime">{v}</span>
                 </button>
               ))}
@@ -365,7 +367,7 @@ export function IconBrowser() {
         <CatalogCard
           open={set === "emojis"}
           title="Emoji catalog"
-          description="Comic emojis in black and white or color, still or animated. Copy one as a standalone SVG."
+          description="Comic emojis in black and white, color, or glossy 3D, still or animated. Copy one as a standalone SVG."
           count={`${emojis.length} faces`}
           tone="bg-orange"
           onOpen={() => openCatalog("emojis")}

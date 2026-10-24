@@ -1,11 +1,12 @@
 /**
- * Comic emojis: black-and-white, thick ink outlines, a hard offset shadow.
+ * Comic emojis: black and white or colored (thick ink outlines, a hard
+ * offset shadow), or glossy 3D (sphere-shaded, with a soft shadow).
  * Each one is a plain SVG, so it copies out of the page and works anywhere.
  * The animated variant carries its own <style> (scoped by a class prefix),
  * which also holds still for reduced motion.
  */
 import type { ComponentType } from "react";
-import { Face, faceDefs, type FaceDef } from "./faces";
+import { Face, FaceBase, faceDefs, variantOf, type FaceDef, type EmojiVariant } from "./faces";
 
 const INK = "#0e0f14";
 const PAPER = "#ffffff";
@@ -14,7 +15,7 @@ const FACE = "#ffd84d";
 const PINK = "#ff70b3";
 const TEAR = "#70ccee";
 
-type EmojiProps = { animated?: boolean; colored?: boolean; size?: number; title?: string };
+type EmojiProps = { animated?: boolean; colored?: boolean; variant?: EmojiVariant; size?: number; title?: string };
 
 /** The keyframes for the animated Smile, inside the SVG itself. */
 const SMILE_CSS = `
@@ -37,7 +38,9 @@ const SMILE_CSS = `
 `;
 
 /** A big comic grin (black and white, or colored with `colored`): round face, oval eyes with glints, an open smile with a tongue. */
-export function Smile({ animated = false, colored = false, size = 96, title = "Smiling face" }: EmojiProps) {
+export function Smile({ animated = false, colored, variant, size = 96, title = "Smiling face" }: EmojiProps) {
+  const look = variantOf({ variant, colored });
+  colored = look !== "mono";
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 132 132" width={size} height={size} role="img" aria-label={title}>
       {animated && <style>{SMILE_CSS}</style>}
@@ -49,9 +52,7 @@ export function Smile({ animated = false, colored = false, size = 96, title = "S
         </g>
       )}
       <g className={animated ? "sui-smile-face" : undefined}>
-        {/* The hard shadow, then the face. */}
-        <circle cx="64" cy="66" r="44" fill={INK} />
-        <circle cx="58" cy="60" r="44" fill={colored ? FACE : PAPER} stroke={INK} strokeWidth="6" />
+        <FaceBase variant={look} fill={colored ? FACE : PAPER} id="smile" />
         {colored && (
           <g fill={PINK}>
             <ellipse cx="28" cy="70" rx="8" ry="5" />
@@ -96,7 +97,9 @@ const CRY_CSS = `
 `;
 
 /** A loud comic sob: eyes squeezed shut, worried brows, a wailing mouth, and tears streaming down. */
-export function Cry({ animated = false, colored = false, size = 96, title = "Crying face" }: EmojiProps) {
+export function Cry({ animated = false, colored, variant, size = 96, title = "Crying face" }: EmojiProps) {
+  const look = variantOf({ variant, colored });
+  colored = look !== "mono";
   const tear = colored ? TEAR : PAPER;
   /** A teardrop shape, its tip at (x, y). */
   const drop = (x: number, y: number) => `M${x} ${y} Q${x + 6} ${y + 9} ${x + 6} ${y + 13} A6 6 0 0 1 ${x - 6} ${y + 13} Q${x - 6} ${y + 9} ${x} ${y} Z`;
@@ -104,9 +107,7 @@ export function Cry({ animated = false, colored = false, size = 96, title = "Cry
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 132 132" width={size} height={size} role="img" aria-label={title}>
       {animated && <style>{CRY_CSS}</style>}
       <g className={animated ? "sui-cry-face" : undefined}>
-        {/* The hard shadow, then the face. */}
-        <circle cx="64" cy="66" r="44" fill={INK} />
-        <circle cx="58" cy="60" r="44" fill={colored ? FACE : PAPER} stroke={INK} strokeWidth="6" />
+        <FaceBase variant={look} fill={colored ? FACE : PAPER} id="cry" />
         {/* Worried brows, slanting up toward the middle. */}
         <g stroke={INK} strokeWidth="5" strokeLinecap="round" fill="none">
           <path d="M30 34 Q38 28 48 31" />

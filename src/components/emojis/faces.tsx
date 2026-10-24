@@ -20,7 +20,68 @@ const LIME = "#bdf952";
 const ORANGE = "#ff9e53";
 const VIOLET = "#c0a2f5";
 
-export type FaceProps = { animated?: boolean; colored?: boolean; size?: number; title?: string };
+/** Black and white, colored, or glossy 3D (colored, sphere-shaded, with a soft shadow). */
+export type EmojiVariant = "mono" | "color" | "3d";
+
+export type FaceProps = {
+  animated?: boolean;
+  /** Shorthand for `variant="color"`. */
+  colored?: boolean;
+  variant?: EmojiVariant;
+  size?: number;
+  title?: string;
+};
+
+/** The variant a set of props asks for: `variant` wins, then `colored`. */
+export const variantOf = ({ variant, colored }: { variant?: EmojiVariant; colored?: boolean }): EmojiVariant => variant ?? (colored ? "color" : "mono");
+
+/** Mixes a hex color toward white (amount > 0) or black (amount < 0). Plain hex out, so copied SVGs work anywhere. */
+function shade(hex: string, amount: number) {
+  const n = parseInt(hex.slice(1), 16);
+  const to = amount > 0 ? 255 : 0;
+  const k = Math.abs(amount);
+  const ch = (v: number) => Math.round(v + (to - v) * k).toString(16).padStart(2, "0");
+  return `#${ch((n >> 16) & 255)}${ch((n >> 8) & 255)}${ch(n & 255)}`;
+}
+
+/**
+ * The round face every emoji sits on. Flat variants: a hard ink offset
+ * shadow and a thick ink outline. 3D: a sphere-shaded fill (light up top-left,
+ * warmer and darker toward the edge), a thin tinted rim, a soft shadow below,
+ * and a glossy highlight. `id` keeps the gradient's id unique per emoji.
+ */
+export function FaceBase({ variant, fill, id, dashed }: { variant: EmojiVariant; fill: string; id: string; dashed?: boolean }) {
+  if (variant !== "3d") {
+    return (
+      <>
+        <circle cx="64" cy="66" r="44" fill={INK} />
+        <circle cx="58" cy="60" r="44" fill={fill} stroke={INK} strokeWidth="6" strokeDasharray={dashed ? "10 7" : undefined} />
+      </>
+    );
+  }
+  const g = `sui3d-${id}`;
+  return (
+    <>
+      <defs>
+        <radialGradient id={`${g}-fill`} cx="38%" cy="30%" r="72%">
+          <stop offset="0%" stopColor={shade(fill, 0.55)} />
+          <stop offset="42%" stopColor={fill} />
+          <stop offset="100%" stopColor={shade(fill, -0.3)} />
+        </radialGradient>
+        <radialGradient id={`${g}-floor`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={INK} stopOpacity="0.28" />
+          <stop offset="100%" stopColor={INK} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <ellipse cx="58" cy="108" rx="40" ry="8" fill={`url(#${g}-floor)`} />
+      <circle cx="58" cy="60" r="44" fill={`url(#${g}-fill)`} stroke={shade(fill, -0.42)} strokeWidth="2.5" strokeDasharray={dashed ? "10 7" : undefined} />
+      {/* A soft bounce of light along the bottom edge, and the gloss up top. */}
+      <path d="M26 86 Q58 112 90 86" fill="none" stroke={shade(fill, 0.35)} strokeOpacity="0.5" strokeWidth="3" strokeLinecap="round" />
+      <ellipse cx="38" cy="30" rx="15" ry="8" transform="rotate(-32 38 30)" fill={PAPER} opacity="0.55" />
+      <circle cx="54" cy="21" r="3" fill={PAPER} opacity="0.6" />
+    </>
+  );
+}
 
 type EyeKind =
   | "dot" | "small" | "happy" | "closed" | "squint" | "flat" | "wide" | "roll" | "plead"
@@ -567,19 +628,29 @@ function extraPart(x: Extra, ctx: Ctx, key: string): ReactNode {
 /* The face                                                            */
 /* ------------------------------------------------------------------ */
 
-export function Face({ def, animated = false, colored = false, size = 96, title }: FaceProps & { def: FaceDef }) {
+/**
+ * The animated stylesheet sets transform-box: fill-box on everything, which
+ * would make rotate(180 58 60) pivot around the group's own box; the view
+ * box keeps it pivoting around the face's centre.
+ */
+const FLIP_BOX = { transformBox: "view-box" } as const;
+
+export function Face({ def, animated = false, colored, variant, size = 96, title }: FaceProps & { def: FaceDef }) {
+  const look = variantOf({ variant, colored });
+  colored = look !== "mono";
   const face = colored ? (def.tint ?? FACE) : PAPER;
   const ctx: Ctx = { colored, anim: animated, face };
   const extras = def.extras ?? [];
   const motion = animated ? `sui-f-${def.motion ?? "bob"}` : undefined;
+  const flip = def.flip ? "rotate(180 58 60)" : undefined;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -10 132 132" width={size} height={size} role="img" aria-label={title ?? def.name} className={animated ? "sui-f" : undefined}>
       {animated && <style>{CSS}</style>}
       <g className={motion}>
-        <g transform={def.flip ? "rotate(180 58 60)" : undefined}>
-          {extras.filter((x) => BEHIND.has(x)).map((x, i) => extraPart(x, ctx, `b${i}`))}
-          <circle cx="64" cy="66" r="44" fill={INK} />
-          <circle cx="58" cy="60" r="44" fill={face} stroke={INK} strokeWidth="6" strokeDasharray={def.dashed ? "10 7" : undefined} />
+        {/* An upside-down face flips its features, not its light and shadow. */}
+        <g transform={flip} style={flip ? FLIP_BOX : undefined}>{extras.filter((x) => BEHIND.has(x)).map((x, i) => extraPart(x, ctx, `b${i}`))}</g>
+        <FaceBase variant={look} fill={face} id={def.slug} dashed={def.dashed} />
+        <g transform={flip} style={flip ? FLIP_BOX : undefined}>
           {browsPart(def.brows)}
           {eyesPart(def, ctx)}
           {mouthPart(def, ctx)}
