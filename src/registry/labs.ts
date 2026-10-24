@@ -305,16 +305,16 @@ labs.push({
 });
 
 labs.push({
-  slug: "snowball",
+  slug: "eight-ball",
   category: "critter",
-  name: "Snowball",
-  description: "A glossy black ball with white pill eyes and a smile: it bounces, turns all the way around, follows your pointer, and does a trick on every tap.",
-  file: "src/components/demos/SnowballLab.tsx",
+  name: "8-Ball",
+  description: "A glossy pool-ball mascot, as any ball in the rack: it bounces, turns round to show its number, follows your pointer, and does a trick on every tap.",
+  file: "src/components/demos/EightBallLab.tsx",
   notes: [
-    "The face is stuck to the ball's surface: each eye and the smile sit at a point on the sphere and are drawn squashed toward the centre as they turn away, so they slide across the curve, narrow at the edge, and go round the back.",
-    "On its own it hovers and hops with squash and stretch, glances about, and every so often turns all the way round. It looks toward the pointer while you hover.",
-    "Each tap is the next trick: a big boing with happy eyes, a spin, a squish with squeezed eyes, a roll (the face turns with the distance it travels), and a wink. Each has its own synthesized blip, pitched above 300 Hz.",
-    "Snowball is exported on its own, in ink, plum, navy, or forest. Reduced motion skips the bouncing, rolling, and turning; the expressions still change.",
+    "Its face is stuck to the ball's surface and its number sticker to the back: each eye, the smile, and the sticker sit at a point on the sphere and are drawn squashed toward the centre as they turn away, so they slide across the curve and go round.",
+    "Every ball in the set is a design: solids 1 to 8, stripes 9 to 15 (the band follows the ball's curve, seen from a little above), and the cue ball. Light balls get dark eyes. Eyes are round by default, or leaning pills.",
+    "On its own it hovers and hops with squash and stretch, glances about, and every so often turns round to show its number. Each tap is the next trick: a big boing, a spin, a squish, a roll (with a clack), and a wink, each with a synthesized blip.",
+    "EightBall is exported on its own: pass ball (1 to 15, or \"cue\") and eyes (\"round\" or \"pill\"). Reduced motion skips the bouncing, rolling, and turning; the expressions still change.",
   ],
 });
 
