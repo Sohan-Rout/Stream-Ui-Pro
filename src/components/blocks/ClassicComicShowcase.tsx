@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Mail, Plus, Zap } from "lucide-react";
+import { ArrowUpRight, Mail, Plus, Zap } from "lucide-react";
 import {
   Alert,
   Button,
@@ -183,8 +183,13 @@ export function ClassicComicShowcase() {
           <li key={t.slug} className={cn("flex min-h-64 flex-col", design === "comic" ? "bg-orange-soft" : "bg-paper")}>
             <div className="flex items-center justify-between gap-3 border-b-2 border-dashed border-ink-faint px-5 py-3 font-mono text-xs">
               <span className="font-semibold">{design === "comic" ? `Comic${t.name}` : t.name}</span>
-              <Link href={`/components/${t.slug}/${design}`} className="font-bold underline decoration-2 underline-offset-2 hover:text-ink-muted">
-                Docs →
+              <Link
+                href={`/components/${t.slug}/${design}`}
+                aria-label={`${design === "comic" ? `Comic${t.name}` : t.name} docs`}
+                className="group inline-flex items-center gap-1 border-2 border-ink bg-paper-raised px-2 py-0.5 font-bold uppercase shadow-brutal-sm transition-[translate,box-shadow] duration-150 hover:-translate-x-px hover:-translate-y-px hover:shadow-brutal motion-reduce:transition-none"
+              >
+                Docs
+                <ArrowUpRight aria-hidden className="size-3.5 transition-transform duration-150 group-hover:translate-x-px group-hover:-translate-y-px motion-reduce:transition-none" strokeWidth={2.5} />
               </Link>
             </div>
             {/* Keyed by design, so the new one mounts fresh (and plays its entrance). */}
