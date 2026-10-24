@@ -280,8 +280,8 @@ export function Quackers({ color = "yellow", size = 180, label = "Quackers" }: Q
               {/* Soft plastic: blur the shape's alpha into a height map, light it, and keep it inside the shape. */}
               {(
                 [
-                  ["big", 9, 6, true, 2.6],
-                  ["small", 4, 3.5, false, 2.2],
+                  ["big", 9, 6, true, 3.2],
+                  ["small", 4, 3.5, false, 2.7],
                 ] as const
               ).map(([name, blur, height, goo, outline]) => (
                 <filter key={name} id={`${uid}-${name}`} x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
