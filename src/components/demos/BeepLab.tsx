@@ -128,7 +128,7 @@ const PITCH = 10;
  * the next trick: a wave, a wink, a spin, a jump with its arms up, and a
  * think with scanning eyes. One labelled button.
  */
-export function Beep({ color = "white", glow = "white", size = 180, label = "Beep" }: BeepProps) {
+export function Beep({ color = "white", glow = "white", size = 210, label = "Beep" }: BeepProps) {
   const [yaw, setYaw] = useState(BASE_YAW);
   const [action, setAction] = useState<{ id: Action; n: number } | null>(null);
   const [blink, setBlink] = useState(false);
@@ -273,7 +273,7 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
         if (!busy.current) turnTo(BASE_YAW, 500);
       }}
       className="relative grid cursor-pointer place-items-center rounded-[3rem] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-blue"
-      style={{ width: size * 1.35, height: size * 1.25 }}
+      style={{ width: size * 1.25, height: size * 1.18 }}
     >
       <style href="beep-bot" precedence="default">{`
         @keyframes beep-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5%; } }
@@ -297,7 +297,7 @@ export function Beep({ color = "white", glow = "white", size = 180, label = "Bee
 
       <div className="beep-float" style={{ width: size }}>
         <div key={action?.n ?? 0} className={cn(id === "jump" && "beep-jump")}>
-          <svg aria-hidden viewBox="-104 -80 208 156" overflow="visible" className="block w-full">
+          <svg aria-hidden viewBox="-90 -74 180 140" overflow="visible" className="block w-full">
             <defs>
               {/* Soft plastic: blur the shape's alpha into a height map, light it, keep it inside, and outline it. */}
               {(
