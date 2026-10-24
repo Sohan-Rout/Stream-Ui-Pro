@@ -1,15 +1,21 @@
+import { ArrowUpRight } from "lucide-react";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SectionThumb, ThumbFrame, type SectionSlug } from "./SectionThumbs";
+import { WhenVisible } from "@/components/ui/WhenVisible";
+import { LiveThumb } from "@/components/docs/LiveThumb";
+import { Live } from "@/components/docs/Live";
+import { getSectionVariant, sections } from "@/registry/sections";
+import { buttonStyles } from "@streamuilib/react";
 
-const items: { slug: SectionSlug; name: string; count: number; tone: string }[] = [
-  { slug: "hero", name: "Hero", count: 6, tone: "bg-lime" },
-  { slug: "pricing", name: "Pricing", count: 4, tone: "bg-blue" },
-  { slug: "features", name: "Features", count: 5, tone: "bg-pink" },
-  { slug: "testimonials", name: "Testimonials", count: 3, tone: "bg-violet" },
-  { slug: "faq", name: "FAQ", count: 2, tone: "bg-orange" },
-  { slug: "footer", name: "Footer", count: 4, tone: "bg-lime" },
+/** The newest designs, live. */
+const picks = [
+  { slug: "hero", id: "comic", tint: "bg-orange-soft" },
+  { slug: "hero", id: "jungle", tint: "bg-lime-soft" },
+  { slug: "footer", id: "bold", tint: "bg-pink-soft" },
 ];
+
+const designs = sections.reduce((n, s) => n + s.variants.length, 0);
 
 export function SectionsShowcase() {
   return (
@@ -17,23 +23,46 @@ export function SectionsShowcase() {
       <SectionHeading
         index="02"
         eyebrow="Sections"
-        title={<span id="sections-title">Page sections built from the same parts.</span>}
-        description="Composed from the same primitives, so a hero and a pricing table never disagree about what a button looks like."
+        title={<span id="sections-title">Whole page sections, ready to drop in.</span>}
+        description={`${designs} designs across ${sections.length} sections: heroes you can play, pricing you can bonk, footers with a punchline. All built from the same components.`}
+        action={
+          <Link href="/sections" className={buttonStyles({ variant: "secondary" })}>
+            All sections <ArrowUpRight aria-hidden />
+          </Link>
+        }
       />
-      <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
-          <li key={item.slug} className="bg-blue-soft p-5 sm:p-6">
-            <ThumbFrame>
-              <SectionThumb slug={item.slug} />
-            </ThumbFrame>
-            <div className="mt-4 flex items-center justify-between">
-              <h3 className="text-lg font-display tracking-tight">{item.name}</h3>
-              <span className={`border-2 border-ink px-2 font-mono text-xs font-bold text-on-bright ${item.tone}`}>
-                ×{item.count}
-              </span>
-            </div>
-          </li>
-        ))}
+      <ul className="grid grid-cols-1 gap-0.5 bg-ink md:grid-cols-3">
+        {picks.map((p) => {
+          const found = getSectionVariant(p.slug, p.id);
+          if (!found) throw new Error(`home: no section ${p.slug}#${p.id}`);
+          const { section, variant } = found;
+          return (
+            <li key={`${p.slug}-${p.id}`} className={`group relative flex flex-col p-5 sm:p-6 ${p.tint}`}>
+              <div aria-hidden className="flex items-center gap-1.5 border-2 border-b-0 border-ink bg-paper-raised px-3 py-1.5">
+                <span className="size-2 rounded-full border-2 border-ink bg-pink" />
+                <span className="size-2 rounded-full border-2 border-ink bg-orange" />
+                <span className="size-2 rounded-full border-2 border-ink bg-lime" />
+                <span className="ml-2 truncate font-mono text-xs text-ink-muted">
+                  {section.slug}/{variant.id}.tsx
+                </span>
+              </div>
+              {/* The previews are whole sections: mount them only as they scroll near. */}
+              <WhenVisible className="aspect-video bg-paper-sunken bg-dots">
+                <LiveThumb>
+                  <Live file={variant.file} headingAs="h3" />
+                </LiveThumb>
+              </WhenVisible>
+              <div className="mt-4 flex items-baseline justify-between gap-3">
+                <h3 className="font-display text-lg tracking-tight">
+                  <Link href={`/sections/${section.slug}#${variant.id}`} className="after:absolute after:inset-0">
+                    {variant.name}
+                  </Link>
+                </h3>
+                <span className="font-mono text-xs font-bold text-ink-muted">{section.name}</span>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </Section>
   );

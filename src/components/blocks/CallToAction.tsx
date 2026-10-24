@@ -17,11 +17,11 @@ export function CallToAction() {
             id="cta-title"
             className="mt-5 font-display text-4xl leading-tight tracking-tight text-balance sm:text-5xl"
           >
-            Start with one component.
+            Pick a personality. Ship it today.
           </h2>
           <p className="mt-4 text-lg leading-relaxed">
-            Add the button, see how it fits your codebase, then pull in more
-            as you need them.
+            Add one component in Classic or Comic, see how it fits your
+            codebase, then bring in a hero, a game, or a critter.
           </p>
         </div>
         <div className="flex max-w-full flex-col items-start gap-5">

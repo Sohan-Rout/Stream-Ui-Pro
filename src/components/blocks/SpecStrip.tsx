@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 
-const items = ["Tailwind ready", "React ready", "Next.js ready", "shadcn CLI ready"];
+const items = ["Tailwind v4 ready", "React 19 ready", "shadcn CLI ready", "Accessible by default"];
 
 export function SpecStrip() {
   return (

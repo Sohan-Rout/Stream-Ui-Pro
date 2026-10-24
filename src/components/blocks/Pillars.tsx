@@ -4,12 +4,17 @@ import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { cn } from "@streamuilib/react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { componentGroups } from "@/registry/components";
+import { sections } from "@/registry/sections";
+import { labs } from "@/registry/labs";
+import { LUCIDE_ICON_COUNT } from "@/lib/icon-count.generated";
 
 type Pillar = {
   title: string;
   href: string;
   blurb: string;
   examples: string;
+  count: string;
   icon: LucideIcon;
   /** Static class strings so Tailwind can see them. */
   tile: string;
@@ -20,8 +25,9 @@ const pillars: Pillar[] = [
   {
     title: "Components",
     href: "/components",
-    blurb: "Buttons, inputs, tabs, and dialogs with keyboard support and focus states included.",
-    examples: "Button · Input · Tabs · Switch",
+    blurb: "Every component in two designs: Classic brutal and Comic book. Keyboard support and focus states included.",
+    examples: "Classic · Comic",
+    count: `${componentGroups.length}×2`,
     icon: Blocks,
     tile: "bg-lime",
     hover: "hover:bg-lime-soft",
@@ -29,8 +35,9 @@ const pillars: Pillar[] = [
   {
     title: "Sections",
     href: "/sections",
-    blurb: "Heroes, pricing tables, FAQs, and footers composed from the same components.",
-    examples: "Hero · Pricing · FAQ · Footer",
+    blurb: "Playable heroes, bonkable pricing, and footers with a punchline, composed from the same components.",
+    examples: "Hero · Pricing · Footer",
+    count: String(sections.reduce((n, s) => n + s.variants.length, 0)),
     icon: PanelsTopLeft,
     tile: "bg-pink",
     hover: "hover:bg-pink-soft",
@@ -38,8 +45,9 @@ const pillars: Pillar[] = [
   {
     title: "Icons",
     href: "/icons",
-    blurb: "A 24px set at one stroke weight, so icons sit evenly next to text at every size.",
+    blurb: "Lucide icons, brand marks, and animated emoji faces. Search, then copy as JSX or SVG.",
     examples: "Search · copy as JSX",
+    count: `${(LUCIDE_ICON_COUNT / 1000).toFixed(1)}k`,
     icon: Shapes,
     tile: "bg-blue",
     hover: "hover:bg-blue-soft",
@@ -47,8 +55,9 @@ const pillars: Pillar[] = [
   {
     title: "Labs",
     href: "/labs",
-    blurb: "Interaction experiments that haven't been promoted to the main library yet.",
-    examples: "APIs may change",
+    blurb: "3D toys, mini games that fit in a card, and the Critter Club: mascots that blink, spook, and type.",
+    examples: "Toys · Games · Critters",
+    count: String(labs.length),
     icon: FlaskConical,
     tile: "bg-violet",
     hover: "hover:bg-violet-soft",
@@ -61,7 +70,7 @@ export function Pillars() {
       <SectionHeading
         index="00"
         eyebrow="What's included"
-        title={<span id="pillars-title">Four parts, one design language.</span>}
+        title={<span id="pillars-title">Four parts, one loud design language.</span>}
         description="Install one package or copy the source into your repo. Plain React and Tailwind, with no theme provider."
       />
       <ul className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-4">
@@ -74,14 +83,17 @@ export function Pillars() {
                 p.hover,
               )}
             >
-              <span
-                className={cn(
-                  "grid size-12 place-items-center border-2 border-ink text-on-bright shadow-brutal-sm",
-                  p.tile,
-                )}
-              >
-                <p.icon aria-hidden className="size-5.5" strokeWidth={2} />
-              </span>
+              <div className="flex items-start justify-between gap-3">
+                <span
+                  className={cn(
+                    "grid size-12 place-items-center border-2 border-ink text-on-bright shadow-brutal-sm",
+                    p.tile,
+                  )}
+                >
+                  <p.icon aria-hidden className="size-5.5" strokeWidth={2} />
+                </span>
+                <span className="font-display text-3xl tracking-tight tabular-nums">{p.count}</span>
+              </div>
               <div className="flex flex-1 flex-col gap-2">
                 <h3 className="font-display text-xl tracking-tight">{p.title}</h3>
                 <p className="leading-relaxed text-ink-muted">{p.blurb}</p>

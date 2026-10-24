@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/blocks/Hero";
 import { SpecStrip } from "@/components/blocks/SpecStrip";
 import { Pillars } from "@/components/blocks/Pillars";
-import { ComponentShowcase } from "@/components/blocks/ComponentShowcase";
+import { ClassicComicSection } from "@/components/blocks/ClassicComicSection";
 import { SectionsShowcase } from "@/components/blocks/SectionsShowcase";
 import { IconShowcase } from "@/components/blocks/IconShowcase";
 import { LabsShowcase } from "@/components/blocks/LabsShowcase";
@@ -44,7 +44,7 @@ export default function Home() {
       <Hero />
       <SpecStrip />
       <Pillars />
-      <ComponentShowcase />
+      <ClassicComicSection />
       <SectionsShowcase />
       <IconShowcase />
       <LabsShowcase />
