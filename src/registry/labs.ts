@@ -304,6 +304,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "snowball",
+  category: "critter",
+  name: "Snowball",
+  description: "A glossy black ball with white pill eyes and a smile: it bounces, turns all the way around, follows your pointer, and does a trick on every tap.",
+  file: "src/components/demos/SnowballLab.tsx",
+  notes: [
+    "The face is stuck to the ball's surface: each eye and the smile sit at a point on the sphere and are drawn squashed toward the centre as they turn away, so they slide across the curve, narrow at the edge, and go round the back.",
+    "On its own it hovers and hops with squash and stretch, glances about, and every so often turns all the way round. It looks toward the pointer while you hover.",
+    "Each tap is the next trick: a big boing with happy eyes, a spin, a squish with squeezed eyes, a roll (the face turns with the distance it travels), and a wink. Each has its own synthesized blip, pitched above 300 Hz.",
+    "Snowball is exported on its own, in ink, plum, navy, or forest. Reduced motion skips the bouncing, rolling, and turning; the expressions still change.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
