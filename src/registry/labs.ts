@@ -318,6 +318,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "beep",
+  category: "critter",
+  name: "Beep",
+  description: "A glossy robot with a screen face, cat-ear nubs, and floating arms: it turns toward your pointer, waves, winks, spins, jumps, and thinks.",
+  file: "src/components/demos/BeepLab.tsx",
+  notes: [
+    "A small 3D model: round parts for the head, bottom, and ear nubs (lit with SVG lighting into one smooth plastic surface with a bold outline), and two floating paddle arms that swing front and back as it turns.",
+    "The dark screen is stuck to the front: it slides across the body and narrows as Beep turns, and hides round the back. Its square eyes and smile glow, and blink.",
+    "Each tap is the next trick: a wave, a wink, a spin, a jump with both arms up, and a think with scanning eyes, each with its own little square-wave beeps.",
+    "Beep is exported on its own: pick a body color (white, mint, peach, lilac) and a glow (white, cyan, lime, pink). Reduced motion skips the floating, turning, and arm swings; the faces still change.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },
