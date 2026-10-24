@@ -290,6 +290,20 @@ labs.push({
   ],
 });
 
+labs.push({
+  slug: "duck",
+  category: "critter",
+  name: "Quackers",
+  description: "A glossy rubber duck modeled in 3D: it rocks on the spot, turns toward your pointer, and quacks, squeaks, and hops into a spin when tapped.",
+  file: "src/components/demos/DuckLab.tsx",
+  notes: [
+    "It's a small 3D model: round parts (body, chest, rump, tail, neck, head, a two-part bill, teardrop wings, eyes) placed in space, turned by the pointer, and projected to ellipses, so it's round from every side.",
+    "The body, tail, neck, and head are drawn as one shape and lit with SVG lighting (a blurred height map through diffuse and specular light), which melts them into one seamless, glossy plastic surface. The bill and each wing are lit the same way on their own.",
+    "Each tap is the next trick: a quack (the bill opens), a double quack, a squeak as it squishes and squints, and a hop with a full 360° spin, landing with a quack. Face features on the far side hide as it turns.",
+    "The quack is synthesized, not a sample: two detuned saw waves gliding down through two band-pass formants, which makes it nasal. Quackers is exported on its own, in yellow, pink, mint, or lilac.",
+  ],
+});
+
 /** The three catalog cards on /labs, in order. `hash` is the URL fragment that opens each. */
 export const labCategories: { id: LabCategory; hash: string; name: string; description: string }[] = [
   { id: "component", hash: "components", name: "Components", description: "Interaction experiments that could become components: a mallet cursor, a 3D radio, magnetic buttons, wobbly text." },

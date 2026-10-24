@@ -39,5 +39,46 @@ export function blip(notes: Note[], volume = 1) {
   }
 }
 
+/**
+ * A rubber-duck quack: two detuned saws gliding down, through two band-pass
+ * "formants" so it sounds nasal rather than like a beep. `pitch` scales it
+ * (1 is a mid duck; above 1 is a smaller one).
+ */
+export function quack(pitch = 1, volume = 1) {
+  const ac = audio();
+  if (!ac) return;
+  const now = ac.currentTime;
+  const dur = 0.2;
+  const out = ac.createGain();
+  out.gain.setValueAtTime(0, now);
+  out.gain.linearRampToValueAtTime(0.09 * volume, now + 0.012);
+  out.gain.setValueAtTime(0.09 * volume, now + 0.06);
+  out.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+  out.connect(ac.destination);
+  const formants = [
+    { f: 1100, q: 4, g: 1 },
+    { f: 2600, q: 7, g: 0.5 },
+  ].map(({ f, q, g }) => {
+    const bp = ac.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = f * Math.sqrt(pitch);
+    bp.Q.value = q;
+    const amp = ac.createGain();
+    amp.gain.value = g;
+    bp.connect(amp).connect(out);
+    return bp;
+  });
+  for (const detune of [0, 14]) {
+    const osc = ac.createOscillator();
+    osc.type = "sawtooth";
+    osc.detune.value = detune;
+    osc.frequency.setValueAtTime(560 * pitch, now);
+    osc.frequency.exponentialRampToValueAtTime(400 * pitch, now + dur);
+    for (const bp of formants) osc.connect(bp);
+    osc.start(now);
+    osc.stop(now + dur + 0.02);
+  }
+}
+
 /** Notes in C major, so every effect sits in one key. */
 export const NOTE = { C4: 262, E4: 330, G4: 392, A4: 440, C5: 523, D5: 587, E5: 659, G5: 784, A5: 880, C6: 1047, E6: 1319, G6: 1568 } as const;

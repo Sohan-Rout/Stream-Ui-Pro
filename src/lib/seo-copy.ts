@@ -432,6 +432,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A cute voxel mascot for React, built from real CSS 3D cubes: it waddles, blinks, tilts toward the pointer, and types dev commands when tapped.",
     keywords: ["voxel character CSS", "3D pixel mascot", "CSS 3D cubes", "cute mascot React", "React UI experiment"],
   },
+  duck: {
+    title: "3D Rubber Duck Animation in React and SVG",
+    description:
+      "A glossy 3D rubber duck for React and SVG: it rocks on the spot, follows your pointer, and quacks, squeaks, and hops into a spin when tapped.",
+    keywords: ["rubber duck animation", "3D duck SVG", "cute mascot React", "quack sound Web Audio", "React UI experiment"],
+  },
   mochi: {
     title: "Cute 3D Blob Mascot Animation in React",
     description:
