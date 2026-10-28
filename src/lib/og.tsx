@@ -33,19 +33,33 @@ async function fetchGoogleFont(family: string, weight: 400 | 700): Promise<Array
       return await font.arrayBuffer();
     } catch (error) {
       lastError = error;
+      console.warn(`[og] ${family} ${weight}: attempt ${attempt} failed:`, error instanceof Error ? error.message : error);
       await new Promise((r) => setTimeout(r, 400 * attempt));
     }
   }
   throw lastError;
 }
 
-async function googleFont(family: string, weight: 400 | 700): Promise<ArrayBuffer | null> {
-  try {
-    return await fetchGoogleFont(family, weight);
-  } catch (error) {
-    console.warn(`[og] Couldn't load ${family} ${weight}; using the default font.`, error);
-    return null;
+/**
+ * One load per font per build worker, shared by every image. The images all
+ * start at once, before the cache above has an entry, so without this each
+ * one fired its own requests and Google throttled some of them.
+ */
+const inFlight = new Map<string, Promise<ArrayBuffer | null>>();
+
+function googleFont(family: string, weight: 400 | 700): Promise<ArrayBuffer | null> {
+  const key = `${family}:${weight}`;
+  let load = inFlight.get(key);
+  if (!load) {
+    load = fetchGoogleFont(family, weight).catch((error) => {
+      // Production builds hide the message inside cached functions, so log the cause here too.
+      console.warn(`[og] Couldn't load ${family} ${weight}; using the default font.`, error instanceof Error ? (error.cause ?? error.message) : error);
+      inFlight.delete(key);
+      return null;
+    });
+    inFlight.set(key, load);
   }
+  return load;
 }
 
 /** Archivo Black for display, Space Mono regular and bold for labels (as on the site). */
