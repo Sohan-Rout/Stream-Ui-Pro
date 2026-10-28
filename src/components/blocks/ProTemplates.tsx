@@ -3,6 +3,7 @@ import { ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
 import { buttonStyles, cn } from "@streamuilib/react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { siteConfig } from "@/lib/site";
 import { templates, type Template } from "@/lib/templates";
 
 /** A screenshot in the same browser chrome the section previews use. */
@@ -13,7 +14,7 @@ function Shot({ shot, url, priority, className }: { shot: Template["shots"][numb
         <span className="size-2 rounded-full border-2 border-ink bg-pink" />
         <span className="size-2 rounded-full border-2 border-ink bg-orange" />
         <span className="size-2 rounded-full border-2 border-ink bg-lime" />
-        {url && <span className="ml-2 truncate font-mono text-xs text-ink-muted">{url.replace(/^https:\/\//, "")}</span>}
+        {url && <span className="ml-2 truncate font-mono text-xs text-ink-muted">{url}</span>}
       </div>
       <Image src={shot.src} alt={shot.alt} placeholder="blur" priority={priority} sizes="(min-width: 1152px) 640px, (min-width: 1024px) 55vw, 100vw" className="block h-auto w-full" />
     </figure>
@@ -25,7 +26,7 @@ function TemplateCard({ t }: { t: Template }) {
   return (
     <article aria-labelledby={`template-${t.slug}`} className="grid grid-cols-1 gap-0.5 bg-ink lg:grid-cols-12">
       <div className="flex flex-col gap-5 bg-orange-soft bg-dots p-5 sm:p-8 lg:col-span-7">
-        <Shot shot={cover} url={t.demoUrl} />
+        <Shot shot={cover} url={`${new URL(siteConfig.url).host}/templates/${t.slug}`} />
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {more.map((s) => (
             <Shot key={s.alt} shot={s} className="shadow-brutal-sm" />
@@ -81,7 +82,8 @@ function TemplateCard({ t }: { t: Template }) {
                   <Clock aria-hidden /> Coming soon
                 </span>
               )}
-              <a href={t.demoUrl} target="_blank" rel="noopener" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+              {/* Opens the preview on this site, in a new tab, so the visitor keeps their place here. */}
+              <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary", size: "lg" })}>
                 Live demo <ArrowUpRight aria-hidden />
               </a>
             </div>

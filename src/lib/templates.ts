@@ -48,3 +48,7 @@ export const templates: Template[] = [
     stack: ["Next.js 16", "React 19", "Tailwind v4", "TypeScript"],
   },
 ];
+
+export function getTemplate(slug: string) {
+  return templates.find((t) => t.slug === slug);
+}
