@@ -1,0 +1,114 @@
+import Image from "next/image";
+import { ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
+import { buttonStyles, cn } from "@streamuilib/react";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { templates, type Template } from "@/lib/templates";
+
+/** A screenshot in the same browser chrome the section previews use. */
+function Shot({ shot, url, priority, className }: { shot: Template["shots"][number]; url?: string; priority?: boolean; className?: string }) {
+  return (
+    <figure className={cn("flex flex-col border-2 border-ink bg-paper shadow-brutal", className)}>
+      <div aria-hidden className="flex items-center gap-1.5 border-b-2 border-ink bg-paper-raised px-3 py-1.5">
+        <span className="size-2 rounded-full border-2 border-ink bg-pink" />
+        <span className="size-2 rounded-full border-2 border-ink bg-orange" />
+        <span className="size-2 rounded-full border-2 border-ink bg-lime" />
+        {url && <span className="ml-2 truncate font-mono text-xs text-ink-muted">{url.replace(/^https:\/\//, "")}</span>}
+      </div>
+      <Image src={shot.src} alt={shot.alt} placeholder="blur" priority={priority} sizes="(min-width: 1152px) 640px, (min-width: 1024px) 55vw, 100vw" className="block h-auto w-full" />
+    </figure>
+  );
+}
+
+function TemplateCard({ t }: { t: Template }) {
+  const [cover, ...more] = t.shots;
+  return (
+    <article aria-labelledby={`template-${t.slug}`} className="grid grid-cols-1 gap-0.5 bg-ink lg:grid-cols-12">
+      <div className="flex flex-col gap-5 bg-orange-soft bg-dots p-5 sm:p-8 lg:col-span-7">
+        <Shot shot={cover} url={t.demoUrl} />
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          {more.map((s) => (
+            <Shot key={s.alt} shot={s} className="shadow-brutal-sm" />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col bg-paper lg:col-span-5">
+        <div className="flex items-center justify-between gap-3 border-b-2 border-ink px-5 py-3 sm:px-8">
+          <span className="font-mono text-xs font-bold">template/{t.slug}</span>
+          <span className="border-2 border-ink bg-lime px-1.5 font-mono text-xs font-bold text-on-bright">New</span>
+        </div>
+
+        <div className="flex flex-1 flex-col gap-6 p-5 sm:p-8">
+          <div>
+            <h3 id={`template-${t.slug}`} className="font-display text-3xl tracking-tight">
+              {t.name}
+            </h3>
+            <p className="mt-3 text-base leading-relaxed text-pretty text-ink-muted">{t.tagline}</p>
+          </div>
+
+          <ul className="flex flex-col gap-2.5">
+            {t.includes.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm">
+                <span className="mt-px grid size-5 shrink-0 place-items-center border-2 border-ink bg-lime text-on-bright">
+                  <Check aria-hidden className="size-3" strokeWidth={3} />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <ul aria-label="Built with" className="flex flex-wrap gap-2">
+            {t.stack.map((s) => (
+              <li key={s} className="border-2 border-ink bg-paper-raised px-2 py-0.5 font-mono text-xs">
+                {s}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-auto flex flex-col gap-4 border-t-2 border-ink pt-6">
+            <p className="flex items-baseline gap-2">
+              <span className="font-display text-4xl tracking-tight">${t.price}</span>
+              <span className="text-sm text-ink-muted">one-time · unlimited projects</span>
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {t.checkoutUrl ? (
+                <a href={t.checkoutUrl} className={buttonStyles({ size: "lg" })}>
+                  <ShoppingBag aria-hidden /> Buy {t.name}
+                </a>
+              ) : (
+                <span aria-disabled className={cn(buttonStyles({ size: "lg" }), "pointer-events-none opacity-60")}>
+                  <Clock aria-hidden /> Coming soon
+                </span>
+              )}
+              <a href={t.demoUrl} target="_blank" rel="noopener" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+                Live demo <ArrowUpRight aria-hidden />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/**
+ * The paid templates: complete sites built from the library. Each shows its
+ * screens, what's inside, the price, and links to the live demo and checkout.
+ */
+export function ProTemplates() {
+  return (
+    <Section id="templates" aria-labelledby="templates-title">
+      <SectionHeading
+        index="05"
+        eyebrow="Pro templates"
+        title={<span id="templates-title">Whole sites, built and ready to ship.</span>}
+        description="Complete Next.js sites made with these components. Buy once, get the full source, and make it yours for unlimited personal and client projects."
+      />
+      {templates.map((t) => (
+        <TemplateCard key={t.slug} t={t} />
+      ))}
+      <p className="border-t-2 border-ink px-5 py-4 font-mono text-xs text-ink-muted sm:px-8">More templates on the way. The library itself stays free and open source.</p>
+    </Section>
+  );
+}

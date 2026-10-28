@@ -20,6 +20,7 @@ const EXAMPLES: Record<string, string> = {
   FUNDING_GITHUB_SPONSORS_URL: "https://github.com/sponsors/your-org",
   FUNDING_RAZORPAY_URL: "https://razorpay.me/@your-name",
   FUNDING_RAZORPAY_QR_URL: "https://rzp.io/i/your-qr-code",
+  TEMPLATE_SAAS_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
 };
 
 const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
@@ -84,6 +85,10 @@ export function parseEnv(source: Source) {
       razorpay: optionalLink(source, "FUNDING_RAZORPAY_URL"),
       /** Razorpay UPI QR code image, for scanning with a phone. */
       razorpayQr: optionalLink(source, "FUNDING_RAZORPAY_QR_URL"),
+    },
+    /** Checkout links for the paid templates. Unset shows "Coming soon" in place of Buy. */
+    checkout: {
+      saas: optionalLink(source, "TEMPLATE_SAAS_CHECKOUT_URL"),
     },
     /** Google Analytics 4, loaded only after a visitor accepts the cookie banner. */
     gaId: optionalGaId(source),

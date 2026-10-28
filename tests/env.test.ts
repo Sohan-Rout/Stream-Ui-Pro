@@ -6,8 +6,14 @@ describe("parseEnv", () => {
     expect(parseEnv({})).toEqual({
       siteUrl: "https://streamui.org",
       funding: { githubSponsors: "", razorpay: "", razorpayQr: "" },
+      checkout: { saas: "" },
       gaId: "",
     });
+  });
+
+  test("reads a template checkout link, rejecting insecure ones", () => {
+    expect(parseEnv({ TEMPLATE_SAAS_CHECKOUT_URL: "buy.polar.sh/polar_cl_abc" }).checkout.saas).toBe("https://buy.polar.sh/polar_cl_abc");
+    expect(() => parseEnv({ TEMPLATE_SAAS_CHECKOUT_URL: "http://buy.polar.sh/x" })).toThrow(/TEMPLATE_SAAS_CHECKOUT_URL must use https/);
   });
 
   test("normalizes the site URL to an origin", () => {

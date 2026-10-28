@@ -11,7 +11,7 @@ export function CallToAction() {
       <div className="flex flex-col items-start gap-8 px-5 py-16 sm:px-10 sm:py-20 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-xl">
           <p className="flex items-center gap-3 font-mono text-xs font-bold tracking-widest uppercase">
-            05 <span aria-hidden className="h-0.5 w-8 bg-on-bright" /> Get started
+            06 <span aria-hidden className="h-0.5 w-8 bg-on-bright" /> Get started
           </p>
           <h2
             id="cta-title"

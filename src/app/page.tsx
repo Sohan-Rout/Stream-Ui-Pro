@@ -10,6 +10,7 @@ import { ClassicComicSection } from "@/components/blocks/ClassicComicSection";
 import { SectionsShowcase } from "@/components/blocks/SectionsShowcase";
 import { IconShowcase } from "@/components/blocks/IconShowcase";
 import { LabsShowcase } from "@/components/blocks/LabsShowcase";
+import { ProTemplates } from "@/components/blocks/ProTemplates";
 import { CallToAction } from "@/components/blocks/CallToAction";
 
 export const metadata: Metadata = pageMetadata({ description: homeSeo.description, path: "/", keywords: homeSeo.keywords });
@@ -48,6 +49,7 @@ export default function Home() {
       <SectionsShowcase />
       <IconShowcase />
       <LabsShowcase />
+      <ProTemplates />
       <CallToAction />
     </>
   );
