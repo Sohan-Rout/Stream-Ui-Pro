@@ -28,7 +28,7 @@ export function SiteHeader() {
           <Logo />
         </Link>
 
-        <nav aria-label="Primary" className="hidden h-full md:block">
+        <nav aria-label="Primary" className="hidden h-full lg:block">
           <NavLinks items={siteConfig.nav} />
         </nav>
 
@@ -43,7 +43,7 @@ export function SiteHeader() {
           <GitHubButton />
           <Link
             href="/components"
-            className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex md:hidden lg:inline-flex" })}
+            className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex lg:hidden xl:inline-flex" })}
           >
             Get started <ArrowRight aria-hidden />
           </Link>

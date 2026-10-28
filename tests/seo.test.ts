@@ -7,6 +7,7 @@ import manifest from "@/app/manifest";
 import { componentEntries, componentGroups } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
+import { templates } from "@/lib/templates";
 
 describe("site config", () => {
   test("canonical origin is https with no trailing slash", () => {
@@ -62,6 +63,7 @@ describe("sitemap.xml", () => {
       "/sections",
       "/icons",
       "/labs",
+      "/templates",
       "/sponsor",
       "/legal/privacy",
       "/legal/terms",
@@ -71,6 +73,7 @@ describe("sitemap.xml", () => {
       ...sections.map((s) => `/sections/${s.slug}`),
       ...sections.filter((s) => s.variants.length > 1).flatMap((s) => s.variants.map((v) => `/sections/${s.slug}/${v.id}`)),
       ...labs.map((l) => `/labs/${l.slug}`),
+      ...templates.map((t) => `/templates/${t.slug}`),
     ].map(absoluteUrl);
     expect(urls.sort()).toEqual(expected.sort());
   });

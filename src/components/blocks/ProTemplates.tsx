@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
 import { buttonStyles, cn } from "@streamuilib/react";
+import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/lib/site";
 import { templates, type Template } from "@/lib/templates";
 
 /** A screenshot in the same browser chrome the section previews use. */
-function Shot({ shot, url, priority, className }: { shot: Template["shots"][number]; url?: string; priority?: boolean; className?: string }) {
+export function Shot({ shot, url, priority, className }: { shot: Template["shots"][number]; url?: string; priority?: boolean; className?: string }) {
   return (
     <figure className={cn("flex flex-col border-2 border-ink bg-paper shadow-brutal", className)}>
       <div aria-hidden className="flex items-center gap-1.5 border-b-2 border-ink bg-paper-raised px-3 py-1.5">
@@ -21,7 +22,7 @@ function Shot({ shot, url, priority, className }: { shot: Template["shots"][numb
   );
 }
 
-function TemplateCard({ t }: { t: Template }) {
+export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingAs?: "h2" | "h3" }) {
   const [cover, ...more] = t.shots;
   return (
     <article aria-labelledby={`template-${t.slug}`} className="grid grid-cols-1 gap-0.5 bg-ink lg:grid-cols-12">
@@ -42,9 +43,11 @@ function TemplateCard({ t }: { t: Template }) {
 
         <div className="flex flex-1 flex-col gap-6 p-5 sm:p-8">
           <div>
-            <h3 id={`template-${t.slug}`} className="font-display text-3xl tracking-tight">
-              {t.name}
-            </h3>
+            <H id={`template-${t.slug}`} className="font-display text-3xl tracking-tight">
+              <Link href={`/templates/${t.slug}`} className="hover:underline hover:decoration-2 hover:underline-offset-4">
+                {t.name}
+              </Link>
+            </H>
             <p className="mt-3 text-base leading-relaxed text-pretty text-ink-muted">{t.tagline}</p>
           </div>
 
@@ -106,6 +109,11 @@ export function ProTemplates() {
         eyebrow="Pro templates"
         title={<span id="templates-title">Whole sites, built and ready to ship.</span>}
         description="Complete Next.js sites made with these components. Buy once, get the full source, and make it yours for unlimited personal and client projects."
+        action={
+          <Link href="/templates" className={buttonStyles({ variant: "secondary" })}>
+            All templates <ArrowUpRight aria-hidden />
+          </Link>
+        }
       />
       {templates.map((t) => (
         <TemplateCard key={t.slug} t={t} />

@@ -3,6 +3,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { componentEntries, componentGroups } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
+import { templates } from "@/lib/templates";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entry = (path: string, priority: number, changeFrequency: "weekly" | "monthly") => ({
@@ -17,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/sections", 0.8, "weekly"),
     entry("/icons", 0.8, "monthly"),
     entry("/labs", 0.6, "weekly"),
+    entry("/templates", 0.8, "weekly"),
     entry("/sponsor", 0.4, "monthly"),
     entry("/legal/privacy", 0.2, "monthly"),
     entry("/legal/terms", 0.2, "monthly"),
@@ -28,5 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((s) => s.variants.length > 1)
       .flatMap((s) => s.variants.map((v) => entry(`/sections/${s.slug}/${v.id}`, 0.7, "monthly"))),
     ...labs.map((l) => entry(`/labs/${l.slug}`, 0.5, "monthly")),
+    ...templates.map((t) => entry(`/templates/${t.slug}`, 0.8, "weekly")),
   ];
 }

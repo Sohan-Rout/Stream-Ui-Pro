@@ -15,7 +15,8 @@ export async function generateMetadata({ params }: PageProps<"/templates/[slug]/
   const { slug } = await params;
   const t = getTemplate(slug);
   if (!t) return {};
-  return pageMetadata({ title: `${t.name} live preview`, description: t.tagline, path: `/templates/${t.slug}/preview` });
+  // The preview is the demo in a frame, with no content of its own: keep it out of search results, pointing at the template's page.
+  return pageMetadata({ title: `${t.name} live preview`, description: t.seo.description, path: `/templates/${t.slug}`, noindex: true });
 }
 
 export default async function TemplatePreviewPage({ params }: PageProps<"/templates/[slug]/preview">) {

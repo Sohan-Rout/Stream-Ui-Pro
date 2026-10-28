@@ -16,18 +16,22 @@ export function pageMetadata({
   description,
   path,
   keywords,
+  noindex,
 }: {
   /** Page title; omit on the home page to use the site title. */
   title?: string;
   description: string;
   path: string;
   keywords?: string[];
+  /** Keep the page out of search results (links on it are still followed). */
+  noindex?: boolean;
 }): Metadata {
   const socialTitle = title ? `${title} · ${siteConfig.name}` : siteConfig.title;
   return {
     ...(title && { title }),
     description,
     ...(keywords && { keywords }),
+    ...(noindex && { robots: { index: false, follow: true } }),
     alternates: { canonical: path },
     openGraph: {
       type: "website",

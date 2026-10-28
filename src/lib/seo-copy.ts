@@ -64,6 +64,12 @@ export const indexSeo = {
       "Creative React UI experiments and CSS animations: a 3D dice roller, a magnetic button, wobble text, and a shape generator, with full source code.",
     keywords: ["React UI experiments", "CSS animations", "creative coding", "React interactions", "3D CSS", "neobrutalism"],
   },
+  templates: {
+    title: "Next.js Landing Page Templates",
+    description:
+      "Neobrutalism Next.js landing page templates made with stream/ui: complete, responsive sites with full source code. Buy once, use in unlimited projects.",
+    keywords: ["Next.js landing page templates", "neobrutalism templates", "SaaS landing page template", "Tailwind templates", "React website templates"],
+  },
   sponsor: {
     title: "Sponsor",
     description:

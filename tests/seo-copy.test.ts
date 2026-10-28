@@ -7,6 +7,7 @@ import { componentGroupSeo, componentSeo, homeSeo, indexSeo, labSeo, sectionSeo,
 import { componentGroups, components } from "@/registry/components";
 import { sections } from "@/registry/sections";
 import { labs } from "@/registry/labs";
+import { templates } from "@/lib/templates";
 
 const pages: [string, SeoCopy, boolean][] = [
   ["home", homeSeo, false],
@@ -18,6 +19,7 @@ const pages: [string, SeoCopy, boolean][] = [
     .filter((s) => s.variants.length > 1)
     .flatMap((s) => s.variants.map((v) => [`/sections/${s.slug}/${v.id}`, variantSeo(s, v), true] as [string, SeoCopy, boolean])),
   ...labs.map((l) => [`/labs/${l.slug}`, labSeo(l), true] as [string, SeoCopy, boolean]),
+  ...templates.map((t) => [`/templates/${t.slug}`, t.seo, true] as [string, SeoCopy, boolean]),
 ];
 
 describe.each(pages)("%s", (_, copy, suffixed) => {
@@ -72,5 +74,13 @@ describe("target phrases", () => {
   test("titles are unique across the site", () => {
     const titles = pages.map(([, c]) => c.title);
     expect(new Set(titles).size).toBe(titles.length);
+  });
+});
+
+describe("templates", () => {
+  const has = (copy: SeoCopy, phrase: RegExp) => phrase.test(copy.title) && phrase.test(copy.description);
+  test("the index and each template target landing page template searches", () => {
+    expect(has(indexSeo.templates, /landing page templates/i)).toBe(true);
+    for (const t of templates) expect(has(t.seo, /landing page template/i)).toBe(true);
   });
 });
