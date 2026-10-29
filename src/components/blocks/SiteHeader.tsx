@@ -1,5 +1,5 @@
 import { IntentLink as Link } from "@/components/ui/IntentLink";
-import { ArrowRight, Heart } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { Rail } from "@/components/ui/Section";
 import { buttonStyles } from "@streamuilib/react";
@@ -42,10 +42,10 @@ export function SiteHeader() {
           </Link>
           <GitHubButton />
           <Link
-            href="/components"
-            className={buttonStyles({ size: "sm", className: "hidden h-10 sm:inline-flex lg:hidden xl:inline-flex" })}
+            href="/templates"
+            className={buttonStyles({ variant: "pink", size: "sm", className: "hidden h-10 sm:inline-flex lg:hidden xl:inline-flex" })}
           >
-            Get started <ArrowRight aria-hidden />
+            <ShoppingBag aria-hidden /> Pro templates
           </Link>
           <MobileMenu items={siteConfig.nav.map((item) => ({ ...item, count: NAV_COUNTS[item.href] }))} />
         </div>
