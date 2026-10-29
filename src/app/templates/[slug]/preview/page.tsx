@@ -23,5 +23,5 @@ export default async function TemplatePreviewPage({ params }: PageProps<"/templa
   const { slug } = await params;
   const t = getTemplate(slug);
   if (!t) notFound();
-  return <TemplatePreview name={t.name} demoUrl={t.demoUrl} checkoutUrl={t.checkoutUrl} price={t.price} />;
+  return <TemplatePreview slug={t.slug} name={t.name} demoUrl={t.demoUrl} checkoutUrl={t.checkoutUrl} price={t.price} />;
 }
