@@ -5,7 +5,7 @@ import { homeSeo } from "@/lib/seo-copy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/blocks/Hero";
 import { SpecStrip } from "@/components/blocks/SpecStrip";
-import { Pillars } from "@/components/blocks/Pillars";
+import { Offerings } from "@/components/blocks/Offerings";
 import { ClassicComicSection } from "@/components/blocks/ClassicComicSection";
 import { SectionsShowcase } from "@/components/blocks/SectionsShowcase";
 import { IconShowcase } from "@/components/blocks/IconShowcase";
@@ -44,12 +44,12 @@ export default function Home() {
       <JsonLd data={structuredData} />
       <Hero />
       <SpecStrip />
-      <Pillars />
+      <Offerings />
       <ClassicComicSection />
       <SectionsShowcase />
+      <ProTemplates />
       <IconShowcase />
       <LabsShowcase />
-      <ProTemplates />
       <CallToAction />
     </>
   );

@@ -71,7 +71,7 @@ export function LabsShowcase() {
   return (
     <Section id="labs" aria-labelledby="labs-title">
       <SectionHeading
-        index="04"
+        index="05"
         eyebrow="Labs"
         title={<span id="labs-title">Toys, games, and the Critter Club.</span>}
         description="The playground: 3D toys you can poke, mini games for empty states, and cute critters with expressions. All plain React and CSS, all copyable."

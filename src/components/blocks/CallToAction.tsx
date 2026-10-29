@@ -21,14 +21,20 @@ export function CallToAction() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed">
             Add one component in Classic or Comic, see how it fits your
-            codebase, then bring in a hero, a game, or a critter.
+            codebase, then bring in a hero, a game, or a critter. Or start
+            from a whole site with a Pro template.
           </p>
         </div>
         <div className="flex max-w-full flex-col items-start gap-5">
           <InstallTabs options={installOptions(shadcnBrowse())} />
-          <Link href="/components" className={buttonStyles({ variant: "secondary", size: "lg" })}>
-            Browse components <ArrowRight aria-hidden />
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/components" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+              Browse components <ArrowRight aria-hidden />
+            </Link>
+            <Link href="/templates" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+              Pro templates <ArrowRight aria-hidden />
+            </Link>
+          </div>
         </div>
       </div>
     </Section>

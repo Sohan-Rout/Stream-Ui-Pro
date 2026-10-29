@@ -105,7 +105,7 @@ export function ProTemplates() {
   return (
     <Section id="templates" aria-labelledby="templates-title">
       <SectionHeading
-        index="05"
+        index="03"
         eyebrow="Pro templates"
         title={<span id="templates-title">Whole sites, built and ready to ship.</span>}
         description="Complete Next.js sites made with these components. Buy once, get the full source, and make it yours for unlimited personal and client projects."

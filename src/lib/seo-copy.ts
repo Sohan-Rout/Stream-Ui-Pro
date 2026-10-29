@@ -23,7 +23,7 @@ const base = ["neobrutalism", "neo-brutalism", "neubrutalism", "React", "Tailwin
 export const homeSeo: SeoCopy = {
   title: "stream/ui — Neobrutalism UI Library for React",
   description:
-    "Neobrutalism UI library for React and Tailwind CSS v4: accessible components, landing page sections, 2,000+ animated icons, and creative UI labs.",
+    "Neobrutalism UI library for React and Tailwind CSS v4: accessible components, page sections, 2,000+ animated icons, UI labs, and Next.js templates.",
   keywords: [
     ...base,
     "neobrutalism UI",

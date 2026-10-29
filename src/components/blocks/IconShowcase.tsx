@@ -9,7 +9,7 @@ export function IconShowcase() {
   return (
     <Section id="icons" aria-labelledby="icons-title">
       <SectionHeading
-        index="03"
+        index="04"
         eyebrow="Icons"
         title={<span id="icons-title">Icons that move. Logos you know.</span>}
         description="2,000+ line icons on one grid and stroke, with seven CSS animations, plus 3,400+ brand logos. Pick an animation, then click anything to copy its JSX."

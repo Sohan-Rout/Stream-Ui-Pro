@@ -18,10 +18,19 @@ export function Hero() {
     <Section id="top" railClassName="grid grid-cols-1 lg:grid-cols-12">
       {/* Pitch */}
       <div className="flex flex-col justify-center gap-8 px-5 py-14 sm:px-10 sm:py-20 lg:col-span-7 lg:border-r-2 lg:border-ink">
-        <Badge tone="paper" className="self-start">
-          <span aria-hidden className="size-2 rounded-full bg-lime ring-2 ring-ink" />
-          {version} · {componentGroups.length} components × 2 designs
-        </Badge>
+        <div className="flex flex-wrap items-center gap-3">
+          <Badge tone="paper">
+            <span aria-hidden className="size-2 rounded-full bg-lime ring-2 ring-ink" />
+            {version} · {componentGroups.length} components × 2 designs
+          </Badge>
+          <Link
+            href="/templates"
+            className="group inline-flex items-center gap-2 border-2 border-ink bg-orange px-2.5 py-1 font-mono text-xs font-bold text-on-bright uppercase shadow-brutal-sm transition-[translate,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink motion-reduce:transition-none"
+          >
+            New · Pro templates
+            <ArrowRight aria-hidden className="size-3.5 transition-[translate] duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none" />
+          </Link>
+        </div>
 
         <h1 className="text-5xl leading-[0.95] font-display tracking-tighter text-balance sm:text-7xl">
           Components with{" "}
