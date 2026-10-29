@@ -141,13 +141,16 @@ export function Offerings() {
                 <span className="font-mono text-xs font-bold">${featured.price} · one-time</span>
               </span>
             </Link>
-            <div className="mt-auto flex flex-wrap gap-3">
-              <Link href="/templates" className={buttonStyles({ variant: "pink" })}>
-                Browse templates <ArrowRight aria-hidden />
+            <div className="mt-auto flex flex-wrap items-center gap-3">
+              <Link href={`/templates/${featured.slug}`} className={buttonStyles({ variant: "pink" })}>
+                View {featured.name} <ArrowRight aria-hidden />
               </Link>
               <a href={`/templates/${featured.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary" })}>
                 Live preview <ArrowUpRight aria-hidden />
               </a>
+              <Link href="/templates" className="font-mono text-xs font-bold underline decoration-2 underline-offset-4 hover:text-ink-muted">
+                All templates
+              </Link>
             </div>
           </div>
         </div>

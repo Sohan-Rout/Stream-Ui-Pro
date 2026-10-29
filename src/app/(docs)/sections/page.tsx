@@ -9,6 +9,7 @@ import { LiveThumb } from "@/components/docs/LiveThumb";
 import { InfiniteGrid } from "@/components/docs/InfiniteGrid";
 import { sections, type SectionDoc } from "@/registry/sections";
 import { Live } from "@/components/docs/Live";
+import { TemplatePromo } from "@/components/blocks/TemplatePromo";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.sections, path: "/sections" });
 
@@ -45,6 +46,8 @@ export default function SectionsIndex() {
           </li>
         ))}
       </ul>
+
+      <TemplatePromo />
 
       {/* A row up front; each live preview's code loads only when its card appears. */}
       <InfiniteGrid batch={3} noun="sections" className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">

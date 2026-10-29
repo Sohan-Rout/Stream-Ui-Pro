@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
 import { buttonStyles, cn } from "@streamuilib/react";
 import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { Section } from "@/components/ui/Section";
@@ -27,7 +27,13 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
   return (
     <article aria-labelledby={`template-${t.slug}`} className="grid grid-cols-1 gap-0.5 bg-ink lg:grid-cols-12">
       <div className="flex flex-col gap-5 bg-orange-soft bg-dots p-5 sm:p-8 lg:col-span-7">
-        <Shot shot={cover} url={`${new URL(siteConfig.url).host}/templates/${t.slug}`} />
+        {/* The cover opens the template's page, like its name and the Details button. */}
+        <Link
+          href={`/templates/${t.slug}`}
+          className="group block transition-[translate] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink motion-reduce:transition-none"
+        >
+          <Shot shot={cover} url={`${new URL(siteConfig.url).host}/templates/${t.slug}`} className="group-hover:shadow-brutal-lg" />
+        </Link>
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {more.map((s) => (
             <Shot key={s.alt} shot={s} className="shadow-brutal-sm" />
@@ -77,17 +83,20 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
             </p>
             <div className="flex flex-wrap gap-3">
               {t.checkoutUrl ? (
-                <a href={t.checkoutUrl} className={buttonStyles({ size: "lg" })}>
-                  <ShoppingBag aria-hidden /> Buy {t.name}
+                <a href={t.checkoutUrl} className={buttonStyles()}>
+                  <ShoppingBag aria-hidden /> Buy · ${t.price}
                 </a>
               ) : (
-                <span aria-disabled className={cn(buttonStyles({ size: "lg" }), "pointer-events-none opacity-60")}>
+                <span aria-disabled className={cn(buttonStyles(), "pointer-events-none opacity-60")}>
                   <Clock aria-hidden /> Coming soon
                 </span>
               )}
+              <Link href={`/templates/${t.slug}`} className={buttonStyles({ variant: "pink" })}>
+                View details <ArrowRight aria-hidden />
+              </Link>
               {/* Opens the preview on this site, in a new tab, so the visitor keeps their place here. */}
-              <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary", size: "lg" })}>
-                Live demo <ArrowUpRight aria-hidden />
+              <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary" })}>
+                Live preview <ArrowUpRight aria-hidden />
               </a>
             </div>
           </div>
