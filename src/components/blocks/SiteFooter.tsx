@@ -1,7 +1,8 @@
 import { SiGithub } from "react-icons/si";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import { IntentLink as Link } from "@/components/ui/IntentLink";
 import { siteConfig } from "@/lib/site";
+import { templates } from "@/lib/templates";
 import { Section } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { CookieSettingsButton } from "./CookieBanner";
@@ -24,12 +25,12 @@ export function SiteFooter() {
   return (
     <footer>
       <Section railClassName="overflow-hidden" joints={false}>
-        <div className="grid grid-cols-1 gap-0.5 bg-ink md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-0.5 bg-ink sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-4 bg-paper p-6 sm:p-10">
             <Logo />
             <p className="max-w-xs text-sm leading-relaxed text-ink-muted">
               Neo-brutalist components, sections, and icons for React and
-              Tailwind v4.
+              Tailwind v4, plus Pro templates: whole sites, ready to ship.
             </p>
           </div>
           <nav aria-label="Footer" className="bg-paper p-6 sm:p-10">
@@ -44,6 +45,28 @@ export function SiteFooter() {
                     className="font-semibold underline-offset-4 hover:underline hover:decoration-2"
                   >
                     {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label="Pro templates" className="bg-paper p-6 sm:p-10">
+            <p className="font-mono text-xs font-semibold tracking-widest text-ink-muted uppercase">
+              Pro
+            </p>
+            <ul className="mt-4 flex flex-col gap-2">
+              <li>
+                <Link
+                  href="/templates"
+                  className="inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline hover:decoration-2"
+                >
+                  <ShoppingBag aria-hidden className="size-4 text-pink" /> All templates
+                </Link>
+              </li>
+              {templates.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/templates/${t.slug}`} className="font-semibold underline-offset-4 hover:underline hover:decoration-2">
+                    {t.name}
                   </Link>
                 </li>
               ))}
