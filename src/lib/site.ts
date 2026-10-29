@@ -16,7 +16,6 @@ export const siteConfig = {
     { label: "Sections", href: "/sections" },
     { label: "Icons", href: "/icons" },
     { label: "Labs", href: "/labs" },
-    { label: "Templates", href: "/templates" },
   ],
   /**
    * Crowdfunding links, from FUNDING_* environment variables. Unset ones are

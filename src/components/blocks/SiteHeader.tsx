@@ -43,11 +43,12 @@ export function SiteHeader() {
           <GitHubButton />
           <Link
             href="/templates"
-            className={buttonStyles({ variant: "pink", size: "sm", className: "hidden h-10 sm:inline-flex lg:hidden xl:inline-flex" })}
+            className={buttonStyles({ variant: "pink", size: "sm", className: "hidden h-10 sm:inline-flex" })}
           >
             <ShoppingBag aria-hidden /> Pro templates
           </Link>
-          <MobileMenu items={siteConfig.nav.map((item) => ({ ...item, count: NAV_COUNTS[item.href] }))} />
+          {/* The phone menu lists the templates too: on the smallest screens the button above is hidden. */}
+          <MobileMenu items={[...siteConfig.nav.map((item) => ({ ...item, count: NAV_COUNTS[item.href] })), { label: "Pro templates", href: "/templates" }]} />
         </div>
       </Rail>
     </header>
