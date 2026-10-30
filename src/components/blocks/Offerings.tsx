@@ -63,6 +63,7 @@ const parts: Part[] = [
 
 /** The cheapest template, for "from $N". */
 const from = Math.min(...templates.map((t) => t.price));
+/** The newest template. */
 const featured = templates[0];
 
 /**

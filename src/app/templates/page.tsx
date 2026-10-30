@@ -3,7 +3,8 @@ import { pageMetadata } from "@/lib/seo";
 import { indexSeo } from "@/lib/seo-copy";
 import { templates } from "@/lib/templates";
 import { Section } from "@/components/ui/Section";
-import { TemplateCard } from "@/components/blocks/ProTemplates";
+import { Fragment } from "react";
+import { TemplateCard, TemplateDivider } from "@/components/blocks/ProTemplates";
 
 export const metadata: Metadata = pageMetadata({ ...indexSeo.templates, path: "/templates" });
 
@@ -24,8 +25,11 @@ export default function TemplatesPage() {
         </p>
       </Section>
       <Section aria-label="Templates">
-        {templates.map((t) => (
-          <TemplateCard key={t.slug} t={t} headingAs="h2" />
+        {templates.map((t, i) => (
+          <Fragment key={t.slug}>
+            {i > 0 && <TemplateDivider />}
+            <TemplateCard t={t} headingAs="h2" />
+          </Fragment>
         ))}
         <p className="border-t-2 border-ink px-5 py-4 font-mono text-xs text-ink-muted sm:px-8">
           More templates on the way. The component library itself stays free and open source.

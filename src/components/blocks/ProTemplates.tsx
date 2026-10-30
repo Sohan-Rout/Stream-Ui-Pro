@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Check, Clock, ShoppingBag } from "lucide-react";
 import { buttonStyles, cn } from "@streamuilib/react";
@@ -19,6 +20,17 @@ export function Shot({ shot, url, priority, className }: { shot: Template["shots
       </div>
       <Image src={shot.src} alt={shot.alt} placeholder="blur" priority={priority} sizes="(min-width: 1152px) 640px, (min-width: 1024px) 55vw, 100vw" className="block h-auto w-full" />
     </figure>
+  );
+}
+
+/** A hatched band between two template cards, so neighbors don't run together. */
+export function TemplateDivider() {
+  return (
+    <div
+      aria-hidden
+      className="h-10 border-y-2 border-ink bg-paper sm:h-14"
+      style={{ backgroundImage: "repeating-linear-gradient(-45deg, color-mix(in oklab, var(--color-ink) 22%, transparent) 0 1.5px, transparent 1.5px 11px)" }}
+    />
   );
 }
 
@@ -44,7 +56,7 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
       <div className="flex flex-col bg-paper lg:col-span-5">
         <div className="flex items-center justify-between gap-3 border-b-2 border-ink px-5 py-3 sm:px-8">
           <span className="font-mono text-xs font-bold">template/{t.slug}</span>
-          <span className="border-2 border-ink bg-lime px-1.5 font-mono text-xs font-bold text-on-bright">New</span>
+          {t.slug === templates[0].slug && <span className="border-2 border-ink bg-lime px-1.5 font-mono text-xs font-bold text-on-bright">New</span>}
         </div>
 
         <div className="flex flex-1 flex-col gap-6 p-5 sm:p-8">
@@ -124,8 +136,11 @@ export function ProTemplates() {
           </Link>
         }
       />
-      {templates.map((t) => (
-        <TemplateCard key={t.slug} t={t} />
+      {templates.map((t, i) => (
+        <Fragment key={t.slug}>
+          {i > 0 && <TemplateDivider />}
+          <TemplateCard t={t} />
+        </Fragment>
       ))}
       <p className="border-t-2 border-ink px-5 py-4 font-mono text-xs text-ink-muted sm:px-8">More templates on the way. The library itself stays free and open source.</p>
     </Section>

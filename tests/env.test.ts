@@ -6,7 +6,8 @@ describe("parseEnv", () => {
     expect(parseEnv({})).toEqual({
       siteUrl: "https://streamui.org",
       funding: { githubSponsors: "", razorpay: "", razorpayQr: "" },
-      checkout: { saas: "" },
+      checkout: { saas: "", agency: "" },
+      demo: { agency: "" },
       gaId: "",
     });
   });
@@ -14,6 +15,13 @@ describe("parseEnv", () => {
   test("reads a template checkout link, rejecting insecure ones", () => {
     expect(parseEnv({ TEMPLATE_SAAS_CHECKOUT_URL: "buy.polar.sh/polar_cl_abc" }).checkout.saas).toBe("https://buy.polar.sh/polar_cl_abc");
     expect(() => parseEnv({ TEMPLATE_SAAS_CHECKOUT_URL: "http://buy.polar.sh/x" })).toThrow(/TEMPLATE_SAAS_CHECKOUT_URL must use https/);
+  });
+
+  test("reads the agency template's checkout and demo links", () => {
+    const env = parseEnv({ TEMPLATE_AGENCY_CHECKOUT_URL: "buy.polar.sh/polar_cl_xyz", TEMPLATE_AGENCY_DEMO_URL: "https://templates.streamui.org/agency" });
+    expect(env.checkout.agency).toBe("https://buy.polar.sh/polar_cl_xyz");
+    expect(env.demo.agency).toBe("https://templates.streamui.org/agency");
+    expect(() => parseEnv({ TEMPLATE_AGENCY_DEMO_URL: "http://example.com" })).toThrow(/TEMPLATE_AGENCY_DEMO_URL must use https/);
   });
 
   test("normalizes the site URL to an origin", () => {

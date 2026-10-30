@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: PageProps<"/templates/[slug]/
 export default async function TemplatePreviewPage({ params }: PageProps<"/templates/[slug]/preview">) {
   const { slug } = await params;
   const t = getTemplate(slug);
-  if (!t) notFound();
+  // A demo whose link isn't set yet (see TEMPLATE_AGENCY_DEMO_URL) 404s rather than framing an empty page.
+  if (!t?.demoUrl) notFound();
   return <TemplatePreview slug={t.slug} name={t.name} demoUrl={t.demoUrl} checkoutUrl={t.checkoutUrl} price={t.price} />;
 }

@@ -21,6 +21,8 @@ const EXAMPLES: Record<string, string> = {
   FUNDING_RAZORPAY_URL: "https://razorpay.me/@your-name",
   FUNDING_RAZORPAY_QR_URL: "https://rzp.io/i/your-qr-code",
   TEMPLATE_SAAS_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
+  TEMPLATE_AGENCY_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
+  TEMPLATE_AGENCY_DEMO_URL: "https://templates.streamui.org/agency",
 };
 
 const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
@@ -89,6 +91,11 @@ export function parseEnv(source: Source) {
     /** Checkout links for the paid templates. Unset shows "Coming soon" in place of Buy. */
     checkout: {
       saas: optionalLink(source, "TEMPLATE_SAAS_CHECKOUT_URL"),
+      agency: optionalLink(source, "TEMPLATE_AGENCY_CHECKOUT_URL"),
+    },
+    /** Live demos that aren't hardcoded. Unset makes that template's preview page 404. */
+    demo: {
+      agency: optionalLink(source, "TEMPLATE_AGENCY_DEMO_URL"),
     },
     /** Google Analytics 4, loaded only after a visitor accepts the cookie banner. */
     gaId: optionalGaId(source),
