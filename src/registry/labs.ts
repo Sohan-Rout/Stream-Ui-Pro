@@ -147,6 +147,21 @@ export const labs: LabDoc[] = [
     ],
   },
   {
+    slug: "darts",
+    category: "game",
+    name: "Darts",
+    description: "A real board, a shaky hand, and wind that shoves every dart: aim off, hold to steady, and let go at the right moment. Play five turns for score, or count down from 301.",
+    file: "src/components/demos/DartsLab.tsx",
+    notes: [
+      "Move the pointer to aim, or use the arrow keys. Hold the mouse, your finger, Space, or Enter to steady your hand, and let go to throw. On touch the crosshair sits above your finger.",
+      "The ring shows where the dart can land. It tightens as you hold, stays small while it says now, then opens up again as your arm tires, so rushing and dawdling both cost you.",
+      "Wind changes with every dart and blows harder each turn, up to 16 mph, which can carry a dart clean out of its sector. The gauge shows its speed and direction, so aim upwind; a small gust means you can't cancel it exactly.",
+      "Five turns adds up your score. 301 counts down to exactly zero in as few darts as you can; go below zero and it's a bust, back to where the turn began.",
+      "The rules live in src/lib/games/darts.ts as pure functions with real board proportions, and tests check every sector in every ring.",
+      "It's SVG, so the board stays crisp and follows the theme. The only animation loop runs while you hold a throw, and it costs nothing the rest of the time. Reduced motion drops the hand sway and the dart's flight.",
+    ],
+  },
+  {
     slug: "tetris",
     category: "game",
     name: "Tetris",

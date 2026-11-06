@@ -402,6 +402,12 @@ const labCopy: Record<string, SeoCopy> = {
       "A retro side-scrolling platformer in React and canvas: coyote time, a jump buffer, coin blocks, walkers, pits, and a flag. Full source code.",
     keywords: ["platformer game React", "retro platformer", "side scroller React", "canvas game React", "React game"],
   },
+  darts: {
+    title: "Darts Game in React and SVG",
+    description:
+      "A neobrutalism darts game in React and SVG: a real board, changing wind, a hold-to-steady throw, and a 301 countdown. Mouse, touch, and keyboard.",
+    keywords: ["darts game React", "browser darts game", "301 darts online", "SVG game React", "React game"],
+  },
   pinball: {
     title: "Pinball Game in React and Canvas",
     description:

@@ -150,7 +150,7 @@ export type OgArt =
   | { kind: "home" }
   | { kind: "component"; name: string }
   | { kind: "section"; variant?: string }
-  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" | "whack" | "hammer" }
+  | { kind: "lab"; game?: "dice" | "tictactoe" | "memory" | "snake" | "flappy" | "tetris" | "maze" | "jumper" | "pinball" | "runner" | "whack" | "hammer" | "darts" }
   | { kind: "icons" }
   | { kind: "sponsor" }
   | { kind: "legal"; doc: "privacy" | "terms" | "cookies" };
@@ -793,6 +793,29 @@ function Art({ art, accent }: { art: OgArt; accent: string }) {
               <div style={{ display: "flex", position: "absolute", left: 66, top: 52, width: 18, height: 96, backgroundColor: brand.orange, border: `4px solid ${brand.ink}` }} />
               <div style={{ display: "flex", position: "absolute", left: 22, top: 10, width: 106, height: 50, backgroundColor: brand.pink, border: `5px solid ${brand.ink}`, borderLeftWidth: 18, borderRightWidth: 18 }} />
             </div>
+          </div>
+        );
+      }
+      if (art.game === "darts") {
+        // A board in target rings, with a dart stuck near the middle.
+        return (
+          <div style={{ display: "flex", position: "relative", width: 290, height: 290, transform: "rotate(-3deg)" }}>
+            {[
+              [290, brand.ink],
+              [236, brand.pink],
+              [204, brand.raised],
+              [132, brand.lime],
+              [100, brand.ink],
+              [52, brand.lime],
+              [24, brand.pink],
+            ].map(([size, color], i) => (
+              <div
+                key={i}
+                style={{ display: "flex", position: "absolute", left: (290 - (size as number)) / 2, top: (290 - (size as number)) / 2, width: size as number, height: size as number, borderRadius: 999, backgroundColor: color as string, border: `4px solid ${brand.ink}` }}
+              />
+            ))}
+            <div style={{ display: "flex", position: "absolute", left: 158, top: 62, width: 14, height: 84, backgroundColor: brand.raised, border: `4px solid ${brand.ink}`, transform: "rotate(24deg)" }} />
+            <div style={{ display: "flex", position: "absolute", left: 176, top: 26, width: 44, height: 44, backgroundColor: brand.orange, border: `4px solid ${brand.ink}`, transform: "rotate(69deg)" }} />
           </div>
         );
       }

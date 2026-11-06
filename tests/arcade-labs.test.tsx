@@ -1,10 +1,11 @@
-/** Muncher and Jumper, driven through their UI. */
+/** Muncher, Jumper, Pinball, and Darts, driven through their UI. */
 import { afterEach, describe, expect, test } from "bun:test";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MazeLab } from "@/components/demos/MazeLab";
 import { JumperLab } from "@/components/demos/JumperLab";
 import { PinballLab } from "@/components/demos/PinballLab";
+import { DartsLab } from "@/components/demos/DartsLab";
 
 afterEach(cleanup);
 
@@ -81,5 +82,37 @@ describe("PinballLab", () => {
     fireEvent.keyUp(table(), { key: " " });
     fireEvent.keyDown(table(), { key: "p" });
     await waitFor(() => expect(announce()).toBe("Paused."));
+  });
+});
+
+describe("DartsLab", () => {
+  const board = () => screen.getByRole("group", { name: /^Darts board/ });
+
+  test("starts on a ready card offering both modes", () => {
+    render(<DartsLab />);
+    expect(screen.getByText("Darts")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "5 turns" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "301" })).toBeTruthy();
+    expect(screen.getByLabelText("3 darts left this turn")).toBeTruthy();
+  });
+
+  test("arrow keys aim, and holding then letting go of Space throws a dart", async () => {
+    render(<DartsLab />);
+    fireEvent.click(screen.getByRole("button", { name: "5 turns" }));
+    await waitFor(() => expect(screen.queryByText("Darts")).toBeNull());
+    expect(screen.getByText("Triple 20")).toBeTruthy();
+    fireEvent.keyDown(board(), { key: "ArrowUp" });
+    await waitFor(() => expect(announce()).toMatch(/^Aiming at/));
+    fireEvent.keyDown(board(), { key: " " });
+    fireEvent.keyUp(board(), { key: " " });
+    await waitFor(() => expect(screen.getByLabelText("2 darts left this turn")).toBeTruthy());
+    expect(announce()).toMatch(/points\.|Miss\./);
+  });
+
+  test("301 starts the countdown", async () => {
+    render(<DartsLab />);
+    fireEvent.click(screen.getByRole("button", { name: "301" }));
+    await waitFor(() => expect(screen.getByText("Left")).toBeTruthy());
+    expect(screen.getByText("301")).toBeTruthy();
   });
 });
