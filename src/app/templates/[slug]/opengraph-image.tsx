@@ -15,7 +15,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOgImage({
     eyebrow: `Pro template · $${t?.price ?? ""}`,
     title: t?.name ?? "stream/ui",
-    description: t?.tagline ?? "Complete Next.js sites built with stream/ui.",
+    description: t?.tagline ?? "Complete Next.js sites. Full source, one-time price.",
     accent: "orange",
     art: { kind: "section" },
   });

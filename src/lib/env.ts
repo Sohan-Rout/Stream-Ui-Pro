@@ -23,6 +23,8 @@ const EXAMPLES: Record<string, string> = {
   TEMPLATE_SAAS_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
   TEMPLATE_AGENCY_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
   TEMPLATE_AGENCY_DEMO_URL: "https://templates.streamui.org/agency",
+  TEMPLATE_FINTECH_CHECKOUT_URL: "https://buy.polar.sh/polar_cl_your-link",
+  TEMPLATE_FINTECH_DEMO_URL: "https://templates.streamui.org/fintech",
 };
 
 const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
@@ -92,10 +94,12 @@ export function parseEnv(source: Source) {
     checkout: {
       saas: optionalLink(source, "TEMPLATE_SAAS_CHECKOUT_URL"),
       agency: optionalLink(source, "TEMPLATE_AGENCY_CHECKOUT_URL"),
+      fintech: optionalLink(source, "TEMPLATE_FINTECH_CHECKOUT_URL"),
     },
     /** Live demos that aren't hardcoded. Unset makes that template's preview page 404. */
     demo: {
       agency: optionalLink(source, "TEMPLATE_AGENCY_DEMO_URL"),
+      fintech: optionalLink(source, "TEMPLATE_FINTECH_DEMO_URL"),
     },
     /** Google Analytics 4, loaded only after a visitor accepts the cookie banner. */
     gaId: optionalGaId(source),

@@ -77,7 +77,7 @@ export function Offerings() {
         index="00"
         eyebrow="Two ways to build"
         title={<span id="offerings-title">Build it yourself, or start from a whole site.</span>}
-        description="The library is free and MIT licensed: install one package or copy the source. Pro templates are complete Next.js sites made from it."
+        description="The library is free and MIT licensed: install one package or copy the source. Pro templates are complete Next.js sites, each in its own design style."
       />
       <div className="grid grid-cols-1 gap-0.5 bg-ink lg:grid-cols-2">
         {/* The free library */}

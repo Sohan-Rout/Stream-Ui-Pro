@@ -71,9 +71,11 @@ function BuyButtons({ t }: { t: Template }) {
           <Clock aria-hidden /> Coming soon
         </span>
       )}
-      <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary", size: "lg" })}>
-        Live preview <ArrowUpRight aria-hidden />
-      </a>
+      {t.demoUrl && (
+        <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary", size: "lg" })}>
+          Live preview <ArrowUpRight aria-hidden />
+        </a>
+      )}
     </div>
   );
 }
@@ -96,6 +98,7 @@ export default async function TemplatePage({ params }: PageProps<"/templates/[sl
               </Link>{" "}
               / <span className="text-ink">{t.name}</span>
             </nav>
+            <p className="-mb-2 w-fit border-2 border-ink bg-paper-raised px-2 py-0.5 font-mono text-xs">Style: {t.style}</p>
             <h1 id="template-title" className="font-display text-4xl leading-tight tracking-tight sm:text-5xl">
               {t.name}
             </h1>

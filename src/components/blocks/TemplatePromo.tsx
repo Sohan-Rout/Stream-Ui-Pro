@@ -6,10 +6,12 @@ import { templates } from "@/lib/templates";
 
 /**
  * A short strip pointing from the sections to a Pro template: the same kind
- * of page, already put together.
+ * of page, already put together. Only a template built from the library
+ * qualifies, since the strip says it's made from these sections.
  */
 export function TemplatePromo() {
-  const t = templates[0];
+  const t = templates.find((x) => x.fromLibrary);
+  if (!t) return null;
   return (
     <aside aria-label="Pro template" className="flex flex-col items-start gap-5 border-2 border-ink bg-orange-soft p-5 shadow-brutal sm:flex-row sm:items-center sm:p-6">
       <Link href={`/templates/${t.slug}`} tabIndex={-1} aria-hidden className="hidden w-44 shrink-0 border-2 border-ink bg-paper sm:block">

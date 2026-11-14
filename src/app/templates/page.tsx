@@ -20,7 +20,7 @@ export default function TemplatesPage() {
           Next.js landing page templates, built and ready to ship.
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-          Complete, responsive sites in the neobrutalism style, made with stream/ui. Buy once, get the full source code, and use it in
+          Complete, responsive sites, each in its own design style, from bold neobrutalism to quiet and minimal. Buy once, get the full source code, and use it in
           unlimited personal and client projects.
         </p>
       </Section>

@@ -56,7 +56,10 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
       <div className="flex flex-col bg-paper lg:col-span-5">
         <div className="flex items-center justify-between gap-3 border-b-2 border-ink px-5 py-3 sm:px-8">
           <span className="font-mono text-xs font-bold">template/{t.slug}</span>
-          {t.slug === templates[0].slug && <span className="border-2 border-ink bg-lime px-1.5 font-mono text-xs font-bold text-on-bright">New</span>}
+          <span className="flex items-center gap-2">
+            <span className="border-2 border-ink bg-paper-raised px-1.5 font-mono text-xs">{t.style}</span>
+            {t.slug === templates[0].slug && <span className="border-2 border-ink bg-lime px-1.5 font-mono text-xs font-bold text-on-bright">New</span>}
+          </span>
         </div>
 
         <div className="flex flex-1 flex-col gap-6 p-5 sm:p-8">
@@ -106,10 +109,12 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
               <Link href={`/templates/${t.slug}`} className={buttonStyles({ variant: "pink" })}>
                 View details <ArrowRight aria-hidden />
               </Link>
-              {/* Opens the preview on this site, in a new tab, so the visitor keeps their place here. */}
-              <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary" })}>
-                Live preview <ArrowUpRight aria-hidden />
-              </a>
+              {/* Opens the preview on this site, in a new tab, so the visitor keeps their place here. Hidden until the demo is deployed. */}
+              {t.demoUrl && (
+                <a href={`/templates/${t.slug}/preview`} target="_blank" className={buttonStyles({ variant: "secondary" })}>
+                  Live preview <ArrowUpRight aria-hidden />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -119,7 +124,7 @@ export function TemplateCard({ t, headingAs: H = "h3" }: { t: Template; headingA
 }
 
 /**
- * The paid templates: complete sites built from the library. Each shows its
+ * The paid templates: complete sites, each in its own design style. Each shows its
  * screens, what's inside, the price, and links to the live demo and checkout.
  */
 export function ProTemplates() {
@@ -129,7 +134,7 @@ export function ProTemplates() {
         index="03"
         eyebrow="Pro templates"
         title={<span id="templates-title">Whole sites, built and ready to ship.</span>}
-        description="Complete Next.js sites made with these components. Buy once, get the full source, and make it yours for unlimited personal and client projects."
+        description="Complete Next.js sites, each in its own design style. Buy once, get the full source, and make it yours for unlimited personal and client projects."
         action={
           <Link href="/templates" className={buttonStyles({ variant: "secondary" })}>
             All templates <ArrowUpRight aria-hidden />

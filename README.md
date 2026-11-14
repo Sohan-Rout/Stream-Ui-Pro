@@ -95,7 +95,9 @@ cp .env.example .env.local
 | `FUNDING_RAZORPAY_URL` | Razorpay payment link, shown as a button for people paying on their phone |
 | `TEMPLATE_SAAS_CHECKOUT_URL` | Store checkout link for the SaaS Launch template. Unset shows "Coming soon" instead of Buy. |
 | `TEMPLATE_AGENCY_CHECKOUT_URL` | Store checkout link for the Studio template. Unset shows "Coming soon" instead of Buy. |
-| `TEMPLATE_AGENCY_DEMO_URL` | Where Studio's live demo is deployed, framed by its Live preview page. Unset makes that page 404. |
+| `TEMPLATE_AGENCY_DEMO_URL` | Where Studio's live demo is deployed, framed by its Live preview page. Unset hides Live preview and makes that page 404. |
+| `TEMPLATE_FINTECH_CHECKOUT_URL` | Store checkout link for the Fintech template. Unset shows "Coming soon" instead of Buy. |
+| `TEMPLATE_FINTECH_DEMO_URL` | Where Fintech's live demo is deployed, framed by its Live preview page. Unset hides Live preview and makes that page 404. |
 
 Values are validated at build time: a malformed or non-https link fails the
 build with a message naming the variable. In production, set them in your

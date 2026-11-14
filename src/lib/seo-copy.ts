@@ -67,8 +67,8 @@ export const indexSeo = {
   templates: {
     title: "Next.js Landing Page Templates",
     description:
-      "Neobrutalism Next.js landing page templates made with stream/ui: complete, responsive sites with full source code. Buy once, use in unlimited projects.",
-    keywords: ["Next.js landing page templates", "neobrutalism templates", "SaaS landing page template", "Tailwind templates", "React website templates"],
+      "Next.js landing page templates in different design styles, from neobrutalism to minimal: complete sites with full source. Buy once, use in unlimited projects.",
+    keywords: ["Next.js landing page templates", "neobrutalism templates", "minimalist landing page templates", "SaaS landing page template", "fintech landing page template", "Tailwind templates", "React website templates"],
   },
   sponsor: {
     title: "Sponsor",
